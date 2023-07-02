@@ -1,0 +1,197 @@
+SQL> CREATE TABLE client_master (client_no varchar2(6) CONSTRAINT clintno_pri PRIMARY KEY, name varchar2(20) NOT NULL, address1 varchar2(30), address2 varchar2(30), city varchar2(15), state varchar2(15), pincode number(6), bal_due number(10,2), CONSTRAINT CLINTNO_CHECK_C CHECK (client_no LIKE 'C%'));
+
+Table created.
+
+SQL> desc client_master;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CLIENT_NO                                 NOT NULL VARCHAR2(6)
+ NAME                                      NOT NULL VARCHAR2(20)
+ ADDRESS1                                           VARCHAR2(30)
+ ADDRESS2                                           VARCHAR2(30)
+ CITY                                               VARCHAR2(15)
+ STATE                                              VARCHAR2(15)
+ PINCODE                                            NUMBER(6)
+ BAL_DUE                                            NUMBER(10,2)
+
+SQL> DESC USER_CONSTRAINS;
+ERROR:
+ORA-04043: object USER_CONSTRAINS does not exist 
+
+
+SQL> DESC USER_CONSTRAINTS;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ OWNER                                              VARCHAR2(120)
+ CONSTRAINT_NAME                           NOT NULL VARCHAR2(30)
+ CONSTRAINT_TYPE                                    VARCHAR2(1)
+ TABLE_NAME                                NOT NULL VARCHAR2(30)
+ SEARCH_CONDITION                                   LONG
+ R_OWNER                                            VARCHAR2(120)
+ R_CONSTRAINT_NAME                                  VARCHAR2(30)
+ DELETE_RULE                                        VARCHAR2(9)
+ STATUS                                             VARCHAR2(8)
+ DEFERRABLE                                         VARCHAR2(14)
+ DEFERRED                                           VARCHAR2(9)
+ VALIDATED                                          VARCHAR2(13)
+ GENERATED                                          VARCHAR2(14)
+ BAD                                                VARCHAR2(3)
+ RELY                                               VARCHAR2(4)
+ LAST_CHANGE                                        DATE
+ INDEX_OWNER                                        VARCHAR2(30)
+ INDEX_NAME                                         VARCHAR2(30)
+ INVALID                                            VARCHAR2(7)
+ VIEW_RELATED                                       VARCHAR2(14)
+
+SQL> SELECT CONSTRAINT_NAME,CONSTRAINT_TYPE FROM USER_CONSTRAINTS;
+
+CONSTRAINT_NAME                C                                                
+------------------------------ -                                                
+SYS_C006997                    C                                                
+SYS_C007002                    C                                                
+CLINTNO_CHECK_C                C                                                
+CLINTNO_PRI                    P                                                
+
+SQL> SELECT OWNER,CONSTRAINT_NAME,CONSTRAINT_TYPE,TABLE_NAME FROM USER_CONSTRAINTS;
+
+OWNER                                                                           
+--------------------------------------------------------------------------------
+CONSTRAINT_NAME                C TABLE_NAME                                     
+------------------------------ - ------------------------------                 
+SCOTT                                                                           
+SYS_C006997                    C EMP                                            
+                                                                                
+SCOTT                                                                           
+SYS_C007002                    C CLIENT_MASTER                                  
+                                                                                
+SCOTT                                                                           
+CLINTNO_CHECK_C                C CLIENT_MASTER                                  
+                                                                                
+
+OWNER                                                                           
+--------------------------------------------------------------------------------
+CONSTRAINT_NAME                C TABLE_NAME                                     
+------------------------------ - ------------------------------                 
+SCOTT                                                                           
+CLINTNO_PRI                    P CLIENT_MASTER                                  
+                                                                                
+
+SQL> SET PAGESIZE 200;
+SQL> SELECT OWNER,CONSTRAINT_NAME,CONSTRAINT_TYPE,TABLE_NAME FROM USER_CONSTRAINTS;
+
+OWNER                                                                           
+--------------------------------------------------------------------------------
+CONSTRAINT_NAME                C TABLE_NAME                                     
+------------------------------ - ------------------------------                 
+SCOTT                                                                           
+SYS_C006997                    C EMP                                            
+                                                                                
+SCOTT                                                                           
+SYS_C007002                    C CLIENT_MASTER                                  
+                                                                                
+SCOTT                                                                           
+CLINTNO_CHECK_C                C CLIENT_MASTER                                  
+                                                                                
+SCOTT                                                                           
+CLINTNO_PRI                    P CLIENT_MASTER                                  
+                                                                                
+
+SQL> SET LINESIZE 90;
+SQL> SELECT OWNER,CONSTRAINT_NAME,CONSTRAINT_TYPE,TABLE_NAME FROM USER_CONSTRAINTS;
+
+OWNER                                                                                     
+------------------------------------------------------------------------------------------
+CONSTRAINT_NAME                C TABLE_NAME                                               
+------------------------------ - ------------------------------                           
+SCOTT                                                                                     
+SYS_C006997                    C EMP                                                      
+                                                                                          
+SCOTT                                                                                     
+SYS_C007002                    C CLIENT_MASTER                                            
+                                                                                          
+SCOTT                                                                                     
+CLINTNO_CHECK_C                C CLIENT_MASTER                                            
+                                                                                          
+SCOTT                                                                                     
+CLINTNO_PRI                    P CLIENT_MASTER                                            
+                                                                                          
+
+SQL> SET LINESIZE 150;
+SQL> SELECT OWNER,CONSTRAINT_NAME,CONSTRAINT_TYPE,TABLE_NAME FROM USER_CONSTRAINTS;
+
+OWNER                                                                                                                                                 
+------------------------------------------------------------------------------------------------------------------------                              
+CONSTRAINT_NAME                C TABLE_NAME                                                                                                           
+------------------------------ - ------------------------------                                                                                       
+SCOTT                                                                                                                                                 
+SYS_C006997                    C EMP                                                                                                                  
+                                                                                                                                                      
+SCOTT                                                                                                                                                 
+SYS_C007002                    C CLIENT_MASTER                                                                                                        
+                                                                                                                                                      
+SCOTT                                                                                                                                                 
+CLINTNO_CHECK_C                C CLIENT_MASTER                                                                                                        
+                                                                                                                                                      
+SCOTT                                                                                                                                                 
+CLINTNO_PRI                    P CLIENT_MASTER                                                                                                        
+                                                                                                                                                      
+
+SQL> CREATE TABLE product_master (product_no varchar2(6) CONSTRAINT productno_pri PRIMARY KEY, description varchar2(5) NOT NULL, profit_percent number(5,2) NOT NULL, unit_measure varcahr2(10) NOT NULL, qty_on_hand number(8) NOT NULL, reorder_lvl number(8) NOT NULL, sell_price number(8,2) NOT NULL CHECK (sell_price > 0), cost_price number(8,2) NOT NULL CHECK (cost_price > 0), CONSTRAINT productno_check_p CHECK (product_no LIKE 'P%'));
+CREATE TABLE product_master (product_no varchar2(6) CONSTRAINT productno_pri PRIMARY KEY, description varchar2(5) NOT NULL, profit_percent number(5,2) NOT NULL, unit_measure varcahr2(10) NOT NULL, qty_on_hand number(8) NOT NULL, reorder_lvl number(8) NOT NULL, sell_price number(8,2) NOT NULL CHECK (sell_price > 0), cost_price number(8,2) NOT NULL CHECK (cost_price > 0), CONSTRAINT productno_check_p CHECK (product_no LIKE 'P%'))
+                                                                                                                                                                                      *
+ERROR at line 1:
+ORA-00907: missing right parenthesis 
+
+
+SQL> CREATE TABLE product_master
+  2  (product_no varchar2(6) CONSTRAINT productno_pri PRIMARY KEY,
+  3  description varchar2(5) NOT NULL,
+  4  profit_percent number(5,2) NOT NULL,
+  5  unit_measure varcahr2(10) NOT NULL,
+  6  qty_on_hand number(8) NOT NULL,
+  7  reorder_lvl number(8) NOT NULL,
+  8  sell_price number(8,2) NOT NULL CHECK (sell_price>0),
+  9  cost_price number(8,2) NOT NULL CHECK (cost_price>0),
+ 10  CONSTRAINT productno_check_p CHECK (product_no LIKE 'P%'));
+unit_measure varcahr2(10) NOT NULL,
+                     *
+ERROR at line 5:
+ORA-00907: missing right parenthesis 
+
+
+SQL> CREATE TABLE product_master (product_no varchar2(6) CONSTRAINT productno_pri PRIMARY KEY, description varchar2(5) NOT NULL, profit_percent number(5,2) NOT NULL, unit_measure varchar2(10) NOT NULL, qty_on_hand number(8) NOT NULL, reorder_lvl number(8) NOT NULL, sell_price number(8,2) NOT NULL CHECK (sell_price>0), cost_price number(8,2) NOT NULL CHECK (cost_price>0), CONSTRAINT productno_check_p CHECK (product_no LIKE 'P%'));
+
+Table created.
+
+SQL> DESC product_master;
+ Name                                                                                Null?    Type
+ ----------------------------------------------------------------------------------- -------- --------------------------------------------------------
+ PRODUCT_NO                                                                          NOT NULL VARCHAR2(6)
+ DESCRIPTION                                                                         NOT NULL VARCHAR2(5)
+ PROFIT_PERCENT                                                                      NOT NULL NUMBER(5,2)
+ UNIT_MEASURE                                                                        NOT NULL VARCHAR2(10)
+ QTY_ON_HAND                                                                         NOT NULL NUMBER(8)
+ REORDER_LVL                                                                         NOT NULL NUMBER(8)
+ SELL_PRICE                                                                          NOT NULL NUMBER(8,2)
+ COST_PRICE                                                                          NOT NULL NUMBER(8,2)
+
+SQL> CREATE TABLE salesman_master (salesman_no varchar2(6) CONSTRAINT salesman_no_pri PRIMARY KEY, salesman_name varchar2(20) NOT NULL, address1 varchar2(30) NOT NULL, address2 varchar2(30), city varchar2(20), pincode number(6), state varchar2(20), sal_amt number(8,2) NOT NULL CHECK (sal_amt>0),tgt_to_get number(6,2) NOT NULL CHECK (tgt_to_get>0), ytd_sales number(6,2) NOT NULL, remarks varchar2(60));
+
+Table created.
+
+SQL> DESC salesman_master;
+ Name                                                                                Null?    Type
+ ----------------------------------------------------------------------------------- -------- --------------------------------------------------------
+ SALESMAN_NO                                                                         NOT NULL VARCHAR2(6)
+ SALESMAN_NAME                                                                       NOT NULL VARCHAR2(20)
+ ADDRESS1                                                                            NOT NULL VARCHAR2(30)
+ ADDRESS2                                                                                     VARCHAR2(30)
+ CITY                                                                                         VARCHAR2(20)
+ PINCODE                                                                                      NUMBER(6)
+ STATE                                                                                        VARCHAR2(20)
+ SAL_AMT                                                                             NOT NULL NUMBER(8,2)
+ TGT_TO_GET                                                                          NOT NULL NUMBER(6,2)
+ YTD_SALES                                                                           NOT NULL NUMBER(6,2)
+ REMARKS                                                                                      VARCHAR2(60)
+
+SQL> spool off;

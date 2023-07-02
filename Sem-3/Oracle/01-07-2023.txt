@@ -1,0 +1,903 @@
+SQL> CREATE TABLE client_master
+  2  (client_no varchar(6) CONSTRAINT clientno_pri PRIMARY KEY,
+  3  name varchar(30) NOT NULL,
+  4  add1 varchar(30),
+  5  add2 varchar(30),
+  6  city varchar(15),
+  7  pincode number(8),
+  8  state varchar(15),
+  9  bal_due number(10,2),
+ 10  CONSTRAINT clientid_check_like CHECK (client_no LIKE 'C%'))
+ 11  /
+
+Table created.
+
+SQL> CREATE TABLE product_master
+  2  (product_no varchar(6) CONSTRAINT product_pri PRIMARY KEY,
+  3  descr varchar(15) NOT NULL,
+  4  profit_percent number(4,2) NOT NULL,
+  5  unit_measure varchar(10) NOT NULL,
+  6  qty_on_hand number(8) NOT NULL,
+  7  reorder_lvl number(8,2) NOT NULL,
+  8  sell_price number(8,2) NOT NULL CHECK (sell_price>0),
+  9  cost_price number(8,2) NOT NULL CHECK (cost_price>0),
+ 10  CONSTRAINT pro_id_like CHECK (product_no LIKE 'P%'))
+ 11  qty_on_hand number(8) NOT NULL,;
+qty_on_hand number(8) NOT NULL,
+*
+ERROR at line 11:
+ORA-00922: missing or invalid option 
+
+
+SQL> INSERT INTO client_master (client_no, name, city, pincode, state, bal_due) VALUES ('C00001', 'Ivan Bayross', 'Bombay', 400054, 'Maharashtra', 15000)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO client_master (client_no, name, city, pincode, state, bal_due) VALUES ('C00002', 'Vandana Saitwal', 'Madras', 780001, 'Tamil Nadu', 0)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO client_master (client_no, name, city, pincode, state, bal_due) VALUES ('C00003', 'Pramada Jahuste', 'Bombay', 400057, 'Maharashtra', 5000)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO client_master (client_no, name, city, pincode, state, bal_due) VALUES ('C00004', 'Basu Navindgi', 'Bombay', 400056, 'Maharashtra', 0)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO client_master (client_no, name, city, pincode, state, bal_due) VALUES ('C00005', 'Ravi Sreedharan', 'Delhi', 100001, '', 2000)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO client_master (client_no, name, city, pincode, state, bal_due) VALUES ('C00006', 'Rukmini', 'Bombay', 400050, 'Maharashtra', 0)
+  2  /
+
+1 row created.
+
+SQL> CREATE TABLE product_master
+  2  (product_no varchar(6) CONSTRAINT product_pri PRIMARY KEY,
+  3  descr varchar(15) NOT NULL,
+  4  profit_percent number(4,2) NOT NULL,
+  5  unit_measure varchar(10) NOT NULL,
+  6  qty_on_hand number(8) NOT NULL,
+  7  reorder_lvl number(8,2) NOT NULL,
+  8  sell_price number(8,2) NOT NULL CHECK (sell_price>0),
+  9  cost_price number(8,2) NOT NULL CHECK (cost_price>0),
+ 10  CONSTRAINT pro_id_like CHECK (product_no LIKE 'P%'))
+ 11  /
+
+Table created.
+
+SQL> INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P00001', '1.44 Floppies', 5, Piece, 100, 20, 525, 500)
+  2  /
+INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P00001', '1.44 Floppies', 5, Piece, 100, 20, 525, 500)
+                                                                                                                                                                     *
+ERROR at line 1:
+ORA-00984: column not allowed here 
+
+
+SQL> INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P03453', 'Monitors', 6, Piece, 10, 3, 12000, 11280)
+  2  /
+INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P03453', 'Monitors', 6, Piece, 10, 3, 12000, 11280)
+                                                                                                                                                                *
+ERROR at line 1:
+ORA-00984: column not allowed here 
+
+
+SQL> INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P06734', 'Mouse', 5, Piece, 20, 5, 1050, 1000)
+  2  /
+INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P06734', 'Mouse', 5, Piece, 20, 5, 1050, 1000)
+                                                                                                                                                             *
+ERROR at line 1:
+ORA-00984: column not allowed here 
+
+
+SQL> INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P07865', '1.22 Floppies', 5, Piece, 100, 20, 525, 500)
+  2  /
+INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P07865', '1.22 Floppies', 5, Piece, 100, 20, 525, 500)
+                                                                                                                                                                     *
+ERROR at line 1:
+ORA-00984: column not allowed here 
+
+
+SQL> INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P07868', 'Keyboards', 2, Piece, 10, 3, 3150, 3050)
+  2  /
+INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P07868', 'Keyboards', 2, Piece, 10, 3, 3150, 3050)
+                                                                                                                                                                 *
+ERROR at line 1:
+ORA-00984: column not allowed here 
+
+
+SQL> INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P07885', 'CD Drive', 2.5, Piece, 10, 3, 5250, 5100)
+  2  /
+INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P07885', 'CD Drive', 2.5, Piece, 10, 3, 5250, 5100)
+                                                                                                                                                                  *
+ERROR at line 1:
+ORA-00984: column not allowed here 
+
+
+SQL> INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P07965', '540 HDD', 4, Piece, 10, 3, 8400, 8000)
+  2  /
+INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P07965', '540 HDD', 4, Piece, 10, 3, 8400, 8000)
+                                                                                                                                                               *
+ERROR at line 1:
+ORA-00984: column not allowed here 
+
+
+SQL> INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P07975', '1.44 Drive', 5, Piece, 10, 3, 1050, 1000)
+  2  /
+INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P07975', '1.44 Drive', 5, Piece, 10, 3, 1050, 1000)
+                                                                                                                                                                  *
+ERROR at line 1:
+ORA-00984: column not allowed here 
+
+
+SQL> INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P08865', '1.22 Drive', 5, Piece, 2, 3, 1050, 1000)
+  2  /
+INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P08865', '1.22 Drive', 5, Piece, 2, 3, 1050, 1000)
+                                                                                                                                                                  *
+ERROR at line 1:
+ORA-00984: column not allowed here 
+
+
+SQL> INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P00001', '1.44 Floppies', 5, 'Piece', 100, 20, 525, 500)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P03453', 'Monitors', 6, 'Piece', 10, 3, 12000, 11280)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P06734', 'Mouse', 5, 'Piece', 20, 5, 1050, 1000)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P07865', '1.22 Floppies', 5, 'Piece', 100, 20, 525, 500)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P07868', 'Keyboards', 2, 'Piece', 10, 3, 3150, 3050)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P07885', 'CD Drive', 2.5, 'Piece', 10, 3, 5250, 5100)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P07965', '540 HDD', 4, 'Piece', 10, 3, 8400, 8000)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P07975', '1.44 Drive', 5, 'Piece', 10, 3, 1050, 1000)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P08865', '1.22 Drive', 5, 'Piece', 2, 3, 1050, 1000)
+  2  /
+
+1 row created.
+
+SQL> CREATE TABLE salesman_master
+  2  (salesman_no varchar(6) CONSTRAINT sales_no_pri PRIMARY KEY,
+  3  salesman_name varchar(30) NOT NULL,
+  4  address1 varchar(30) NOT NULL,
+  5  address2 varchar(30),
+  6  city varchar(15),
+  7  pincode number(8),
+  8  state varchar(20),
+  9  sal_amt number(8,2) NOT NULL CHECK (sal_amt>0),
+ 10  tgt_to_get number(6,2) NOT NULL CHECK (tgt_to_get>0),
+ 11  ytd_sales number(6,2) NOT NULL,
+ 12  remarks varchar(30),
+ 13  CONSTRAINT sales_no_like CHECK (salesman_no LIKE 'S%'))
+ 14  /
+
+Table created.
+
+SQL> INSERT INTO salesman_master (salesman_no, salesman_name, address1, address2, city, pincode, state, sal_amt, tgt_to_get, ytd_sales, remarks) VALUES ('S00001', 'Kiran', 'A/14', 'Worli', 'Bombay', 400002, 'MAH', 3000, 100, 50, 'Good')
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO salesman_master (salesman_no, salesman_name, address1, address2, city, pincode, state, sal_amt, tgt_to_get, ytd_sales, remarks) VALUES ('S00002', 'Manjsh', '65', 'Nariman', 'Bombay', 400001, 'MAH', 3000, 200, 100, 'Good')
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO salesman_master (salesman_no, salesman_name, address1, address2, city, pincode, state, sal_amt, tgt_to_get, ytd_sales, remarks) VALUES ('S00003', 'Ravi', 'P-7', 'Bandra', 'Bombay', 400032, 'MAH', 3000, 200, 100, 'Good')
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO salesman_master (salesman_no, salesman_name, address1, address2, city, pincode, state, sal_amt, tgt_to_get, ytd_sales, remarks) VALUES ('S00004', 'Ashish', 'A/5', 'Juhu', 'Bombay', 400044, 'MAH', 3000, 200, 100, 'Good')
+  2  /
+
+1 row created.
+
+SQL> CREATE TABLE sales_order
+  2  (order_no varchar(6) CONSTRAINT sales_pri PRIMARY KEY,
+  3  order_date date NOT NULL,
+  4  client_no varchar(6) CONSTRAINT sales_ref_client REFERENCES client_master (client_no) ON DELETE CASCADE,
+  5  dely_addr varchar(25),
+  6  salesman_no varchar(6) CONSTRAINT sales_ref_sels REFERENCES salesman_master(salesman_no) ON DELETE CASCADE,
+  7  dely_type char(1) DEFAULT 'F' check(dely_type in('P','F')),
+  8  billed_yn char(1),
+  9  dely_date date,
+ 10  order_states varchar(10) CONSTRAINT sales_state_ch check (order_states in('IN PROCESS','FULFILLED','BACKORDER','CANCELLED')),
+ 11  CONSTRAINT so_date check(order_date<dely_date))
+ 12  /
+
+Table created.
+
+SQL> INSERT INTO sales_order (order_no, order_date, client_no, dely_type, billed_yn, salesman_no, dely_date, order_states) VALUES ('O19001', '12-jan-96', 'C00001', 'F', 'N', 'S00001', '20-jan-96', 'IP')
+  2  /
+INSERT INTO sales_order (order_no, order_date, client_no, dely_type, billed_yn, salesman_no, dely_date, order_states) VALUES ('O19001', '12-jan-96', 'C00001', 'F', 'N', 'S00001', '20-jan-96', 'IP')
+*
+ERROR at line 1:
+ORA-02290: check constraint (SCOTT.SALES_STATE_CH) violated 
+
+
+SQL> INSERT INTO sales_order (order_no, order_date, client_no, dely_type, billed_yn, salesman_no, dely_date, order_states) VALUES ('O19002', '25-jan-96', 'C00002', 'P', 'N', 'S00002', '27-jan-96', 'C')
+  2  /
+INSERT INTO sales_order (order_no, order_date, client_no, dely_type, billed_yn, salesman_no, dely_date, order_states) VALUES ('O19002', '25-jan-96', 'C00002', 'P', 'N', 'S00002', '27-jan-96', 'C')
+*
+ERROR at line 1:
+ORA-02290: check constraint (SCOTT.SALES_STATE_CH) violated 
+
+
+SQL> INSERT INTO sales_order (order_no, order_date, client_no, dely_type, billed_yn, salesman_no, dely_date, order_states) VALUES ('O46865', '18-feb-96', 'C00003', 'F', 'Y', 'S00003', '20-feb-96', 'F')
+  2  /
+INSERT INTO sales_order (order_no, order_date, client_no, dely_type, billed_yn, salesman_no, dely_date, order_states) VALUES ('O46865', '18-feb-96', 'C00003', 'F', 'Y', 'S00003', '20-feb-96', 'F')
+*
+ERROR at line 1:
+ORA-02290: check constraint (SCOTT.SALES_STATE_CH) violated 
+
+
+SQL> INSERT INTO sales_order (order_no, order_date, client_no, dely_type, billed_yn, salesman_no, dely_date, order_states) VALUES ('O19003', '03-apr-96', 'C00001', 'F', 'Y', 'S00001', '07-apr-96', 'F')
+  2  /
+INSERT INTO sales_order (order_no, order_date, client_no, dely_type, billed_yn, salesman_no, dely_date, order_states) VALUES ('O19003', '03-apr-96', 'C00001', 'F', 'Y', 'S00001', '07-apr-96', 'F')
+*
+ERROR at line 1:
+ORA-02290: check constraint (SCOTT.SALES_STATE_CH) violated 
+
+
+SQL> INSERT INTO sales_order (order_no, order_date, client_no, dely_type, billed_yn, salesman_no, dely_date, order_states) VALUES ('O46866', '20-may-96', 'C00004', 'P', 'N', 'S00002', '22-may-96', 'C')
+  2  /
+INSERT INTO sales_order (order_no, order_date, client_no, dely_type, billed_yn, salesman_no, dely_date, order_states) VALUES ('O46866', '20-may-96', 'C00004', 'P', 'N', 'S00002', '22-may-96', 'C')
+*
+ERROR at line 1:
+ORA-02290: check constraint (SCOTT.SALES_STATE_CH) violated 
+
+
+SQL> INSERT INTO sales_order (order_no, order_date, client_no, dely_type, billed_yn, salesman_no, dely_date, order_states) VALUES ('O10008', '24-may-96', 'C00005', 'F', 'N', 'S00004', '26-may-96', 'IP')
+  2  /
+INSERT INTO sales_order (order_no, order_date, client_no, dely_type, billed_yn, salesman_no, dely_date, order_states) VALUES ('O10008', '24-may-96', 'C00005', 'F', 'N', 'S00004', '26-may-96', 'IP')
+*
+ERROR at line 1:
+ORA-02290: check constraint (SCOTT.SALES_STATE_CH) violated 
+
+
+SQL> INSERT INTO sales_order (order_no, order_date, client_no, dely_type, billed_yn, salesman_no, dely_date, order_states) VALUES ('O19001', '12-jan-96', 'C00001', 'F', 'N', 'S00001', '20-jan-96', 'IN PROCESS')
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO sales_order (order_no, order_date, client_no, dely_type, billed_yn, salesman_no, dely_date, order_states) VALUES ('O19002', '25-jan-96', 'C00002', 'P', 'N', 'S00002', '27-jan-96', 'CANCELLED')
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO sales_order (order_no, order_date, client_no, dely_type, billed_yn, salesman_no, dely_date, order_states) VALUES ('O46865', '18-feb-96', 'C00003', 'F', 'Y', 'S00003', '20-feb-96', 'FULFILLED')
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO sales_order (order_no, order_date, client_no, dely_type, billed_yn, salesman_no, dely_date, order_states) VALUES ('O19003', '03-apr-96', 'C00001', 'F', 'Y', 'S00001', '07-apr-96', 'FULFILLED')
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO sales_order (order_no, order_date, client_no, dely_type, billed_yn, salesman_no, dely_date, order_states) VALUES ('O46866', '20-may-96', 'C00004', 'P', 'N', 'S00002', '22-may-96', 'CANCELLED')
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO sales_order (order_no, order_date, client_no, dely_type, billed_yn, salesman_no, dely_date, order_states) VALUES ('O10008', '24-may-96', 'C00005', 'F', 'N', 'S00004', '26-may-96', 'IN PROCESS')
+  2  /
+
+1 row created.
+
+SQL> CREATE TABLE sales_order_details
+  2  (order_no varchar(6) CONSTRAINT sales_ord_de REFERENCES sales_order(order_no) ON DELETE CASCADE,
+  3  product_no varchar(6) CONSTRAINT sales_pro_mas REFERENCES product_master(product_no) ON DELETE CASCADE,
+  4  qty_ordered number(8),
+  5  qty_disp number(8),
+  6  product_rate number(10,2))
+  7  /
+
+Table created.
+
+SQL> INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALIES ('O19001', 'P00001', 4, 4, 525)
+  2  /
+INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALIES ('O19001', 'P00001', 4, 4, 525)
+                                                                                            *
+ERROR at line 1:
+ORA-00926: missing VALUES keyword 
+
+
+SQL> INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALIES ('O19001', 'P07965', 2, 1, 8400)
+  2  /
+INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALIES ('O19001', 'P07965', 2, 1, 8400)
+                                                                                            *
+ERROR at line 1:
+ORA-00926: missing VALUES keyword 
+
+
+SQL> INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALIES ('O19001', 'P07885', 2, 1, 5250)
+  2  /
+INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALIES ('O19001', 'P07885', 2, 1, 5250)
+                                                                                            *
+ERROR at line 1:
+ORA-00926: missing VALUES keyword 
+
+
+SQL> INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALIES ('O19002', 'P00001', 10, 0, 525)
+  2  /
+INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALIES ('O19002', 'P00001', 10, 0, 525)
+                                                                                            *
+ERROR at line 1:
+ORA-00926: missing VALUES keyword 
+
+
+SQL> INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALIES ('O46865', 'P07868', 3, 3, 3150)
+  2  /
+INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALIES ('O46865', 'P07868', 3, 3, 3150)
+                                                                                            *
+ERROR at line 1:
+ORA-00926: missing VALUES keyword 
+
+
+SQL> INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALIES ('O46865', 'P07885', 3, 1, 5250)
+  2  /
+INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALIES ('O46865', 'P07885', 3, 1, 5250)
+                                                                                            *
+ERROR at line 1:
+ORA-00926: missing VALUES keyword 
+
+
+SQL> INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALIES ('O46865', 'P00001', 10, 10, 525)
+  2  /
+INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALIES ('O46865', 'P00001', 10, 10, 525)
+                                                                                            *
+ERROR at line 1:
+ORA-00926: missing VALUES keyword 
+
+
+SQL> INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALIES ('O46865', 'P03453', 4, 4, 1050)
+  2  /
+INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALIES ('O46865', 'P03453', 4, 4, 1050)
+                                                                                            *
+ERROR at line 1:
+ORA-00926: missing VALUES keyword 
+
+
+SQL> INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALIES ('O19003', 'P03453', 2, 2, 1050)
+  2  /
+INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALIES ('O19003', 'P03453', 2, 2, 1050)
+                                                                                            *
+ERROR at line 1:
+ORA-00926: missing VALUES keyword 
+
+
+SQL> INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALIES ('O19003', 'P06734', 1, 1, 12000)
+  2  /
+INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALIES ('O19003', 'P06734', 1, 1, 12000)
+                                                                                            *
+ERROR at line 1:
+ORA-00926: missing VALUES keyword 
+
+
+SQL> INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALIES ('O46866', 'P07965', 1, 0, 8400)
+  2  /
+INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALIES ('O46866', 'P07965', 1, 0, 8400)
+                                                                                            *
+ERROR at line 1:
+ORA-00926: missing VALUES keyword 
+
+
+SQL> INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALIES ('O46866', 'P07975', 1, 0, 1050)
+  2  /
+INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALIES ('O46866', 'P07975', 1, 0, 1050)
+                                                                                            *
+ERROR at line 1:
+ORA-00926: missing VALUES keyword 
+
+
+SQL> INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALIES ('O10008', 'P00001', 10, 5, 525)
+  2  /
+INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALIES ('O10008', 'P00001', 10, 5, 525)
+                                                                                            *
+ERROR at line 1:
+ORA-00926: missing VALUES keyword 
+
+
+SQL> INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALIES ('O10008', 'P07975', 5, 3, 1050)
+  2  /
+INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALIES ('O10008', 'P07975', 5, 3, 1050)
+                                                                                            *
+ERROR at line 1:
+ORA-00926: missing VALUES keyword 
+
+
+SQL> INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALUES ('O19001', 'P00001', 4, 4, 525)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALUES ('O19001', 'P07965', 2, 1, 8400)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALUES ('O19001', 'P07885', 2, 1, 5250)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALUES ('O19002', 'P00001', 10, 0, 525)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALUES ('O46865', 'P07868', 3, 3, 3150)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALUES ('O46865', 'P07885', 3, 1, 5250)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALUES ('O46865', 'P00001', 10, 10, 525)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALUES ('O46865', 'P03453', 4, 4, 1050)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALUES ('O19003', 'P03453', 2, 2, 1050)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALUES ('O19003', 'P06734', 1, 1, 12000)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALUES ('O46866', 'P07965', 1, 0, 8400)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALUES ('O46866', 'P07975', 1, 0, 1050)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALUES ('O10008', 'P00001', 10, 5, 525)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALUES ('O10008', 'P07975', 5, 3, 1050)
+  2  /
+
+1 row created.
+
+SQL> CREATE TABLE CHALLAN_HEADER
+  2  (CHALLAN_NO VARCHAR2(6) PRIMARY KEY,
+  3  ORDER_NO VARCHAR2(6) REFERENCES SALES_ORDER(ORDER_NO),
+  4  CHALLAN_DATE DATE NOT NULL,
+  5  BILLED_YN CHAR(1) DEFAULT 'N' CHECK( BILLED_YN IN ('Y','N')),
+  6  CONSTRAINT PRI_CH_H CHECK(CHALLAN_NO LIKE 'CH%'))
+  7  /
+
+Table created.
+
+SQL> INSERT INTO challan_header (challan_no, order_no, challan_date, billed_yn) VALUES ('CH9001', 'O19001', '12-dec-95', 'Y')
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO challan_header (challan_no, order_no, challan_date, billed_yn) VALUES ('CH6865', 'O46865', '12-nov-95', 'Y')
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO challan_header (challan_no, order_no, challan_date, billed_yn) VALUES ('CH3965', 'O10008', '12-oct-95', 'Y')
+  2  /
+
+1 row created.
+
+SQL> CREATE TABLE CHALLAN_DETAILS
+  2  (CHALLAN_NO VARCHAR2(6) REFERENCES CHALLAN_HEADER(CHALLAN_NO),
+  3  PRODUCT_NO VARCHAR2(6) REFERENCES PRODUCT_MASTER(PRODUCT_NO),
+  4  QTY_DISP NUMBER(3))
+  5  /
+
+Table created.
+
+SQL> INSERT INTO challan_header (challan_no, product_no, qty_disp) VALUES ('CH9001', 'P00001', '4')
+  2  /
+INSERT INTO challan_header (challan_no, product_no, qty_disp) VALUES ('CH9001', 'P00001', '4')
+                                                    *
+ERROR at line 1:
+ORA-00904: "QTY_DISP": invalid identifier 
+
+
+SQL> INSERT INTO challan_header (challan_no, product_no, qty_disp) VALUES ('CH9001', 'P07965', '1')
+  2  /
+INSERT INTO challan_header (challan_no, product_no, qty_disp) VALUES ('CH9001', 'P07965', '1')
+                                                    *
+ERROR at line 1:
+ORA-00904: "QTY_DISP": invalid identifier 
+
+
+SQL> INSERT INTO challan_header (challan_no, product_no, qty_disp) VALUES ('CH9001', 'P07885', '1')
+  2  /
+INSERT INTO challan_header (challan_no, product_no, qty_disp) VALUES ('CH9001', 'P07885', '1')
+                                                    *
+ERROR at line 1:
+ORA-00904: "QTY_DISP": invalid identifier 
+
+
+SQL> INSERT INTO challan_header (challan_no, product_no, qty_disp) VALUES ('CH6865', 'P07868', '3')
+  2  /
+INSERT INTO challan_header (challan_no, product_no, qty_disp) VALUES ('CH6865', 'P07868', '3')
+                                                    *
+ERROR at line 1:
+ORA-00904: "QTY_DISP": invalid identifier 
+
+
+SQL> INSERT INTO challan_header (challan_no, product_no, qty_disp) VALUES ('CH6865', 'P03453', '4')
+  2  /
+INSERT INTO challan_header (challan_no, product_no, qty_disp) VALUES ('CH6865', 'P03453', '4')
+                                                    *
+ERROR at line 1:
+ORA-00904: "QTY_DISP": invalid identifier 
+
+
+SQL> INSERT INTO challan_header (challan_no, product_no, qty_disp) VALUES ('CH6865', 'P00001', '10')
+  2  /
+INSERT INTO challan_header (challan_no, product_no, qty_disp) VALUES ('CH6865', 'P00001', '10')
+                                                    *
+ERROR at line 1:
+ORA-00904: "QTY_DISP": invalid identifier 
+
+
+SQL> INSERT INTO challan_header (challan_no, product_no, qty_disp) VALUES ('CH6865', 'P00001', '5')
+  2  /
+INSERT INTO challan_header (challan_no, product_no, qty_disp) VALUES ('CH6865', 'P00001', '5')
+                                                    *
+ERROR at line 1:
+ORA-00904: "QTY_DISP": invalid identifier 
+
+
+SQL> INSERT INTO challan_header (challan_no, product_no, qty_disp) VALUES ('CH6865', 'P07975', '2')
+  2  /
+INSERT INTO challan_header (challan_no, product_no, qty_disp) VALUES ('CH6865', 'P07975', '2')
+                                                    *
+ERROR at line 1:
+ORA-00904: "QTY_DISP": invalid identifier 
+
+
+SQL> INSERT INTO challan_header (challan_no, product_no, qty_disp) VALUES ('CH9001', 'P00001', 4)
+  2  /
+INSERT INTO challan_header (challan_no, product_no, qty_disp) VALUES ('CH9001', 'P00001', 4)
+                                                    *
+ERROR at line 1:
+ORA-00904: "QTY_DISP": invalid identifier 
+
+
+SQL> INSERT INTO challan_header (challan_no, product_no, qty_disp) VALUES ('CH9001', 'P07965', 1)
+  2  /
+INSERT INTO challan_header (challan_no, product_no, qty_disp) VALUES ('CH9001', 'P07965', 1)
+                                                    *
+ERROR at line 1:
+ORA-00904: "QTY_DISP": invalid identifier 
+
+
+SQL> INSERT INTO challan_header (challan_no, product_no, qty_disp) VALUES ('CH9001', 'P07885', 1)
+  2  /
+INSERT INTO challan_header (challan_no, product_no, qty_disp) VALUES ('CH9001', 'P07885', 1)
+                                                    *
+ERROR at line 1:
+ORA-00904: "QTY_DISP": invalid identifier 
+
+
+SQL> INSERT INTO challan_header (challan_no, product_no, qty_disp) VALUES ('CH6865', 'P07868', 3)
+  2  /
+INSERT INTO challan_header (challan_no, product_no, qty_disp) VALUES ('CH6865', 'P07868', 3)
+                                                    *
+ERROR at line 1:
+ORA-00904: "QTY_DISP": invalid identifier 
+
+
+SQL> INSERT INTO challan_header (challan_no, product_no, qty_disp) VALUES ('CH6865', 'P03453', 4)
+  2  /
+INSERT INTO challan_header (challan_no, product_no, qty_disp) VALUES ('CH6865', 'P03453', 4)
+                                                    *
+ERROR at line 1:
+ORA-00904: "QTY_DISP": invalid identifier 
+
+
+SQL> INSERT INTO challan_header (challan_no, product_no, qty_disp) VALUES ('CH6865', 'P00001', 10)
+  2  /
+INSERT INTO challan_header (challan_no, product_no, qty_disp) VALUES ('CH6865', 'P00001', 10)
+                                                    *
+ERROR at line 1:
+ORA-00904: "QTY_DISP": invalid identifier 
+
+
+SQL> INSERT INTO challan_header (challan_no, product_no, qty_disp) VALUES ('CH6865', 'P00001', 5)
+  2  /
+INSERT INTO challan_header (challan_no, product_no, qty_disp) VALUES ('CH6865', 'P00001', 5)
+                                                    *
+ERROR at line 1:
+ORA-00904: "QTY_DISP": invalid identifier 
+
+
+SQL> INSERT INTO challan_header (challan_no, product_no, qty_disp) VALUES ('CH6865', 'P07975', 2)
+  2  /
+INSERT INTO challan_header (challan_no, product_no, qty_disp) VALUES ('CH6865', 'P07975', 2)
+                                                    *
+ERROR at line 1:
+ORA-00904: "QTY_DISP": invalid identifier 
+
+
+SQL> DESC challan
+ERROR:
+ORA-04043: object challan does not exist 
+
+
+SQL> DESC challan_details;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CHALLAN_NO                                         VARCHAR2(6)
+ PRODUCT_NO                                         VARCHAR2(6)
+ QTY_DISP                                           NUMBER(3)
+
+SQL> INSERT INTO challan_details (challan_no, product_no, qty_disp) VALUES ('CH9001', 'P00001', 4)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO challan_details (challan_no, product_no, qty_disp) VALUES ('CH9001', 'P07965', 1)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO challan_details (challan_no, product_no, qty_disp) VALUES ('CH9001', 'P07885', 1)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO challan_details (challan_no, product_no, qty_disp) VALUES ('CH6865', 'P07868', 3)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO challan_details (challan_no, product_no, qty_disp) VALUES ('CH6865', 'P03453', 4)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO challan_details (challan_no, product_no, qty_disp) VALUES ('CH6865', 'P00001', 10)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO challan_details (challan_no, product_no, qty_disp) VALUES ('CH6865', 'P00001', 5)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO challan_details (challan_no, product_no, qty_disp) VALUES ('CH6865', 'P07975', 2)
+  2  /
+
+1 row created.
+
+SQL> SELECT * FROM client_master;
+
+CLIENT NAME                           ADD1                                      
+------ ------------------------------ ------------------------------            
+ADD2                           CITY               PINCODE STATE                 
+------------------------------ --------------- ---------- ---------------       
+   BAL_DUE                                                                      
+----------                                                                      
+C00001 Ivan Bayross                                                             
+                               Bombay              400054 Maharashtra           
+     15000                                                                      
+                                                                                
+C00002 Vandana Saitwal                                                          
+                               Madras              780001 Tamil Nadu            
+         0                                                                      
+
+CLIENT NAME                           ADD1                                      
+------ ------------------------------ ------------------------------            
+ADD2                           CITY               PINCODE STATE                 
+------------------------------ --------------- ---------- ---------------       
+   BAL_DUE                                                                      
+----------                                                                      
+                                                                                
+C00003 Pramada Jahuste                                                          
+                               Bombay              400057 Maharashtra           
+      5000                                                                      
+                                                                                
+C00004 Basu Navindgi                                                            
+                               Bombay              400056 Maharashtra           
+
+CLIENT NAME                           ADD1                                      
+------ ------------------------------ ------------------------------            
+ADD2                           CITY               PINCODE STATE                 
+------------------------------ --------------- ---------- ---------------       
+   BAL_DUE                                                                      
+----------                                                                      
+         0                                                                      
+                                                                                
+C00005 Ravi Sreedharan                                                          
+                               Delhi               100001                       
+      2000                                                                      
+                                                                                
+C00006 Rukmini                                                                  
+
+CLIENT NAME                           ADD1                                      
+------ ------------------------------ ------------------------------            
+ADD2                           CITY               PINCODE STATE                 
+------------------------------ --------------- ---------- ---------------       
+   BAL_DUE                                                                      
+----------                                                                      
+                               Bombay              400050 Maharashtra           
+         0                                                                      
+                                                                                
+
+6 rows selected.
+
+SQL> SET PAGESIZE 100;
+SQL> SELECT * FROM client_master;
+
+CLIENT NAME                           ADD1                                      
+------ ------------------------------ ------------------------------            
+ADD2                           CITY               PINCODE STATE                 
+------------------------------ --------------- ---------- ---------------       
+   BAL_DUE                                                                      
+----------                                                                      
+C00001 Ivan Bayross                                                             
+                               Bombay              400054 Maharashtra           
+     15000                                                                      
+                                                                                
+C00002 Vandana Saitwal                                                          
+                               Madras              780001 Tamil Nadu            
+         0                                                                      
+                                                                                
+C00003 Pramada Jahuste                                                          
+                               Bombay              400057 Maharashtra           
+      5000                                                                      
+                                                                                
+C00004 Basu Navindgi                                                            
+                               Bombay              400056 Maharashtra           
+         0                                                                      
+                                                                                
+C00005 Ravi Sreedharan                                                          
+                               Delhi               100001                       
+      2000                                                                      
+                                                                                
+C00006 Rukmini                                                                  
+                               Bombay              400050 Maharashtra           
+         0                                                                      
+                                                                                
+
+6 rows selected.
+
+SQL> SET LINESIZE 300;
+SQL> SELECT * FROM client_master;
+
+CLIENT NAME                           ADD1                           ADD2                           CITY               PINCODE STATE              BAL_DUE                                                                                                                                                   
+------ ------------------------------ ------------------------------ ------------------------------ --------------- ---------- --------------- ----------                                                                                                                                                   
+C00001 Ivan Bayross                                                                                 Bombay              400054 Maharashtra          15000                                                                                                                                                   
+C00002 Vandana Saitwal                                                                              Madras              780001 Tamil Nadu               0                                                                                                                                                   
+C00003 Pramada Jahuste                                                                              Bombay              400057 Maharashtra           5000                                                                                                                                                   
+C00004 Basu Navindgi                                                                                Bombay              400056 Maharashtra              0                                                                                                                                                   
+C00005 Ravi Sreedharan                                                                              Delhi               100001                       2000                                                                                                                                                   
+C00006 Rukmini                                                                                      Bombay              400050 Maharashtra              0                                                                                                                                                   
+
+6 rows selected.
+
+SQL> SELECT * FROM product_master;
+
+PRODUC DESCR           PROFIT_PERCENT UNIT_MEASU QTY_ON_HAND REORDER_LVL SELL_PRICE COST_PRICE                                                                                                                                                                                                              
+------ --------------- -------------- ---------- ----------- ----------- ---------- ----------                                                                                                                                                                                                              
+P00001 1.44 Floppies                5 Piece              100          20        525        500                                                                                                                                                                                                              
+P03453 Monitors                     6 Piece               10           3      12000      11280                                                                                                                                                                                                              
+P06734 Mouse                        5 Piece               20           5       1050       1000                                                                                                                                                                                                              
+P07865 1.22 Floppies                5 Piece              100          20        525        500                                                                                                                                                                                                              
+P07868 Keyboards                    2 Piece               10           3       3150       3050                                                                                                                                                                                                              
+P07885 CD Drive                   2.5 Piece               10           3       5250       5100                                                                                                                                                                                                              
+P07965 540 HDD                      4 Piece               10           3       8400       8000                                                                                                                                                                                                              
+P07975 1.44 Drive                   5 Piece               10           3       1050       1000                                                                                                                                                                                                              
+P08865 1.22 Drive                   5 Piece                2           3       1050       1000                                                                                                                                                                                                              
+
+9 rows selected.
+
+SQL> SELECT * FROM salesman_master;
+
+SALESM SALESMAN_NAME                  ADDRESS1                       ADDRESS2                       CITY               PINCODE STATE                   SAL_AMT TGT_TO_GET  YTD_SALES REMARKS                                                                                                                
+------ ------------------------------ ------------------------------ ------------------------------ --------------- ---------- -------------------- ---------- ---------- ---------- ------------------------------                                                                                         
+S00001 Kiran                          A/14                           Worli                          Bombay              400002 MAH                        3000        100         50 Good                                                                                                                   
+S00002 Manjsh                         65                             Nariman                        Bombay              400001 MAH                        3000        200        100 Good                                                                                                                   
+S00003 Ravi                           P-7                            Bandra                         Bombay              400032 MAH                        3000        200        100 Good                                                                                                                   
+S00004 Ashish                         A/5                            Juhu                           Bombay              400044 MAH                        3000        200        100 Good                                                                                                                   
+
+SQL> SET LINESIZE 260;
+SQL> SELECT * FROM salesman_master;
+
+SALESM SALESMAN_NAME                  ADDRESS1                       ADDRESS2                       CITY               PINCODE STATE                   SAL_AMT TGT_TO_GET  YTD_SALES REMARKS                                                                        
+------ ------------------------------ ------------------------------ ------------------------------ --------------- ---------- -------------------- ---------- ---------- ---------- ------------------------------                                                 
+S00001 Kiran                          A/14                           Worli                          Bombay              400002 MAH                        3000        100         50 Good                                                                           
+S00002 Manjsh                         65                             Nariman                        Bombay              400001 MAH                        3000        200        100 Good                                                                           
+S00003 Ravi                           P-7                            Bandra                         Bombay              400032 MAH                        3000        200        100 Good                                                                           
+S00004 Ashish                         A/5                            Juhu                           Bombay              400044 MAH                        3000        200        100 Good                                                                           
+
+SQL> SET LINESIZE 220;
+SQL> SELECT * FROM salesman_master;
+
+SALESM SALESMAN_NAME                  ADDRESS1                       ADDRESS2                       CITY               PINCODE STATE                   SAL_AMT TGT_TO_GET  YTD_SALES REMARKS                                
+------ ------------------------------ ------------------------------ ------------------------------ --------------- ---------- -------------------- ---------- ---------- ---------- ------------------------------         
+S00001 Kiran                          A/14                           Worli                          Bombay              400002 MAH                        3000        100         50 Good                                   
+S00002 Manjsh                         65                             Nariman                        Bombay              400001 MAH                        3000        200        100 Good                                   
+S00003 Ravi                           P-7                            Bandra                         Bombay              400032 MAH                        3000        200        100 Good                                   
+S00004 Ashish                         A/5                            Juhu                           Bombay              400044 MAH                        3000        200        100 Good                                   
+
+SQL> SET LINESIZE 360;
+SQL> SELECT * FROM salesman_master;
+
+SALESM SALESMAN_NAME                  ADDRESS1                       ADDRESS2                       CITY               PINCODE STATE                   SAL_AMT TGT_TO_GET  YTD_SALES REMARKS                                                                                                                                                                            
+------ ------------------------------ ------------------------------ ------------------------------ --------------- ---------- -------------------- ---------- ---------- ---------- ------------------------------                                                                                                                                                     
+S00001 Kiran                          A/14                           Worli                          Bombay              400002 MAH                        3000        100         50 Good                                                                                                                                                                               
+S00002 Manjsh                         65                             Nariman                        Bombay              400001 MAH                        3000        200        100 Good                                                                                                                                                                               
+S00003 Ravi                           P-7                            Bandra                         Bombay              400032 MAH                        3000        200        100 Good                                                                                                                                                                               
+S00004 Ashish                         A/5                            Juhu                           Bombay              400044 MAH                        3000        200        100 Good                                                                                                                                                                               
+
+SQL> SET LINESIZE 260;
+SQL> SELECT * FROM sales_order;
+
+ORDER_ ORDER_DAT CLIENT DELY_ADDR                 SALESM D B DELY_DATE ORDER_STAT                                                                                                                                                                                   
+------ --------- ------ ------------------------- ------ - - --------- ----------                                                                                                                                                                                   
+O19001 12-JAN-96 C00001                           S00001 F N 20-JAN-96 IN PROCESS                                                                                                                                                                                   
+O19002 25-JAN-96 C00002                           S00002 P N 27-JAN-96 CANCELLED                                                                                                                                                                                    
+O46865 18-FEB-96 C00003                           S00003 F Y 20-FEB-96 FULFILLED                                                                                                                                                                                    
+O19003 03-APR-96 C00001                           S00001 F Y 07-APR-96 FULFILLED                                                                                                                                                                                    
+O46866 20-MAY-96 C00004                           S00002 P N 22-MAY-96 CANCELLED                                                                                                                                                                                    
+O10008 24-MAY-96 C00005                           S00004 F N 26-MAY-96 IN PROCESS                                                                                                                                                                                   
+
+6 rows selected.
+
+SQL> SPOOL OFF;

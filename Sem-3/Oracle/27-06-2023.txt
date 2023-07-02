@@ -1,0 +1,106 @@
+SQL> CREATE TABLE client_master (client_no varchar(6) CONTRAINT PRIMARY KEY, name varchar(30)NOT NULL, add1 varchar(30), add2 varchar(30), city varchar(15), state varchar(15), pincode number(6), bal_due number(10,2), CONTRAINT CHECK(client_no LIKE 'C%'));
+CREATE TABLE client_master (client_no varchar(6) CONTRAINT PRIMARY KEY, name varchar(30)NOT NULL, add1 varchar(30), add2 varchar(30), city varchar(15), state varchar(15), pincode number(6), bal_due number(10,2), CONTRAINT CHECK(client_no LIKE 'C%'))
+                                                 *
+ERROR at line 1:
+ORA-00907: missing right parenthesis 
+
+
+SQL> CREATE TABLE client_master (client_no varchar(6) CONTRAINT PRIMARY KEY, name varchar(30)NOT NULL, add1 varchar(30), add2 varchar(30), city varchar(15), state varchar(15), pincode number(6), bal_due number(10,2), CONTRAINT CHECK(client_no LIKE 'C%'));
+CREATE TABLE client_master (client_no varchar(6) CONTRAINT PRIMARY KEY, name varchar(30)NOT NULL, add1 varchar(30), add2 varchar(30), city varchar(15), state varchar(15), pincode number(6), bal_due number(10,2), CONTRAINT CHECK(client_no LIKE 'C%'))
+                                                 *
+ERROR at line 1:
+ORA-00907: missing right parenthesis 
+
+
+SQL> CREATE TABLE client_master
+  2  (client_no varchar(6) CONTRAINT clientno_pri PRIMARY KEY,
+  3  name varchar(30)NOT NULL,
+  4  add1 varchar(30),
+  5  add2 varchar(30),
+  6  city varchar(15),
+  7  state varchar(15),
+  8  pincode number(6),
+  9  bal_due number(10,2),
+ 10  CONTRAINT clientno_check_like CHECK(client_no LIKE 'C%'));
+(client_no varchar(6) CONTRAINT clientno_pri PRIMARY KEY,
+                      *
+ERROR at line 2:
+ORA-00907: missing right parenthesis 
+
+
+SQL> CREATE TABLE client_master
+  2  (client_no varchar(6) CONSTRAINT clientno_pri PRIMARY KEY,
+  3  name varchar(30) NOT NULL,
+  4  add1 varchar(30),
+  5  add2 varchar(30),
+  6  city varchar(15),
+  7  state varchar(15),
+  8  pincode number(6),
+  9  bal_due number(10,2),
+ 10  CONSTRAINT clientno_check_like CHECK(client_no LIKE 'C%'));
+
+Table created.
+
+SQL> INSERT INTO client_master (client_no, name, city, pincode, state, bal_due) VALUES ('C00001', 'Ivan Bayross', 'Bombay', 400054, 'Maharashtra', 15000);
+
+1 row created.
+
+SQL> INSERT INTO client_master (client_no, name, city, pincode, state, bal_due) VALUES ('', 'Vandana Saitwal', 'Madras', 780001, 'Tamil Nadu', 0);
+INSERT INTO client_master (client_no, name, city, pincode, state, bal_due) VALUES ('', 'Vandana Saitwal', 'Madras', 780001, 'Tamil Nadu', 0)
+                                                                                   *
+ERROR at line 1:
+ORA-01400: cannot insert NULL into ("SCOTT"."CLIENT_MASTER"."CLIENT_NO") 
+
+
+SQL> /
+INSERT INTO client_master (client_no, name, city, pincode, state, bal_due) VALUES ('', 'Vandana Saitwal', 'Madras', 780001, 'Tamil Nadu', 0)
+                                                                                   *
+ERROR at line 1:
+ORA-01400: cannot insert NULL into ("SCOTT"."CLIENT_MASTER"."CLIENT_NO") 
+
+
+SQL> INSERT INTO client_master (client_no, name, city, pincode, state, bal_due) VALUES ('C00003', 'Pramada Jahuste', 'Bombay', 400057, 'Maharashtra', 5000);
+
+1 row created.
+
+SQL> /
+INSERT INTO client_master (client_no, name, city, pincode, state, bal_due) VALUES ('C00003', 'Pramada Jahuste', 'Bombay', 400057, 'Maharashtra', 5000)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SCOTT.CLIENTNO_PRI) violated 
+
+
+SQL> INSERT INTO client_master (client_no, name, city, pincode, state, bal_due) VALUES ('C00004', 'Basu Navindgi', 'Bombay', 400056, 'Maharashtra', 0);
+
+1 row created.
+
+SQL> /
+INSERT INTO client_master (client_no, name, city, pincode, state, bal_due) VALUES ('C00004', 'Basu Navindgi', 'Bombay', 400056, 'Maharashtra', 0)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SCOTT.CLIENTNO_PRI) violated 
+
+
+SQL> INSERT INTO client_master (client_no, name, city, pincode, state, bal_due) VALUES ('C00005', 'Ravi Sreedharan', 'Delhi', 100001, '', 2000);
+
+1 row created.
+
+SQL> /
+INSERT INTO client_master (client_no, name, city, pincode, state, bal_due) VALUES ('C00005', 'Ravi Sreedharan', 'Delhi', 100001, '', 2000)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SCOTT.CLIENTNO_PRI) violated 
+
+
+SQL> INSERT INTO client_master (client_no, name, city, pincode, state, bal_due) VALUES ('C00006', 'Rukmini', 'Bombay', 400050, 'Maharashtra', 0);
+
+1 row created.
+
+SQL> /
+INSERT INTO client_master (client_no, name, city, pincode, state, bal_due) VALUES ('C00006', 'Rukmini', 'Bombay', 400050, 'Maharashtra', 0)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SCOTT.CLIENTNO_PRI) violated 
+
+
+SQL> SPOOL OFF;

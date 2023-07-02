@@ -1,14 +1,3 @@
-CREATE TABLE client_master
-(client_no varchar(6) CONSTRAINT clientno_pri PRIMARY KEY,
-name varchar(30) NOT NULL,
-add1 varchar(30),
-add2 varchar(30),
-city varchar(15),
-pincode number(8),
-state varchar(15),
-bal_due number(10,2),
-CONSTRAINT clientid_check_like CHECK (client_no LIKE 'C%'))
-/
 /*
 set CONSTRAINT Column Level ==>
 syntax => CREATE TABLE <table_name> (<firld_name> <data_type><(size)> CONSTRAINT <any-name> <constraint_name>, .... );
@@ -30,6 +19,17 @@ Examples =>
   Table level CHECK CONSTRAINT ex. ->
   CREATE TABLE client_master (client_no varchar(6), ... , CONSTRAINT clientid_check_like CHECK (client_no LIKE 'C%'))
 */
+CREATE TABLE client_master
+(client_no varchar(6) CONSTRAINT clientno_pri PRIMARY KEY,
+name varchar(30) NOT NULL,
+add1 varchar(30),
+add2 varchar(30),
+city varchar(15),
+pincode number(8),
+state varchar(15),
+bal_due number(10,2),
+CONSTRAINT clientid_check_like CHECK (client_no LIKE 'C%'))
+/
 INSERT INTO client_master (client_no, name, city, pincode, state, bal_due) VALUES ('C00001', 'Ivan Bayross', 'Bombay', 400054, 'Maharashtra', 15000)
 /
 INSERT INTO client_master (client_no, name, city, pincode, state, bal_due) VALUES ('C00002', 'Vandana Saitwal', 'Madras', 780001, 'Tamil Nadu', 0) 

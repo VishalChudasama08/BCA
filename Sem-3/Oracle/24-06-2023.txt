@@ -1,0 +1,741 @@
+SQL> create table client_master
+  2  (client_no varchar(6) constraint clie_pri PRIMARY KEY,
+  3  name varchar(30) not null,
+  4  add1 varchar(30),
+  5  add2 varchar(30),
+  6  city varchar(15),
+  7  pincode number(8),
+  8  state varchar(15),
+  9  bal_due number(10,2),
+ 10  constraint clie_id_like check (client_no like 'C%'))
+ 11  /
+
+Table created.
+
+SQL> 
+SQL> create table product_master
+  2  (product_no varchar(6) constraint product_pri PRIMARY KEY,
+  3  descr varchar(15) not null,
+  4  profit_percent number(4,2) not null,
+  5  unit_measure varchar(10) not null,
+  6  qty_on_hand number(8)not null,
+  7  reorder_lvl number(8,2)not null,
+  8  sell_price number(8,2)not null check (sell_price>0),
+  9  cost_price number(8,2)not null check (cost_price>0),
+ 10  constraint pro_id_like check (product_no like 'P%'))
+ 11  /
+
+Table created.
+
+SQL> 
+SQL> create table salesman_master
+  2  (salesman_no varchar(6) constraint sales_no_pri PRIMARY KEY,
+  3  salesman_name varchar(30) not null,
+  4  address1 varchar(30),
+  5  address2 varchar(30),
+  6  city varchar(15),
+  7  pincode number(8),
+  8  state varchar(20),
+  9  sal_amt number(8,2),
+ 10  tgt_to_get number(6,2),
+ 11  ytd_sales number(6,2),
+ 12  remarks varchar(30),
+ 13  constraint sales_no_like check (salesman_no like 'S%'))
+ 14  /
+
+Table created.
+
+SQL> 
+SQL> create table sales_order
+  2  (order_no varchar(6) constraint sales_pri PRIMARY KEY,
+  3  client_no varchar(6) constraint sales_ref_client REFERENCES client_master (client_no) ON DELETE CASCADE,
+  4  order_date date not null,
+  5  delt_addr varchar(25),
+  6  salesman_no varchar(6) constraint sales_ref_sels REFERENCES salesman_master(salesman_no) ON DELETE CASCADE,
+  7  dely_type char(1) DEFAULT 'F' check(dely_type in('P','F')),
+  8  bill_yn char(1),
+  9  dely_date date,
+ 10  order_state varchar(10) constraint sales_state_ch check (order_state in('IN PROCESS','FULFILLED','BACKORDER','CANCELLED')),
+ 11  constraint so_date check(order_date<dely_date))
+ 12  /
+
+Table created.
+
+SQL> 
+SQL> create table sales_order_details
+  2  (order_no varchar(6) constraint sales_ord_de REFERENCES sales_order(order_no) ON DELETE CASCADE,
+  3  product_no varchar(6) constraint sales_pro_mas REFERENCES product_master(product_no) ON DELETE CASCADE,
+  4  qty_ordered number(8),
+  5  qty_disp number(8),
+  6  product_rate number(10,2))
+  7  /
+
+Table created.
+
+SQL> 
+SQL> CREATE TABLE CHALLAN_HEADER
+  2  (CHALLAN_NO VARCHAR2(6) PRIMARY KEY,
+  3  S_ORDER_NO VARCHAR2(6) REFERENCES SALES_ORDER(ORDER_NO),
+  4  CHALLAN_DATE DATE NOT NULL,
+  5  BILLED_YN CHAR(1) DEFAULT 'N' CHECK( BILLED_YN IN ('Y','N')),
+  6  CONSTRAINT PRI_CH_H CHECK(CHALLAN_NO LIKE 'CH%'))
+  7  /
+
+Table created.
+
+SQL> 
+SQL> CREATE TABLE CHALLAN_DETAILS
+  2  (CHALLAN_NO VARCHAR2(6) REFERENCES CHALLAN_HEADER(CHALLAN_NO),
+  3  PRODUCT_NO VARCHAR2(6) REFERENCES PRODUCT_MASTER(PRODUCT_NO),
+  4  QTY_DISP NUMBER(3))
+  5  /
+
+Table created.
+
+SQL> SELECT * FROM TAB;
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+BONUS                          TABLE                                            
+CHALLAN_DETAILS                TABLE                                            
+CHALLAN_HEADER                 TABLE                                            
+CLIENT_MASTER                  TABLE                                            
+DEPT                           TABLE                                            
+DUMMY                          TABLE                                            
+EMP                            TABLE                                            
+PRODUCT_MASTER                 TABLE                                            
+SALESMAN_MASTER                TABLE                                            
+SALES_ORDER                    TABLE                                            
+SALES_ORDER_DETAILS            TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+SALGRADE                       TABLE                                            
+
+12 rows selected.
+
+SQL> SET PAGESIZE 60;
+SQL> SELECT * FROM TAB;
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+BONUS                          TABLE                                            
+CHALLAN_DETAILS                TABLE                                            
+CHALLAN_HEADER                 TABLE                                            
+CLIENT_MASTER                  TABLE                                            
+DEPT                           TABLE                                            
+DUMMY                          TABLE                                            
+EMP                            TABLE                                            
+PRODUCT_MASTER                 TABLE                                            
+SALESMAN_MASTER                TABLE                                            
+SALES_ORDER                    TABLE                                            
+SALES_ORDER_DETAILS            TABLE                                            
+SALGRADE                       TABLE                                            
+
+12 rows selected.
+
+SQL> create table client_master
+  2  (client_no varchar(6) constraint clie_pri PRIMARY KEY,
+  3  name varchar(30) not null,
+  4  add1 varchar(30),
+  5  add2 varchar(30),
+  6  city varchar(15),
+  7  pincode number(8),
+  8  state varchar(15),
+  9  bal_due number(10,2),
+ 10  constraint clie_id_like check (client_no like 'C%'))
+ 11  /
+create table client_master
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> 
+SQL> create table product_master
+  2  (product_no varchar(6) constraint product_pri PRIMARY KEY,
+  3  descr varchar(15) not null,
+  4  profit_percent number(4,2) not null,
+  5  unit_measure varchar(10) not null,
+  6  qty_on_hand number(8)not null,
+  7  reorder_lvl number(8,2)not null,
+  8  sell_price number(8,2)not null check (sell_price>0),
+  9  cost_price number(8,2)not null check (cost_price>0),
+ 10  constraint pro_id_like check (product_no like 'P%'))
+ 11  /
+create table product_master
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> 
+SQL> create table salesman_master
+  2  (salesman_no varchar(6) constraint sales_no_pri PRIMARY KEY,
+  3  salesman_name varchar(30) not null,
+  4  address1 varchar(30),
+  5  address2 varchar(30),
+  6  city varchar(15),
+  7  pincode number(8),
+  8  state varchar(20),
+  9  sal_amt number(8,2),
+ 10  tgt_to_get number(6,2),
+ 11  ytd_sales number(6,2),
+ 12  remarks varchar(30),
+ 13  constraint sales_no_like check (salesman_no like 'S%'))
+ 14  /
+create table salesman_master
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> 
+SQL> create table sales_order
+  2  (order_no varchar(6) constraint sales_pri PRIMARY KEY,
+  3  client_no varchar(6) constraint sales_ref_client REFERENCES client_master (client_no) ON DELETE CASCADE,
+  4  order_date date not null,
+  5  delt_addr varchar(25),
+  6  salesman_no varchar(6) constraint sales_ref_sels REFERENCES salesman_master(salesman_no) ON DELETE CASCADE,
+  7  dely_type char(1) DEFAULT 'F' check(dely_type in('P','F')),
+  8  bill_yn char(1),
+  9  dely_date date,
+ 10  order_state varchar(10) constraint sales_state_ch check (order_state in('IN PROCESS','FULFILLED','BACKORDER','CANCELLED')),
+ 11  constraint so_date check(order_date<dely_date))
+ 12  /
+create table sales_order
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> 
+SQL> create table sales_order_details
+  2  (order_no varchar(6) constraint sales_ord_de REFERENCES sales_order(order_no) ON DELETE CASCADE,
+  3  product_no varchar(6) constraint sales_pro_mas REFERENCES product_master(product_no) ON DELETE CASCADE,
+  4  qty_ordered number(8),
+  5  qty_disp number(8),
+  6  product_rate number(10,2))
+  7  /
+create table sales_order_details
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> 
+SQL> CREATE TABLE CHALLAN_HEADER
+  2  (CHALLAN_NO VARCHAR2(6) PRIMARY KEY,
+  3  S_ORDER_NO VARCHAR2(6) REFERENCES SALES_ORDER(ORDER_NO),
+  4  CHALLAN_DATE DATE NOT NULL,
+  5  BILLED_YN CHAR(1) DEFAULT 'N' CHECK( BILLED_YN IN ('Y','N')),
+  6  CONSTRAINT PRI_CH_H CHECK(CHALLAN_NO LIKE 'CH%'))
+  7  /
+CREATE TABLE CHALLAN_HEADER
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> 
+SQL> CREATE TABLE CHALLAN_DETAILS
+  2  (CHALLAN_NO VARCHAR2(6) REFERENCES CHALLAN_HEADER(CHALLAN_NO),
+  3  PRODUCT_NO VARCHAR2(6) REFERENCES PRODUCT_MASTER(PRODUCT_NO),
+  4  QTY_DISP NUMBER(3))
+  5  /
+CREATE TABLE CHALLAN_DETAILS
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> CREATE TABLE employee (empno number(4), ename varchar2(10), job varchar2(9), mgr number(4), hiredate date, sal number(7,2), comm number(7,2), deptno number(2))
+  2  /
+
+Table created.
+
+SQL> INSERT INTO employee(empno, ename, job, mgr, hiredate, sal, deptno) VALUES (7369, 'SMITH', 'CLERK', 7902, '17-DEC-80', 800, 20)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO employee (empno, ename, job, mgr, hiredate, sal, comm, deptno) VALUES (7499, 'allen', 'salesman', 7698, '20-feb-81', 1600, 300, 30)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO employee (empno, ename, job, mgr, hiredate, sal, comm, deptno) VALUES (7521, 'ward', 'salesman', 7698, '22-feb-81', 1250, 500, 30)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO employee (empno, ename, job, mgr, hiredate, sal, deptno) VALUES (7566, 'jones', 'manager', 7839, '02-apr-81', 2975, 20)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO employee (empno, ename, job, mgr, hiredate, sal, comm, deptno) VALUES (7654, 'martin', 'salesman', 7698, '28-sep-81', 1250, 1400, 30)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO employee (empno, ename, job, mgr, hiredate, sal, deptno) VALUES (7698, 'BLAKE', 'MANAGER', 7839, '01-MAY-81', 2850, 30)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO employee (empno, ename, job, mgr, hiredate, sal, deptno) VALUES (7782, 'CLARK', 'MANAGER', 7839, '09-JUN-81', 2450, 10)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO employee (empno, ename, job, mgr, hiredate, sal, deptno) VALUES (7788, 'SCOTT', 'ANALYST', 7566, '19-APR-81', 3000, 20)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO employee (empno, ename, job, hiredate, sal, deptno) VALUES (7839, 'KING', 'PRESIDENT', '17-NOV-81', 5000, 10)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO employee (empno, ename, job, mgr, hiredate, sal, deptno) VALUES (7844, 'TURNER', 'SALESMAN', 7698, '08-SEP-81', 1500, 30)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO employee (empno, ename, job, mgr, hiredate, sal, deptno) VALUES (7876, 'ADAMS', 'CLERK', 7788, '23-MAY-87', 1100, 10)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO employee (empno, ename, job, mgr, hiredate, sal, deptno) VALUES (7900, 'JAMES', 'CLERK', 7698, '03-DEC-81', 950, 30)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO employee (empno, ename, job, mgr, hiredate, sal, deptno) VALUES (7902, 'FORD', 'ANALYST', 7566, '03-DEC-81', 3000, 20)
+  2  /
+
+1 row created.
+
+SQL> INSERT INTO employee (empno, ename, job, mgr, hiredate, sal, deptno) VALUES (7934, 'MILLER', 'CLERK', 7782, '23-JAN-82', 1300, 10)
+  2  /
+
+1 row created.
+
+SQL> SELECT * FROM employee;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7369 SMITH      CLERK           7902 17-DEC-80        800                 
+        20                                                                      
+                                                                                
+      7499 allen      salesman        7698 20-FEB-81       1600        300      
+        30                                                                      
+                                                                                
+      7521 ward       salesman        7698 22-FEB-81       1250        500      
+        30                                                                      
+                                                                                
+      7566 jones      manager         7839 02-APR-81       2975                 
+        20                                                                      
+                                                                                
+      7654 martin     salesman        7698 28-SEP-81       1250       1400      
+        30                                                                      
+                                                                                
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                 
+        30                                                                      
+                                                                                
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                 
+        10                                                                      
+                                                                                
+      7788 SCOTT      ANALYST         7566 19-APR-81       3000                 
+        20                                                                      
+                                                                                
+      7839 KING       PRESIDENT            17-NOV-81       5000                 
+        10                                                                      
+                                                                                
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500                 
+        30                                                                      
+                                                                                
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                 
+        10                                                                      
+                                                                                
+      7900 JAMES      CLERK           7698 03-DEC-81        950                 
+        30                                                                      
+                                                                                
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                 
+        20                                                                      
+                                                                                
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                 
+        10                                                                      
+                                                                                
+
+14 rows selected.
+
+SQL> set linesize 100;
+SQL> SELECT * FROM employee;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20               
+      7499 allen      salesman        7698 20-FEB-81       1600        300         30               
+      7521 ward       salesman        7698 22-FEB-81       1250        500         30               
+      7566 jones      manager         7839 02-APR-81       2975                    20               
+      7654 martin     salesman        7698 28-SEP-81       1250       1400         30               
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30               
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10               
+      7788 SCOTT      ANALYST         7566 19-APR-81       3000                    20               
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10               
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500                    30               
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    10               
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30               
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20               
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10               
+
+14 rows selected.
+
+SQL> SELECT * FROM dept;
+
+    DEPTNO DNAME          LOC                                                                       
+---------- -------------- -------------                                                             
+        10 ACCOUNTING     NEW YORK                                                                  
+        20 RESEARCH       DALLAS                                                                    
+        30 SALES          CHICAGO                                                                   
+        40 OPERATIONS     BOSTON                                                                    
+
+SQL> SELECT * FROM salgrade;
+
+     GRADE      LOSAL      HISAL                                                                    
+---------- ---------- ----------                                                                    
+         1        700       1200                                                                    
+         2       1201       1400                                                                    
+         3       1401       2000                                                                    
+         4       2001       3000                                                                    
+         5       3001       9999                                                                    
+
+SQL> SELECT * FROM employee;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------               
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20               
+      7499 allen      salesman        7698 20-FEB-81       1600        300         30               
+      7521 ward       salesman        7698 22-FEB-81       1250        500         30               
+      7566 jones      manager         7839 02-APR-81       2975                    20               
+      7654 martin     salesman        7698 28-SEP-81       1250       1400         30               
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30               
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10               
+      7788 SCOTT      ANALYST         7566 19-APR-81       3000                    20               
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10               
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500                    30               
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    10               
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30               
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20               
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10               
+
+14 rows selected.
+
+SQL> DESC employee;
+ Name                                                  Null?    Type
+ ----------------------------------------------------- -------- ------------------------------------
+ EMPNO                                                          NUMBER(4)
+ ENAME                                                          VARCHAR2(10)
+ JOB                                                            VARCHAR2(9)
+ MGR                                                            NUMBER(4)
+ HIREDATE                                                       DATE
+ SAL                                                            NUMBER(7,2)
+ COMM                                                           NUMBER(7,2)
+ DEPTNO                                                         NUMBER(2)
+
+SQL> SELECT * FROM tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                   
+------------------------------ ------- ----------                                                   
+BONUS                          TABLE                                                                
+CHALLAN_DETAILS                TABLE                                                                
+CHALLAN_HEADER                 TABLE                                                                
+CLIENT_MASTER                  TABLE                                                                
+DEPT                           TABLE                                                                
+DUMMY                          TABLE                                                                
+EMP                            TABLE                                                                
+EMPLOYEE                       TABLE                                                                
+PRODUCT_MASTER                 TABLE                                                                
+SALESMAN_MASTER                TABLE                                                                
+SALES_ORDER                    TABLE                                                                
+SALES_ORDER_DETAILS            TABLE                                                                
+SALGRADE                       TABLE                                                                
+
+13 rows selected.
+
+SQL> SELECT empno FROM employee;
+
+     EMPNO                                                                                          
+----------                                                                                          
+      7369                                                                                          
+      7499                                                                                          
+      7521                                                                                          
+      7566                                                                                          
+      7654                                                                                          
+      7698                                                                                          
+      7782                                                                                          
+      7788                                                                                          
+      7839                                                                                          
+      7844                                                                                          
+      7876                                                                                          
+      7900                                                                                          
+      7902                                                                                          
+      7934                                                                                          
+
+14 rows selected.
+
+SQL> SELECT ename,job FROM employee;
+
+ENAME      JOB                                                                                      
+---------- ---------                                                                                
+SMITH      CLERK                                                                                    
+allen      salesman                                                                                 
+ward       salesman                                                                                 
+jones      manager                                                                                  
+martin     salesman                                                                                 
+BLAKE      MANAGER                                                                                  
+CLARK      MANAGER                                                                                  
+SCOTT      ANALYST                                                                                  
+KING       PRESIDENT                                                                                
+TURNER     SALESMAN                                                                                 
+ADAMS      CLERK                                                                                    
+JAMES      CLERK                                                                                    
+FORD       ANALYST                                                                                  
+MILLER     CLERK                                                                                    
+
+14 rows selected.
+
+SQL> SELECT comm FROM employee;
+
+      COMM                                                                                          
+----------                                                                                          
+                                                                                                    
+       300                                                                                          
+       500                                                                                          
+                                                                                                    
+      1400                                                                                          
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+                                                                                                    
+
+14 rows selected.
+
+SQL> SELECT mgr FROM employee;
+
+       MGR                                                                                          
+----------                                                                                          
+      7902                                                                                          
+      7698                                                                                          
+      7698                                                                                          
+      7839                                                                                          
+      7698                                                                                          
+      7839                                                                                          
+      7839                                                                                          
+      7566                                                                                          
+                                                                                                    
+      7698                                                                                          
+      7788                                                                                          
+      7698                                                                                          
+      7566                                                                                          
+      7782                                                                                          
+
+14 rows selected.
+
+SQL> SELECT deptno FROM employee;
+
+    DEPTNO                                                                                          
+----------                                                                                          
+        20                                                                                          
+        30                                                                                          
+        30                                                                                          
+        20                                                                                          
+        30                                                                                          
+        30                                                                                          
+        10                                                                                          
+        20                                                                                          
+        10                                                                                          
+        30                                                                                          
+        10                                                                                          
+        30                                                                                          
+        20                                                                                          
+        10                                                                                          
+
+14 rows selected.
+
+SQL> SELECT empno,ename,job,mgr FROM employee;
+
+     EMPNO ENAME      JOB              MGR                                                          
+---------- ---------- --------- ----------                                                          
+      7369 SMITH      CLERK           7902                                                          
+      7499 allen      salesman        7698                                                          
+      7521 ward       salesman        7698                                                          
+      7566 jones      manager         7839                                                          
+      7654 martin     salesman        7698                                                          
+      7698 BLAKE      MANAGER         7839                                                          
+      7782 CLARK      MANAGER         7839                                                          
+      7788 SCOTT      ANALYST         7566                                                          
+      7839 KING       PRESIDENT                                                                     
+      7844 TURNER     SALESMAN        7698                                                          
+      7876 ADAMS      CLERK           7788                                                          
+      7900 JAMES      CLERK           7698                                                          
+      7902 FORD       ANALYST         7566                                                          
+      7934 MILLER     CLERK           7782                                                          
+
+14 rows selected.
+
+SQL> SELECT ename,mgr FROM employee;
+
+ENAME             MGR                                                                               
+---------- ----------                                                                               
+SMITH            7902                                                                               
+allen            7698                                                                               
+ward             7698                                                                               
+jones            7839                                                                               
+martin           7698                                                                               
+BLAKE            7839                                                                               
+CLARK            7839                                                                               
+SCOTT            7566                                                                               
+KING                                                                                                
+TURNER           7698                                                                               
+ADAMS            7788                                                                               
+JAMES            7698                                                                               
+FORD             7566                                                                               
+MILLER           7782                                                                               
+
+14 rows selected.
+
+SQL> SELECT job,comm FROM employee;
+
+JOB             COMM                                                                                
+--------- ----------                                                                                
+CLERK                                                                                               
+salesman         300                                                                                
+salesman         500                                                                                
+manager                                                                                             
+salesman        1400                                                                                
+MANAGER                                                                                             
+MANAGER                                                                                             
+ANALYST                                                                                             
+PRESIDENT                                                                                           
+SALESMAN                                                                                            
+CLERK                                                                                               
+CLERK                                                                                               
+ANALYST                                                                                             
+CLERK                                                                                               
+
+14 rows selected.
+
+SQL> SELECT ename,empno FROM employee;
+
+ENAME           EMPNO                                                                               
+---------- ----------                                                                               
+SMITH            7369                                                                               
+allen            7499                                                                               
+ward             7521                                                                               
+jones            7566                                                                               
+martin           7654                                                                               
+BLAKE            7698                                                                               
+CLARK            7782                                                                               
+SCOTT            7788                                                                               
+KING             7839                                                                               
+TURNER           7844                                                                               
+ADAMS            7876                                                                               
+JAMES            7900                                                                               
+FORD             7902                                                                               
+MILLER           7934                                                                               
+
+14 rows selected.
+
+SQL> SELECT empno,ename,sal,job FROM employee;
+
+     EMPNO ENAME             SAL JOB                                                                
+---------- ---------- ---------- ---------                                                          
+      7369 SMITH             800 CLERK                                                              
+      7499 allen            1600 salesman                                                           
+      7521 ward             1250 salesman                                                           
+      7566 jones            2975 manager                                                            
+      7654 martin           1250 salesman                                                           
+      7698 BLAKE            2850 MANAGER                                                            
+      7782 CLARK            2450 MANAGER                                                            
+      7788 SCOTT            3000 ANALYST                                                            
+      7839 KING             5000 PRESIDENT                                                          
+      7844 TURNER           1500 SALESMAN                                                           
+      7876 ADAMS            1100 CLERK                                                              
+      7900 JAMES             950 CLERK                                                              
+      7902 FORD             3000 ANALYST                                                            
+      7934 MILLER           1300 CLERK                                                              
+
+14 rows selected.
+
+SQL> SELECT * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                   
+------------------------------ ------- ----------                                                   
+BONUS                          TABLE                                                                
+CHALLAN_DETAILS                TABLE                                                                
+CHALLAN_HEADER                 TABLE                                                                
+CLIENT_MASTER                  TABLE                                                                
+DEPT                           TABLE                                                                
+DUMMY                          TABLE                                                                
+EMP                            TABLE                                                                
+EMPLOYEE                       TABLE                                                                
+PRODUCT_MASTER                 TABLE                                                                
+SALESMAN_MASTER                TABLE                                                                
+SALES_ORDER                    TABLE                                                                
+SALES_ORDER_DETAILS            TABLE                                                                
+SALGRADE                       TABLE                                                                
+
+13 rows selected.
+
+SQL> SELECT deptno,dname FROM dept;
+
+    DEPTNO DNAME                                                                                    
+---------- --------------                                                                           
+        10 ACCOUNTING                                                                               
+        20 RESEARCH                                                                                 
+        30 SALES                                                                                    
+        40 OPERATIONS                                                                               
+
+SQL> SELECT * FROM SALGRADE;
+
+     GRADE      LOSAL      HISAL                                                                    
+---------- ---------- ----------                                                                    
+         1        700       1200                                                                    
+         2       1201       1400                                                                    
+         3       1401       2000                                                                    
+         4       2001       3000                                                                    
+         5       3001       9999                                                                    
+
+SQL> SELECT grade FROM salgrade;
+
+     GRADE                                                                                          
+----------                                                                                          
+         1                                                                                          
+         2                                                                                          
+         3                                                                                          
+         4                                                                                          
+         5                                                                                          
+
+SQL> SELECT losal,hisal,grade FROM salgrade;
+
+     LOSAL      HISAL      GRADE                                                                    
+---------- ---------- ----------                                                                    
+       700       1200          1                                                                    
+      1201       1400          2                                                                    
+      1401       2000          3                                                                    
+      2001       3000          4                                                                    
+      3001       9999          5                                                                    
+
+SQL> spool off

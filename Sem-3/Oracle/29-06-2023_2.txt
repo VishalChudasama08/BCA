@@ -1,0 +1,208 @@
+SQL> CREATE TABLE client_master
+  2  (
+  3  client_no varchar2(6) CONSTRAINT clintno_pri PRIMARY KEY,
+  4  name varchar2(20) NOT NULL,
+  5  address1 varchar2(30),
+  6  address2 varchar2(30),
+  7  city varchar2(15),
+  8  state varchar2(15),
+  9  pincode number(6),
+ 10  bal_due number(10,2),
+ 11  CONSTRAINT CLINTNO_CHECK_C CHECK (client_no LIKE 'C%')
+ 12  )
+ 13  /
+
+Table created.
+
+SQL> CREATE TABLE product_master
+  2  (
+  3  product_no varchar2(6) CONSTRAINT productno_pri PRIMARY KEY,
+  4  description varchar2(5) NOT NULL,
+  5  profit_percent number(5,2) NOT NULL,
+  6  unit_measure varchar2(10) NOT NULL,
+  7  qty_on_hand number(8) NOT NULL,
+  8  reorder_lvl number(8) NOT NULL,
+  9  sell_price number(8,2) NOT NULL CHECK (sell_price>0),
+ 10  cost_price number(8,2) NOT NULL CHECK (cost_price>0),
+ 11  CONSTRAINT productno_check_p CHECK (product_no LIKE 'P%')
+ 12  )
+ 13  /
+
+Table created.
+
+SQL> CREATE TABLE salesman_master (
+  2  salesman_no varchar2(6) CONSTRAINT salesman_no_pri PRIMARY KEY,
+  3  salesman_name varchar2(20) NOT NULL,
+  4  address1 varchar2(30) NOT NULL,
+  5  address2 varchar2(30),
+  6  city varchar2(20),
+  7  pincode number(6),
+  8  state varchar2(20),
+  9  sal_amt number(8,2) NOT NULL CHECK (sal_amt>0),
+ 10  tgt_to_get number(6,2) NOT NULL CHECK (tgt_to_get>0),
+ 11  ytd_sales number(6,2) NOT NULL, remarks varchar2(60)
+ 12  )
+ 13  /
+
+Table created.
+
+SQL> CREATE TABLE sales_order
+  2  (
+  3  order_no varchar2(6) CONSTRAINT order_pri PRIMARY KEY,
+  4  order_date date NOT NULL,
+  5  client_no varchar2(6) CONSTRAINT ref_clientno REFERENCES client_master(client_no) ON DELETE CASCADE,
+  6  dely_addr varchar2(25),
+  7  salesman_no varchar2(6) CONSTRAINT ref_salesmanno REFERENCES salesman_master(salesman_no) ON DELETE CASCADE,
+  8  dely_type char(1) DEFAULT 'F' CHECK (dely_type IN('P', 'F')),
+  9  billed_yn char(1),
+ 10  dely_date date,
+ 11  order_status varchar2(10) CHECK (order_status IN ('Process', 'Fulfilled', 'Back Order', 'Canceled')),
+ 12  CONSTRAINT orderno_check_o CHECK (order_no LIKE 'O%'),
+ 13  CONSTRAINT dely_date_check CHECK (order_date<dely_date)
+ 14  )
+ 15  /
+
+Table created.
+
+SQL> CREATE TABLE sales_order_details
+  2  (
+  3  order_no varchar2(6) CONSTRAINT order_ref REFERENCES sales_order(order_no),
+  4  product_no varchar2(6) CONSTRAINT product_ref REFERENCES product_master(product_no),
+  5  qty_ordered number(8),
+  6  qty_disp number(8),
+  7  product_rate number(10, 2)
+  8  );
+
+Table created.
+
+SQL> CREATE TABLE challan_header
+  2  (
+  3  challan_no varchar2(6),
+  4  order_no varchar2(6) CONSTRAINT order_ref REFERENCES sales_order(order_no),
+  5  challan_date date NOT NULL,
+  6  billed_yn char(1) DEFAULT 'N' CHECK (billed_yn IN('Y', 'N')),
+  7  CONSTRAINT challan_chek CHECK (challan_no LIKE 'CH%')
+  8  );
+order_no varchar2(6) CONSTRAINT order_ref REFERENCES sales_order(order_no),
+                                *
+ERROR at line 4:
+ORA-02264: name already used by an existing constraint 
+
+
+SQL> CREATE TABLE challan_header
+  2  (
+  3  challan_no varchar2(6),
+  4  order_no varchar2(6) CONSTRAINT orderno_ref REFERENCES sales_order(order_no),
+  5  challan_date date NOT NULL,
+  6  billed_yn char(1) DEFAULT 'N' CHECK (billed_yn IN('Y', 'N')),
+  7  CONSTRAINT challan_chek CHECK (challan_no LIKE 'CH%')
+  8  );
+
+Table created.
+
+SQL> CREATE TABLE challan_details
+  2  (
+  3  challan_no varchar2(6) CONSTRAINT challanno_ref REFERENCES challan_header(challan_no) ON DELETE CASCADE,
+  4  product_no varchar2(6) CONSTRAINT productno_ref REFERENCES product_master(product_no) ON DELETE CASCADE,
+  5  qty_disp number(8)
+  6  );
+challan_no varchar2(6) CONSTRAINT challanno_ref REFERENCES challan_header(challan_no) ON DELETE CASCADE,
+                                                                          *
+ERROR at line 3:
+ORA-02270: no matching unique or primary key for this column-list 
+
+
+SQL> alter table challan_header modifay (challan_no varchar2(6) constraint challan_pri primaryy key);
+alter table challan_header modifay (challan_no varchar2(6) constraint challan_pri primaryy key)
+                           *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option 
+
+
+SQL> alter table challan_header modify (challan_no varchar2(6) constraint challan_pri primaryy key);
+alter table challan_header modify (challan_no varchar2(6) constraint challan_pri primaryy key)
+                                                          *
+ERROR at line 1:
+ORA-02253: constraint specification not allowed here 
+
+
+SQL> alter table challan_header modify (challan_no varchar2(6) constraint challan_pri primary key);
+
+Table altered.
+
+SQL> CREATE TABLE challan_details
+  2  (
+  3  challan_no varchar2(6) CONSTRAINT challanno_ref REFERENCES challan_header(challan_no) ON DELETE CASCADE,
+  4  product_no varchar2(6) CONSTRAINT productno_ref REFERENCES product_master(product_no) ON DELETE CASCADE,
+  5  qty_disp number(8)
+  6  );
+
+Table created.
+
+SQL> INSERT INTO client_master (client_no, name, city, pincode, state, bal_due) VALUES ('C00001', 'Ivan Bayross', 'Bombay', 400054, 'Maharashtra', 15000);
+
+1 row created.
+
+SQL> /
+INSERT INTO client_master (client_no, name, city, pincode, state, bal_due) VALUES ('C00001', 'Ivan Bayross', 'Bombay', 400054, 'Maharashtra', 15000)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SCOTT.CLINTNO_PRI) violated 
+
+
+SQL> INSERT INTO client_master (client_no, name, city, pincode, state, bal_due) VALUES ('C00002', 'Vandana Saitwal', 'Madras', 780001, 'Tamil Nadu', 0);
+
+1 row created.
+
+SQL> /
+INSERT INTO client_master (client_no, name, city, pincode, state, bal_due) VALUES ('C00002', 'Vandana Saitwal', 'Madras', 780001, 'Tamil Nadu', 0)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SCOTT.CLINTNO_PRI) violated 
+
+
+SQL> INSERT INTO client_master (client_no, name, city, pincode, state, bal_due) VALUES ('C00003', 'Pramada Jahuste', 'Bombay', 400057, 'Maharashtra', 5000);
+
+1 row created.
+
+SQL> /
+INSERT INTO client_master (client_no, name, city, pincode, state, bal_due) VALUES ('C00003', 'Pramada Jahuste', 'Bombay', 400057, 'Maharashtra', 5000)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SCOTT.CLINTNO_PRI) violated 
+
+
+SQL> INSERT INTO client_master (client_no, name, city, pincode, state, bal_due) VALUES ('C00004', 'Basu Navindgi', 'Bombay', 400056, 'Maharashtra', 0);
+
+1 row created.
+
+SQL> /
+INSERT INTO client_master (client_no, name, city, pincode, state, bal_due) VALUES ('C00004', 'Basu Navindgi', 'Bombay', 400056, 'Maharashtra', 0)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SCOTT.CLINTNO_PRI) violated 
+
+
+SQL> INSERT INTO client_master (client_no, name, city, pincode, state, bal_due) VALUES ('C00005', 'Ravi Sreedharan', 'Delhi', 100001, '', 2000);
+
+1 row created.
+
+SQL> /
+INSERT INTO client_master (client_no, name, city, pincode, state, bal_due) VALUES ('C00005', 'Ravi Sreedharan', 'Delhi', 100001, '', 2000)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SCOTT.CLINTNO_PRI) violated 
+
+
+SQL> INSERT INTO client_master (client_no, name, city, pincode, state, bal_due) VALUES ('C00006', 'Rukmini', 'Bombay', 400050, 'Maharashtra', 0);
+
+1 row created.
+
+SQL> /
+INSERT INTO client_master (client_no, name, city, pincode, state, bal_due) VALUES ('C00006', 'Rukmini', 'Bombay', 400050, 'Maharashtra', 0)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SCOTT.CLINTNO_PRI) violated 
+
+
+SQL> spool off
