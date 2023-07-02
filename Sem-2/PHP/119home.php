@@ -1,0 +1,11 @@
+<?php
+session_start();
+  if(!isset($_SESSION['login'])){
+	  header("location:119login.php");  
+  }
+?>
+<html>
+  <body>
+    <p>Welcome</p>
+  </body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="/Sem-2/jQuery/jquery.min.js"></script>
+  <style>
+    h2 {
+      text-align: center;
+      color: green;
+      text-shadow: 0px 0px 8px greenyellow;
+    }
+
+    p {
+      height: 150px;
+      width: 150px;
+      border-radius: 8px;
+      background-color: aqua;
+      color: red;
+      font-weight: bold;
+      text-align: center;
+      margin: 10px auto;
+      padding: 25px;
+      border: 2px solid black;
+    }
+
+    div {
+      text-align: center;
+    }
+
+    button {
+      margin: 6px 4px;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>jQuery fade method</h2>
+  <p>This is a box.</p>
+  <div>
+    <button id="b1">slideUp</button>
+    <button id="b2">slideDown</button>
+    <button id="b3">slideToggle</button>
+    <br>
+  </div>
+</body>
+<script>
+  $(document).ready(function() {
+    $("#b1").click(function() {
+      $("p").slideUp();
+    });
+    $("#b2").click(function() {
+      $("p").slideDown();
+    });
+    $("#b3").click(function() {
+      $("p").slideToggle();
+    });
+  });
+</script>
+</html>

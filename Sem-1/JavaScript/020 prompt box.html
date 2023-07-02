@@ -1,0 +1,26 @@
+<!-- write a html code to show the use of prompt box of JavaScript -->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  <p>Click the button to demonstrate the prompt box.</p>
+  <button onclick="myFunction()">Try it</button>
+  <p id="prompt"></p>
+  <script>
+    function myFunction() {
+      var x;
+      var p = prompt("Please Enter Your Name", "Student");
+      if (p != null) {
+        x = "Hello " + p + "! <br>" + " Learning the prompt bax of JavaScript";
+        document.getElementById("prompt").innerHTML = x;
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!-- write a html code to show the use of confirm box of JavaScript -->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  <p>Click the button to display a confirm box.</p>
+  <button onclick="myFunction()">Try it</button>
+  <p id="confirm"></p>
+  <script>
+    function myFunction() {
+      var x;
+      var r = confirm("press button of your choice");
+      if (r==true) {
+        x = "You pressed ok!";
+      }
+      else {
+        x = "You pressed cancel!";
+      }
+      document.getElementById("confirm").innerHTML = x;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script> -->
+  <script src="/Sem-2/jQuery/jquery.min.js"></script>
+  <style>
+    h2 {
+      text-align: center;
+    }
+    button {
+      font-weight: bold;
+      /* font-size: 1.5rem; */
+      /* padding: 10px 20px; */
+      margin: 10px;
+      border: 2px solid lawngreen;
+      border-radius: 7px;
+      box-shadow: 0px 0px 15px 6px greenyellow;
+    }
+
+    hr {
+      margin: 30px auto;
+      border: 2px solid darkblue;
+      border-radius: 5px;
+      box-shadow: 0px 0px 15px 4px blue;
+    }
+
+    p {
+      color: darkred;
+      text-shadow: 0.5px 0.5px 2px red;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>jQuery fade method</h2>
+  
+  <button class="b3out">fadeOut - fast(default)</button>
+  <button class="b1out">fadeOut - slow</button>
+  <button class="b2out">fadeOut - 2000ms(2s)</button>
+  <hr>
+  <button class="b3in">fadeIn - fast(default)</button>
+  <button class="b1in">fadeIn - slow</button>
+  <button class="b2in">fadeIn - 2000ms(2s)</button>
+  <hr>
+  <button class="b3">fadeToggle - fast(default)</button>
+  <button class="b1">fadeToggle - slow</button>
+  <button class="b2">fadeToggle - 2000ms(2s)</button>
+  <hr />
+
+  <p>This is a paragraph will little content. This is a paragraph will little content. This is a paragraph will little content. This is a paragraph will little content. This is a paragraph will little content. This is a paragraph will little content. This is a paragraph will little content. This is a paragraph will little content. This is a paragraph will little content. This is a paragraph will little content.</p>
+
+  <p>This is another small paragraph. This is another small paragraph. This is another small paragraph. This is another small paragraph. This is another small paragraph. This is another small paragraph. This is another small paragraph. This is another small paragraph. This is another small paragraph. This is another small paragraph. This is another small paragraph. This is another small paragraph.</p>
+</body>
+<script>
+  $(document).ready(function() {
+    $(".b1in").click(function() {
+      $("p").fadeIn("slow");
+    });
+    $(".b2in").click(function() {
+      $("p").fadeIn(2000);
+    });
+    $(".b3in").click(function() {
+      $("p").fadeIn();
+    });
+    
+    $(".b1out").click(function() {
+      $("p").fadeOut("slow");
+    });
+    $(".b2out").click(function() {
+      $("p").fadeOut(2000);
+    });
+    $(".b3out").click(function() {
+      $("p").fadeOut();
+    });
+    
+    $(".b1").click(function() {
+      $("p").fadeToggle("slow");
+    });
+    $(".b2").click(function() {
+      $("p").fadeToggle(2000);
+    });
+    $(".b3").click(function() {
+      $("p").fadeToggle();
+    });
+  });
+</script>
+
+</html>

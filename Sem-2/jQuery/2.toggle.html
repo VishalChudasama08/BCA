@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script> -->
+  <script src="/Sem-2/jQuery/jquery.min.js"></script>
+  <style>
+    button {
+      font-weight: bold;
+      font-size: 1.5rem;
+      padding: 10px 20px;
+      margin: 10px;
+      border: 3px solid black;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <h3>Toggle berween hiding and showing the paragraphs.</h3>
+  <button class="b3">Toggle - fast(default)</button>
+  <button class="b1">Toggle - slow</button>
+  <button class="b2">Toggle - 2000ms</button>
+  
+  <p>This is a paragraph will little content. This is a paragraph will little content. This is a paragraph will little content. This is a paragraph will little content. This is a paragraph will little content. This is a paragraph will little content. This is a paragraph will little content. This is a paragraph will little content. This is a paragraph will little content. This is a paragraph will little content.</p>
+  
+  <p>This is another small paragraph. This is another small paragraph. This is another small paragraph. This is another small paragraph. This is another small paragraph. This is another small paragraph. This is another small paragraph. This is another small paragraph. This is another small paragraph. This is another small paragraph. This is another small paragraph. This is another small paragraph.</p>
+</body>
+<script>
+  $(document).ready(function(){
+    $(".b1").click(function(){
+      $("p").toggle("slow");
+    });
+    $(".b2").click(function() {
+      $("p").toggle(2000);
+    });
+    $(".b3").click(function() {
+      $("p").toggle();
+    });
+  });
+</script>
+</html>

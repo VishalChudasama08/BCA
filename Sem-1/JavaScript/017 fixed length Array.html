@@ -1,0 +1,33 @@
+<!-- write a html code to show the use of fixed length array in javascript -->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  <script language="javascript">
+    ZeroArray = new Array();
+    FixedArray = new Array(2);
+    for (i = 1 ; i <= 5 ; i++) {
+      ZeroArray[i - 1] = i * 2;
+    }
+    for (i = 1 ; i <= 5 ; i++) {
+      FixedArray[i - 1] = ZeroArray[i - 1];
+    }
+    document.write("Zero Length Array output :-" + "<br>");
+    
+    for (i = 0 ; i <= 4 ; i++) {
+      document.write("  " + ZeroArray[i]);
+    }
+    document.write("<br> Fixed Length output (Initial Declation = 2)" + "<br>");
+    for (i = 0 ; i <= 4 ; i++) {
+      document.write("  " + FixedArray[i]);
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+#include<stdio.h>
+#include<conio.h>
+void main()
+{
+	int i,j,sp=-1,k,a;
+	clrscr();
+	for(i=5;i>=1;i--)
+	{
+		for(j=1;j<=i;j++)
+		{
+			printf("%2c",j+64);
+		}
+		for(k=1;k<=sp;k++)
+		{
+			printf("  ");
+		}
+		sp+=2;
+		if(i==5)
+			a=4;
+		else
+			a=i;
+		for(j=a;j>=1;j--)
+		{
+			printf("%2c",j+64);
+		}
+		printf("\n");
+	}
+	sp=5;
+	for(i=2;i<=5;i++)
+	{
+		for(j=1;j<=i;j++)
+		{
+			printf("%2c",j+64);
+		}
+		for(k=1;k<=sp;k++)
+		{
+			printf("  ");
+		}
+		sp-=2;
+		if(i==5)
+			a=4;
+		else
+			a=i;
+		for(j=a;j>=1;j--)
+		{
+			printf("%2c",j+64);
+		}
+		printf("\n");
+	}
+	getch();
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  <script language="javascript">
+    var txt1 = "Hello World!";
+    var txt2 = " How are you ?";
+    var txt3 = " Welcome to javascript"
+    
+    //length
+    document.write(txt1.length + "<br>");
+    
+    //display string in bold font
+    document.write(txt1.big() + "<br>");
+    
+    //display string in small font
+    document.write(txt1.small() + "<br>");
+    
+    //display string in bold
+    document.write(txt1.bold() + "<br>");
+    
+    //display string in italics
+    document.write(txt1.italics() + "<br>");
+    
+    //display string in strike
+    document.write(txt1.strike() + "<br>");
+    
+    //change fontcolor hexadecimal code
+    document.write(txt1.fontcolor("#00ccaa") + "<br>");
+    
+    //change fontcolor rgb
+    document.write(txt1.fontcolor("rgb(100, 255, 100)") + "<br>");
+    
+    //change font size
+    document.write(txt1.fontsize(1) + "<br>");
+    
+    //string will be displayed as link
+    document.write(txt1.link("http://www.Wikipedia.com") + "<br>");
+    
+    //charAt returns the character from the specified
+    document.write(txt1.charAt(6) + "<br>");
+    
+    //concat used to join more string
+    document.write(txt1.concat(txt2,txt3) + "<br>");
+    
+    //string mache than return 0, return -1 on not found. it's case sensitive.
+    document.write(txt1.indexOf("hello") + "<br>");
+    
+    //lastIndexOf return the position of the last occurrence of string, if not found return -1
+    document.write(txt1.lastIndexOf("o") + "<br>");
+    
+    //match will return the searched string if it is found, else it will return 'null'. the method is case sensitive
+    document.write(txt1.match("World") + "<br>");
+    
+    //replace will replace searched string with second parameter.it is case sensitive.
+    document.write(txt2.replace("are","r") + '<br>');
+    
+    // 'i' is a flag to make replace case-insensitive.
+    document.write(txt2.replace(/ARE/i,"r") + '<br>');
+    
+    //search is same as indexOf, additional to it 'i' flag can also be used
+    document.write(txt3.search(/WELCOME/i) + '<br>');
+    
+    //slice Extracts a part of string and returns it. [ending index position optional]
+    document.write(txt3.slice(2,4) + '<br>');
+    
+    //slice Extracts a part of string and returns it. [minus value for reverse ending index position optional]
+    document.write(txt3.slice(10,-4) + '<br>');
+    //substr return the number of character from index position.index starts with 0
+    document.write(txt2.substr(2,8) + '<br>');
+    
+    //substring return the character from index postion to index position.index starts with 0
+    document.write(txt2.substring(3,4) + '<br>');
+    
+    //toLowerCase convert the string in lower case
+    document.write(txt2.toLowerCase() + '<br>');
+    
+    //toUppercase convert the string in upper case
+    document.write(txt3.toUpperCase() + '<br>');
+    
+    document.write(txt2.toUpperCase().fontcolor("#aabbcc").fontsize(6));
+  </script>
+</body>
+
+</html>

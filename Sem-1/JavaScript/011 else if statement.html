@@ -1,0 +1,37 @@
+<!-- write a html code to show the use of else if statement in javascript -->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  <p>Click the button to get a time based greeting</p>
+  <button onclick="myFunction()">Try it</button>
+  <p id="demo"></p>
+  <script language="javascript">
+    function myFunction() {
+      var x;
+      var t = new Date() .getHours();
+      // date() and .getHours() it is a function 
+      if (t > 6 && t < 10 ) {
+        x = "Hello Good Morning!";
+      }
+      else if (t > 12 && t < 17) {
+        x = "Hello Good Afternoon!";
+      }
+      else if (t > 17 && t < 20) {
+        x = "Hello Good Evening!";
+      }
+      else {
+        x = "Hello Good Night!";
+      }
+      document.getElementById("demo").innerHTML=x;
+    }
+  </script>
+</body>
+
+</html>

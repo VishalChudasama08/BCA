@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  <script language="javascript">
+    function logical_operator() {
+      let a = 70, b = 80, c = 80;
+      let and_all_right = (a<80 && b>70);
+      console.log(and_all_right);
+      let and_1_right = (a<80 && b>90);
+      console.log(and_1_right);
+      let or_all_right = (a<50 || b>70);
+      console.log(or_all_right);
+      let or_ = (a<70 || b>90);
+      console.log(or_);
+      let not_true = (a != b);
+      console.log(not_true);
+      let not_false = (b != c);
+      console.log(not_false);
+    }
+    logical_operator();
+    with (document){
+      
+      //abs display's absolute values only
+      write(Math.abs(7.325) + '<br>');
+      
+      //ceil display's next greater integer value
+      write(Math.ceil(4.25)+ '<br>');
+      
+      //floor gives previous integer value
+      write(Math.floor(10.22)+ '<br>');
+      
+      //exp returns Euler constant base of natural logarithms
+      write(Math.exp(1)+ '<br>');
+      
+      //cos returns consine of number
+      write(Math.cos(2)+ '<br>');
+      
+      //sin returns sine of number
+      write(Math.sin(2)+ '<br>');
+      
+      //tan returns tangent of angle
+      write(Math.tan(4)+ '<br>');
+      
+      //log returns log,if argument is negative NaN is returned
+      write(Math.log(2)+ '<br>');
+      
+      //pow returns the value of x to the power of y  (2²)
+      write(Math.pow(2,2)+ '<br>');
+      
+      //random returns random value between 0 to 1
+      write(Math.random()+ '<br>');
+      
+      //max gives maximum value
+      write(Math.max(24,5,6)+ '<br>');
+      
+      //min returns minimum value
+      write(Math.min(24,5,6)+ '<br>');
+      
+      //round gives nearest integer value
+      write(Math.round(5.2222)+ '<br>');
+      write(Math.round(5.5222)+ '<br>');
+      
+      //value of π
+      write(Math.PI + '<br>');
+      
+      //Euler's Number 'e' is a numerical constant
+      write(Math.E + '<br>');
+    }
+  </script>
+</body>
+
+</html>

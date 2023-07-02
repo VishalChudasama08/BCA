@@ -1,0 +1,10 @@
+<?php
+  if(!isset($_COOKIE['login'])){
+	  header("location:116login.php");  
+  }
+?>
+<html>
+  <body>
+    <p>Welcome</p>
+  </body>
+</html>

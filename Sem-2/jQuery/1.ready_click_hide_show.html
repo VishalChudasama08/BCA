@@ -1,0 +1,47 @@
+<!-- element and id selector, 
+ready,click,hide,show -->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+  <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script> -->
+  <script src="/Sem-2/jQuery/jquery.min.js"></script>
+  <style>
+    button {
+      font-weight: bold;
+      font-size: 1.5rem;
+      padding: 10px 20px;
+      margin: 10px;
+      border: 3px solid black;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Welcome to jquery</h1>
+  <button id="x" value="hide">Hide</button>
+  <button id="y" value="show">Show</button>
+</body>
+<script>
+  $(document).ready(function(){
+    //document mins this page
+    //.ready mins dot(.) pela jehoy je ready hoy to 
+    //full jo aa page ready hoy to aakaro
+    $("#x").click(function(){
+      //#x --> id selector
+      //.click mins aana par click thay to aakaro
+      $("h1").hide();
+      //h1 --> element selector
+      //.hide --> hide this
+    });
+    $("#y").click(function(){
+      $("h1").show();
+      //.show --> show this
+    });
+  });
+</script>
+</html>

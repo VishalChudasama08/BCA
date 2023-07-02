@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  <script language="javascript">
+    var dt = new Date();
+    with (document){
+      write("dt = new Date() <br>")
+      
+      //Date returns the today date
+      write("Date()--> " + Date() + '<br>');
+      
+      //getDate return a day of month 1 to 31
+      write("dt.getDate()--> " + dt.getDate() + '<br>');
+      
+      //getDay returns a day of week 0 to 6. 0=sunday
+      write("dt.getDay()--> " + dt.getDay() + '<br>');
+      
+      //getMonth returns a month of year 1 to 11
+      write("dt.getMonth()--> " + dt.getMonth() + '<br>');
+      
+      //getYear return 2 digit year for 1900 to 1999,4 digit for remaining
+      write("dt.getYear()--> " + dt.getYear() + '<br>');
+    
+      //getFullYear return 4 digit for any year
+      write("dt.getFullYear()--> " + dt.getFullYear() + '<br>');
+    
+      //getHours returns 1 digit for 1 to 9 and 2 digit for 10 to 24
+      write("dt.getHours()--> " + dt.getHours() + '<br>');
+     
+      //getMinutes returns 1 digit for 1 to 9 and 2 digit for 10 to 60
+      write("dt.getMinutes()--> " + dt.getMinutes() + '<br>');
+      
+      //getSeconds returns 1 digit for 1 to 9 and 2 digit for 10 to 60
+      write("dt.getSeconds()--> " + dt.getSeconds() + '<br>');
+      
+      //getMilliseconds Returns milliseconds of object [2 digit less then 100,1 digit less 10]
+      write("dt.getMilliseconds()--> " + dt.getMilliseconds() + '<br>');
+      
+      //getTime Returns the milliseconds since midnight January 1,1970
+      write("dt.getTime()--> " + dt.getTime() + '<br>');
+      
+      //setDate Set's date to object (1-31) 
+      dt.setDate(10);
+      write(dt.getDate() + '<br>');
+      
+      //setMonth Set's Month to object (0-11) 
+      dt.setMonth(10);
+      write(dt.getMonth() + '<br>');
+      
+      //setYear Set's full year (year, month, day) month and day optional 
+      dt.setYear(2002, 12,);
+      write(dt.getYear() + '<br>');
+      
+      //setFullYear Set's year in object 1900-1999 2 digit year, else four digit 
+      dt.setFullYear(90)
+      write(dt.getFullYear() + '<br>');
+      
+      //setHours's Set Hours in object (hrs, min, sec, millisec) hours only compulsory 
+      dt.setHours(10)
+      write(dt.getHours() + '<br>');
+      
+      //setMinutes Set's minutes to object (min, sec ,milliseconds) min compulsory 
+      dt.setMinutes(33)
+      write(dt.getMinutes() + '<br>');
+      
+      //setSeconds Set's seconds to object (sec, milliseconds) sec compulsory 
+      dt.setSeconds(44)
+      write(dt.getSeconds() + '<br>');
+    }
+  </script>
+</body>
+
+</html>

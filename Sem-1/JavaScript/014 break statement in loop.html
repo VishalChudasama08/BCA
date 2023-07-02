@@ -1,0 +1,29 @@
+<!-- write a html code to show the use of break statement in loop of javascript -->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  <p>Click the button to doba loop which will skip the step where i = 3.</p>
+  <button onclick="myFunction()">Try it</button>
+  <p id="okay"></p>
+  <script>
+    function myFunction() {
+      var x = " ";
+      for (var i = 0 ; i < 10 ; i++) {
+        if (i == 3) {
+          break;
+        }
+        x = x + "The Number is " + i + "<br>";
+      }
+      document.getElementById("okay").innerHTML = x;
+    }
+  </script>
+</body>
+
+</html>

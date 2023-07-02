@@ -1,0 +1,9 @@
+#include<stdio.h>
+#include<conio.h>
+main()
+{
+   clrscr();
+   gotoxy(10,20);
+   printf("INDIA");
+   getch();
+}
