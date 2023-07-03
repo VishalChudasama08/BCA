@@ -1,0 +1,73 @@
+create table client_master
+(client_no varchar(6) constraint clie_pri PRIMARY KEY,
+name varchar(30) not null,
+add1 varchar(30),
+add2 varchar(30),
+city varchar(15),
+pincode number(8),
+state varchar(15),
+bal_due number(10,2),
+constraint clie_id_like check (client_no like 'C%'))
+/
+
+create table product_master
+(product_no varchar(6) constraint product_pri PRIMARY KEY,
+descr varchar(15) not null,
+profit_percent number(4,2) not null,
+unit_measure varchar(10) not null,
+qty_on_hand number(8)not null,
+reorder_lvl number(8,2)not null,
+sell_price number(8,2)not null check (sell_price>0),
+cost_price number(8,2)not null check (cost_price>0),
+constraint pro_id_like check (product_no like 'P%'))
+/
+
+create table salesman_master
+(salesman_no varchar(6) constraint sales_no_pri PRIMARY KEY,
+salesman_name varchar(30) not null,
+address1 varchar(30),
+address2 varchar(30),
+city varchar(15),
+pincode number(8),
+state varchar(20),
+sal_amt number(8,2),
+tgt_to_get number(6,2),
+ytd_sales number(6,2),
+remarks varchar(30),
+constraint sales_no_like check (salesman_no like 'S%'))
+/
+
+create table sales_order
+(order_no varchar(6) constraint sales_pri PRIMARY KEY,
+client_no varchar(6) constraint sales_ref_client REFERENCES client_master (client_no) ON DELETE CASCADE,
+order_date date not null,
+delt_addr varchar(25),
+salesman_no varchar(6) constraint sales_ref_sels REFERENCES salesman_master(salesman_no) ON DELETE CASCADE,
+dely_type char(1) DEFAULT 'F' check(dely_type in('P','F')),
+bill_yn char(1),
+dely_date date,
+order_state varchar(10) constraint sales_state_ch check (order_state in('IN PROCESS','FULFILLED','BACKORDER','CANCELLED')),
+constraint so_date check(order_date<dely_date))
+/
+
+create table sales_order_details
+(order_no varchar(6) constraint sales_ord_de REFERENCES sales_order(order_no) ON DELETE CASCADE,
+product_no varchar(6) constraint sales_pro_mas REFERENCES product_master(product_no) ON DELETE CASCADE,
+qty_ordered number(8),
+qty_disp number(8),
+product_rate number(10,2))
+/
+
+CREATE TABLE CHALLAN_HEADER
+(CHALLAN_NO VARCHAR2(6) PRIMARY KEY,
+S_ORDER_NO VARCHAR2(6) REFERENCES SALES_ORDER(ORDER_NO),
+CHALLAN_DATE DATE NOT NULL,
+BILLED_YN CHAR(1) DEFAULT 'N' CHECK( BILLED_YN IN ('Y','N')),
+CONSTRAINT PRI_CH_H CHECK(CHALLAN_NO LIKE 'CH%'))
+/
+
+CREATE TABLE CHALLAN_DETAILS
+(CHALLAN_NO VARCHAR2(6) REFERENCES CHALLAN_HEADER(CHALLAN_NO),
+PRODUCT_NO VARCHAR2(6) REFERENCES PRODUCT_MASTER(PRODUCT_NO),
+QTY_DISP NUMBER(3))
+/
