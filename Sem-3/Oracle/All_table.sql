@@ -55,23 +55,23 @@ sell_price number(8,2) NOT NULL CHECK (sell_price>0),
 cost_price number(8,2) NOT NULL CHECK (cost_price>0),
 CONSTRAINT pro_id_like CHECK (product_no LIKE 'P%'))
 /
-INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P00001', '1.44 Floppies', 5, Piece, 100, 20, 525, 500)
+INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P00001', '1.44 Floppies', 5, 'Piece', 100, 20, 525, 500)
 /
-INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P03453', 'Monitors', 6, Piece, 10, 3, 12000, 11280)
+INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P03453', 'Monitors', 6, 'Piece', 10, 3, 12000, 11280)
 /
-INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P06734', 'Mouse', 5, Piece, 20, 5, 1050, 1000)
+INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P06734', 'Mouse', 5, 'Piece', 20, 5, 1050, 1000)
 /
-INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P07865', '1.22 Floppies', 5, Piece, 100, 20, 525, 500)
+INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P07865', '1.22 Floppies', 5, 'Piece', 100, 20, 525, 500)
 /
-INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P07868', 'Keyboards', 2, Piece, 10, 3, 3150, 3050)
+INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P07868', 'Keyboards', 2, 'Piece', 10, 3, 3150, 3050)
 /
-INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P07885', 'CD Drive', 2.5, Piece, 10, 3, 5250, 5100)
+INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P07885', 'CD Drive', 2.5, 'Piece', 10, 3, 5250, 5100)
 /
-INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P07965', '540 HDD', 4, Piece, 10, 3, 8400, 8000)
+INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P07965', '540 HDD', 4, 'Piece', 10, 3, 8400, 8000)
 /
-INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P07975', '1.44 Drive', 5, Piece, 10, 3, 1050, 1000)
+INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P07975', '1.44 Drive', 5, 'Piece', 10, 3, 1050, 1000)
 /
-INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P08865', '1.22 Drive', 5, Piece, 2, 3, 1050, 1000)
+INSERT INTO product_master (product_no, descr, profit_percent, unit_measure, qty_on_hand, reorder_lvl, sell_price, cost_price) VALUES ('P08865', '1.22 Drive', 5, 'Piece', 2, 3, 1050, 1000)
 /
 
 
@@ -111,17 +111,17 @@ dely_date date,
 order_states varchar(10) CONSTRAINT sales_state_ch check (order_states in('IN PROCESS','FULFILLED','BACKORDER','CANCELLED')),
 CONSTRAINT so_date check(order_date<dely_date))
 /
-INSERT INTO sales_order (order_no, order_date, client_no, dely_type, billed_yn, salesman_no, dely_date, order_states) VALUES ('O19001', '12-jan-96', 'C00001', 'F', 'N', 'S00001', '20-jan-96', 'IP')
+INSERT INTO sales_order (order_no, order_date, client_no, dely_type, billed_yn, salesman_no, dely_date, order_states) VALUES ('O19001', '12-jan-96', 'C00001', 'F', 'N', 'S00001', '20-jan-96', 'IN PROCESS')
 /
-INSERT INTO sales_order (order_no, order_date, client_no, dely_type, billed_yn, salesman_no, dely_date, order_states) VALUES ('O19002', '25-jan-96', 'C00002', 'P', 'N', 'S00002', '27-jan-96', 'C')
+INSERT INTO sales_order (order_no, order_date, client_no, dely_type, billed_yn, salesman_no, dely_date, order_states) VALUES ('O19002', '25-jan-96', 'C00002', 'P', 'N', 'S00002', '27-jan-96', 'CANCELLED')
 /
-INSERT INTO sales_order (order_no, order_date, client_no, dely_type, billed_yn, salesman_no, dely_date, order_states) VALUES ('O46865', '18-feb-96', 'C00003', 'F', 'Y', 'S00003', '20-feb-96', 'F')
+INSERT INTO sales_order (order_no, order_date, client_no, dely_type, billed_yn, salesman_no, dely_date, order_states) VALUES ('O46865', '18-feb-96', 'C00003', 'F', 'Y', 'S00003', '20-feb-96', 'FULFILLED')
 /
-INSERT INTO sales_order (order_no, order_date, client_no, dely_type, billed_yn, salesman_no, dely_date, order_states) VALUES ('O19003', '03-apr-96', 'C00001', 'F', 'Y', 'S00001', '07-apr-96', 'F')
+INSERT INTO sales_order (order_no, order_date, client_no, dely_type, billed_yn, salesman_no, dely_date, order_states) VALUES ('O19003', '03-apr-96', 'C00001', 'F', 'Y', 'S00001', '07-apr-96', 'FULFILLED')
 /
-INSERT INTO sales_order (order_no, order_date, client_no, dely_type, billed_yn, salesman_no, dely_date, order_states) VALUES ('O46866', '20-may-96', 'C00004', 'P', 'N', 'S00002', '22-may-96', 'C')
+INSERT INTO sales_order (order_no, order_date, client_no, dely_type, billed_yn, salesman_no, dely_date, order_states) VALUES ('O46866', '20-may-96', 'C00004', 'P', 'N', 'S00002', '22-may-96', 'CANCELLED')
 /
-INSERT INTO sales_order (order_no, order_date, client_no, dely_type, billed_yn, salesman_no, dely_date, order_states) VALUES ('O10008', '24-may-96', 'C00005', 'F', 'N', 'S00004', '26-may-96', 'IP')
+INSERT INTO sales_order (order_no, order_date, client_no, dely_type, billed_yn, salesman_no, dely_date, order_states) VALUES ('O10008', '24-may-96', 'C00005', 'F', 'N', 'S00004', '26-may-96', 'IN PROCESS')
 /
 
 
@@ -132,33 +132,33 @@ qty_ordered number(8),
 qty_disp number(8),
 product_rate number(10,2))
 /
-INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALIES ('O19001', 'P00001', 4, 4, 525)
+INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALUES ('O19001', 'P00001', 4, 4, 525)
 /
-INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALIES ('O19001', 'P07965', 2, 1, 8400)
+INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALUES ('O19001', 'P07965', 2, 1, 8400)
 /
-INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALIES ('O19001', 'P07885', 2, 1, 5250)
+INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALUES ('O19001', 'P07885', 2, 1, 5250)
 /
-INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALIES ('O19002', 'P00001', 10, 0, 525)
+INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALUES ('O19002', 'P00001', 10, 0, 525)
 /
-INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALIES ('O46865', 'P07868', 3, 3, 3150)
+INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALUES ('O46865', 'P07868', 3, 3, 3150)
 /
-INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALIES ('O46865', 'P07885', 3, 1, 5250)
+INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALUES ('O46865', 'P07885', 3, 1, 5250)
 /
-INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALIES ('O46865', 'P00001', 10, 10, 525)
+INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALUES ('O46865', 'P00001', 10, 10, 525)
 /
-INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALIES ('O46865', 'P03453', 4, 4, 1050)
+INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALUES ('O46865', 'P03453', 4, 4, 1050)
 /
-INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALIES ('O19003', 'P03453', 2, 2, 1050)
+INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALUES ('O19003', 'P03453', 2, 2, 1050)
 /
-INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALIES ('O19003', 'P06734', 1, 1, 12000)
+INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALUES ('O19003', 'P06734', 1, 1, 12000)
 /
-INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALIES ('O46866', 'P07965', 1, 0, 8400)
+INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALUES ('O46866', 'P07965', 1, 0, 8400)
 /
-INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALIES ('O46866', 'P07975', 1, 0, 1050)
+INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALUES ('O46866', 'P07975', 1, 0, 1050)
 /
-INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALIES ('O10008', 'P00001', 10, 5, 525)
+INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALUES ('O10008', 'P00001', 10, 5, 525)
 /
-INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALIES ('O10008', 'P07975', 5, 3, 1050)
+INSERT INTO sales_order_details (order_no, product_no, qty_ordered, qty_disp, product_rate) VALUES ('O10008', 'P07975', 5, 3, 1050)
 /
 
 
@@ -169,32 +169,35 @@ CHALLAN_DATE DATE NOT NULL,
 BILLED_YN CHAR(1) DEFAULT 'N' CHECK( BILLED_YN IN ('Y','N')),
 CONSTRAINT PRI_CH_H CHECK(CHALLAN_NO LIKE 'CH%'))
 /
-INSERT INTO challan_header (challan_no, order_no, challan_date, billed_yn) VALIES ('CH9001', 'O19001', '12-dec-95', 'Y')
+INSERT INTO challan_header (challan_no, order_no, challan_date, billed_yn) VALUES ('CH9001', 'O19001', '12-dec-95', 'Y')
 /
-INSERT INTO challan_header (challan_no, order_no, challan_date, billed_yn) VALIES ('CH6865', 'O46865', '12-nov-95', 'Y')
+INSERT INTO challan_header (challan_no, order_no, challan_date, billed_yn) VALUES ('CH6865', 'O46865', '12-nov-95', 'Y')
 /
-INSERT INTO challan_header (challan_no, order_no, challan_date, billed_yn) VALIES ('CH3965', 'O10008', '12-oct-95', 'Y')
+INSERT INTO challan_header (challan_no, order_no, challan_date, billed_yn) VALUES ('CH3965', 'O10008', '12-oct-95', 'Y')
 /
 
 
 CREATE TABLE CHALLAN_DETAILS
 (CHALLAN_NO VARCHAR2(6) REFERENCES CHALLAN_HEADER(CHALLAN_NO),
 PRODUCT_NO VARCHAR2(6) REFERENCES PRODUCT_MASTER(PRODUCT_NO),
-QTY_DISP NUMBER(3))
+QTY_DISP NUMBER(3), 
+CONSTRAINT PRI_CH_CC CHECK(CHALLAN_NO LIKE 'CH%'), 
+CONSTRAINT PRI_CH_CH CHECK(PRODUCT_NO LIKE 'P%')
+)
 /
-INSERT INTO challan_header (challan_no, product_no, qty_disp) VALIES ('CH9001', 'P00001', '4')
+INSERT INTO challan_details (challan_no, product_no, qty_disp) VALUES ('CH9001', 'P00001', 4)
 /
-INSERT INTO challan_header (challan_no, product_no, qty_disp) VALIES ('CH9001', 'P07965', '1')
+INSERT INTO challan_details (challan_no, product_no, qty_disp) VALUES ('CH9001', 'P07965', 1)
 /
-INSERT INTO challan_header (challan_no, product_no, qty_disp) VALIES ('CH9001', 'P07885', '1')
+INSERT INTO challan_details (challan_no, product_no, qty_disp) VALUES ('CH9001', 'P07885', 1)
 /
-INSERT INTO challan_header (challan_no, product_no, qty_disp) VALIES ('CH6865', 'P07868', '3')
+INSERT INTO challan_details (challan_no, product_no, qty_disp) VALUES ('CH6865', 'P07868', 3)
 /
-INSERT INTO challan_header (challan_no, product_no, qty_disp) VALIES ('CH6865', 'P03453', '4')
+INSERT INTO challan_details (challan_no, product_no, qty_disp) VALUES ('CH6865', 'P03453', 4)
 /
-INSERT INTO challan_header (challan_no, product_no, qty_disp) VALIES ('CH6865', 'P00001', '10')
+INSERT INTO challan_details (challan_no, product_no, qty_disp) VALUES ('CH6865', 'P00001', 10)
 /
-INSERT INTO challan_header (challan_no, product_no, qty_disp) VALIES ('CH6865', 'P00001', '5')
+INSERT INTO challan_details (challan_no, product_no, qty_disp) VALUES ('CH6865', 'P00001', 5)
 /
-INSERT INTO challan_header (challan_no, product_no, qty_disp) VALIES ('CH6865', 'P07975', '2')
+INSERT INTO challan_details (challan_no, product_no, qty_disp) VALUES ('CH6865', 'P07975', 2)
 /
