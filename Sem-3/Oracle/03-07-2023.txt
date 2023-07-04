@@ -1,0 +1,158 @@
+SQL> SELECT * FROM TAB;
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+BONUS                          TABLE                                            
+CHALLAN_DETAILS                TABLE                                            
+CHALLAN_HEADER                 TABLE                                            
+CLIENT_MASTER                  TABLE                                            
+DEPT                           TABLE                                            
+DUMMY                          TABLE                                            
+EMP                            TABLE                                            
+PRODUCT_MASTER                 TABLE                                            
+SALESMAN_MASTER                TABLE                                            
+SALES_ORDER                    TABLE                                            
+SALES_ORDER_DETAILS            TABLE                                            
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+SALGRADE                       TABLE                                            
+
+12 rows selected.
+
+SQL> SET PAGESIZE 500;
+SQL> SET LINESIZE 250;
+SQL> SELECT clint_no FROM clint
+  2  ;
+SELECT clint_no FROM clint
+                     *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> SELECT clint_no FROM clint_master;
+SELECT clint_no FROM clint_master
+                     *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> SELECT client_no FROM client_master;
+
+CLIENT                                                                                                                                                                                                                                                    
+------                                                                                                                                                                                                                                                    
+C00001                                                                                                                                                                                                                                                    
+C00002                                                                                                                                                                                                                                                    
+C00003                                                                                                                                                                                                                                                    
+C00004                                                                                                                                                                                                                                                    
+C00005                                                                                                                                                                                                                                                    
+C00006                                                                                                                                                                                                                                                    
+
+6 rows selected.
+
+SQL> SELECT * FROM client_master;
+
+CLIENT NAME                           ADD1                           ADD2                           CITY               PINCODE STATE              BAL_DUE                                                                                                 
+------ ------------------------------ ------------------------------ ------------------------------ --------------- ---------- --------------- ----------                                                                                                 
+C00001 Ivan Bayross                                                                                 Bombay              400054 Maharashtra          15000                                                                                                 
+C00002 Vandana Saitwal                                                                              Madras              780001 Tamil Nadu               0                                                                                                 
+C00003 Pramada Jahuste                                                                              Bombay              400057 Maharashtra           5000                                                                                                 
+C00004 Basu Navindgi                                                                                Bombay              400056 Maharashtra              0                                                                                                 
+C00005 Ravi Sreedharan                                                                              Delhi               100001                       2000                                                                                                 
+C00006 Rukmini                                                                                      Bombay              400050 Maharashtra              0                                                                                                 
+
+6 rows selected.
+
+SQL> SELECT name, city FROM client_master;
+
+NAME                           CITY                                                                                                                                                                                                                       
+------------------------------ ---------------                                                                                                                                                                                                            
+Ivan Bayross                   Bombay                                                                                                                                                                                                                     
+Vandana Saitwal                Madras                                                                                                                                                                                                                     
+Pramada Jahuste                Bombay                                                                                                                                                                                                                     
+Basu Navindgi                  Bombay                                                                                                                                                                                                                     
+Ravi Sreedharan                Delhi                                                                                                                                                                                                                      
+Rukmini                        Bombay                                                                                                                                                                                                                     
+
+6 rows selected.
+
+SQL> SELECT product_no FROM product_master;
+
+PRODUC                                                                                                                                                                                                                                                    
+------                                                                                                                                                                                                                                                    
+P00001                                                                                                                                                                                                                                                    
+P03453                                                                                                                                                                                                                                                    
+P06734                                                                                                                                                                                                                                                    
+P07865                                                                                                                                                                                                                                                    
+P07868                                                                                                                                                                                                                                                    
+P07885                                                                                                                                                                                                                                                    
+P07965                                                                                                                                                                                                                                                    
+P07975                                                                                                                                                                                                                                                    
+P08865                                                                                                                                                                                                                                                    
+
+9 rows selected.
+
+SQL> SELECT name FROM client_master WHERE LIKE('a%');
+SELECT name FROM client_master WHERE LIKE('a%')
+                                     *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> SELECT name FROM client_master LIKE('a%');
+SELECT name FROM client_master LIKE('a%')
+                               *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> SELECT name FROM client_master LIKE 'a%';
+SELECT name FROM client_master LIKE 'a%'
+                               *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> SELECT name FROM client_master LIKE '_a%';
+SELECT name FROM client_master LIKE '_a%'
+                               *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> SELECT name FROM client_master LIKE ('_a%');
+SELECT name FROM client_master LIKE ('_a%')
+                               *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> SELECT name FROM client_master WHERE LIKE('_a%');
+SELECT name FROM client_master WHERE LIKE('_a%')
+                                     *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> SELECT name FROM client_master WHERE name LIKE('_a%');
+
+NAME                                                                                                                                                                                                                                                      
+------------------------------                                                                                                                                                                                                                            
+Vandana Saitwal                                                                                                                                                                                                                                           
+Basu Navindgi                                                                                                                                                                                                                                             
+Ravi Sreedharan                                                                                                                                                                                                                                           
+
+SQL> SELECT city FROM client_master city LIKE('_a%');
+SELECT city FROM client_master city LIKE('_a%')
+                                    *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> SELECT city FROM client_master WHERE city LIKE('_a%');
+
+CITY                                                                                                                                                                                                                                                      
+---------------                                                                                                                                                                                                                                           
+Madras                                                                                                                                                                                                                                                    
+
+SQL> spool off

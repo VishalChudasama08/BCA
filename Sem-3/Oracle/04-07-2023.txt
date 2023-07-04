@@ -1,0 +1,167 @@
+SQL> SELECT * FROM sales_order WHERE order_date LIKE ('%jan%')
+  2  ;
+
+no rows selected
+
+SQL> SELECT * FROM sales_order WHERE order_date LIKE ('%JAN%');
+
+ORDER_ ORDER_DAT CLIENT DELY_ADDR                 SALESM D B DELY_DATE          
+------ --------- ------ ------------------------- ------ - - ---------          
+ORDER_STAT                                                                      
+----------                                                                      
+O19001 12-JAN-96 C00001                           S00001 F N 20-JAN-96          
+IN PROCESS                                                                      
+                                                                                
+O19002 25-JAN-96 C00002                           S00002 P N 27-JAN-96          
+CANCELLED                                                                       
+                                                                                
+
+SQL> SET PAGESIZE 500;
+SQL> SET LINESIZE 360;
+SQL> SELECT * FROM sales_order WHERE order_date LIKE ('%JAN%');
+
+ORDER_ ORDER_DAT CLIENT DELY_ADDR                 SALESM D B DELY_DATE ORDER_STAT                                                                                                                                                                                                                                                                                       
+------ --------- ------ ------------------------- ------ - - --------- ----------                                                                                                                                                                                                                                                                                       
+O19001 12-JAN-96 C00001                           S00001 F N 20-JAN-96 IN PROCESS                                                                                                                                                                                                                                                                                       
+O19002 25-JAN-96 C00002                           S00002 P N 27-JAN-96 CANCELLED                                                                                                                                                                                                                                                                                        
+
+SQL> SELECT * FROM client_master WHERE client_no = 'C00001' OR client_no= 'C00002';
+
+CLIENT NAME                           ADD1                           ADD2                           CITY               PINCODE STATE              BAL_DUE                                                                                                                                                                                                               
+------ ------------------------------ ------------------------------ ------------------------------ --------------- ---------- --------------- ----------                                                                                                                                                                                                               
+C00001 Ivan Bayross                                                                                 Bombay              400054 Maharashtra          15000                                                                                                                                                                                                               
+C00002 Vandana Saitwal                                                                              Madras              780001 Tamil Nadu               0                                                                                                                                                                                                               
+
+SQL> SELECT product_no,descr FROM product_master WHERE descr IN ('1.44 Drive', '1.22 Drive');
+
+PRODUC DESCR                                                                                                                                                                                                                                                                                                                                                            
+------ ---------------                                                                                                                                                                                                                                                                                                                                                  
+P07975 1.44 Drive                                                                                                                                                                                                                                                                                                                                                       
+P08865 1.22 Drive                                                                                                                                                                                                                                                                                                                                                       
+
+SQL> SELECT product_no,sell_price FROM product_master WHERE sell_price > 2000 OR sell_price <= 5000;
+
+PRODUC SELL_PRICE                                                                                                                                                                                                                                                                                                                                                       
+------ ----------                                                                                                                                                                                                                                                                                                                                                       
+P00001        525                                                                                                                                                                                                                                                                                                                                                       
+P03453      12000                                                                                                                                                                                                                                                                                                                                                       
+P06734       1050                                                                                                                                                                                                                                                                                                                                                       
+P07865        525                                                                                                                                                                                                                                                                                                                                                       
+P07868       3150                                                                                                                                                                                                                                                                                                                                                       
+P07885       5250                                                                                                                                                                                                                                                                                                                                                       
+P07965       8400                                                                                                                                                                                                                                                                                                                                                       
+P07975       1050                                                                                                                                                                                                                                                                                                                                                       
+P08865       1050                                                                                                                                                                                                                                                                                                                                                       
+
+9 rows selected.
+
+SQL> SELECT product_no,sell_price FROM product_master WHERE sell_price < 2000 OR sell_price >= 5000;
+
+PRODUC SELL_PRICE                                                                                                                                                                                                                                                                                                                                                       
+------ ----------                                                                                                                                                                                                                                                                                                                                                       
+P00001        525                                                                                                                                                                                                                                                                                                                                                       
+P03453      12000                                                                                                                                                                                                                                                                                                                                                       
+P06734       1050                                                                                                                                                                                                                                                                                                                                                       
+P07865        525                                                                                                                                                                                                                                                                                                                                                       
+P07885       5250                                                                                                                                                                                                                                                                                                                                                       
+P07965       8400                                                                                                                                                                                                                                                                                                                                                       
+P07975       1050                                                                                                                                                                                                                                                                                                                                                       
+P08865       1050                                                                                                                                                                                                                                                                                                                                                       
+
+8 rows selected.
+
+SQL> SELECT product_no,sell_price FROM product_master WHERE sell_price > 2000 AND sell_price <= 5000;
+
+PRODUC SELL_PRICE                                                                                                                                                                                                                                                                                                                                                       
+------ ----------                                                                                                                                                                                                                                                                                                                                                       
+P07868       3150                                                                                                                                                                                                                                                                                                                                                       
+
+SQL> SELECT product_no,sell_price, sell_price * 15 "NEW PRICE" FROM product_master WHERE sell_price > 1500;
+
+PRODUC SELL_PRICE  NEW PRICE                                                                                                                                                                                                                                                                                                                                            
+------ ---------- ----------                                                                                                                                                                                                                                                                                                                                            
+P03453      12000     180000                                                                                                                                                                                                                                                                                                                                            
+P07868       3150      47250                                                                                                                                                                                                                                                                                                                                            
+P07885       5250      78750                                                                                                                                                                                                                                                                                                                                            
+P07965       8400     126000                                                                                                                                                                                                                                                                                                                                            
+
+SQL> SELECT product_no,sell_price,sell_price + sell_price * 0.15 "NEW PRICE" FROM product_master WHERE sell_price > 1500;
+
+PRODUC SELL_PRICE  NEW PRICE                                                                                                                                                                                                                                                                                                                                            
+------ ---------- ----------                                                                                                                                                                                                                                                                                                                                            
+P03453      12000      13800                                                                                                                                                                                                                                                                                                                                            
+P07868       3150     3622.5                                                                                                                                                                                                                                                                                                                                            
+P07885       5250     6037.5                                                                                                                                                                                                                                                                                                                                            
+P07965       8400       9660                                                                                                                                                                                                                                                                                                                                            
+
+SQL> SELECT product_no,sell_price,sell_price "NEW PRICE" FROM product_master;
+
+PRODUC SELL_PRICE  NEW PRICE                                                                                                                                                                                                                                                                                                                                            
+------ ---------- ----------                                                                                                                                                                                                                                                                                                                                            
+P00001        525        525                                                                                                                                                                                                                                                                                                                                            
+P03453      12000      12000                                                                                                                                                                                                                                                                                                                                            
+P06734       1050       1050                                                                                                                                                                                                                                                                                                                                            
+P07865        525        525                                                                                                                                                                                                                                                                                                                                            
+P07868       3150       3150                                                                                                                                                                                                                                                                                                                                            
+P07885       5250       5250                                                                                                                                                                                                                                                                                                                                            
+P07965       8400       8400                                                                                                                                                                                                                                                                                                                                            
+P07975       1050       1050                                                                                                                                                                                                                                                                                                                                            
+P08865       1050       1050                                                                                                                                                                                                                                                                                                                                            
+
+9 rows selected.
+
+SQL> SELECT product_no,cost_price FROM product_master WHERE cost_price < 1500;
+
+PRODUC COST_PRICE                                                                                                                                                                                                                                                                                                                                                       
+------ ----------                                                                                                                                                                                                                                                                                                                                                       
+P00001        500                                                                                                                                                                                                                                                                                                                                                       
+P06734       1000                                                                                                                                                                                                                                                                                                                                                       
+P07865        500                                                                                                                                                                                                                                                                                                                                                       
+P07975       1000                                                                                                                                                                                                                                                                                                                                                       
+P08865       1000                                                                                                                                                                                                                                                                                                                                                       
+
+SQL> SELECT * FROM product_master DESC;
+SELECT * FROM product_master DESC
+                             *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> SELECT * FROM product_master DESC;
+SELECT * FROM product_master DESC
+                             *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> SELECT * FROM product_master desc;
+SELECT * FROM product_master desc
+                             *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> SELECT * FROM product_master ORDER BY description;
+SELECT * FROM product_master ORDER BY description
+                                      *
+ERROR at line 1:
+ORA-00904: "DESCRIPTION": invalid identifier 
+
+
+SQL> SELECT * FROM product_master ORDER BY descr;
+
+PRODUC DESCR           PROFIT_PERCENT UNIT_MEASU QTY_ON_HAND REORDER_LVL SELL_PRICE COST_PRICE                                                                                                                                                                                                                                                                          
+------ --------------- -------------- ---------- ----------- ----------- ---------- ----------                                                                                                                                                                                                                                                                          
+P08865 1.22 Drive                   5 Piece                2           3       1050       1000                                                                                                                                                                                                                                                                          
+P07865 1.22 Floppies                5 Piece              100          20        525        500                                                                                                                                                                                                                                                                          
+P07975 1.44 Drive                   5 Piece               10           3       1050       1000                                                                                                                                                                                                                                                                          
+P00001 1.44 Floppies                5 Piece              100          20        525        500                                                                                                                                                                                                                                                                          
+P07965 540 HDD                      4 Piece               10           3       8400       8000                                                                                                                                                                                                                                                                          
+P07885 CD Drive                   2.5 Piece               10           3       5250       5100                                                                                                                                                                                                                                                                          
+P07868 Keyboards                    2 Piece               10           3       3150       3050                                                                                                                                                                                                                                                                          
+P03453 Monitors                     6 Piece               10           3      12000      11280                                                                                                                                                                                                                                                                          
+P06734 Mouse                        5 Piece               20           5       1050       1000                                                                                                                                                                                                                                                                          
+
+9 rows selected.
+
+SQL> spool off
