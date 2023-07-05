@@ -1,0 +1,90 @@
+SQL> SELECT product_no, cost_price, cost_price * cost_price "sqare_of_cost_price" FROM product_master;
+
+PRODUC COST_PRICE sqare_of_cost_price                                           
+------ ---------- -------------------                                           
+P00001        500              250000                                           
+P03453      11280           127238400                                           
+P06734       1000             1000000                                           
+P07865        500              250000                                           
+P07868       3050             9302500                                           
+P07885       5100            26010000                                           
+P07965       8000            64000000                                           
+P07975       1000             1000000                                           
+P08865       1000             1000000                                           
+
+9 rows selected.
+
+SQL> SELECT product_no, cost_price, cost_price/100 "cost_price/100" FROM product_master WHERE descr = '540 HDD';
+
+PRODUC COST_PRICE cost_price/100                                                
+------ ---------- --------------                                                
+P07965       8000             80                                                
+
+SQL> SELECT product_no, descr, cost_price, cost_price/100 "cost_price/100" FROM product_master WHERE descr = '540 HDD';
+
+PRODUC DESCR           COST_PRICE cost_price/100                                
+------ --------------- ---------- --------------                                
+P07965 540 HDD               8000             80                                
+
+SQL> SELECT name, city, state FROM client_master WHERE state != 'Maharashtra';
+
+NAME                           CITY            STATE                            
+------------------------------ --------------- ---------------                  
+Vandana Saitwal                Madras          Tamil Nadu                       
+
+SQL> SELECT product_no, descr, sell_price FROM product_master WHERE descr LIKE ('M%');
+
+PRODUC DESCR           SELL_PRICE                                               
+------ --------------- ----------                                               
+P03453 Monitors             12000                                               
+P06734 Mouse                 1050                                               
+
+SQL> SELECT * FROM sales_order WHERE order_date LIKE ('MAR');
+
+no rows selected
+
+SQL> SELECT * FROM sales_order WHERE order_state = 'CANCELLED' order_date LIKE ('MAY');
+SELECT * FROM sales_order WHERE order_state = 'CANCELLED' order_date LIKE ('MAY')
+                                                          *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> SELECT * FROM sales_order WHERE order_state = 'CANCELLED' (order_date LIKE ('MAY'));
+SELECT * FROM sales_order WHERE order_state = 'CANCELLED' (order_date LIKE ('MAY'))
+                                                          *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> SELECT * FROM sales_order WHERE order_state = 'CANCELLED' AND (order_date LIKE ('%MAY%'));
+SELECT * FROM sales_order WHERE order_state = 'CANCELLED' AND (order_date LIKE ('%MAY%'))
+                                *
+ERROR at line 1:
+ORA-00904: "ORDER_STATE": invalid identifier 
+
+
+SQL> SELECT *
+  2  FROM sales_order
+  3  WHERE order_state = 'CANCELLED' AND order_date LIKE '%MAY%';
+WHERE order_state = 'CANCELLED' AND order_date LIKE '%MAY%'
+      *
+ERROR at line 3:
+ORA-00904: "ORDER_STATE": invalid identifier 
+
+
+SQL> SELECT * FROM sales_order WHERE order_states = 'CANCELLED' AND (order_date LIKE ('%MAY%'));
+
+ORDER_ ORDER_DAT CLIENT DELY_ADDR                 SALESM D B DELY_DATE          
+------ --------- ------ ------------------------- ------ - - ---------          
+ORDER_STAT                                                                      
+----------                                                                      
+O46866 20-MAY-96 C00004                           S00002 P N 22-MAY-96          
+CANCELLED                                                                       
+                                                                                
+
+SQL> SELECT * FROM sales_order WHERE order_states = 'CANCELLED' AND (order_date LIKE ('%MAR%'));
+
+no rows selected
+
+SQL> spool off;
