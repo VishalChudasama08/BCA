@@ -1,0 +1,202 @@
+SQL> SELECT product_no,qty_on_hand,reorder_lvl FROM product_master WHERE qty_on_hand<reorder_lvl;
+
+PRODUC QTY_ON_HAND REORDER_LVL                                                  
+------ ----------- -----------                                                  
+P08865           2           3                                                  
+
+SQL> SELECT a.client_no,a.name,c.order_no,c.order_date FROM client_master a, product_master b, sales_order c WHERE a.client_no = c.client_no;
+
+CLIENT NAME                           ORDER_ ORDER_DAT                          
+------ ------------------------------ ------ ---------                          
+C00001 Ivan Bayross                   O19001 12-JAN-96                          
+C00001 Ivan Bayross                   O19001 12-JAN-96                          
+C00001 Ivan Bayross                   O19001 12-JAN-96                          
+C00001 Ivan Bayross                   O19001 12-JAN-96                          
+C00001 Ivan Bayross                   O19001 12-JAN-96                          
+C00001 Ivan Bayross                   O19001 12-JAN-96                          
+C00001 Ivan Bayross                   O19001 12-JAN-96                          
+C00001 Ivan Bayross                   O19001 12-JAN-96                          
+C00001 Ivan Bayross                   O19001 12-JAN-96                          
+C00002 Vandana Saitwal                O19002 25-JAN-96                          
+C00002 Vandana Saitwal                O19002 25-JAN-96                          
+
+CLIENT NAME                           ORDER_ ORDER_DAT                          
+------ ------------------------------ ------ ---------                          
+C00002 Vandana Saitwal                O19002 25-JAN-96                          
+C00002 Vandana Saitwal                O19002 25-JAN-96                          
+C00002 Vandana Saitwal                O19002 25-JAN-96                          
+C00002 Vandana Saitwal                O19002 25-JAN-96                          
+C00002 Vandana Saitwal                O19002 25-JAN-96                          
+C00002 Vandana Saitwal                O19002 25-JAN-96                          
+C00002 Vandana Saitwal                O19002 25-JAN-96                          
+C00003 Pramada Jahuste                O46865 18-FEB-96                          
+C00003 Pramada Jahuste                O46865 18-FEB-96                          
+C00003 Pramada Jahuste                O46865 18-FEB-96                          
+C00003 Pramada Jahuste                O46865 18-FEB-96                          
+
+CLIENT NAME                           ORDER_ ORDER_DAT                          
+------ ------------------------------ ------ ---------                          
+C00003 Pramada Jahuste                O46865 18-FEB-96                          
+C00003 Pramada Jahuste                O46865 18-FEB-96                          
+C00003 Pramada Jahuste                O46865 18-FEB-96                          
+C00003 Pramada Jahuste                O46865 18-FEB-96                          
+C00003 Pramada Jahuste                O46865 18-FEB-96                          
+C00001 Ivan Bayross                   O19003 03-APR-96                          
+C00001 Ivan Bayross                   O19003 03-APR-96                          
+C00001 Ivan Bayross                   O19003 03-APR-96                          
+C00001 Ivan Bayross                   O19003 03-APR-96                          
+C00001 Ivan Bayross                   O19003 03-APR-96                          
+C00001 Ivan Bayross                   O19003 03-APR-96                          
+
+CLIENT NAME                           ORDER_ ORDER_DAT                          
+------ ------------------------------ ------ ---------                          
+C00001 Ivan Bayross                   O19003 03-APR-96                          
+C00001 Ivan Bayross                   O19003 03-APR-96                          
+C00001 Ivan Bayross                   O19003 03-APR-96                          
+C00004 Basu Navindgi                  O46866 20-MAY-96                          
+C00004 Basu Navindgi                  O46866 20-MAY-96                          
+C00004 Basu Navindgi                  O46866 20-MAY-96                          
+C00004 Basu Navindgi                  O46866 20-MAY-96                          
+C00004 Basu Navindgi                  O46866 20-MAY-96                          
+C00004 Basu Navindgi                  O46866 20-MAY-96                          
+C00004 Basu Navindgi                  O46866 20-MAY-96                          
+C00004 Basu Navindgi                  O46866 20-MAY-96                          
+
+CLIENT NAME                           ORDER_ ORDER_DAT                          
+------ ------------------------------ ------ ---------                          
+C00004 Basu Navindgi                  O46866 20-MAY-96                          
+C00005 Ravi Sreedharan                O10008 24-MAY-96                          
+C00005 Ravi Sreedharan                O10008 24-MAY-96                          
+C00005 Ravi Sreedharan                O10008 24-MAY-96                          
+C00005 Ravi Sreedharan                O10008 24-MAY-96                          
+C00005 Ravi Sreedharan                O10008 24-MAY-96                          
+C00005 Ravi Sreedharan                O10008 24-MAY-96                          
+C00005 Ravi Sreedharan                O10008 24-MAY-96                          
+C00005 Ravi Sreedharan                O10008 24-MAY-96                          
+C00005 Ravi Sreedharan                O10008 24-MAY-96                          
+
+54 rows selected.
+
+SQL> set pagezise 100;
+SP2-0158: unknown SET option "pagezise"
+SQL> set pagesize 100;
+SQL> SELECT a.client_no,a.name,c.order_no,c.order_date FROM client_master a, product_master b, sales_order c WHERE a.client_no = c.client_no;
+
+CLIENT NAME                           ORDER_ ORDER_DAT                          
+------ ------------------------------ ------ ---------                          
+C00001 Ivan Bayross                   O19001 12-JAN-96                          
+C00001 Ivan Bayross                   O19001 12-JAN-96                          
+C00001 Ivan Bayross                   O19001 12-JAN-96                          
+C00001 Ivan Bayross                   O19001 12-JAN-96                          
+C00001 Ivan Bayross                   O19001 12-JAN-96                          
+C00001 Ivan Bayross                   O19001 12-JAN-96                          
+C00001 Ivan Bayross                   O19001 12-JAN-96                          
+C00001 Ivan Bayross                   O19001 12-JAN-96                          
+C00001 Ivan Bayross                   O19001 12-JAN-96                          
+C00002 Vandana Saitwal                O19002 25-JAN-96                          
+C00002 Vandana Saitwal                O19002 25-JAN-96                          
+C00002 Vandana Saitwal                O19002 25-JAN-96                          
+C00002 Vandana Saitwal                O19002 25-JAN-96                          
+C00002 Vandana Saitwal                O19002 25-JAN-96                          
+C00002 Vandana Saitwal                O19002 25-JAN-96                          
+C00002 Vandana Saitwal                O19002 25-JAN-96                          
+C00002 Vandana Saitwal                O19002 25-JAN-96                          
+C00002 Vandana Saitwal                O19002 25-JAN-96                          
+C00003 Pramada Jahuste                O46865 18-FEB-96                          
+C00003 Pramada Jahuste                O46865 18-FEB-96                          
+C00003 Pramada Jahuste                O46865 18-FEB-96                          
+C00003 Pramada Jahuste                O46865 18-FEB-96                          
+C00003 Pramada Jahuste                O46865 18-FEB-96                          
+C00003 Pramada Jahuste                O46865 18-FEB-96                          
+C00003 Pramada Jahuste                O46865 18-FEB-96                          
+C00003 Pramada Jahuste                O46865 18-FEB-96                          
+C00003 Pramada Jahuste                O46865 18-FEB-96                          
+C00001 Ivan Bayross                   O19003 03-APR-96                          
+C00001 Ivan Bayross                   O19003 03-APR-96                          
+C00001 Ivan Bayross                   O19003 03-APR-96                          
+C00001 Ivan Bayross                   O19003 03-APR-96                          
+C00001 Ivan Bayross                   O19003 03-APR-96                          
+C00001 Ivan Bayross                   O19003 03-APR-96                          
+C00001 Ivan Bayross                   O19003 03-APR-96                          
+C00001 Ivan Bayross                   O19003 03-APR-96                          
+C00001 Ivan Bayross                   O19003 03-APR-96                          
+C00004 Basu Navindgi                  O46866 20-MAY-96                          
+C00004 Basu Navindgi                  O46866 20-MAY-96                          
+C00004 Basu Navindgi                  O46866 20-MAY-96                          
+C00004 Basu Navindgi                  O46866 20-MAY-96                          
+C00004 Basu Navindgi                  O46866 20-MAY-96                          
+C00004 Basu Navindgi                  O46866 20-MAY-96                          
+C00004 Basu Navindgi                  O46866 20-MAY-96                          
+C00004 Basu Navindgi                  O46866 20-MAY-96                          
+C00004 Basu Navindgi                  O46866 20-MAY-96                          
+C00005 Ravi Sreedharan                O10008 24-MAY-96                          
+C00005 Ravi Sreedharan                O10008 24-MAY-96                          
+C00005 Ravi Sreedharan                O10008 24-MAY-96                          
+C00005 Ravi Sreedharan                O10008 24-MAY-96                          
+C00005 Ravi Sreedharan                O10008 24-MAY-96                          
+C00005 Ravi Sreedharan                O10008 24-MAY-96                          
+C00005 Ravi Sreedharan                O10008 24-MAY-96                          
+C00005 Ravi Sreedharan                O10008 24-MAY-96                          
+C00005 Ravi Sreedharan                O10008 24-MAY-96                          
+
+54 rows selected.
+
+SQL> SELECT a.client_no,a.name,c.order_no,c.order_date FROM client_master a, sales_order c WHERE a.client_no = c.client_no;
+
+CLIENT NAME                           ORDER_ ORDER_DAT                          
+------ ------------------------------ ------ ---------                          
+C00001 Ivan Bayross                   O19001 12-JAN-96                          
+C00002 Vandana Saitwal                O19002 25-JAN-96                          
+C00003 Pramada Jahuste                O46865 18-FEB-96                          
+C00001 Ivan Bayross                   O19003 03-APR-96                          
+C00004 Basu Navindgi                  O46866 20-MAY-96                          
+C00005 Ravi Sreedharan                O10008 24-MAY-96                          
+
+6 rows selected.
+
+SQL> SELECT cost_price/(sell_price-100)FROM product_master;
+
+COST_PRICE/(SELL_PRICE-100)                                                     
+---------------------------                                                     
+                 1.17647059                                                     
+                  .94789916                                                     
+                 1.05263158                                                     
+                 1.17647059                                                     
+                          1                                                     
+                 .990291262                                                     
+                 .963855422                                                     
+                 1.05263158                                                     
+                 1.05263158                                                     
+
+9 rows selected.
+
+SQL> SELECT sell_price-cost_price FROM product_master;
+
+SELL_PRICE-COST_PRICE                                                           
+---------------------                                                           
+                   25                                                           
+                  720                                                           
+                   50                                                           
+                   25                                                           
+                  100                                                           
+                  150                                                           
+                  400                                                           
+                   50                                                           
+                   50                                                           
+
+9 rows selected.
+
+SQL> SELECT cost_price/(sell_price-100)FROM product_master descr = '540 HDD';
+SELECT cost_price/(sell_price-100)FROM product_master descr = '540 HDD'
+                                                            *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> SELECT cost_price/(sell_price-100)FROM product_master WHERE descr = '540 HDD';
+
+COST_PRICE/(SELL_PRICE-100)                                                     
+---------------------------                                                     
+                 .963855422                                                     
+
+SQL> SPOOL OFF

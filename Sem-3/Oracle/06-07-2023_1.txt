@@ -1,0 +1,66 @@
+SQL> SELECT count(order_no) FROM sales_order_details;
+
+COUNT(ORDER_NO)                                                                 
+---------------                                                                 
+             14                                                                 
+
+SQL> SELECT avg(product_rate) FROM sales_order_details;
+
+AVG(PRODUCT_RATE)                                                               
+-----------------                                                               
+       3482.14286                                                               
+
+SQL> SELECT min(product_rate) FROM sales_order_details;
+
+MIN(PRODUCT_RATE)                                                               
+-----------------                                                               
+              525                                                               
+
+SQL> SELECT min(product_rate) "min_price" max(product_rate) "max_price" FROM sales_order_details;
+SELECT min(product_rate) "min_price" max(product_rate) "max_price" FROM sales_order_details
+                                     *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> SELECT min(product_rate),max(product_rate) "min_price","max_price" FROM sales_order_details;
+SELECT min(product_rate),max(product_rate) "min_price","max_price" FROM sales_order_details
+                                                       *
+ERROR at line 1:
+ORA-00904: "max_price": invalid identifier 
+
+
+SQL> SELECT min(product_rate) "min_price", max(product_rate) "max_price" FROM sales_order_details;
+
+ min_price  max_price                                                           
+---------- ----------                                                           
+       525      12000                                                           
+
+SQL> SELECT product_no FROM sales_order_details WHERE product_no >= 1500;
+SELECT product_no FROM sales_order_details WHERE product_no >= 1500
+                                                 *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> SELECT product_no FROM sales_order_details WHERE product_no >= 1500;
+SELECT product_no FROM sales_order_details WHERE product_no >= 1500
+                                                 *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> SELECT product_no,product_rate FROM sales_order_details WHERE product_rate >= 1500;
+
+PRODUC PRODUCT_RATE                                                             
+------ ------------                                                             
+P07965         8400                                                             
+P07885         5250                                                             
+P07868         3150                                                             
+P07885         5250                                                             
+P06734        12000                                                             
+P07965         8400                                                             
+
+6 rows selected.
+
+SQL> spool off
