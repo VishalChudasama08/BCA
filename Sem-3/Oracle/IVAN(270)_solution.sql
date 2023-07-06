@@ -30,3 +30,6 @@
 /* 27. */ SELECT count(product_rate) FROM sales_order_details WHERE product_rate >= 1500;
 /* 28. */ SELECT product_no,qty_on_hand,reorder_lvl FROM product_master WHERE qty_on_hand<reorder_lvl;
 /* 29. */ SELECT a.client_no,a.name,c.order_no,c.order_date FROM client_master a, sales_order c WHERE a.client_no = c.client_no;
+
+/* Having and Group By */
+/* 30 */ SELECT A.descr, SUM(B.qty_ordered) FROM product_master A, sales_order_details B WHERE A.product_no = B.product_no GROUP BY A.descr;
