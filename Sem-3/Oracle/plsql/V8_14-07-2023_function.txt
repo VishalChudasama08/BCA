@@ -1,0 +1,140 @@
+SQL> /* function */
+SQL> /* NO argument */
+SQL> create or replace function abc1 return number is
+  2  	a number:=5;
+  3  begin
+  4  	return(a*a);
+  5  end;
+  6  /
+create or replace function abc1 return number is
+*
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  create or replace function abc2 return number is
+  2  	a number:=5;
+  3  begin
+  4  	return(a*a);
+  5* end;
+SQL> /
+
+Function created.
+
+SQL> select abc2() from dual;
+
+    ABC2()                                                                      
+----------                                                                      
+        25                                                                      
+
+SQL> /* with argument number */
+SQL> create or replace function abc2(a in number) return number is
+  2  begin
+  3  	return(a*a);
+  4  end;
+  5  /
+
+Function created.
+
+SQL> SELECT abc2(2) FROM DUAL;
+
+   ABC2(2)                                                                      
+----------                                                                      
+         4                                                                      
+
+SQL> /* with argument varchar */
+SQL> creater or replace funtion abc2(a in varchar, b in varchar) return varchar is
+SP2-0734: unknown command beginning "creater or..." - rest of line ignored.
+SQL> begin
+  2  	return(a||' '||b0);
+  3  end;
+  4  /
+	return(a||' '||b0);
+	*
+ERROR at line 2:
+ORA-06550: line 2, column 2: 
+PLS-00372: In a procedure, RETURN statement cannot contain an expression 
+ORA-06550: line 2, column 2: 
+PL/SQL: Statement ignored 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  begin
+  2  	return(a||' '||b);
+  3* end;
+SQL> /
+	return(a||' '||b);
+	*
+ERROR at line 2:
+ORA-06550: line 2, column 2: 
+PLS-00372: In a procedure, RETURN statement cannot contain an expression 
+ORA-06550: line 2, column 2: 
+PL/SQL: Statement ignored 
+
+
+SQL> creater or replace funtion abc2(a in varchar, b in varchar) return varchar is
+SP2-0734: unknown command beginning "creater or..." - rest of line ignored.
+SQL> ed
+Wrote file afiedt.buf
+
+  1  creater or replace funtion abc2(a in varchar, b in varchar) return varchar is
+  2  begin
+  3  	return (a ||' '|| b);
+  4* end;
+SQL> /
+creater or replace funtion abc2(a in varchar, b in varchar) return varchar is
+*
+ERROR at line 1:
+ORA-00900: invalid SQL statement 
+
+
+SQL> begin
+  2  	return(a || ' ' || b);
+  3  end;
+  4  /
+	return(a || ' ' || b);
+	*
+ERROR at line 2:
+ORA-06550: line 2, column 2: 
+PLS-00372: In a procedure, RETURN statement cannot contain an expression 
+ORA-06550: line 2, column 2: 
+PL/SQL: Statement ignored 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  create or replace funtion abc3(a in varchar, b in varchar) return varchar is
+  2  begin
+  3  	return(a || ' ' || b);
+  4* end;
+SQL> /
+create or replace funtion abc3(a in varchar, b in varchar) return varchar is
+                  *
+ERROR at line 1:
+ORA-00922: missing or invalid option 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  create or replace function abc2(a in varchar, b in varchar) return varchar is
+  2  begin
+  3  	return(a || ' ' || b);
+  4* end;
+SQL> /
+
+Function created.
+
+SQL> SELECT abc2('Chudasama', 'Vishal') FROM DUAL;
+
+ABC2('CHUDASAMA','VISHAL')                                                      
+--------------------------------------------------------------------------------
+Chudasama Vishal                                                                
+
+SQL> spool off;

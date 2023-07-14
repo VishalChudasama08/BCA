@@ -1,0 +1,138 @@
+SQL> /* procedure */
+SQL> /* simple procedure */
+SQL> set serveroutput on;
+SQL> create or replace procedure abc1 as
+  2  begin
+  3  	dbms_output.put_line('procesure call');
+  4  end;
+  5  /
+
+Procedure created.
+
+SQL> // procedure with argument as a number
+
+Procedure created.
+
+SQL> /* procedure with argument as a number */
+SQL> create or replace procedure abc1(a in number, b in number) as
+  2  c number;
+  3  begin
+  4  	c:=a+b;
+  5  	dbms_output.put_line('addition is ' || c);
+  6  end;
+  7  /
+
+Procedure created.
+
+SQL> select abc1(10, 20) from dual;
+select abc1(10, 20) from dual
+       *
+ERROR at line 1:
+ORA-00904: "ABC1": invalid identifier 
+
+
+SQL> exec abc1(10, 20);
+addition is 30                                                                  
+
+PL/SQL procedure successfully completed.
+
+SQL> /* procedure with argument as a varchar */
+SQL> create or replace procedure abc1(a in varchar2, b in varchar) as
+  2  	c varchar(50);
+  3  begin
+  4  	c:=a||' '||b;
+  5  	dbms_output.put_line('Addition is ' || c);
+  6  end;
+  7  /
+
+Procedure created.
+
+SQL> exec abc1('Chudasama', 'Vishal');
+Addition is Chudasama Vishal                                                    
+
+PL/SQL procedure successfully completed.
+
+SQL> /* procedure with in or out perameters */
+SQL> create or replace procedure abc1(a in number, b in number, c out number) as
+  2  begin
+  3  	c:=a+b;
+  4  end;
+  5  /
+
+Procedure created.
+
+SQL> exec abc1(40,60);
+BEGIN abc1(40,60); END;
+
+      *
+ERROR at line 1:
+ORA-06550: line 1, column 7: 
+PLS-00306: wrong number or types of arguments in call to 'ABC1' 
+ORA-06550: line 1, column 7: 
+PL/SQL: Statement ignored 
+
+
+SQL> /* block for in out */
+SQL> decalre
+SP2-0042: unknown command "decalre" - rest of line ignored.
+SQL> 	a number;
+  4* end;number
+SQL> /* block for in out */
+SQL> declare
+  2  	a number;
+  3  	b number;
+  4  	c number:=0;
+  5  begin
+  6  	a:=&a;
+  7  	b:=&b;
+  8  	abc1(a,b,c);
+  9  	dbms_output.put_line('Addition is ' || c);
+ 10  end;
+ 11  /
+Enter value for a: 40
+old   6: 	a:=&a;
+new   6: 	a:=40;
+Enter value for b: 60
+old   7: 	b:=&b;
+new   7: 	b:=60;
+Addition is 100                                                                 
+
+PL/SQL procedure successfully completed.
+
+SQL> /* procedure with out parameter */
+SQL> create or replase procedure abc1(c in out number) as
+  2  begin
+  3  	c:=c*c;
+create or replase procedure abc1(c in out number) as
+          *
+ERROR at line 1:
+ORA-00905: missing keyword 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  create or replace procedure abc1(c in out number) as
+  2  begin
+  3  	c:=c*c;
+  4* end;
+SQL> /
+
+Procedure created.
+
+SQL> declare
+  2  	a number;
+  3  begin
+  4  	a:=&a;
+  5  	abc1(a);
+  6  	dbms_output.put_line('Addition is ' || a);
+  7  end;
+  8  /
+Enter value for a: 80
+old   4: 	a:=&a;
+new   4: 	a:=80;
+Addition is 6400                                                                
+
+PL/SQL procedure successfully completed.
+
+SQL> spool off;

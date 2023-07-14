@@ -1,0 +1,435 @@
+SQL> set serveroutput on
+SQL> begin
+  2  dbms_output.put_line("Hello world!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!?");
+  3  end;
+  4  /
+dbms_output.put_line("Hello world!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!?");
+                     *
+ERROR at line 2:
+ORA-06550: line 2, column 22: 
+PLS-00114: identifier 'Hello world!!!!!!!!!!!!!!!!!!!' too long 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  begin
+  2  dbms_output.put_line('Hello world!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!?');
+  3* end;
+SQL> 
+SQL> /
+Hello                                                                           
+world!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!?                                                                        
+
+PL/SQL procedure successfully completed.
+
+SQL> /*accept number from the user and dispay */
+Hello                                                                           
+world!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!?                                                                        
+
+PL/SQL procedure successfully completed.
+
+SQL> declare
+  2  i number;
+  3  begin
+  4  i:=&i;
+  5  dbms_output.put_line(i);
+  6  end;
+  7  /
+Enter value for i: 08
+old   4: i:=&i;
+new   4: i:=08;
+8                                                                               
+
+PL/SQL procedure successfully completed.
+
+SQL> //simple if statement
+Enter value for i: 5
+old   4: i:=&i;
+new   4: i:=5;
+5                                                                               
+
+PL/SQL procedure successfully completed.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  /* simple if statement */
+  2  declare
+  3  	i number;
+  4  bgin
+  5  i:=&i;
+  6  if i=5 then 
+  7  	dbms_output.put_line('value is ' || i);
+  8  end if;
+  9* end;
+SQL> /
+Enter value for i: 5
+old   5: i:=&i;
+new   5: i:=5;
+if i=5 then 
+*
+ERROR at line 6:
+ORA-06550: line 6, column 1: 
+PLS-00103: Encountered the symbol "IF" when expecting one of the following: 
+begin function pragma procedure subtype type <an identifier> 
+<a double-quoted delimited-identifier> current cursor delete 
+exists prior 
+The symbol "begin" was substituted for "IF" to continue. 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  /* simple if statement */
+  2  declare
+  3  	i number;
+  4  begin
+  5  i:=&i;
+  6  if i=5 then 
+  7  	dbms_output.put_line('value is ' || i);
+  8  end if;
+  9* end;
+SQL> /
+Enter value for i: 5
+old   5: i:=&i;
+new   5: i:=5;
+value is 5                                                                      
+
+PL/SQL procedure successfully completed.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  /* if....else statement */
+  2  declare
+  3  	i number;
+  4  begin
+  5  i:=&i;
+  6  if i>8 then 
+  7  	dbms_output.put_line('value is more then 8');
+  8  else
+  9  	dbms_output.put_line('value is less then 8');
+ 10  end if;
+ 11* end;
+SQL> /
+Enter value for i: 8
+old   5: i:=&i;
+new   5: i:=8;
+value is less then 8                                                            
+
+PL/SQL procedure successfully completed.
+
+SQL> /
+Enter value for i: 5
+old   5: i:=&i;
+new   5: i:=5;
+value is less then 8                                                            
+
+PL/SQL procedure successfully completed.
+
+SQL> /
+Enter value for i: 9
+old   5: i:=&i;
+new   5: i:=9;
+value is more then 8                                                            
+
+PL/SQL procedure successfully completed.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	i number;
+  3  begin
+  4  	i:=&i;
+  5  	if mod(i, 2)=0 then 
+  6  		dbms_output.put_line('Even');
+  7  	else
+  8  		dbms_output.put_line('odd');
+  9  	end if;
+ 10* end;
+SQL> 
+SQL> /
+Enter value for i: 8
+old   4: 	i:=&i;
+new   4: 	i:=8;
+Even                                                                            
+
+PL/SQL procedure successfully completed.
+
+SQL> /
+Enter value for i: 7
+old   4: 	i:=&i;
+new   4: 	i:=7;
+odd                                                                             
+
+PL/SQL procedure successfully completed.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  /* nested if...else statement */
+  2  declare
+  3  	i number;
+  4  begin
+  5  	i:=&i;
+  6  	if i=0 then 
+  7  		dbms_output.put_line('value of i is zero');
+  8  	else
+  9  		if
+ 10  			dbms_output.put_line('value of i is more then zero');
+ 11  		else
+ 12  			dbms_output.put_line('value of i is less then zero');
+ 13  		end if;
+ 14  	end if;
+ 15* end;
+SQL> /
+Enter value for i: 0
+old   5: 	i:=&i;
+new   5: 	i:=0;
+			dbms_output.put_line('value of i is more then zero');
+			                                                    *
+ERROR at line 10:
+ORA-06550: line 10, column 56: 
+PLS-00103: Encountered the symbol ";" when expecting one of the following: 
+. ( * % & = - + < / > at in is mod remainder not rem then 
+<an exponent (**)> <> or != or ~= >= <= <> and or like like2 
+like4 likec between || multiset member submultiset 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  /* nested if...else statement */
+  2  declare
+  3  	i number;
+  4  begin
+  5  	i:=&i;
+  6  	if i=0 then 
+  7  		dbms_output.put_line('value of i is zero');
+  8  	else
+  9  		if i>0 then
+ 10  			dbms_output.put_line('value of i is more then zero');
+ 11  		else
+ 12  			dbms_output.put_line('value of i is less then zero');
+ 13  		end if;
+ 14  	end if;
+ 15* end;
+SQL> ;
+  1  /* nested if...else statement */
+  2  declare
+  3  	i number;
+  4  begin
+  5  	i:=&i;
+  6  	if i=0 then 
+  7  		dbms_output.put_line('value of i is zero');
+  8  	else
+  9  		if i>0 then
+ 10  			dbms_output.put_line('value of i is more then zero');
+ 11  		else
+ 12  			dbms_output.put_line('value of i is less then zero');
+ 13  		end if;
+ 14  	end if;
+ 15* end;
+SQL> /
+Enter value for i: 0
+old   5: 	i:=&i;
+new   5: 	i:=0;
+value of i is zero                                                              
+
+PL/SQL procedure successfully completed.
+
+SQL> /
+Enter value for i: 1
+old   5: 	i:=&i;
+new   5: 	i:=1;
+value of i is more then zero                                                    
+
+PL/SQL procedure successfully completed.
+
+SQL> /
+Enter value for i: -1
+old   5: 	i:=&i;
+new   5: 	i:=-1;
+value of i is less then zero                                                    
+
+PL/SQL procedure successfully completed.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	i number;
+  3  begin
+  4  	i:=&i;
+  5  	if i!=0 then 
+  6  		if i>0 then
+  7  			dbms_output.put_line('value of i is more then zero');
+  8  		else
+  9  			dbms_output.put_line('value of i is less then zero');
+ 10  		end if;
+ 11  	else
+ 12  		dbms_output.put_line('value of i is zero');
+ 13  	end if;
+ 14* end;
+SQL> /
+Enter value for i: 0
+old   4: 	i:=&i;
+new   4: 	i:=0;
+value of i is zero                                                              
+
+PL/SQL procedure successfully completed.
+
+SQL> /
+Enter value for i: -1
+old   4: 	i:=&i;
+new   4: 	i:=-1;
+value of i is less then zero                                                    
+
+PL/SQL procedure successfully completed.
+
+SQL> /
+Enter value for i: 1
+old   4: 	i:=&i;
+new   4: 	i:=1;
+value of i is more then zero                                                    
+
+PL/SQL procedure successfully completed.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  /* ledder if....else statement */
+  2  declare
+  3  	i number;
+  4  begin
+  5  	i:=&i;
+  6  	if i=0 then 
+  7  		dbms_output.put_line('value of i is zero');
+  8  	else if i>0 then
+  9  		dbms_output.put_line('value of i is more then zero');
+ 10  	else
+ 11  		dbms_output.put_line('value of i is less then zero');
+ 12  	end if;
+ 13* end;
+SQL> /
+Enter value for i: 0
+old   5: 	i:=&i;
+new   5: 	i:=0;
+end;
+   *
+ERROR at line 13:
+ORA-06550: line 13, column 4: 
+PLS-00103: Encountered the symbol ";" when expecting one of the following: 
+if 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  /* ledder if....else statement */
+  2  declare
+  3  	i number;
+  4  begin
+  5  	i:=&i;
+  6  	if i=0 then 
+  7  		dbms_output.put_line('value of i is zero');
+  8  	elseif i>0 then
+  9  		dbms_output.put_line('value of i is more then zero');
+ 10  	else
+ 11  		dbms_output.put_line('value of i is less then zero');
+ 12  	end if;
+ 13* end;
+SQL> /
+Enter value for i: 1
+old   5: 	i:=&i;
+new   5: 	i:=1;
+	elseif i>0 then
+	       *
+ERROR at line 8:
+ORA-06550: line 8, column 9: 
+PLS-00103: Encountered the symbol "I" when expecting one of the following: 
+:= . ( @ % ; 
+ORA-06550: line 13, column 4: 
+PLS-00103: Encountered the symbol ";" when expecting one of the following: 
+if 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  /* ledder if....else statement */
+  2  declare
+  3  	i number;
+  4  begin
+  5  	i:=&i;
+  6  	if i=0 then 
+  7  		dbms_output.put_line('value of i is zero');
+  8  	elsif i>0 then
+  9  		dbms_output.put_line('value of i is more then zero');
+ 10  	else
+ 11  		dbms_output.put_line('value of i is less then zero');
+ 12  	end if;
+ 13* end;
+SQL> /
+Enter value for i: 1
+old   5: 	i:=&i;
+new   5: 	i:=1;
+value of i is more then zero                                                    
+
+PL/SQL procedure successfully completed.
+
+SQL> /
+Enter value for i: 0
+old   5: 	i:=&i;
+new   5: 	i:=0;
+value of i is zero                                                              
+
+PL/SQL procedure successfully completed.
+
+SQL> /
+Enter value for i: -1
+old   5: 	i:=&i;
+new   5: 	i:=-1;
+value of i is less then zero                                                    
+
+PL/SQL procedure successfully completed.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  /* loop */
+  2  /* exit when loop print 1 to 10 */
+  3  declare
+  4  	i number:=0;
+  5  	a number;
+  6  begin
+  7  	a:=&a;
+  8  	loop 
+  9  		dbms_output.put_line(i);
+ 10  		i:=i+1;
+ 11  		exit when i>a;
+ 12  	end loop;
+ 13* end;
+SQL> /
+Enter value for a: 10
+old   7: 	a:=&a;
+new   7: 	a:=10;
+0                                                                               
+1                                                                               
+2                                                                               
+3                                                                               
+4                                                                               
+5                                                                               
+6                                                                               
+7                                                                               
+8                                                                               
+9                                                                               
+10                                                                              
+
+PL/SQL procedure successfully completed.
+
+SQL> spool off;
