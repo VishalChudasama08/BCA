@@ -1,0 +1,409 @@
+SQL> set serveroutput on;
+SQL> /* implicit cursor */
+SQL> ed
+Wrote file afiedt.buf
+
+  1  begin
+  2  	update employee set sal=&sal where empno=&no;
+  3  	empno=&no;
+  4  	if sql%found then
+  5  		dbms_output.put_line('FOUND');
+  6  	end if;
+  7  	if sql%notfound then
+  8  		dbms_output.put-line('NOT FOUND');
+  9  	end if;
+ 10* end;
+SQL> /
+Enter value for sal: 800
+Enter value for no: 1
+old   2: 	update employee set sal=&sal where empno=&no;
+new   2: 	update employee set sal=800 where empno=1;
+Enter value for no: 1
+old   3: 	empno=&no;
+new   3: 	empno=1;
+	empno=1;
+	     *
+ERROR at line 3:
+ORA-06550: line 3, column 7: 
+PLS-00103: Encountered the symbol "=" when expecting one of the following: 
+:= . ( @ % ; 
+The symbol ":= was inserted before "=" to continue. 
+ORA-06550: line 8, column 18: 
+PLS-00103: Encountered the symbol "-" when expecting one of the following: 
+:= . ( @ % ; 
+The symbol ":=" was substituted for "-" to continue. 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  begin
+  2  	update employee set sal=&sal where empno=&no;
+  3  	empno:=&no;
+  4  	if sql%found then
+  5  		dbms_output.put_line('FOUND');
+  6  	end if;
+  7  	if sql%notfound then
+  8  		dbms_output.put-line('NOT FOUND');
+  9  	end if;
+ 10* end;
+SQL> /
+Enter value for sal: 500
+Enter value for no: 4
+old   2: 	update employee set sal=&sal where empno=&no;
+new   2: 	update employee set sal=500 where empno=4;
+Enter value for no: 5
+old   3: 	empno:=&no;
+new   3: 	empno:=5;
+		dbms_output.put-line('NOT FOUND');
+		               *
+ERROR at line 8:
+ORA-06550: line 8, column 18: 
+PLS-00103: Encountered the symbol "-" when expecting one of the following: 
+:= . ( @ % ; 
+The symbol ":=" was substituted for "-" to continue. 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  begin
+  2  	update employee set sal=&sal where empno=&no;
+  3  	empno:=&no;
+  4  	if sql%found then
+  5  		dbms_output.put_line('FOUND');
+  6  	end if;
+  7  	if sql%notfound then
+  8  		dbms_output.put_line('NOT FOUND');
+  9  	end if;
+ 10* end;
+SQL> /
+Enter value for sal: 500
+Enter value for no: 4
+old   2: 	update employee set sal=&sal where empno=&no;
+new   2: 	update employee set sal=500 where empno=4;
+Enter value for no: 5
+old   3: 	empno:=&no;
+new   3: 	empno:=5;
+	empno:=5;
+	*
+ERROR at line 3:
+ORA-06550: line 3, column 2: 
+PLS-00201: identifier 'EMPNO' must be declared 
+ORA-06550: line 3, column 2: 
+PL/SQL: Statement ignored 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  begin
+  2  	update employee set sal=&sal where empno=&no;
+  3  	if sql%found then
+  4  		dbms_output.put_line('FOUND');
+  5  	end if;
+  6  	if sql%notfound then
+  7  		dbms_output.put_line('NOT FOUND');
+  8  	end if;
+  9* end;
+SQL> /
+Enter value for sal: 2000;
+Enter value for no: 3
+old   2: 	update employee set sal=&sal where empno=&no;
+new   2: 	update employee set sal=2000; where empno=3;
+	update employee set sal=2000; where empno=3;
+	                              *
+ERROR at line 2:
+ORA-06550: line 2, column 32: 
+PLS-00103: Encountered the symbol "WHERE" when expecting one of the following: 
+( begin case declare end exception exit for goto if loop mod 
+null pragma raise return select update while with 
+<an identifier> <a double-quoted delimited-identifier> 
+<a bind variable> << continue close current delete fetch lock 
+insert open rollback savepoint set sql execute commit forall 
+merge pipe purge 
+
+
+SQL> /
+Enter value for sal: 1250;
+Enter value for no: 3
+old   2: 	update employee set sal=&sal where empno=&no;
+new   2: 	update employee set sal=1250; where empno=3;
+	update employee set sal=1250; where empno=3;
+	                              *
+ERROR at line 2:
+ORA-06550: line 2, column 32: 
+PLS-00103: Encountered the symbol "WHERE" when expecting one of the following: 
+( begin case declare end exception exit for goto if loop mod 
+null pragma raise return select update while with 
+<an identifier> <a double-quoted delimited-identifier> 
+<a bind variable> << continue close current delete fetch lock 
+insert open rollback savepoint set sql execute commit forall 
+merge pipe purge 
+
+
+SQL> /
+Enter value for sal: 1250
+Enter value for no: 7521
+old   2: 	update employee set sal=&sal where empno=&no;
+new   2: 	update employee set sal=1250 where empno=7521;
+FOUND                                                                           
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> /
+Enter value for sal: 1250
+Enter value for no: 1220
+old   2: 	update employee set sal=&sal where empno=&no;
+new   2: 	update employee set sal=1250 where empno=1220;
+NOT FOUND                                                                       
+
+PL/SQL procedure successfully completed.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  begin
+  2  	update employee set sal=&sal where empno=&empno;
+  3  	if sql%found then
+  4  		dbms_output.put_line('FOUND');
+  5  	end if;
+  6  	if sql%notfound then
+  7  		dbms_output.put_line('NOT FOUND');
+  8  	end if;
+  9* end;
+SQL> /
+Enter value for sal: 1250
+Enter value for empno: 7521
+old   2: 	update employee set sal=&sal where empno=&empno;
+new   2: 	update employee set sal=1250 where empno=7521;
+FOUND                                                                           
+
+PL/SQL procedure successfully completed.
+
+SQL> /
+Enter value for sal: 1250
+Enter value for empno: 1250
+old   2: 	update employee set sal=&sal where empno=&empno;
+new   2: 	update employee set sal=1250 where empno=1250;
+NOT FOUND                                                                       
+
+PL/SQL procedure successfully completed.
+
+SQL> /* explicit cursor */
+SQL> declare
+  2  	no employee.empno%type;
+  3  	name employee.ename
+  4  /
+	name employee.ename
+	                  *
+ERROR at line 3:
+ORA-06550: line 3, column 20: 
+PLS-00103: Encountered the symbol "end-of-file" when expecting one of the 
+following: 
+:= . ( @ % ; not null range default character 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	no employee.empno%type;
+  3  	name employee.ename%type;
+  4  	sal employee.sal%type;
+  5  	cursor emp_cur is select empno,ename,sal from employee;
+  6  begin
+  7  	open emp_cur;
+  8  	loop
+  9  		fetch emp_cur into no,name,sal;
+ 10  			dbms_output.put_line('Employee no :- ' || no || ' name :- ' || name || 'salary is :- ' || sal);
+ 11  		exit when emp_cur%notfound;
+ 12  	end loop;
+ 13  	close emp_cur;
+ 14* end;
+SQL> /
+Employee no :- 7369 name :- SMITHsalary is :- 800                               
+Employee no :- 7499 name :- allensalary is :- 1600                              
+Employee no :- 7521 name :- wardsalary is :- 1250                               
+Employee no :- 7566 name :- jonessalary is :- 2975                              
+Employee no :- 7654 name :- martinsalary is :- 1250                             
+Employee no :- 7698 name :- BLAKEsalary is :- 2850                              
+Employee no :- 7782 name :- CLARKsalary is :- 2450                              
+Employee no :- 7788 name :- SCOTTsalary is :- 3000                              
+Employee no :- 7839 name :- KINGsalary is :- 5000                               
+Employee no :- 7844 name :- TURNERsalary is :- 1500                             
+Employee no :- 7876 name :- ADAMSsalary is :- 1100                              
+Employee no :- 7900 name :- JAMESsalary is :- 950                               
+Employee no :- 7902 name :- FORDsalary is :- 3000                               
+Employee no :- 7934 name :- MILLERsalary is :- 1300                             
+Employee no :- 7934 name :- MILLERsalary is :- 1300                             
+
+PL/SQL procedure successfully completed.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	no employee.empno%type;
+  3  	name employee.ename%type;
+  4  	sal employee.sal%type;
+  5  	cursor emp_cur is select empno,ename,sal from employee;
+  6  begin
+  7  	open emp_cur;
+  8  	loop
+  9  		fetch emp_cur into no,name,sal;
+ 10  			dbms_output.put_line('Employee no :- ' || no || ' name :- ' || name || ' salary is :- ' || sal);
+ 11  		exit when emp_cur%notfound;
+ 12  	end loop;
+ 13  	close emp_cur;
+ 14* end;
+SQL> /
+Employee no :- 7369 name :- SMITH salary is :- 800                              
+Employee no :- 7499 name :- allen salary is :- 1600                             
+Employee no :- 7521 name :- ward salary is :- 1250                              
+Employee no :- 7566 name :- jones salary is :- 2975                             
+Employee no :- 7654 name :- martin salary is :- 1250                            
+Employee no :- 7698 name :- BLAKE salary is :- 2850                             
+Employee no :- 7782 name :- CLARK salary is :- 2450                             
+Employee no :- 7788 name :- SCOTT salary is :- 3000                             
+Employee no :- 7839 name :- KING salary is :- 5000                              
+Employee no :- 7844 name :- TURNER salary is :- 1500                            
+Employee no :- 7876 name :- ADAMS salary is :- 1100                             
+Employee no :- 7900 name :- JAMES salary is :- 950                              
+Employee no :- 7902 name :- FORD salary is :- 3000                              
+Employee no :- 7934 name :- MILLER salary is :- 1300                            
+Employee no :- 7934 name :- MILLER salary is :- 1300                            
+
+PL/SQL procedure successfully completed.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	no employee.empno%type;
+  3  	name employee.ename%type;
+  4  	sal employee.sal%type;
+  5  	cursor emp_cur is select empno,ename,sal from employee;
+  6  begin
+  7  	open emp_cur;
+  8  	loop
+  9  		fetch emp_cur into no,name,sal;
+ 10  			dbms_output.put_line('Employee no :- ' || no || ' name :- ' || name || ' salary is :- ' || sal);
+ 11  		exit when emp_cur%notfound;
+ 12  	end loop;
+ 13  	close emp_cur;
+ 14* end;
+SQL> /
+Employee no :- 7369 name :- SMITH salary is :- 800                              
+Employee no :- 7499 name :- allen salary is :- 1600                             
+Employee no :- 7521 name :- ward salary is :- 1250                              
+Employee no :- 7566 name :- jones salary is :- 2975                             
+Employee no :- 7654 name :- martin salary is :- 1250                            
+Employee no :- 7698 name :- BLAKE salary is :- 2850                             
+Employee no :- 7782 name :- CLARK salary is :- 2450                             
+Employee no :- 7788 name :- SCOTT salary is :- 3000                             
+Employee no :- 7839 name :- KING salary is :- 5000                              
+Employee no :- 7844 name :- TURNER salary is :- 1500                            
+Employee no :- 7876 name :- ADAMS salary is :- 1100                             
+Employee no :- 7900 name :- JAMES salary is :- 950                              
+Employee no :- 7902 name :- FORD salary is :- 3000                              
+Employee no :- 7934 name :- MILLER salary is :- 1300                            
+Employee no :- 7934 name :- MILLER salary is :- 1300                            
+
+PL/SQL procedure successfully completed.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	no employee.empno%type;
+  3  	name employee.ename%type;
+  4  	sal employee.sal%type;
+  5  	cursor emp_cur is select empno,ename,sal from employee;
+  6  begin
+  7  	open emp_cur;
+  8  	fetch emp_cur into no,name,sal;
+  9  	while emp_cur%found
+ 10  		loop
+ 11  			dbms_output.put_line('Employee no :- ' || no || ' Name :- ' || name || ' Salary is :- ' || sal);
+ 12  			fetch emp_cur into no,name,sal;
+ 13  		end loop;
+ 14  	close emp_cur;
+ 15* end;
+SQL> /
+Employee no :- 7369 Name :- SMITH Salary is :- 800                              
+Employee no :- 7499 Name :- allen Salary is :- 1600                             
+Employee no :- 7521 Name :- ward Salary is :- 1250                              
+Employee no :- 7566 Name :- jones Salary is :- 2975                             
+Employee no :- 7654 Name :- martin Salary is :- 1250                            
+Employee no :- 7698 Name :- BLAKE Salary is :- 2850                             
+Employee no :- 7782 Name :- CLARK Salary is :- 2450                             
+Employee no :- 7788 Name :- SCOTT Salary is :- 3000                             
+Employee no :- 7839 Name :- KING Salary is :- 5000                              
+Employee no :- 7844 Name :- TURNER Salary is :- 1500                            
+Employee no :- 7876 Name :- ADAMS Salary is :- 1100                             
+Employee no :- 7900 Name :- JAMES Salary is :- 950                              
+Employee no :- 7902 Name :- FORD Salary is :- 3000                              
+Employee no :- 7934 Name :- MILLER Salary is :- 1300                            
+
+PL/SQL procedure successfully completed.
+
+SQL> /*  while loop in implicit cursor  */
+SQL> /*  row type cursor  */
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	cursor emp_cur is select  * from employee;
+  3  begin
+  4  	for a in emp_cur;
+  5  	loop
+  6  		dbms_output.put_line('Name of Employee is :- ' || a.ename || ' Salary is :- ' || a.sal);
+  7  	end loop;
+  8* end;
+SQL> /
+	for a in emp_cur;
+	                *
+ERROR at line 4:
+ORA-06550: line 4, column 18: 
+PLS-00103: Encountered the symbol ";" when expecting one of the following: 
+. ( * @ % & - + / at loop mod remainder rem .. 
+<an exponent (**)> || multiset 
+ORA-06550: line 8, column 4: 
+PLS-00103: Encountered the symbol "end-of-file" when expecting one of the 
+following: 
+end not pragma final instantiable order overriding static 
+member constructor map 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	cursor emp_cur is select  * from employee;
+  3  begin
+  4  	for a in emp_cur
+  5  	loop
+  6  		dbms_output.put_line('Name of Employee is :- ' || a.ename || ' Salary is :- ' || a.sal);
+  7  	end loop;
+  8* end;
+SQL> /
+Name of Employee is :- SMITH Salary is :- 800                                   
+Name of Employee is :- allen Salary is :- 1600                                  
+Name of Employee is :- ward Salary is :- 1250                                   
+Name of Employee is :- jones Salary is :- 2975                                  
+Name of Employee is :- martin Salary is :- 1250                                 
+Name of Employee is :- BLAKE Salary is :- 2850                                  
+Name of Employee is :- CLARK Salary is :- 2450                                  
+Name of Employee is :- SCOTT Salary is :- 3000                                  
+Name of Employee is :- KING Salary is :- 5000                                   
+Name of Employee is :- TURNER Salary is :- 1500                                 
+Name of Employee is :- ADAMS Salary is :- 1100                                  
+Name of Employee is :- JAMES Salary is :- 950                                   
+Name of Employee is :- FORD Salary is :- 3000                                   
+Name of Employee is :- MILLER Salary is :- 1300                                 
+
+PL/SQL procedure successfully completed.
+
+SQL> spool off;

@@ -1,0 +1,389 @@
+SQL> set serveroutput on;
+SQL> /* rowtype cursor */
+SQL> declare
+  2  	em emp%rowtype;
+  3  	cursor emp-cur is select * from emp;
+  4  begin
+  5  	open emp-cur;
+  6  	if emp-cur%isopen then
+  7  	loop
+  8  		fetch emp_cur into em;
+  9  		exit when emp_cur%notfound;
+ 10  		dbms_output.put_line('Name of employee is :- ' || em.ename || 'Salary is :- ')
+ 11  	end loop;
+ 12  	else
+ 13  	dbms_output.put_line('Not open cursor ');
+ 14  	end if;
+ 15  	close emp
+ 16  end;
+ 17  /
+	cursor emp-cur is select * from emp;
+	          *
+ERROR at line 3:
+ORA-06550: line 3, column 12: 
+PLS-00103: Encountered the symbol "-" when expecting one of the following: 
+( ; is return 
+The symbol "return was inserted before "-" to continue. 
+ORA-06550: line 5, column 10: 
+PLS-00103: Encountered the symbol "-" when expecting one of the following: 
+. ( % ; for 
+The symbol "for" was substituted for "-" to continue. 
+ORA-06550: line 11, column 2: 
+PLS-00103: Encountered the symbol "END" when expecting one of the following: 
+:= . ( % ; 
+The symbol ";" was substituted for "END" to continue. 
+ORA-06550: line 16, column 1: 
+PLS-00103: Encountered the symbol "END" when expecting one of the following: 
+. ; 
+The symbol ";" was substituted for "END" to continue. 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	em emp%rowtype;
+  3  	cursor emp_cur is select * from employee;
+  4  begin
+  5  	open emp_cur;
+  6  	if emp_cur%isopen then
+  7  	loop
+  8  		fetch emp_cur into em;
+  9  		exit when emp_cur%notfound;
+ 10  		dbms_output.put_line('Name of employee is :- ' || em.ename || 'Salary is :- ' || em.sal);
+ 11  	end loop;
+ 12  	else
+ 13  		dbms_output.put_line('Not open cursor ');
+ 14  	end if;
+ 15  	close emp_cur;
+ 16* end;
+SQL> /
+	em emp%rowtype;
+	   *
+ERROR at line 2:
+ORA-06550: line 2, column 5: 
+PLS-00201: identifier 'EMP' must be declared 
+ORA-06550: line 2, column 5: 
+PL/SQL: Item ignored 
+ORA-06550: line 8, column 22: 
+PLS-00320: the declaration of the type of this expression is incomplete or 
+malformed 
+ORA-06550: line 8, column 3: 
+PL/SQL: SQL Statement ignored 
+ORA-06550: line 10, column 53: 
+PLS-00320: the declaration of the type of this expression is incomplete or 
+malformed 
+ORA-06550: line 10, column 3: 
+PL/SQL: Statement ignored 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	em emp%rowtype;
+  3  	cursor emp_cur1 is select * from employee;
+  4  begin
+  5  	open emp_cur1;
+  6  	if emp_cur1%isopen then
+  7  	loop
+  8  		fetch emp_cur1 into em;
+  9  		exit when emp_cur1%notfound;
+ 10  		dbms_output.put_line('Name of employee is :- ' || em.ename || 'Salary is :- ' || em.sal);
+ 11  	end loop;
+ 12  	else
+ 13  		dbms_output.put_line('Not open cursor ');
+ 14  	end if;
+ 15  	close emp_cur1;
+ 16* end;
+SQL> /
+	em emp%rowtype;
+	   *
+ERROR at line 2:
+ORA-06550: line 2, column 5: 
+PLS-00201: identifier 'EMP' must be declared 
+ORA-06550: line 2, column 5: 
+PL/SQL: Item ignored 
+ORA-06550: line 8, column 23: 
+PLS-00320: the declaration of the type of this expression is incomplete or 
+malformed 
+ORA-06550: line 8, column 3: 
+PL/SQL: SQL Statement ignored 
+ORA-06550: line 10, column 53: 
+PLS-00320: the declaration of the type of this expression is incomplete or 
+malformed 
+ORA-06550: line 10, column 3: 
+PL/SQL: Statement ignored 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	em employee%rowtype;
+  3  	cursor emp_cur is select * from employee;
+  4  begin
+  5  	open emp_cur;
+  6  	if emp_cur%isopen then
+  7  	loop
+  8  		fetch emp_cur into em;
+  9  		exit when emp_cur%notfound;
+ 10  		dbms_output.put_line('Name of employee is :- ' || em.ename || 'Salary is :- ' || em.sal);
+ 11  	end loop;
+ 12  	else
+ 13  		dbms_output.put_line('Not open cursor ');
+ 14  	end if;
+ 15  	close emp_cur;
+ 16* end;
+SQL> /
+Name of employee is :- SMITHSalary is :- 800                                    
+Name of employee is :- allenSalary is :- 1600                                   
+Name of employee is :- wardSalary is :- 1250                                    
+Name of employee is :- jonesSalary is :- 2975                                   
+Name of employee is :- martinSalary is :- 1250                                  
+Name of employee is :- BLAKESalary is :- 2850                                   
+Name of employee is :- CLARKSalary is :- 2450                                   
+Name of employee is :- SCOTTSalary is :- 3000                                   
+Name of employee is :- KINGSalary is :- 5000                                    
+Name of employee is :- TURNERSalary is :- 1500                                  
+Name of employee is :- ADAMSSalary is :- 1100                                   
+Name of employee is :- JAMESSalary is :- 950                                    
+Name of employee is :- FORDSalary is :- 3000                                    
+Name of employee is :- MILLERSalary is :- 1300                                  
+
+PL/SQL procedure successfully completed.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	em employee%rowtype;
+  3  	cursor emp_cur is select * from employee;
+  4  begin
+  5  	open emp_cur;
+  6  	if emp_cur%isopen then
+  7  	loop
+  8  		fetch emp_cur into em;
+  9  		exit when emp_cur%notfound;
+ 10  		dbms_output.put_line('Name of employee is :- ' || em.ename || ' Salary is :- ' || em.sal);
+ 11  	end loop;
+ 12  	else
+ 13  		dbms_output.put_line('Not open cursor ');
+ 14  	end if;
+ 15  	close emp_cur;
+ 16* end;
+SQL> /
+Name of employee is :- SMITH Salary is :- 800                                   
+Name of employee is :- allen Salary is :- 1600                                  
+Name of employee is :- ward Salary is :- 1250                                   
+Name of employee is :- jones Salary is :- 2975                                  
+Name of employee is :- martin Salary is :- 1250                                 
+Name of employee is :- BLAKE Salary is :- 2850                                  
+Name of employee is :- CLARK Salary is :- 2450                                  
+Name of employee is :- SCOTT Salary is :- 3000                                  
+Name of employee is :- KING Salary is :- 5000                                   
+Name of employee is :- TURNER Salary is :- 1500                                 
+Name of employee is :- ADAMS Salary is :- 1100                                  
+Name of employee is :- JAMES Salary is :- 950                                   
+Name of employee is :- FORD Salary is :- 3000                                   
+Name of employee is :- MILLER Salary is :- 1300                                 
+
+PL/SQL procedure successfully completed.
+
+SQL> /* parameter type cursor */
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	no employee.empno%type;
+  3  	name employee.ename%type;
+  4  	sal employee.sal%type;
+  5  	dept employee.deptno%type;
+  6  	cursur emp_cur(dept number) is select empno,ename,sal from employee where deptno=dept;
+  7  begin
+  8  	dept:=&dept;
+  9  	open emp_cur(dept);
+ 10  	if emp_cur%isopen then
+ 11  	loop
+ 12  		fetch emp_cur into no,name,sal;
+ 13  		exit when emp_cur%notfound;
+ 14  		dbms_output.put_line('Name of Eemployee is :- ' || name || ' Salary is :- ' || sal);
+ 15  	end loop;
+ 16  	else
+ 17  		dbms_output.put_line('Not open cursur');
+ 18  	end if;
+ 19* end;
+ 20  /
+Enter value for dept: 7788;
+old   8: 	dept:=&dept;
+new   8: 	dept:=7788;;
+	cursur emp_cur(dept number) is select empno,ename,sal from employee where deptno=dept;
+	                    *
+ERROR at line 6:
+ORA-06550: line 6, column 22: 
+PLS-00103: Encountered the symbol "NUMBER" when expecting one of the following: 
+. ( ) , * @ % & = - + < / > at in is mod remainder not rem => 
+<an exponent (**)> <> or != or ~= >= <= <> and or like like2 
+like4 likec between || multiset member submultiset 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2     no employee.empno%type;
+  3     name employee.ename%type;
+  4     sal employee.sal%type;
+  5     dept employee.deptno%type;
+  6     CURSOR emp_cur(dept_number NUMBER) IS
+  7        SELECT empno, ename, sal
+  8        FROM employee
+  9        WHERE deptno = dept_number;
+ 10  BEGIN
+ 11     dept := &dept;
+ 12     OPEN emp_cur(dept);
+ 13     IF emp_cur%ISOPEN THEN
+ 14        LOOP
+ 15           FETCH emp_cur INTO no, name, sal;
+ 16           EXIT WHEN emp_cur%NOTFOUND;
+ 17           DBMS_OUTPUT.put_line('Name of Employee is: ' || name || ' Salary is: ' || sal);
+ 18        END LOOP;
+ 19     ELSE
+ 20        DBMS_OUTPUT.put_line('Cursor is not open');
+ 21     END IF;
+ 22* END;
+SQL> /
+Enter value for dept: 7788;
+old  11:    dept := &dept;
+new  11:    dept := 7788;;
+   dept := 7788;;
+                *
+ERROR at line 11:
+ORA-06550: line 11, column 17: 
+PLS-00103: Encountered the symbol ";" when expecting one of the following: 
+( begin case declare end exception exit for goto if loop mod 
+null pragma raise return select update while with 
+<an identifier> <a double-quoted delimited-identifier> 
+<a bind variable> << continue close current delete fetch lock 
+insert open rollback savepoint set sql execute commit forall 
+merge pipe purge 
+The symbol "exit" was substituted for ";" to continue. 
+
+
+SQL> /
+Enter value for dept: 7788
+old  11:    dept := &dept;
+new  11:    dept := 7788;
+DECLARE
+*
+ERROR at line 1:
+ORA-06502: PL/SQL: numeric or value error: number precision too large 
+ORA-06512: at line 11 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2     no employee.empno%type;
+  3     name employee.ename%type;
+  4     sal employee.sal%type;
+  5     dept NUMBER;
+  6     CURSOR emp_cur(dept_number NUMBER) IS
+  7        SELECT empno, ename, sal
+  8        FROM employee
+  9        WHERE deptno = dept_number;
+ 10  BEGIN
+ 11     dept := &dept;
+ 12     OPEN emp_cur(dept);
+ 13     IF emp_cur%ISOPEN THEN
+ 14        LOOP
+ 15           FETCH emp_cur INTO no, name, sal;
+ 16           EXIT WHEN emp_cur%NOTFOUND;
+ 17           DBMS_OUTPUT.put_line('Name of Employee is: ' || name || ' Salary is: ' || sal);
+ 18        END LOOP;
+ 19     ELSE
+ 20        DBMS_OUTPUT.put_line('Cursor is not open');
+ 21     END IF;
+ 22* END;
+SQL> /
+Enter value for dept: 7788
+old  11:    dept := &dept;
+new  11:    dept := 7788;
+
+PL/SQL procedure successfully completed.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  /* parameter rowtype cursor */
+  2  declare
+  3      dept number;
+  4      em employee%rowtype;
+  5      cursor emp_cur (dept number) is select * from employee where deptno=dept;
+  6  begin
+  7      dept:=&dept;
+  8      open emp_cur%isopen then
+  9      loop
+ 10          fetch emp_cur into em;
+ 11          exit when emp_cur%not found;
+ 12          dbms_output.put_line('Name of Employee is :- ' || em.ename || 'Salary is :- ' || em.sal);
+ 13      end loop;
+ 14      else
+ 15          dbms_output.put_line('Not open cursor');
+ 16      end if;
+ 17* end;
+SQL> /
+Enter value for dept: 7788
+old   7:     dept:=&dept;
+new   7:     dept:=7788;
+    open emp_cur%isopen then
+                        *
+ERROR at line 8:
+ORA-06550: line 8, column 25: 
+PLS-00103: Encountered the symbol "THEN" when expecting one of the following: 
+. ( % ; for 
+ORA-06550: line 11, column 27: 
+PLS-00103: Encountered the symbol "NOT" when expecting one of the following: 
+type <an identifier> <a double-quoted delimited-identifier> 
+ORA-06550: line 14, column 5: 
+PLS-00103: Encountered the symbol "ELSE" when expecting one of the following: 
+( begin case declare end exit for goto if loop mod null 
+pragma raise return select update when while with 
+<an identifier> <a double-quoted delimited-i 
+ORA-06550: line 17, column 1: 
+PLS-00103: Encountered the symbol "END"  
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  /* parameter rowtype cursor */
+  2  DECLARE
+  3      dept NUMBER;
+  4      em employee%rowtype;
+  5      CURSOR emp_cur (dept_number NUMBER) IS
+  6          SELECT *
+  7          FROM employee
+  8          WHERE deptno = dept_number;
+  9  BEGIN
+ 10      dept := &dept;
+ 11      IF emp_cur%ISOPEN THEN
+ 12          LOOP
+ 13              FETCH emp_cur INTO em;
+ 14              EXIT WHEN emp_cur%NOTFOUND;
+ 15              DBMS_OUTPUT.put_line('Name of Employee is: ' || em.ename || ' Salary is: ' || em.sal);
+ 16          END LOOP;
+ 17      ELSE
+ 18          DBMS_OUTPUT.put_line('Cursor is not open');
+ 19      END IF;
+ 20* END;
+SQL> /
+Enter value for dept: 7788
+old  10:     dept := &dept;
+new  10:     dept := 7788;
+Cursor is not open                                                              
+
+PL/SQL procedure successfully completed.
+
+SQL> spool off;

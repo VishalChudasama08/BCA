@@ -1,0 +1,179 @@
+SQL> /* esception */
+SQL> declare
+  2  	name varchar2(15);
+  3  	no number;
+  4  begin
+  5  	select empno,ename into no,name from employee where empno=&empno;
+  6  	dbms_output.put_line('empno' || no);
+  7  	dbms_output.put_line('ename' || name);
+  8  except
+  9  /
+Enter value for empno: 15
+old   5: 	select empno,ename into no,name from employee where empno=&empno;
+new   5: 	select empno,ename into no,name from employee where empno=15;
+except
+     *
+ERROR at line 8:
+ORA-06550: line 8, column 6: 
+PLS-00103: Encountered the symbol "end-of-file" when expecting one of the 
+following: 
+:= . ( @ % ; 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	name varchar2(15);
+  3  	no number;
+  4  begin
+  5  	select empno,ename into no,name from employee where empno=&empno;
+  6  	dbms_output.put_line('empno' || no);
+  7  	dbms_output.put_line('ename' || name);
+  8  exception
+  9  	when NO_DATA_FOUND then
+ 10  		dbms_output.put_line('NO row selected');
+ 11  	when TOO_MANY_ROWS then
+ 12  		dbms_output.put_line('Multiple row selected');
+ 13* end;
+SQL> /
+Enter value for empno: 7844
+old   5: 	select empno,ename into no,name from employee where empno=&empno;
+new   5: 	select empno,ename into no,name from employee where empno=7844;
+
+PL/SQL procedure successfully completed.
+
+SQL> set serveroutput on;
+SQL> /
+Enter value for empno: 7844
+old   5: 	select empno,ename into no,name from employee where empno=&empno;
+new   5: 	select empno,ename into no,name from employee where empno=7844;
+empno7844                                                                       
+enameTURNER                                                                     
+
+PL/SQL procedure successfully completed.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	n number;
+  3  	n1 number;
+  4  	n2 number;
+  5  begin
+  6  	n1:=&n1;
+  7  	n2:=&n2;
+  8  	n:=&n;
+  9  	dbms_output.put_line('Division is ' || name);
+ 10  exception
+ 11  	when ZERO_DIVIDE then
+ 12  		dbms_output.put_line('zero divide error');
+ 13* end;
+SQL> /
+Enter value for n1: 15
+old   6: 	n1:=&n1;
+new   6: 	n1:=15;
+Enter value for n2: 15
+old   7: 	n2:=&n2;
+new   7: 	n2:=15;
+Enter value for n: 15
+old   8: 	n:=&n;
+new   8: 	n:=15;
+	dbms_output.put_line('Division is ' || name);
+	                                       *
+ERROR at line 9:
+ORA-06550: line 9, column 41: 
+PLS-00201: identifier 'NAME' must be declared 
+ORA-06550: line 9, column 2: 
+PL/SQL: Statement ignored 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	n number;
+  3  	n1 number;
+  4  	n2 number;
+  5  begin
+  6  	n1:=&n1;
+  7  	n2:=&n2;
+  8  	n:= n1/n2;
+  9  	dbms_output.put_line('Division is ' || name);
+ 10  exception
+ 11  	when ZERO_DIVIDE then
+ 12  		dbms_output.put_line('zero divide error');
+ 13* end;
+SQL> /
+Enter value for n1: 20
+old   6: 	n1:=&n1;
+new   6: 	n1:=20;
+Enter value for n2: 0
+old   7: 	n2:=&n2;
+new   7: 	n2:=0;
+	dbms_output.put_line('Division is ' || name);
+	                                       *
+ERROR at line 9:
+ORA-06550: line 9, column 41: 
+PLS-00201: identifier 'NAME' must be declared 
+ORA-06550: line 9, column 2: 
+PL/SQL: Statement ignored 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	n number;
+  3  	n1 number;
+  4  	n2 number;
+  5  begin
+  6  	n1:=&n1;
+  7  	n2:=&n2;
+  8  	n:= n1/n2;
+  9  	dbms_output.put_line('Division is ' || n);
+ 10  exception
+ 11  	when ZERO_DIVIDE then
+ 12  		dbms_output.put_line('zero divide error');
+ 13* end;
+SQL> /
+Enter value for n1: 18
+old   6: 	n1:=&n1;
+new   6: 	n1:=18;
+Enter value for n2: 0
+old   7: 	n2:=&n2;
+new   7: 	n2:=0;
+zero divide error                                                               
+
+PL/SQL procedure successfully completed.
+
+SQL> /
+Enter value for n1: 18
+old   6: 	n1:=&n1;
+new   6: 	n1:=18;
+Enter value for n2: 9
+old   7: 	n2:=&n2;
+new   7: 	n2:=9;
+Division is 2                                                                   
+
+PL/SQL procedure successfully completed.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	myerror exception;
+  3  begin
+  4  	if true then
+  5  		raise myerror;
+  6  	end if;
+  7  	exception
+  8  		when myerror then
+  9  			dbms_output.put_line('Error Message From Inner Block');
+ 10* end;
+SQL> /
+Error Message From Inner Block                                                  
+
+PL/SQL procedure successfully completed.
+
+SQL> spool off;
