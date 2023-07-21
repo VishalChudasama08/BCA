@@ -1,0 +1,101 @@
+SQL> SELECT product_no, sum(qty_disp*product_rate) "total price" FROM sales_order_details GROUP BY product_no;
+
+PRODUC total price                                                              
+------ -----------                                                              
+P07965        8400                                                              
+P07885       10500                                                              
+P07868        9450                                                              
+P06734       12000                                                              
+P03453        6300                                                              
+P07975        3150                                                              
+P00001        9975                                                              
+
+7 rows selected.
+
+SQL> SELECT order_no,product_no, sum(qty_disp*product_rate) "total price" FROM sales_order_details GROUP BY order_no;
+SELECT order_no,product_no, sum(qty_disp*product_rate) "total price" FROM sales_order_details GROUP BY order_no
+                *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> SELECT pm.product_no, sum(sod.qty_disp*sod.product_rate) "total price" FROM product_master pm, sales_order_details sod WHERE pm.product_no=sod.product_no GROUP BY product_no;
+SELECT pm.product_no, sum(sod.qty_disp*sod.product_rate) "total price" FROM product_master pm, sales_order_details sod WHERE pm.product_no=sod.product_no GROUP BY product_no
+                                                                                                                                                                   *
+ERROR at line 1:
+ORA-00918: column ambiguously defined 
+
+
+SQL> SELECT pm.product_no, sum(sod.qty_disp*sod.product_rate) "total price" FROM product_master pm, sales_order_details sod WHERE pm.product_no=sod.product_no GROUP BY pm.product_no;
+
+PRODUC total price                                                              
+------ -----------                                                              
+P07965        8400                                                              
+P07885       10500                                                              
+P07868        9450                                                              
+P06734       12000                                                              
+P03453        6300                                                              
+P07975        3150                                                              
+P00001        9975                                                              
+
+7 rows selected.
+
+SQL> SELECT pm.product_no, sum(sod.qty_disp*sod.product_rate) "total price" FROM product_master pm, sales_order_details sod WHERE pm.product_no=sod.product_no GROUP BY sod.product_no;
+
+PRODUC total price                                                              
+------ -----------                                                              
+P07965        8400                                                              
+P07885       10500                                                              
+P07868        9450                                                              
+P06734       12000                                                              
+P03453        6300                                                              
+P07975        3150                                                              
+P00001        9975                                                              
+
+7 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* SELECT pm.product_no, sum(sod.qty_disp*sod.product_rate) "total price" FROM product_master pm, sales_order_details sod WHERE pm.product_no=sod.product_no GROUP BY sod.product_no
+SQL> SELECT pm.product_no, sum(sod.qty_disp*sod.product_rate) "total price" FROM product_master pm, sales_order_details sod WHERE pm.product_no=sod.product_no GROUP BY sod.product_no;
+
+PRODUC total price                                                              
+------ -----------                                                              
+P07965        8400                                                              
+P07885       10500                                                              
+P07868        9450                                                              
+P06734       12000                                                              
+P03453        6300                                                              
+P07975        3150                                                              
+P00001        9975                                                              
+
+7 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* SELECT pm.descr, sum(sod.qty_ordered*sod.product_rate) "total price" FROM product_master pm, sales_order_details sod WHERE pm.product_no=sod.product_no GROUP BY descr;
+SQL> /
+SELECT pm.descr, sum(sod.qty_ordered*sod.product_rate) "total price" FROM product_master pm, sales_order_details sod WHERE pm.product_no=sod.product_no GROUP BY descr;
+                                                                                                                                                                      *
+ERROR at line 1:
+ORA-00911: invalid character 
+
+
+SQL> SELECT pm.descr, sum(sod.qty_ordered*sod.product_rate) "total price" FROM product_master pm, sales_order_details sod WHERE pm.product_no=sod.product_no GROUP BY pm.descr;
+
+DESCR           total price                                                     
+--------------- -----------                                                     
+1.44 Floppies         17850                                                     
+CD Drive              26250                                                     
+540 HDD               25200                                                     
+Keyboards              9450                                                     
+Mouse                 12000                                                     
+1.44 Drive             6300                                                     
+Monitors               6300                                                     
+
+7 rows selected.
+
+SQL> 
+SQL> spool off

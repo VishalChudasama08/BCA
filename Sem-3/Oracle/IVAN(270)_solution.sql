@@ -16,7 +16,7 @@
 /* 15. */ SELECT product_no,sell_price, sell_price * 15 "NEW PRICE" FROM product_master WHERE sell_price > 1500;
 /* 16. */ SELECT product_no,cost_price FROM product_master WHERE cost_price < 1500;
 /* 17. */ SELECT * FROM product_master ORDER BY descr;
-/* 18. */ ELECT product_no, cost_price, cost_price * cost_price "sqare_of_cost_price" FROM product_master;
+/* 18. */ SELECT product_no, cost_price, cost_price * cost_price "sqare_of_cost_price" FROM product_master;
 /* 19. */ SELECT product_no, descr, cost_price, cost_price/(sell_price-100)FROM product_master WHERE descr = '540 HDD';
 /* 20. */ SELECT name, city, state FROM client_master WHERE state != 'Maharashtra';
 /* 21. */ SELECT product_no, descr, sell_price FROM product_master WHERE descr LIKE ('M%');
@@ -33,3 +33,6 @@
 
 /* Having and Group By */
 /* 30 */ SELECT A.descr, SUM(B.qty_ordered) FROM product_master A, sales_order_details B WHERE A.product_no = B.product_no GROUP BY A.descr;
+/* 31 */ SELECT pm.descr, sum(sod.qty_ordered*sod.product_rate) "total price" FROM product_master pm, sales_order_details sod WHERE pm.product_no=sod.product_no GROUP BY pm.descr;
+/* 32 */ SELECT order_no, SUM(qty_ordered * product_rate) FROM sales_order_details GROUP BY order_no HAVING MAX(product_rate * qty_ordered) >= 15000;
+/* 33 */ 
