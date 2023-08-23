@@ -1,0 +1,271 @@
+SQL> set serveroutput on;
+SQL> --procedure
+SQL> ed
+SP2-0107: Nothing to save.
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+ACADEMY                        TABLE                                            
+CHALLAN_DETAILS                TABLE                                            
+CHALLAN_HEADER                 TABLE                                            
+CLIENT_MASTER                  TABLE                                            
+EMP1                           TABLE                                            
+EMP2                           TABLE                                            
+EMPLOYEE                       TABLE                                            
+PRODUCT_MASTER                 TABLE                                            
+SALESMAN_MASTER                TABLE                                            
+SALES_ORDER                    TABLE                                            
+SALES_ORDER_DETAILS            TABLE                                            
+
+11 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  create or replace procedure pro_emp(no in number,name in varchar2,sal in number,s in number) as
+  2  begin
+  3  	dbms_output.put_line(rpad (no,5,'') || ' ' || rpad(name,5,'') || ' ' || rpad(sal,5,'') || rpad(s,5,''));
+  4* end;
+SQL> /
+
+Procedure created.
+
+SQL> exec pro_emp(8,vishal,9999999999,108);
+BEGIN pro_emp(8,vishal,9999999999,108); END;
+
+                *
+ERROR at line 1:
+ORA-06550: line 1, column 17: 
+PLS-00201: identifier 'VISHAL' must be declared 
+ORA-06550: line 1, column 7: 
+PL/SQL: Statement ignored 
+
+
+SQL> exec pro_emp(8,'vishal',9999999999,108);
+
+PL/SQL procedure successfully completed.
+
+SQL> set serveroutput on;
+SQL> exec pro_emp(8,'vishal',9999999999,108);
+
+PL/SQL procedure successfully completed.
+
+SQL> /* funtion for calcution new salary */
+SQL> ed
+Wrote file afiedt.buf
+
+  1  create or replace function pro_emp(sal in number) as
+  2  begin
+  3  	if sal>=0 and sal<=1500 then
+  4  		return (sal +(sal*0.1));
+  5  	elsif sal>1500 and sal<=3000 then
+  6  		return (sal +(sal*0.15));
+  7  	elsif sal>3000 and sal<=5000 then
+  8  		return (sal +(sal*0.2));
+  9  	else
+ 10  		return (sal +(sal*0.3));
+ 11  	end if;
+ 12* end;
+SQL> /
+create or replace function pro_emp(sal in number) as
+*
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  create or replace function pro_emp1(sal in number) as
+  2  begin
+  3  	if sal>=0 and sal<=1500 then
+  4  		return (sal +(sal*0.1));
+  5  	elsif sal>1500 and sal<=3000 then
+  6  		return (sal +(sal*0.15));
+  7  	elsif sal>3000 and sal<=5000 then
+  8  		return (sal +(sal*0.2));
+  9  	else
+ 10  		return (sal +(sal*0.3));
+ 11  	end if;
+ 12* end;
+SQL> /
+
+Warning: Function created with compilation errors.
+
+SQL> /* cursor */
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	cursor cur_emp is select empno,ename,sal from emp1;
+  3  	no emp1.empno%type;
+  4  	name emp1.ename%type;
+  5  	sal emp1.sal%type;
+  6  	z number();
+  7  begin
+  8  	open cur_emp;
+  9  	if cur_emp%isopen then
+ 10  	loop
+ 11  		fetch cur_emp into no,name,sal;
+ 12  		exit when
+ 13  		cur_emp%notfound;
+ 14  		if cur_emp%found then
+ 15  			z:=pro_emp1(sal);
+ 16  			pro_emp(no,name,sal,z)
+ 17  		else
+ 18  			raise NO_DATA_FOUND;
+ 19  		end if;
+ 20  	end loop;
+ 21  	else
+ 22  		dbms_output.put_line('NO OPEN CURSOR');
+ 23  	end if;
+ 24  exception
+ 25  	when NO_DATA_FOUND then
+ 26  		dbms_output.put_line('NO DATA IN TABLE');
+ 27* end; 
+SQL> /
+	z number();
+	         *
+ERROR at line 6:
+ORA-06550: line 6, column 11: 
+PLS-00103: Encountered the symbol ")" when expecting one of the following: 
+( - + case mod new not null <an identifier> 
+<a double-quoted delimited-identifier> <a bind variable> 
+continue avg count current exists max min prior sql stddev 
+sum variance execute forall merge time timestamp interval 
+date <a string literal with character set specification> 
+<a number> <a single-quoted SQL string> pipe 
+<an alternatively-quoted string literal with character set specification> 
+<an alternatively 
+ORA-06550: line 17, column 3: 
+PLS-00103: Encountered the symbol "ELSE" when expecting one of the following: 
+:= . ( % ; 
+The symbol ";" was substituted for "ELSE" to continue. 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	cursor cur_emp is select empno,ename,sal from emp1;
+  3  	no emp1.empno%type;
+  4  	name emp1.ename%type;
+  5  	sal emp1.sal%type;
+  6  	z number(6);
+  7  begin
+  8  	open cur_emp;
+  9  	if cur_emp%isopen then
+ 10  	loop
+ 11  		fetch cur_emp into no,name,sal;
+ 12  		exit when
+ 13  		cur_emp%notfound;
+ 14  		if cur_emp%found then
+ 15  			z:=pro_emp1(sal);
+ 16  			pro_emp(no,name,sal,z)
+ 17  		else
+ 18  			raise NO_DATA_FOUND;
+ 19  		end if;
+ 20  	end loop;
+ 21  	else
+ 22  		dbms_output.put_line('NO OPEN CURSOR');
+ 23  	end if;
+ 24  exception
+ 25  	when NO_DATA_FOUND then
+ 26  		dbms_output.put_line('NO DATA IN TABLE');
+ 27* end; 
+SQL> /
+		else
+		*
+ERROR at line 17:
+ORA-06550: line 17, column 3: 
+PLS-00103: Encountered the symbol "ELSE" when expecting one of the following: 
+:= . ( % ; 
+The symbol ";" was substituted for "ELSE" to continue. 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	cursor cur_emp is select empno,ename,sal from emp1;
+  3  	no emp1.empno%type;
+  4  	name emp1.ename%type;
+  5  	sal emp1.sal%type;
+  6  	z number(6);
+  7  begin
+  8  	open cur_emp;
+  9  	if cur_emp%isopen then
+ 10  	loop
+ 11  		fetch cur_emp into no,name,sal;
+ 12  		exit when
+ 13  		cur_emp%notfound;
+ 14  		if cur_emp%found then
+ 15  			z:=pro_emp1(sal);
+ 16  			pro_emp(no,name,sal,z);
+ 17  		else
+ 18  			raise NO_DATA_FOUND;
+ 19  		end if;
+ 20  	end loop;
+ 21  	else
+ 22  		dbms_output.put_line('NO OPEN CURSOR');
+ 23  	end if;
+ 24  exception
+ 25  	when NO_DATA_FOUND then
+ 26  		dbms_output.put_line('NO DATA IN TABLE');
+ 27* end; 
+SQL> /
+			z:=pro_emp1(sal);
+			   *
+ERROR at line 15:
+ORA-06550: line 15, column 7: 
+PLS-00905: object VISHAL.PRO_EMP1 is invalid 
+ORA-06550: line 15, column 4: 
+PL/SQL: Statement ignored 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	cursor cur_emp is select empno,ename,sal from emp1;
+  3  	no emp1.empno%type;
+  4  	name emp1.ename%type;
+  5  	sal emp1.sal%type;
+  6  	z number(6);
+  7  begin
+  8  	open cur_emp;
+  9  	if cur_emp%isopen then
+ 10  	loop
+ 11  		fetch cur_emp into no,name,sal;
+ 12  		exit when
+ 13  		cur_emp%notfound;
+ 14  		if cur_emp%found then
+ 15  			z:=pro_emp1(sal);
+ 16  			pro_emp1(no,name,sal,z);
+ 17  		else
+ 18  			raise NO_DATA_FOUND;
+ 19  		end if;
+ 20  	end loop;
+ 21  	else
+ 22  		dbms_output.put_line('NO OPEN CURSOR');
+ 23  	end if;
+ 24  exception
+ 25  	when NO_DATA_FOUND then
+ 26  		dbms_output.put_line('NO DATA IN TABLE');
+ 27* end; 
+SQL> /
+			z:=pro_emp1(sal);
+			   *
+ERROR at line 15:
+ORA-06550: line 15, column 7: 
+PLS-00905: object VISHAL.PRO_EMP1 is invalid 
+ORA-06550: line 15, column 4: 
+PL/SQL: Statement ignored 
+ORA-06550: line 16, column 4: 
+PLS-00905: object VISHAL.PRO_EMP1 is invalid 
+ORA-06550: line 16, column 4: 
+PL/SQL: Statement ignored 
+
+
+SQL> spool off;

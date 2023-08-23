@@ -1,0 +1,155 @@
+SQL> --in book cursor then procedure
+SQL> --Procedure
+SQL> SET SERVEROUTPUT ON;
+SQL> /* prosedure */
+SQL> create or replace procedure pro_emp(no in number, name in varchar2, sal in number) as
+  2  begin
+  3  	dbms_output.put_line( rpad(no,5,'') || ' ' || rpad(name,5,'') || ' ' || rpad(sal,5,'') );
+  4  end;
+  5  /
+
+Procedure created.
+
+SQL> CREATE TABLE emp1 AS SELECT * FROM employee;
+CREATE TABLE emp1 AS SELECT * FROM employee
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> --I created emp1 table in anether spool file
+SQL> --then emp1 table is exist all dasa as employee
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2    	cursor cur_emp is select empno,ename,sal from emp1;
+  3    	no emp1.empno%type;
+  4    	name emp1.ename%type;
+  5    	sal emp1.sal%type;
+  6  begin
+  7    	open cur_emp;
+  8    	if cur_emp%isopen then
+  9    		loop
+ 10    			fetch cur_emp into no,name,sal;
+ 11    			exit when cur_emp%notfound;
+ 12    			if cur_emp%found then
+ 13    				pro_emp(no,name,sal);
+ 14    			else
+ 15    				raise NO_DATA_FOUND;
+ 16    			end if;
+ 17    		end loop;
+ 18    	else
+ 19    		dbms_output.put_line('No Open Cursor');
+ 20    	end if;
+ 21  exception
+ 22    	when NO_DATA_FOUND then
+ 23    	dbms_output.put_line('No Data In Table');
+ 24* end;
+SQL> /
+
+PL/SQL procedure successfully completed.
+
+SQL> /* row type */
+SQL> ed
+Wrote file afiedt.buf
+
+  1* CREATE TABLE emp2 AS SELECT * FROM employee;
+  2  
+SQL> /
+CREATE TABLE emp2 AS SELECT * FROM employee;
+                                           *
+ERROR at line 1:
+ORA-00911: invalid character 
+
+
+SQL> create table emp2 as select * from employee;
+
+Table created.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2    	cursor cur_emp is select * from emp;
+  3  begin
+  4    	for a in cur_emp
+  5  	loop
+  6  		pro_emp(a.empno,a.ename,a.sal);
+  7  		if cur_emp%notfound then
+  8  			raise NO_DATA_FOUND;
+  9  	end loop;
+ 10  exception
+ 11    	when NO_DATA_FOUND then
+ 12    		dbms_output.put_line('No Data In Table');
+ 13  	close cur_emp;
+ 14* end;
+SQL> /
+	end loop;
+	    *
+ERROR at line 9:
+ORA-06550: line 9, column 6: 
+PLS-00103: Encountered the symbol "LOOP" when expecting one of the following: 
+if 
+ORA-06550: line 14, column 4: 
+PLS-00103: Encountered the symbol "end-of-file" when expecting one of the 
+following: 
+end not pragma final instantiable order overriding static 
+member constructor map 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2    	cursor cur_emp is select * from emp;
+  3  begin
+  4    	for a in cur_emp
+  5  	loop
+  6  		pro_emp(a.empno,a.ename,a.sal);
+  7  		if cur_emp%notfound then
+  8  			raise NO_DATA_FOUND;
+  9  		end if;
+ 10  	end loop;
+ 11  exception
+ 12    	when NO_DATA_FOUND then
+ 13    		dbms_output.put_line('No Data In Table');
+ 14  	close cur_emp;
+ 15* end;
+SQL> /
+  	cursor cur_emp is select * from emp;
+  	                                *
+ERROR at line 2:
+ORA-06550: line 2, column 36: 
+PL/SQL: ORA-00942: table or view does not exist 
+ORA-06550: line 2, column 22: 
+PL/SQL: SQL Statement ignored 
+ORA-06550: line 6, column 11: 
+PLS-00364: loop index variable 'A' use is invalid 
+ORA-06550: line 6, column 3: 
+PL/SQL: Statement ignored 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2    	cursor cur_emp is select * from emp2;
+  3  begin
+  4    	for a in cur_emp
+  5  	loop
+  6  		pro_emp(a.empno,a.ename,a.sal);
+  7  		if cur_emp%notfound then
+  8  			raise NO_DATA_FOUND;
+  9  		end if;
+ 10  	end loop;
+ 11  exception
+ 12    	when NO_DATA_FOUND then
+ 13    		dbms_output.put_line('No Data In Table');
+ 14  	close cur_emp;
+ 15* end;
+SQL> /
+
+PL/SQL procedure successfully completed.
+
+SQL> spool off;
