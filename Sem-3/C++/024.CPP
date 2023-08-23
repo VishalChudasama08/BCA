@@ -15,7 +15,7 @@ class complex{
 complex complex::operator+(complex c){
 	complex temp;
 	temp.x = x + c.x;
-	temp.x = y + c.y;
+	temp.y = y + c.y;
 	return(temp);
 }
 void complex::display(void){

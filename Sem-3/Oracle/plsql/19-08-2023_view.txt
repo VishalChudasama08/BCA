@@ -1,0 +1,368 @@
+SQL> ed
+Wrote file afiedt.buf
+
+  1  CREATE VIEW abc
+  2  AS
+  3* SELECT * FROM employee;
+SQL> ed
+Wrote file afiedt.buf
+
+  1  CREATE VIEW abc
+  2  AS
+  3* SELECT * FROM employee;
+SQL> /
+SELECT * FROM employee;
+                      *
+ERROR at line 3:
+ORA-00911: invalid character 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  CREATE VIEW abc
+  2  AS
+  3* SELECT * FROM employee
+SQL> /
+
+View created.
+
+SQL> select * from abc;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7369 SMITH      CLERK           7902 17-DEC-80        800                 
+        20                                                                      
+                                                                                
+      7499 allen      salesman        7698 20-FEB-81       1600        300      
+        30                                                                      
+                                                                                
+      7521 ward       salesman        7698 22-FEB-81       1250        500      
+        30                                                                      
+                                                                                
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7566 jones      manager         7839 02-APR-81       2975                 
+        20                                                                      
+                                                                                
+      7654 martin     salesman        7698 28-SEP-81       1250       1400      
+        30                                                                      
+                                                                                
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                 
+        30                                                                      
+                                                                                
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                 
+        10                                                                      
+                                                                                
+      7788 SCOTT      ANALYST         7566 19-APR-81       3000                 
+        20                                                                      
+                                                                                
+      7839 KING       PRESIDENT            17-NOV-81       5000                 
+        10                                                                      
+                                                                                
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500                 
+        30                                                                      
+                                                                                
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                 
+        10                                                                      
+                                                                                
+      7900 JAMES      CLERK           7698 03-DEC-81        950                 
+        30                                                                      
+                                                                                
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                 
+        20                                                                      
+                                                                                
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                 
+        10                                                                      
+                                                                                
+
+14 rows selected.
+
+SQL> set pagesize 100;
+SQL> 
+SQL> select * from abc;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7369 SMITH      CLERK           7902 17-DEC-80        800                 
+        20                                                                      
+                                                                                
+      7499 allen      salesman        7698 20-FEB-81       1600        300      
+        30                                                                      
+                                                                                
+      7521 ward       salesman        7698 22-FEB-81       1250        500      
+        30                                                                      
+                                                                                
+      7566 jones      manager         7839 02-APR-81       2975                 
+        20                                                                      
+                                                                                
+      7654 martin     salesman        7698 28-SEP-81       1250       1400      
+        30                                                                      
+                                                                                
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                 
+        30                                                                      
+                                                                                
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                 
+        10                                                                      
+                                                                                
+      7788 SCOTT      ANALYST         7566 19-APR-81       3000                 
+        20                                                                      
+                                                                                
+      7839 KING       PRESIDENT            17-NOV-81       5000                 
+        10                                                                      
+                                                                                
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500                 
+        30                                                                      
+                                                                                
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                 
+        10                                                                      
+                                                                                
+      7900 JAMES      CLERK           7698 03-DEC-81        950                 
+        30                                                                      
+                                                                                
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                 
+        20                                                                      
+                                                                                
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                 
+        10                                                                      
+                                                                                
+
+14 rows selected.
+
+SQL> set linesize 250;
+SQL> select * from abc;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                                                                                                     
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                                                                                                     
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20                                                                                                                                                                     
+      7499 allen      salesman        7698 20-FEB-81       1600        300         30                                                                                                                                                                     
+      7521 ward       salesman        7698 22-FEB-81       1250        500         30                                                                                                                                                                     
+      7566 jones      manager         7839 02-APR-81       2975                    20                                                                                                                                                                     
+      7654 martin     salesman        7698 28-SEP-81       1250       1400         30                                                                                                                                                                     
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30                                                                                                                                                                     
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10                                                                                                                                                                     
+      7788 SCOTT      ANALYST         7566 19-APR-81       3000                    20                                                                                                                                                                     
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10                                                                                                                                                                     
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500                    30                                                                                                                                                                     
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    10                                                                                                                                                                     
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30                                                                                                                                                                     
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20                                                                                                                                                                     
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10                                                                                                                                                                     
+
+14 rows selected.
+
+SQL> drop view abc;
+
+View dropped.
+
+SQL> select * from abc;
+select * from abc
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* create view abc(grno, name) as select empno,ename from employee;
+SQL> create view abc(grno, name) as select empno,ename from employee;
+
+View created.
+
+SQL> select * from abc;
+
+      GRNO NAME                                                                                                                                                                                                                                           
+---------- ----------                                                                                                                                                                                                                                     
+      7369 SMITH                                                                                                                                                                                                                                          
+      7499 allen                                                                                                                                                                                                                                          
+      7521 ward                                                                                                                                                                                                                                           
+      7566 jones                                                                                                                                                                                                                                          
+      7654 martin                                                                                                                                                                                                                                         
+      7698 BLAKE                                                                                                                                                                                                                                          
+      7782 CLARK                                                                                                                                                                                                                                          
+      7788 SCOTT                                                                                                                                                                                                                                          
+      7839 KING                                                                                                                                                                                                                                           
+      7844 TURNER                                                                                                                                                                                                                                         
+      7876 ADAMS                                                                                                                                                                                                                                          
+      7900 JAMES                                                                                                                                                                                                                                          
+      7902 FORD                                                                                                                                                                                                                                           
+      7934 MILLER                                                                                                                                                                                                                                         
+
+14 rows selected.
+
+SQL> drop view abc;
+
+View dropped.
+
+SQL> create view abc as select empno,ename from employee where sal>=1000 with check option;
+
+View created.
+
+SQL> select * from abc;
+
+     EMPNO ENAME                                                                                                                                                                                                                                          
+---------- ----------                                                                                                                                                                                                                                     
+      7499 allen                                                                                                                                                                                                                                          
+      7521 ward                                                                                                                                                                                                                                           
+      7566 jones                                                                                                                                                                                                                                          
+      7654 martin                                                                                                                                                                                                                                         
+      7698 BLAKE                                                                                                                                                                                                                                          
+      7782 CLARK                                                                                                                                                                                                                                          
+      7788 SCOTT                                                                                                                                                                                                                                          
+      7839 KING                                                                                                                                                                                                                                           
+      7844 TURNER                                                                                                                                                                                                                                         
+      7876 ADAMS                                                                                                                                                                                                                                          
+      7902 FORD                                                                                                                                                                                                                                           
+      7934 MILLER                                                                                                                                                                                                                                         
+
+12 rows selected.
+
+SQL> drop view abc;
+
+View dropped.
+
+SQL> create view abc as select empno,ename from employee where sal>=1000 with read only;
+
+View created.
+
+SQL> select * from abc;
+
+     EMPNO ENAME                                                                                                                                                                                                                                          
+---------- ----------                                                                                                                                                                                                                                     
+      7499 allen                                                                                                                                                                                                                                          
+      7521 ward                                                                                                                                                                                                                                           
+      7566 jones                                                                                                                                                                                                                                          
+      7654 martin                                                                                                                                                                                                                                         
+      7698 BLAKE                                                                                                                                                                                                                                          
+      7782 CLARK                                                                                                                                                                                                                                          
+      7788 SCOTT                                                                                                                                                                                                                                          
+      7839 KING                                                                                                                                                                                                                                           
+      7844 TURNER                                                                                                                                                                                                                                         
+      7876 ADAMS                                                                                                                                                                                                                                          
+      7902 FORD                                                                                                                                                                                                                                           
+      7934 MILLER                                                                                                                                                                                                                                         
+
+12 rows selected.
+
+SQL> drop view abc;
+
+View dropped.
+
+SQL> CREATE FORCE VIEW student AS SELECT * FROM student;
+
+Warning: View created with compilation errors.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* CREATE TABLE student(grno number(3), name varchar2(30), address varchar2(30), city varchar2(20)); 
+SQL> CREATE TABLE student(grno number(3), name varchar2(30), address varchar2(30), city varchar2(20));
+CREATE TABLE student(grno number(3), name varchar2(30), address varchar2(30), city varchar2(20))
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> select * reom tab;
+select * reom tab
+         *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                                                                                                                                                                         
+------------------------------ ------- ----------                                                                                                                                                                                                         
+BONUS                          TABLE                                                                                                                                                                                                                      
+DEPT                           TABLE                                                                                                                                                                                                                      
+DUMMY                          TABLE                                                                                                                                                                                                                      
+EMP                            TABLE                                                                                                                                                                                                                      
+EMPLOYEE                       TABLE                                                                                                                                                                                                                      
+SALGRADE                       TABLE                                                                                                                                                                                                                      
+STUDENT                        VIEW                                                                                                                                                                                                                       
+
+7 rows selected.
+
+SQL> select * from student;
+select * from student
+              *
+ERROR at line 1:
+ORA-04063: view "SCOTT.STUDENT" has errors 
+
+
+SQL> drop view student;
+
+View dropped.
+
+SQL> CREATE FORCE VIEW abc AS SELECT * FROM student;
+
+Warning: View created with compilation errors.
+
+SQL> CREATE TABLE student(grno number(3), name varchar2(30), address varchar2(30), city varchar2(20));
+
+Table created.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* INSERT INTO student values(&grno, &'name', &'address', &'city')
+SQL> INSERT INTO student values(&grno, &'name', &'address', &'city');
+Enter value for grno: 100
+old   1: INSERT INTO student values(&grno, &'name', &'address', &'city')
+new   1: INSERT INTO student values(100, &'name', &'address', &'city')
+INSERT INTO student values(100, &'name', &'address', &'city')
+                                 *
+ERROR at line 1:
+ORA-01745: invalid host/bind variable name 
+
+
+SQL> INSERT INTO student values(&grno, &'name', &'address', &'city')
+  2  /
+Enter value for grno: 100;
+old   1: INSERT INTO student values(&grno, &'name', &'address', &'city')
+new   1: INSERT INTO student values(100;, &'name', &'address', &'city')
+INSERT INTO student values(100;, &'name', &'address', &'city')
+                              *
+ERROR at line 1:
+ORA-00911: invalid character 
+
+
+SQL> INSERT INTO student values(&grno, '&name', '&address', '&city');
+Enter value for grno: 100
+Enter value for name: vishnu
+Enter value for address: kotadiya
+Enter value for city: khambhaliya
+old   1: INSERT INTO student values(&grno, '&name', '&address', '&city')
+new   1: INSERT INTO student values(100, 'vishnu', 'kotadiya', 'khambhaliya')
+
+1 row created.
+
+SQL> drop view abc;
+
+View dropped.
+
+SQL> spool off

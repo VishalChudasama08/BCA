@@ -38,7 +38,7 @@ istream & operator >> (istream &din, vector &b){
 	return(din);
 }
 ostream & operator << (ostream &dout, vector &b){
-	dout<<"c"<<b.v[0];
+	dout<<"("<<b.v[0];
 	for(int i=1; i<size; i++)
 		dout<<","<<b.v[i];
 	dout<<")";
@@ -51,7 +51,6 @@ void main(){
 	clrscr();
 	cout<<"enter element of vector m "<<endl;
 	cin>>m; //invokes operator >>() function
-	cout<<endl;
 	cout<<"m ="<<m<<endl; //invokes operator <<() function
 	vector p,q;
 	p=2*m; //invokes friend 1
