@@ -1,0 +1,454 @@
+SQL> set serveroutput on;
+SQL> /* display sum of even digit and odd digits */
+SQL> DECLARE
+  2      n NUMBER;
+  3      d NUMBER;
+  4      esum NUMBER := 0;
+  5      osum NUMBER := 0;
+  6  BEGIN
+  7      n := &n;
+  8      WHILE n != 0 LOOP
+  9          d := MOD(n, 10);
+ 10          IF MOD(d, 2) = 0 THEN
+ 11              esum := esum + d;
+ 12          ELSE
+ 13              osum := osum + d;
+ 14          END IF;
+ 15          n := n / 10;
+ 16      END LOOP;
+ 17      DBMS_OUTPUT.PUT_LINE('Even Digit Sum: ' || esum);
+ 18      DBMS_OUTPUT.PUT_LINE('Odd Digit Sum: ' || osum);
+ 19  END;
+ 20  /
+Enter value for n: 12354
+old   7:     n := &n;
+new   7:     n := 12354;
+Even Digit Sum: 4                                                               
+Odd Digit Sum: 12.66666666666666666666666666666666666666                        
+
+PL/SQL procedure successfully completed.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2      n NUMBER;
+  3      d NUMBER;
+  4      esum NUMBER := 0;
+  5      osum NUMBER := 0;
+  6  BEGIN
+  7      n := &n;
+  8      WHILE n != 0 LOOP
+  9          d := MOD(n, 10);
+ 10          IF MOD(d, 2) = 0 THEN
+ 11              esum := esum + d;
+ 12          ELSE
+ 13              osum := osum + d;
+ 14          END IF;
+ 15          n := TRUNC(n / 10);
+ 16      END LOOP;
+ 17      DBMS_OUTPUT.PUT_LINE('Even Digit Sum: ' || esum);
+ 18      DBMS_OUTPUT.PUT_LINE('Odd Digit Sum: ' || osum);
+ 19* END;
+SQL> /
+Enter value for n: 135246
+old   7:     n := &n;
+new   7:     n := 135246;
+Even Digit Sum: 12                                                              
+Odd Digit Sum: 9                                                                
+
+PL/SQL procedure successfully completed.
+
+SQL> /* Armstrong Number */
+SQL> /****** Armstrong Number ******/
+SQL> ed
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2      n NUMBER;
+  3      a NUMBER;
+  4      ex NUMBER;
+  5      sum NUMBER := 0;
+  6  BEGIN
+  7      n := &n;
+  8      ex := n; 
+  9      WHILE n != 0 LOOP
+ 10          a := MOD(n, 10);
+ 11  	sum := sum + (a*a*a);
+ 12          n := TRUNC(n / 10);
+ 13      END LOOP;
+ 14      IF ex = sum THEN
+ 15  	DBMS_OUTPUT.PUT_LINE(n || ' Number Is Armstrong');
+ 16      ELSE
+ 17  	DBMS_OUTPUT.PUT_LINE(n || ' Number Is Not Armstrong');
+ 18* END;
+SQL> /
+Enter value for n: 153
+old   7:     n := &n;
+new   7:     n := 153;
+	sum := sum + (a*a*a);
+	           *
+ERROR at line 11:
+ORA-06550: line 11, column 13: 
+PLS-00103: Encountered the symbol "+" when expecting one of the following: 
+( 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  	n NUMBER;
+  3  	a NUMBER;
+  4  	ex NUMBER;
+  5  	sum NUMBER := 0;
+  6  BEGIN
+  7  	n := &n;
+  8  	ex := n; 
+  9  	WHILE n != 0 LOOP
+ 10  		a := MOD(n, 10);
+ 11  		sum := sum + a * a * a;
+ 12  		n := TRUNC(n / 10);
+ 13  	END LOOP;
+ 14  	IF ex = sum THEN
+ 15  		DBMS_OUTPUT.PUT_LINE(n || ' Number Is Armstrong');
+ 16  	ELSE	
+ 17  		DBMS_OUTPUT.PUT_LINE(n || ' Number Is Not Armstrong');
+ 18* END;
+SQL> /
+Enter value for n: 153
+old   7: 	n := &n;
+new   7: 	n := 153;
+		sum := sum + a * a * a;
+		           *
+ERROR at line 11:
+ORA-06550: line 11, column 14: 
+PLS-00103: Encountered the symbol "+" when expecting one of the following: 
+( 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  	n NUMBER;
+  3  	a NUMBER;
+  4  	ex NUMBER;
+  5  	sum NUMBER := 0;
+  6  BEGIN
+  7  	n := &n;
+  8  	ex := n; 
+  9  	WHILE n != 0 LOOP
+ 10  		a := MOD(n, 10);
+ 11  		sum := (sum + (a * a * a));
+ 12  		n := TRUNC(n / 10);
+ 13  	END LOOP;
+ 14  	IF ex = sum THEN
+ 15  		DBMS_OUTPUT.PUT_LINE(n || ' Number Is Armstrong');
+ 16  	ELSE	
+ 17  		DBMS_OUTPUT.PUT_LINE(n || ' Number Is Not Armstrong');
+ 18* END;
+SQL> /
+Enter value for n: 153
+old   7: 	n := &n;
+new   7: 	n := 153;
+		sum := (sum + (a * a * a));
+		            *
+ERROR at line 11:
+ORA-06550: line 11, column 15: 
+PLS-00103: Encountered the symbol "+" when expecting one of the following: 
+( 
+
+
+SQL> /****** Finnonacci Series ******/
+SQL> ed
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  	n NUMBER;
+  3  	i NUMBER;
+  4  	a NUMBER := 1;
+  5  	b NUMBER := 0;
+  6  	c NUMBER := 0;
+  7  BEGIN
+  8  	n := &n;
+  9  	for i in 1.. n loop
+ 10  		dbms_output.put_line(i || ' ' || c);
+ 11  		c := a + b;
+ 12  		a := b;
+ 13  		b := c;
+ 14  	end loop;
+ 15* END;
+SQL> /
+Enter value for n: 11
+old   8: 	n := &n;
+new   8: 	n := 11;
+1 0                                                                             
+2 1                                                                             
+3 1                                                                             
+4 2                                                                             
+5 3                                                                             
+6 5                                                                             
+7 8                                                                             
+8 13                                                                            
+9 21                                                                            
+10 34                                                                           
+11 55                                                                           
+
+PL/SQL procedure successfully completed.
+
+SQL> /****** Prime or not ******/
+SQL> ed
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  	n NUMBER;
+  3  	i NUMBER;
+  4  	f NUMBER := 0;
+  5  BEGIN
+  6  	n := &n;
+  7  	i := 2;
+  8  	WHILE i < n LOOP
+  9  		IF MOD(n,i) = 0 THEN
+ 10  			f := 1;
+ 11  			BREAK;
+ 12  		END IF;
+ 13  	END LOOP;
+ 14  	IF ex = sum THEN
+ 15  		DBMS_OUTPUT.PUT_LINE(n || ' Number Is Prime');
+ 16  	ELSE
+ 17  		DBMS_OUTPUT.PUT_LINE(n || ' Number Is Not Prime');
+ 18  	END IF;
+ 19* END;
+SQL> /
+Enter value for n: 7
+old   6: 	n := &n;
+new   6: 	n := 7;
+	IF ex = sum THEN
+	            *
+ERROR at line 14:
+ORA-06550: line 14, column 14: 
+PLS-00103: Encountered the symbol "THEN" when expecting one of the following: 
+( 
+ORA-06550: line 16, column 2: 
+PLS-00103: Encountered the symbol "ELSE" when expecting one of the following: 
+( begin case declare end exit for goto if loop mod null 
+pragma raise return select update when while with 
+<an identifier> <a double-quoted delimited-i 
+ORA-06550: line 19, column 1: 
+PLS-00103: Encountered the symbol "END"  
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  	n NUMBER;
+  3  	i NUMBER;
+  4  	f NUMBER := 0;
+  5  BEGIN
+  6  	n := &n;
+  7  	i := 2;
+  8  	WHILE i < n LOOP
+  9  		IF MOD(n,i) = 0 THEN
+ 10  			f := 1;
+ 11  			BREAK;
+ 12  		END IF;
+ 13  	END LOOP;
+ 14  	IF f = 0 THEN
+ 15  		DBMS_OUTPUT.PUT_LINE(n || ' Number Is Prime');
+ 16  	ELSE
+ 17  		DBMS_OUTPUT.PUT_LINE(n || ' Number Is Not Prime');
+ 18  	END IF;
+ 19* END;
+SQL> /
+Enter value for n: 7
+old   6: 	n := &n;
+new   6: 	n := 7;
+			BREAK;
+			*
+ERROR at line 11:
+ORA-06550: line 11, column 4: 
+PLS-00201: identifier 'BREAK' must be declared 
+ORA-06550: line 11, column 4: 
+PL/SQL: Statement ignored 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  	n NUMBER;
+  3  	i NUMBER;
+  4  	f NUMBER := 0;
+  5  BEGIN
+  6  	n := &n;
+  7  	i := 2;
+  8  	WHILE i < n LOOP
+  9  		IF MOD(n,i) = 0 THEN
+ 10  			f := 1;
+ 11  			BREAK;
+ 12  		END IF;
+ 13  		i := i + 1;
+ 14  	END LOOP;
+ 15  	IF f = 0 THEN
+ 16  		DBMS_OUTPUT.PUT_LINE(n || ' Number Is Prime');
+ 17  	ELSE
+ 18  		DBMS_OUTPUT.PUT_LINE(n || ' Number Is Not Prime');
+ 19  	END IF;
+ 20* END;
+SQL> /
+Enter value for n: 7
+old   6: 	n := &n;
+new   6: 	n := 7;
+			BREAK;
+			*
+ERROR at line 11:
+ORA-06550: line 11, column 4: 
+PLS-00201: identifier 'BREAK' must be declared 
+ORA-06550: line 11, column 4: 
+PL/SQL: Statement ignored 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2  	n NUMBER;
+  3  	i NUMBER;
+  4  	f NUMBER := 0;
+  5  BEGIN
+  6  	n := &n;
+  7  	i := 2;
+  8  	WHILE i < n LOOP
+  9  		IF MOD(n,i) = 0 THEN
+ 10  			f := 1;
+ 11  			EXIT WHEN f = 1;
+ 12  		END IF;
+ 13  		i := i + 1;
+ 14  	END LOOP;
+ 15  	IF f = 0 THEN
+ 16  		DBMS_OUTPUT.PUT_LINE(n || ' Number Is Prime');
+ 17  	ELSE
+ 18  		DBMS_OUTPUT.PUT_LINE(n || ' Number Is Not Prime');
+ 19  	END IF;
+ 20* END;
+SQL> /
+Enter value for n: 7
+old   6: 	n := &n;
+new   6: 	n := 7;
+7 Number Is Prime                                                               
+
+PL/SQL procedure successfully completed.
+
+SQL> /
+Enter value for n: 4
+old   6: 	n := &n;
+new   6: 	n := 4;
+4 Number Is Not Prime                                                           
+
+PL/SQL procedure successfully completed.
+
+SQL> /***** Armstrong Number ******/
+SQL> ed
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2      n NUMBER;
+  3      a NUMBER;
+  4      ex NUMBER;
+  5      sum NUMBER := 0;
+  6  BEGIN
+  7      n := &n;
+  8      ex := n;
+  9      WHILE n != 0 LOOP
+ 10          a := MOD(n, 10);
+ 11          sum := sum + (a * a * a);
+ 12          n := TRUNC(n / 10);
+ 13      END LOOP;
+ 14      IF ex = sum THEN
+ 15          DBMS_OUTPUT.PUT_LINE(ex || ' Number Is Armstrong');
+ 16      ELSE
+ 17          DBMS_OUTPUT.PUT_LINE(ex || ' Number Is Not Armstrong');
+ 18      END IF;
+ 19* END;
+ 20  /
+Enter value for n: 153
+old   7:     n := &n;
+new   7:     n := 153;
+        sum := sum + (a * a * a);
+                   *
+ERROR at line 11:
+ORA-06550: line 11, column 20: 
+PLS-00103: Encountered the symbol "+" when expecting one of the following: 
+( 
+
+
+SQL> /******* Digit sum ******/
+SQL> ed
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2      n NUMBER;
+  3      d NUMBER;
+  4      ex NUMBER;
+  5      sum NUMBER := 0;
+  6  BEGIN
+  7      n := &n;
+  8      ex := n;
+  9      WHILE n != 0 LOOP
+ 10          d := MOD(n, 10);
+ 11          sum := sum + d;
+ 12          n := TRUNC(n / 10);
+ 13      END LOOP;
+ 14      DBMS_OUTPUT.PUT_LINE('Sum OF ' || ex || ' Number Is ' || sum);
+ 15* END;
+SQL> /
+Enter value for n: 122345
+old   7:     n := &n;
+new   7:     n := 122345;
+        sum := sum + d;
+                   *
+ERROR at line 11:
+ORA-06550: line 11, column 20: 
+PLS-00103: Encountered the symbol "+" when expecting one of the following: 
+( 
+ORA-06550: line 14, column 65: 
+PLS-00103: Encountered the symbol ")" when expecting one of the following: 
+( 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2      n NUMBER;
+  3      d NUMBER;
+  4      ex NUMBER;
+  5      sum NUMBER := 0;
+  6  BEGIN
+  7      n := &n;
+  8      ex := n;
+  9      WHILE n != 0 LOOP
+ 10          d := MOD(n, 10);
+ 11          sum := sum + d;
+ 12          n := n / 10;
+ 13      END LOOP;
+ 14      DBMS_OUTPUT.PUT_LINE('Sum OF ' || ex || ' Number Is ' || sum);
+ 15* END;
+SQL> /
+Enter value for n: 122345
+old   7:     n := &n;
+new   7:     n := 122345;
+        sum := sum + d;
+                   *
+ERROR at line 11:
+ORA-06550: line 11, column 20: 
+PLS-00103: Encountered the symbol "+" when expecting one of the following: 
+( 
+ORA-06550: line 14, column 65: 
+PLS-00103: Encountered the symbol ")" when expecting one of the following: 
+( 
+
+
+SQL> spool off;

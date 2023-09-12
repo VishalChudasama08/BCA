@@ -1,0 +1,23 @@
+body {
+    background-color: #F7FFE5;
+}
+av, footer {
+    background-color: #A0C49D;
+}
+.v1 {
+    border: 2px solid white;
+    background-color: #E1ECC8;
+}
+button {
+    background-color: #67c85e;
+}
+.v2 {
+    color: green;
+}
+.v8 {
+	width: 40px;
+	height: 40px;
+	border: 1px solid yellow;
+	border-radius: 50px;
+	margin-bottom: 20px;
+}

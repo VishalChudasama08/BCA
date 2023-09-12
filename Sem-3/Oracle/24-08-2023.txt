@@ -1,0 +1,123 @@
+SQL> set serveroutput on;
+SQL> ed
+SP2-0107: Nothing to save.
+SQL> select * from tab
+  2  ;
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+BONUS                          TABLE                                            
+DEPT                           TABLE                                            
+DUMMY                          TABLE                                            
+EMP                            TABLE                                            
+SALGRADE                       TABLE                                            
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  /* display sum of even digit and odd digits */
+  2  declare
+  3  	d number;
+  4  	esum number:=0;
+  5  	osum number:=0;
+  6  	n number;
+  7  begin
+  8  	n:=&n;
+  9  	while n!=0
+ 10  	loop 
+ 11  		d:=n%10;
+ 12  		if d%2=0 then
+ 13  			esum:=esum+d;
+ 14  		else
+ 15  			osum:=osum+d;
+ 16  		end if;
+ 17  		n:=n/10;
+ 18  	end loop;
+ 19  	dbms_output.put_line('Even Digit Sum :- ' || esum);
+ 20  	dbms_output.put_line('Odd Digit Sum :- ' || osum);
+ 21* end;
+SQL> /
+Enter value for n: 20
+old   8: 	n:=&n;
+new   8: 	n:=20;
+		d:=n%10;
+		     *
+ERROR at line 11:
+ORA-06550: line 11, column 8: 
+PLS-00103: Encountered the symbol "10" when expecting one of the following: 
+type <an identifier> <a double-quoted delimited-identifier> 
+ORA-06550: line 12, column 8: 
+PLS-00103: Encountered the symbol "2" when expecting one of the following: 
+type <an identifier> <a double-quoted delimited-identifier> 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  /* display sum of even digit and odd digits */
+  2  declare
+  3  	d number;
+  4  	esum number:=0;
+  5  	osum number:=0;
+  6  	n number;
+  7  begin
+  8  	n:=&n;
+  9  	while n!=0
+ 10  	loop 
+ 11  		d:=mod(n,10);
+ 12  		if d%2=0 then
+ 13  			esum:=esum+d;
+ 14  		else
+ 15  			osum:=osum+d;
+ 16  		end if;
+ 17  		n:=n/10;
+ 18  	end loop;
+ 19  	dbms_output.put_line('Even Digit Sum :- ' || esum);
+ 20  	dbms_output.put_line('Odd Digit Sum :- ' || osum);
+ 21* end;
+SQL> /
+Enter value for n: 20
+old   8: 	n:=&n;
+new   8: 	n:=20;
+		if d%2=0 then
+		     *
+ERROR at line 12:
+ORA-06550: line 12, column 8: 
+PLS-00103: Encountered the symbol "2" when expecting one of the following: 
+type <an identifier> <a double-quoted delimited-identifier> 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  /* display sum of even digit and odd digits */
+  2  declare
+  3  	d number;
+  4  	esum number:=0;
+  5  	osum number:=0;
+  6  	n number;
+  7  begin
+  8  	n:=&n;
+  9  	while n!=0
+ 10  	loop 
+ 11  		d:=mod(n,10);
+ 12  		if mod(d,2)=0 then
+ 13  			esum:=esum+d;
+ 14  		else
+ 15  			osum:=osum+d;
+ 16  		end if;
+ 17  		n:=n/10;
+ 18  	end loop;
+ 19  	dbms_output.put_line('Even Digit Sum :- ' || esum);
+ 20  	dbms_output.put_line('Odd Digit Sum :- ' || osum);
+ 21* end;
+SQL> /
+Enter value for n: 10
+old   8: 	n:=&n;
+new   8: 	n:=10;
+Even Digit Sum :- 0                                                             
+Odd Digit Sum :- 1.11111111111111111111111111111111111111                       
+
+PL/SQL procedure successfully completed.
+
+SQL> spool off;

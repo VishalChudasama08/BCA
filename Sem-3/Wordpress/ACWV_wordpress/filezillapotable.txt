@@ -1,0 +1,4 @@
+Host: ftpupload.net
+Username: if0_34534315
+Password: 3LvtEF1zswfc
+Port: 21  (it is OPTIONAL)
