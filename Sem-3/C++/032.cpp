@@ -1,6 +1,7 @@
 /* write a c++ cource code to show the use of the hybrid inharitance */
-#include <iostream.h>
-#include <conio.h>
+#include <iostream>
+// #include <conio.h>
+using namespace std;
 class student
 {
 protected:
@@ -24,6 +25,11 @@ protected:
 
 public:
     void get_marks(float x, float y)
+    {
+        part1 = x;
+        part2 = y;
+    }
+    void put_marks()
     {
         cout << "marks obtained : " << endl;
         cout << "part1 = " << part1 << endl;
@@ -60,17 +66,18 @@ void result::display(void)
 {
     total = part1 + part2 + score;
     put_number();
-    get_marks();
+    put_marks();
     put_score();
     cout << "total score: " << total << endl;
 }
-void main()
+int main()
 {
     result student_1;
-    clrscr();
+    // clrscr();
     student_1.get_number(1234);
     student_1.get_marks(27.5, 33);
     student_1.get_score(6.0);
     student_1.display();
-    getch();
+    // getch();
+    return 0;
 }
