@@ -28,7 +28,7 @@ void main()
     clrscr();
     for (i = 0; i < size; i++)
     {
-        cout << "input code and price for item - " << i + 1;
+        cout << "input code and price for item - " << i + 1 << " :- ";
         cin >> x >> y;
         p->getdata(x, y);
         p++;
