@@ -1,0 +1,209 @@
+
+Setting environment for using XAMPP for Windows.
+Administrator@PC118 c:\xampp
+# cd mysql
+
+Administrator@PC118 c:\xampp\mysql
+# mysql -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.4.17-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
++--------------------+
+5 rows in set (0.056 sec)
+
+MariaDB [(none)]> create database vishal;
+Query OK, 1 row affected (0.007 sec)
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
+| vishal             |
++--------------------+
+6 rows in set (0.001 sec)
+
+MariaDB [(none)]> use vishal;
+Database changed
+MariaDB [vishal]> create table marksheet(srno int(2), subject varchar(20), internal int(2), theorey int(2));
+Query OK, 0 rows affected (0.056 sec)
+
+MariaDB [vishal]> desc marksheet;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| srno     | int(2)      | YES  |     | NULL    |       |
+| subject  | varchar(20) | YES  |     | NULL    |       |
+| internal | int(2)      | YES  |     | NULL    |       |
+| theorey  | int(2)      | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+4 rows in set (0.036 sec)
+
+MariaDB [vishal]> inset into marksheet(srno, subject, internal, theorey) values(1, "ds", 28, 65);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'inset into marksheet(srno, subject, internal, theorey) values(1, "ds", 28, 65)' at line 1
+MariaDB [vishal]> insert into student(srno, surname, name) values(2, "CBA", "ABC");
+ERROR 1146 (42S02): Table 'vishal.student' doesn't exist
+MariaDB [vishal]> Query OK, 1 row affected (0.008 sec)
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'Query OK, 1 row affected (0.008 sec)' at line 1
+MariaDB [vishal]> insert into marksheet(srno, subject, internal, theorey) values(1, "ds", 28, 65);
+Query OK, 1 row affected (0.066 sec)
+
+MariaDB [vishal]> select * from marksheet;
++------+---------+----------+---------+
+| srno | subject | internal | theorey |
++------+---------+----------+---------+
+|    1 | ds      |       28 |      65 |
++------+---------+----------+---------+
+1 row in set (0.004 sec)
+
+MariaDB [vishal]> insert into marksheet(srno, subject, internal, theorey) values(2, "php", 27, 59);
+Query OK, 1 row affected (0.006 sec)
+
+MariaDB [vishal]> insert into marksheet(srno, subject, internal, theorey) values(3, "coa", 25, 55);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [vishal]> insert into marksheet(srno, subject, internal, theorey) values(4, "sed", 25, 66);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [vishal]> select * from marksheet;
++------+---------+----------+---------+
+| srno | subject | internal | theorey |
++------+---------+----------+---------+
+|    1 | ds      |       28 |      65 |
+|    2 | php     |       27 |      59 |
+|    3 | coa     |       25 |      55 |
+|    4 | sed     |       25 |      66 |
++------+---------+----------+---------+
+4 rows in set (0.000 sec)
+
+MariaDB [vishal]> alter table marksheet add total int(3);
+Query OK, 0 rows affected (0.045 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [vishal]> desc marksheet;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| srno     | int(2)      | YES  |     | NULL    |       |
+| subject  | varchar(20) | YES  |     | NULL    |       |
+| internal | int(2)      | YES  |     | NULL    |       |
+| theorey  | int(2)      | YES  |     | NULL    |       |
+| total    | int(3)      | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.036 sec)
+
+MariaDB [vishal]> select * from marksheet;
++------+---------+----------+---------+-------+
+| srno | subject | internal | theorey | total |
++------+---------+----------+---------+-------+
+|    1 | ds      |       28 |      65 |  NULL |
+|    2 | php     |       27 |      59 |  NULL |
+|    3 | coa     |       25 |      55 |  NULL |
+|    4 | sed     |       25 |      66 |  NULL |
++------+---------+----------+---------+-------+
+4 rows in set (0.000 sec)
+
+MariaDB [vishal]> alter table marksheet add max_internal int(2) after subject;
+Query OK, 0 rows affected (0.026 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [vishal]> select * from marksheet;
++------+---------+--------------+----------+---------+-------+
+| srno | subject | max_internal | internal | theorey | total |
++------+---------+--------------+----------+---------+-------+
+|    1 | ds      |         NULL |       28 |      65 |  NULL |
+|    2 | php     |         NULL |       27 |      59 |  NULL |
+|    3 | coa     |         NULL |       25 |      55 |  NULL |
+|    4 | sed     |         NULL |       25 |      66 |  NULL |
++------+---------+--------------+----------+---------+-------+
+4 rows in set (0.000 sec)
+
+MariaDB [vishal]> alter table marksheet add max_theorey int(2) after internal;
+Query OK, 0 rows affected (0.017 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [vishal]> select * from marksheet;
++------+---------+--------------+----------+-------------+---------+-------+
+| srno | subject | max_internal | internal | max_theorey | theorey | total |
++------+---------+--------------+----------+-------------+---------+-------+
+|    1 | ds      |         NULL |       28 |        NULL |      65 |  NULL |
+|    2 | php     |         NULL |       27 |        NULL |      59 |  NULL |
+|    3 | coa     |         NULL |       25 |        NULL |      55 |  NULL |
+|    4 | sed     |         NULL |       25 |        NULL |      66 |  NULL |
++------+---------+--------------+----------+-------------+---------+-------+
+4 rows in set (0.000 sec)
+
+MariaDB [vishal]> UPDATE Customers
+    -> SET ContactName = 'Alfred Schmidt', City= 'Frankfurt'
+    -> UPDATE CustomersUPDATE Customers
+    -> SET ContactName = 'Alfred Schmidt', City= 'Frankfurt'
+    -> SET ContactName = 'Alfred Schmidt', City= 'Frankfurt';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'UPDATE CustomersUPDATE Customers
+SET ContactName = 'Alfred Schmidt', City= 'F...' at line 3
+MariaDB [vishal]> UPDATE Customers
+    -> SET ContactName = 'Alfred Schmidt', City= 'Frankfurt'
+    -> WHERE max_internal = 30;
+ERROR 1146 (42S02): Table 'vishal.customers' doesn't exist
+MariaDB [vishal]> update marksheet set srnoUPDATE Customers
+    -> SET ContactName = 'Alfred Schmidt', City= 'Frankfurt'
+    -> WHERE CustomerID = 1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'Customers
+SET ContactName = 'Alfred Schmidt', City= 'Frankfurt'
+WHERE Custome...' at line 1
+MariaDB [vishal]> updata marksheet set srno=1 where max_internal;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'updata marksheet set srno=1 where max_internal' at line 1
+MariaDB [vishal]> updata marksheet set max_internal where srno=1;;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'updata marksheet set max_internal where srno=1' at line 1
+ERROR: No query specified
+
+MariaDB [vishal]> updata marksheet set max_internal where srno=1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'updata marksheet set max_internal where srno=1' at line 1
+MariaDB [vishal]> updata marksheet set max_internal=30 where srno=1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'updata marksheet set max_internal=30 where srno=1' at line 1
+MariaDB [vishal]> alter table marksheet drop column max_internal,max_theorey,total;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'total' at line 1
+MariaDB [vishal]> alter table marksheet drop column max_internal;
+Query OK, 0 rows affected (0.021 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [vishal]> select * from marksheet;
++------+---------+----------+-------------+---------+-------+
+| srno | subject | internal | max_theorey | theorey | total |
++------+---------+----------+-------------+---------+-------+
+|    1 | ds      |       28 |        NULL |      65 |  NULL |
+|    2 | php     |       27 |        NULL |      59 |  NULL |
+|    3 | coa     |       25 |        NULL |      55 |  NULL |
+|    4 | sed     |       25 |        NULL |      66 |  NULL |
++------+---------+----------+-------------+---------+-------+
+4 rows in set (0.001 sec)
+
+MariaDB [vishal]> alter table marksheet drop column max_theorey;
+Query OK, 0 rows affected (0.017 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [vishal]> alter table marksheet drop column total;
+Query OK, 0 rows affected (0.015 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [vishal]> aletr table marksheet change column total totalmark int(3);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'aletr table marksheet change column total totalmark int(3)' at line 1
+MariaDB [vishal]>

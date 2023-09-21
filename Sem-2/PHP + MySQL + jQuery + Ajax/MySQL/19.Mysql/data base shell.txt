@@ -1,0 +1,230 @@
+MariaDB [vishal]> insert into student(srno, surname, name) values(2, "CBA", "ABC");
+Query OK, 1 row affected (0.008 sec)
+
+MariaDB [vishal]> select surname from student;
++-----------+
+| surname   |
++-----------+
+| chudasama |
+| CBA       |
++-----------+
+2 rows in set (0.000 sec)
+
+MariaDB [vishal]> select surname,name from student;
++-----------+--------+
+| surname   | name   |
++-----------+--------+
+| chudasama | vishal |
+| CBA       | ABC    |
++-----------+--------+
+2 rows in set (0.000 sec)
+
+MariaDB [vishal]> select city,surname,name,srno from student;
++----------+-----------+--------+------+
+| city     | surname   | name   | srno |
++----------+-----------+--------+------+
+| kotadiya | chudasama | vishal |    1 |
+| NULL     | CBA       | ABC    |    2 |
++----------+-----------+--------+------+
+2 rows in set (0.000 sec)
+
+MariaDB [vishal]> select * from student where name='vishal';
++------+-----------+--------+----------+
+| srno | surname   | name   | city     |
++------+-----------+--------+----------+
+|    1 | chudasama | vishal | kotadiya |
++------+-----------+--------+----------+
+1 row in set (0.011 sec)
+
+MariaDB [vishal]> select * from student where city='null';
+Empty set (0.001 sec)
+
+MariaDB [vishal]> select * from student where srno=2;
++------+---------+------+------+
+| srno | surname | name | city |
++------+---------+------+------+
+|    2 | CBA     | ABC  | NULL |
++------+---------+------+------+
+1 row in set (0.004 sec)
+
+MariaDB [vishal]> select * from student where srno=2 or name='abc';
++------+---------+------+------+
+| srno | surname | name | city |
++------+---------+------+------+
+|    2 | CBA     | ABC  | NULL |
++------+---------+------+------+
+1 row in set (0.001 sec)
+
+MariaDB [vishal]> select * from student where srno=2 and name='abc';
++------+---------+------+------+
+| srno | surname | name | city |
++------+---------+------+------+
+|    2 | CBA     | ABC  | NULL |
++------+---------+------+------+
+1 row in set (0.000 sec)
+
+MariaDB [vishal]> select * from student where srno=2 and srno=1;
+Empty set (0.000 sec)
+
+MariaDB [vishal]> select * from student where srno=2 or srno=1;
++------+-----------+--------+----------+
+| srno | surname   | name   | city     |
++------+-----------+--------+----------+
+|    1 | chudasama | vishal | kotadiya |
+|    2 | CBA       | ABC    | NULL     |
++------+-----------+--------+----------+
+2 rows in set (0.000 sec)
+
+MariaDB [vishal]> insert into student(srno,surname,name,city) value(3,"FED","DEF","EDF");
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [vishal]> insert into student(srno,surname,name,city) value(4,"DSA","ASD","SAD");
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [vishal]> insert into student(srno,surname,name,city) value(5,"CXZ","ZXC","XZC");
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [vishal]> select * from student;
++------+-----------+--------+----------+
+| srno | surname   | name   | city     |
++------+-----------+--------+----------+
+|    1 | chudasama | vishal | kotadiya |
+|    2 | CBA       | ABC    | NULL     |
+|    3 | FED       | DEF    | EDF      |
+|    4 | DSA       | ASD    | SAD      |
+|    5 | CXZ       | ZXC    | XZC      |
++------+-----------+--------+----------+
+5 rows in set (0.000 sec)
+
+MariaDB [vishal]> select surname,name,srno from student where srno>=2 and srno<=5;
++---------+------+------+
+| surname | name | srno |
++---------+------+------+
+| CBA     | ABC  |    2 |
+| FED     | DEF  |    3 |
+| DSA     | ASD  |    4 |
+| CXZ     | ZXC  |    5 |
++---------+------+------+
+4 rows in set (0.000 sec)
+
+MariaDB [vishal]> select surname,name,srno from student where srno>=2 or srno<=5;
++-----------+--------+------+
+| surname   | name   | srno |
++-----------+--------+------+
+| chudasama | vishal |    1 |
+| CBA       | ABC    |    2 |
+| FED       | DEF    |    3 |
+| DSA       | ASD    |    4 |
+| CXZ       | ZXC    |    5 |
++-----------+--------+------+
+5 rows in set (0.000 sec)
+
+----------------------------------------------------------------------------------- update and delete -----------------------------------------------------------------------
+
+MariaDB [vishal]> select * from student;
++------+---------+------+------+
+| srno | surname | name | city |
++------+---------+------+------+
+|    1 | abc     | acb  | bac  |
+|    1 | azq     | zaq  | qaz  |
+|    1 | sxw     | xsw  | wsx  |
+|    1 | dce     | edc  | cde  |
+|    1 | fvr     | rfv  | vfr  |
+|    1 | gbt     | tgb  | bgt  |
+|    1 | cha     | cgv  | cvb  |
++------+---------+------+------+
+7 rows in set (0.000 sec)
+
+MariaDB [vishal]> update student set srno=2 where surname="azq";
+Query OK, 1 row affected (0.009 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [vishal]> select * from student;
++------+---------+------+------+
+| srno | surname | name | city |
++------+---------+------+------+
+|    1 | abc     | acb  | bac  |
+|    2 | azq     | zaq  | qaz  |
+|    1 | sxw     | xsw  | wsx  |
+|    1 | dce     | edc  | cde  |
+|    1 | fvr     | rfv  | vfr  |
+|    1 | gbt     | tgb  | bgt  |
+|    1 | cha     | cgv  | cvb  |
++------+---------+------+------+
+7 rows in set (0.000 sec)
+
+MariaDB [vishal]> update student set srno=3 where surname="sxw";
+Query OK, 1 row affected (0.005 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [vishal]> update student set srno=4 where surname="dce";
+Query OK, 1 row affected (0.008 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [vishal]> update student set srno=5 where surname="fvr";
+Query OK, 1 row affected (0.005 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [vishal]> update student set srno=6 where surname="gbt";
+Query OK, 1 row affected (0.004 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [vishal]> update student set srno=7 where surname="cha";
+Query OK, 1 row affected (0.003 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [vishal]> select * from student;
++------+---------+------+------+
+| srno | surname | name | city |
++------+---------+------+------+
+|    1 | abc     | acb  | bac  |
+|    2 | azq     | zaq  | qaz  |
+|    3 | sxw     | xsw  | wsx  |
+|    4 | dce     | edc  | cde  |
+|    5 | fvr     | rfv  | vfr  |
+|    6 | gbt     | tgb  | bgt  |
+|    7 | cha     | cgv  | cvb  |
++------+---------+------+------+
+7 rows in set (0.000 sec)
+
+MariaDB [vishal]> update student set city="rajkot" where srno>=4;
+Query OK, 4 rows affected (0.004 sec)
+Rows matched: 4  Changed: 4  Warnings: 0
+
+MariaDB [vishal]> select * from student;
++------+---------+------+--------+
+| srno | surname | name | city   |
++------+---------+------+--------+
+|    1 | abc     | acb  | bac    |
+|    2 | azq     | zaq  | qaz    |
+|    3 | sxw     | xsw  | wsx    |
+|    4 | dce     | edc  | rajkot |
+|    5 | fvr     | rfv  | rajkot |
+|    6 | gbt     | tgb  | rajkot |
+|    7 | cha     | cgv  | rajkot |
++------+---------+------+--------+
+7 rows in set (0.000 sec)
+
+MariaDB [vishal]> delete from student where srno=7;
+Query OK, 1 row affected (0.006 sec)
+
+MariaDB [vishal]> select * from student;
++------+---------+------+--------+
+| srno | surname | name | city   |
++------+---------+------+--------+
+|    1 | abc     | acb  | bac    |
+|    2 | azq     | zaq  | qaz    |
+|    3 | sxw     | xsw  | wsx    |
+|    4 | dce     | edc  | rajkot |
+|    5 | fvr     | rfv  | rajkot |
+|    6 | gbt     | tgb  | rajkot |
++------+---------+------+--------+
+6 rows in set (0.000 sec)
+
+MariaDB [vishal]> delete from student;
+Query OK, 6 rows affected (0.005 sec)
+
+MariaDB [vishal]> select * from student;
+Empty set (0.000 sec)
+
+MariaDB [vishal]>
