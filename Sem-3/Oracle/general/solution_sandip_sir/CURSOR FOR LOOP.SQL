@@ -1,0 +1,61 @@
+
+CREATE TABLE STUD
+(GRNO NUMBER(3),
+NAME VARCHAR2(30),
+AGE NUMBER(3),
+SEX CHAR(1));
+
+INSERT INTO STUD VALUES(1,'AKASH',21,'M');
+INSERT INTO STUD VALUES(2,'DHARTI',21,'F');
+INSERT INTO STUD VALUES(3,'SAGAR',20,'M');
+INSERT INTO STUD VALUES(4,'NISHA',22,'F');
+INSERT INTO STUD VALUES(5,'VINAY',21,'M');
+INSERT INTO STUD VALUES(6,'JALPA',23,'F');
+
+CREATE TABLE STUD_MALE
+(GRNO NUMBER(3),
+NAME VARCHAR2(30),
+AGE NUMBER(3));
+
+CREATE TABLE STUD_FEMALE
+(GRNO NUMBER(3),
+NAME VARCHAR2(30),
+AGE NUMBER(3));
+
+
+/***********PLSQL BLOCK*********************/
+DECLARE
+	CURSOR v_stud_cur is select * from stud;
+BEGIN
+	
+	FOR v_stud_rec IN v_stud_cur
+	LOOP
+		IF V_stud_rec.sex='M' THEN
+		   INSERT INTO STUD_MALE VALUES
+		   (V_stud_rec.GRNO,V_stud_rec.NAME,V_stud_rec.AGE);
+		ELSE
+		   INSERT INTO STUD_FEMALE VALUES
+		   (V_stud_rec.GRNO,V_stud_rec.NAME,V_stud_rec.AGE);
+		END IF;
+	END LOOP;
+	
+END;
+/
+
+
+/***************************OR****************************/
+BEGIN
+	
+	FOR v_stud_rec IN (SELECT * FROM STUD)
+	LOOP
+		IF V_stud_rec.sex='M' THEN
+		   INSERT INTO STUD_MALE VALUES
+		   (V_stud_rec.GRNO,V_stud_rec.NAME,V_stud_rec.AGE);
+		ELSE
+		   INSERT INTO STUD_FEMALE VALUES
+		   (V_stud_rec.GRNO,V_stud_rec.NAME,V_stud_rec.AGE);
+		END IF;
+	END LOOP;
+	
+END;
+/
