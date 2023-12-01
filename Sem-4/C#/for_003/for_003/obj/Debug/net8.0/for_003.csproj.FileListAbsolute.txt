@@ -1,0 +1,14 @@
+D:\Happy_Coding\With_Github\BCA\Sem-4\C#\for_003\for_003\bin\Debug\net8.0\for_003.exe
+D:\Happy_Coding\With_Github\BCA\Sem-4\C#\for_003\for_003\bin\Debug\net8.0\for_003.deps.json
+D:\Happy_Coding\With_Github\BCA\Sem-4\C#\for_003\for_003\bin\Debug\net8.0\for_003.runtimeconfig.json
+D:\Happy_Coding\With_Github\BCA\Sem-4\C#\for_003\for_003\bin\Debug\net8.0\for_003.dll
+D:\Happy_Coding\With_Github\BCA\Sem-4\C#\for_003\for_003\bin\Debug\net8.0\for_003.pdb
+D:\Happy_Coding\With_Github\BCA\Sem-4\C#\for_003\for_003\obj\Debug\net8.0\for_003.GeneratedMSBuildEditorConfig.editorconfig
+D:\Happy_Coding\With_Github\BCA\Sem-4\C#\for_003\for_003\obj\Debug\net8.0\for_003.AssemblyInfoInputs.cache
+D:\Happy_Coding\With_Github\BCA\Sem-4\C#\for_003\for_003\obj\Debug\net8.0\for_003.AssemblyInfo.cs
+D:\Happy_Coding\With_Github\BCA\Sem-4\C#\for_003\for_003\obj\Debug\net8.0\for_003.csproj.CoreCompileInputs.cache
+D:\Happy_Coding\With_Github\BCA\Sem-4\C#\for_003\for_003\obj\Debug\net8.0\for_003.dll
+D:\Happy_Coding\With_Github\BCA\Sem-4\C#\for_003\for_003\obj\Debug\net8.0\refint\for_003.dll
+D:\Happy_Coding\With_Github\BCA\Sem-4\C#\for_003\for_003\obj\Debug\net8.0\for_003.pdb
+D:\Happy_Coding\With_Github\BCA\Sem-4\C#\for_003\for_003\obj\Debug\net8.0\for_003.genruntimeconfig.cache
+D:\Happy_Coding\With_Github\BCA\Sem-4\C#\for_003\for_003\obj\Debug\net8.0\ref\for_003.dll

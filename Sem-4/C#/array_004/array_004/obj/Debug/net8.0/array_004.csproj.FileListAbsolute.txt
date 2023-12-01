@@ -1,0 +1,14 @@
+D:\Happy_Coding\With_Github\BCA\Sem-4\C#\array_004\array_004\bin\Debug\net8.0\array_004.exe
+D:\Happy_Coding\With_Github\BCA\Sem-4\C#\array_004\array_004\bin\Debug\net8.0\array_004.deps.json
+D:\Happy_Coding\With_Github\BCA\Sem-4\C#\array_004\array_004\bin\Debug\net8.0\array_004.runtimeconfig.json
+D:\Happy_Coding\With_Github\BCA\Sem-4\C#\array_004\array_004\bin\Debug\net8.0\array_004.dll
+D:\Happy_Coding\With_Github\BCA\Sem-4\C#\array_004\array_004\bin\Debug\net8.0\array_004.pdb
+D:\Happy_Coding\With_Github\BCA\Sem-4\C#\array_004\array_004\obj\Debug\net8.0\array_004.GeneratedMSBuildEditorConfig.editorconfig
+D:\Happy_Coding\With_Github\BCA\Sem-4\C#\array_004\array_004\obj\Debug\net8.0\array_004.AssemblyInfoInputs.cache
+D:\Happy_Coding\With_Github\BCA\Sem-4\C#\array_004\array_004\obj\Debug\net8.0\array_004.AssemblyInfo.cs
+D:\Happy_Coding\With_Github\BCA\Sem-4\C#\array_004\array_004\obj\Debug\net8.0\array_004.csproj.CoreCompileInputs.cache
+D:\Happy_Coding\With_Github\BCA\Sem-4\C#\array_004\array_004\obj\Debug\net8.0\array_004.dll
+D:\Happy_Coding\With_Github\BCA\Sem-4\C#\array_004\array_004\obj\Debug\net8.0\refint\array_004.dll
+D:\Happy_Coding\With_Github\BCA\Sem-4\C#\array_004\array_004\obj\Debug\net8.0\array_004.pdb
+D:\Happy_Coding\With_Github\BCA\Sem-4\C#\array_004\array_004\obj\Debug\net8.0\array_004.genruntimeconfig.cache
+D:\Happy_Coding\With_Github\BCA\Sem-4\C#\array_004\array_004\obj\Debug\net8.0\ref\array_004.dll
