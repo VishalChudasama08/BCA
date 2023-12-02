@@ -14,17 +14,17 @@ namespace array_004 // Note: actual namespace depends on the project name.
         {
             Console.WriteLine("Hello World!");
             int a  = 0;
-            int[] b = new int[10];
-            b = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+            int b = 1;
             for (int i = 0; i < 10; i++)
             {
                 for (int j = 0; j < 10; j++)
                 {
-                    a = a + 1;
-                    Console.Write(a + " " + b[i] + " " + (a * b[i]) + "\t");
+                    ++a;
+                    Console.Write(a + " " + b + " " + (a * b) + "\t");
                 }
                 Console.WriteLine();
                 a = 0;
+                b++;
             }
             Console.ReadKey();
         }
