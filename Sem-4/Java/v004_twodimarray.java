@@ -1,6 +1,6 @@
 //004
 //2 dimensional array prg...
-class twodimarray {
+class v004_twodimarray {
     public static void main(String[] args) {
         int marks[][] = { { 60, 61, 62 }, { 56, 57, 58 }, { 70, 71, 72 }, { 66, 67, 68 } };
         for (int i = 0; i < 4; i++) {

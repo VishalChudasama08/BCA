@@ -1,6 +1,6 @@
 //002
 //simple one dimensional array
-class onedimarray {
+class v002_onedimarray {
     public static void main(String[] arg) {
         int marks[]; // declare array only
         marks = new int[3]; // declare array size

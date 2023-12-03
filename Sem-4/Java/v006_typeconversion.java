@@ -4,7 +4,7 @@
  * big data type to small data type convert esely but
  * small data type to big data type not convert, useing casting to convert it (like line number 17)
  */
-public class typeconversion {
+public class v006_typeconversion {
     public static void main(String[] args) {
         int i = 1000;
         System.out.println("value of i : " + i);

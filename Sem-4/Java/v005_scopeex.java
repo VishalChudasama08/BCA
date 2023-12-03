@@ -1,6 +1,6 @@
 //005
 //an example to temonstrate the scope of the variable
-class scopeex {
+class v005_scopeex {
     public static void main(String[] args) {
         int a = 10;
         if (a > 5) {

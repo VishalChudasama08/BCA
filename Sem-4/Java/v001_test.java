@@ -1,6 +1,6 @@
 //001
 //simpple java program 
-class test {
+class v001_test {
     public static void main(String args[]) {
         System.out.println("Hello! This is Java"); // println is print on new line like \n.....\n
         System.out.println("Java is a easy to learn language");

@@ -1,6 +1,6 @@
 //007
 //simple basic arithmetic calculations...
-public class basiccalculation {
+public class v007_basiccalculation {
     public static void main(String[] args) {
         // integer mode arithmetic...
         System.out.println("calculation in integer mode \n");
