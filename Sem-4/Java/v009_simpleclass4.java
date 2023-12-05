@@ -1,3 +1,5 @@
+//009
+//adding method to the class that take parameters
 class banking {
     double p, r;
     int n;

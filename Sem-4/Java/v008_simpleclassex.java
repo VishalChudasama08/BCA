@@ -1,3 +1,5 @@
+//008
+//prg to declare and create objects of class...
 class banking {
     double p;
     double r;

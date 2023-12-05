@@ -1,3 +1,5 @@
+//010
+//simple example of access specifiers....
 class simple {
     int i;
     public int j;
