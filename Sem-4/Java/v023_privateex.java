@@ -1,3 +1,5 @@
+//023
+//java program to show thar private memebers can be accessed from other class
 class Super {
     int a;
     private int x; // x is private property of super class
@@ -15,7 +17,7 @@ class sub extends Super {
     }
 }
 
-public class v026_privateex {
+public class v023_privateex {
     public static void main(String[] args) {
         sub s = new sub();
         s.initialize(10, 20);

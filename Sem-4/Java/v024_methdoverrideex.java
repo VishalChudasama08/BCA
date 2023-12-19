@@ -1,3 +1,5 @@
+//024
+//java program to show the use og method overriding
 class Super {
     String msg;
 
@@ -26,7 +28,7 @@ class sub extends Super {
     }
 }
 
-public class v027_methdoverrideex {
+public class v024_methdoverrideex {
     public static void main(String[] args) {
         sub s = new sub("Hello", 100);
         s.display();
