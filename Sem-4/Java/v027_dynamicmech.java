@@ -33,7 +33,7 @@ class Triangle extends Shape {
     }
 }
 
-class v027_dynamicmech {
+class v027_dynamicmeth {
     public static void main(String[] args) {
         Shape ref; // creating reference of superclass
         Rectangle r = new Rectangle(20, 30);
