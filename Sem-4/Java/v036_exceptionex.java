@@ -1,4 +1,4 @@
-// 033 ch-2(16)
+// 033 ch-3(1)
 // java program to show the exception
 public class v036_exceptionex {
     public static void main(String[] args) {
