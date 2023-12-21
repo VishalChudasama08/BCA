@@ -1,4 +1,4 @@
-// 035 ch-2(18)
+// 035 ch-3(18)
 // java program for printing the description exseption...
 public class v038_exceptionex2 {
     public static void main(String[] args) {
