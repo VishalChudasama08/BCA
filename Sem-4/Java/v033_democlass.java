@@ -1,4 +1,4 @@
-//
+// 030
 // program to show the interface can extend another interface
 
 interface SuperInterface {
