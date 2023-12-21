@@ -1,4 +1,4 @@
-// ch-2(15)
+// 032 ch-2(15) 
 //Stack interface declares two methods push() and pop()
 
 interface Stack {

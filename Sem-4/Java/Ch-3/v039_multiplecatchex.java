@@ -1,4 +1,4 @@
-// ch-2(19)
+// 036 ch-3(19)
 // java program to show the use of multiple catch blocks
 public class v039_multiplecatchex {
     public static void main(String[] args) {
