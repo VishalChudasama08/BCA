@@ -33,7 +33,7 @@ class Triangle implements Shape {
     }
 }
 
-public class v034_shapeinterface {
+public class v031_shapeinterface {
     public static void main(String[] args) {
         Shape ref;
         Rectangle r = new Rectangle();

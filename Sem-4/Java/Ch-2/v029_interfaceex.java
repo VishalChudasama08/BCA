@@ -24,7 +24,7 @@ class MyClass implements MyInterface {
     }
 }
 
-public class v032_interfaceex {
+public class v029_interfaceex {
     public static void main(String[] args) {
         MyClass m = new MyClass();
         m.print();

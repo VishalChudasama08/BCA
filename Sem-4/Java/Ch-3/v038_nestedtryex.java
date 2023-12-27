@@ -1,6 +1,6 @@
-// 038 ch-3
+// ch-3 (6)
 // Java program for show the use of nested try blocks
-public class v041_nestedtryex {
+public class v038_nestedtryex {
     public static void main(String[] args) {
         int a = 0, b;
         try {

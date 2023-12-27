@@ -37,7 +37,7 @@ class MyStack implements Stack {
     }
 }
 
-public class v035_stackex {
+public class v032_stackex {
     public static void main(String[] args) {
         MyStack m1 = new MyStack(5);
         for (int i = 0; i <= 6; i++) {

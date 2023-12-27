@@ -1,6 +1,6 @@
-// 034 ch-3(17)
+// ch-3(2)
 // java program to show the use of try and catch to handle exception
-public class v037_exceptionex1 {
+public class v034_exceptionex1 {
     public static void main(String[] args) {
         int arr[] = { 23, 43, 45 };
         try {

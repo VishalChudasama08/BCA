@@ -1,6 +1,6 @@
-// 037 ch-3(20)
+// ch-3(5)
 // java program having error in catching exception...
-public class v040_multiplecatchex1 {
+public class v037_multiplecatchex1 {
     public static void main(String[] args) {
         int a = 0, b;
         try {

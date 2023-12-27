@@ -25,7 +25,7 @@ class TestClass implements SubInterface {
     }
 }
 
-public class v033_democlass {
+public class v030_democlass {
     public static void main(String[] args) {
         TestClass t = new TestClass();
         t.method1();
