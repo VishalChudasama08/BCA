@@ -1,3 +1,5 @@
+// ch-3(10)
+// java program to show the character extraction methods...
 public class v045_getcharsex {
     public static void main(String[] args) {
         String str = "computer";

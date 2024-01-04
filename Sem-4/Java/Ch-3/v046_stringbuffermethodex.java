@@ -1,3 +1,5 @@
+// ch-3(11)
+// java program to show the methods of StringBuffer.....
 public class v046_stringbuffermethodex {
     public static void main(String[] args) {
         StringBuffer sb1 = new StringBuffer();

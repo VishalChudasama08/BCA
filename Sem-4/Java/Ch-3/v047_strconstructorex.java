@@ -1,3 +1,5 @@
+// ch-3(12)
+// java program to show the use of string 
 public class v047_strconstructorex {
     public static void main(String[] args) {
         String s1 = new String();

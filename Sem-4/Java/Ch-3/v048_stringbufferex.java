@@ -1,3 +1,5 @@
+// ch-3(13)
+// java program to show the length and capacity of StringBuffer object
 public class v048_stringbufferex {
     public static void main(String[] args) {
         StringBuffer sb1 = new StringBuffer();
