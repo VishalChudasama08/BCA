@@ -1,0 +1,41 @@
+# Method-1
+# run in code-runner (Ctrl + Alt + N)
+#
+# -- i copy git and git bash.exe file with its required file on this "D:\Happy_Coding\With_Github" locations and
+# -- i modify code-runner.executorMap settings.json file
+# -- find this=> File->preferences->settings ( Ctrl + , ) and serch code-runner.executorMap and go "edit settings.json" to see it 
+# -- "shellscript": "D:\\Happy_Coding\\With_Github\\Git\\bin\\bash.exe",
+
+
+# Method-2
+# open .sh file on any editor and copy all code text 
+# open git bash.exe aplication ("C:\Program Files\Git\bin\bash.exe") than
+# paste code text in new opened bash.exe terminal and click on Enter (Your code is runing...)
+
+# Method-3
+# open .sh file on vs code
+# open new terminal 
+# in terminal find near by +(big plus) icon down-erow click it (Launch Profile...) and choice "Git Bash"
+# than click on "Terminal" (vs code top-bar, there line) and click on "Run Active File"
+# (in terminal --> )
+# visha@LAPTOP-HRB2BB7Q MINGW64 /d/Happy_Coding/With_Github/BCA (main)
+# $ 'd:/Happy_Coding/With_Github/BCA/Sem-4/UNIX_shell_programing/001_arithmetic_addition.sh'
+# Enter 1st Value
+# 10
+# Enter 2nd value
+# 20
+# addition is 30
+
+# Method-4
+# open .sh file on vs code
+# open new terminal 
+# in terminal find near by +(big plus) icon down-erow click it (Launch Profile...) and choice "Git Bash"
+# (in terminal --> write "bash" than space than file path {on path use this slase -> / not use use this slase -> \ })
+# visha@LAPTOP-HRB2BB7Q MINGW64 /d/Happy_Coding/With_Github/BCA (main)
+# $ bash Sem-4/UNIX_shell_programing/001_arithmetic_addition.sh
+# Enter 1st Value
+# 10
+# Enter 2nd value
+# 20
+# addition is 30
+
