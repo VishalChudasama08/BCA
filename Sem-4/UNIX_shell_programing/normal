@@ -1,0 +1,7 @@
+#!/bin/sh
+# create a function
+function green(){
+	echo "Hello World";
+}
+# call the function
+green

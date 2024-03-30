@@ -1,0 +1,6 @@
+echo "Enter Number:- "
+read no
+if [$no -eq 1]
+then
+	echo "Number 1";
+ififif;
