@@ -12,6 +12,7 @@ s4t = int(input("Enter Subject 4 Theory Mark : "))
 
 if s1i>30 or s2i>30 or s3i>30 or s4i>30 or s1t>70 or s2t>70 or s3t>70 or s4t>70 :
     print("Please Enter Valid Marks")
+    exit()
     
 
 s1 = s1t + s1i
