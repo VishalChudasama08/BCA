@@ -1,3 +1,4 @@
+# Write a python program to accept number from user and check that number is prime or not
 n = int(input("Enter Any Number: "))
 r = 'y'
 if n <= 1 :

@@ -1,3 +1,4 @@
+# Write a python program to accept a number from user and check that number positive , negative and zero( NESTED IF)
 a = float(input("Entere Any Number: "))
 if a!=0 :
     if a>0 :

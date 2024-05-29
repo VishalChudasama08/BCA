@@ -1,3 +1,7 @@
+#Write a program to input to input 4 subject marks from the user and prepare mark sheet with following rules
+# 1. Internal mark must be enter between 0 to 30 and min mark is 12 for pass
+# 2. Theory mark must be enter between 0 to 70 and min mark is 28 for pass
+# Display marks, result and grade
 print("Enter Internal Mark in 0 to 30 ")
 s1i = int(input("Enter Subject 1 Internal Mark : "))
 s2i = int(input("Enter Subject 2 Internal Mark : "))

@@ -1,3 +1,5 @@
+# Write a python program to accept three values from user and display MAXIMUM value (NESTED IF)
+
 a = float(input("Enter Value 1: "))
 b = float(input("Enter Value 2: "))
 c = float(input("Enter Value 3: "))
