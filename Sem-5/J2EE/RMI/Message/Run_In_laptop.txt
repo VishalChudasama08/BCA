@@ -1,0 +1,35 @@
+CMD-1
+Microsoft Windows [Version 10.0.22631.3593]
+(c) Microsoft Corporation. All rights reserved.
+
+D:\Happy_Coding\jdk-21\bin>javac RMIPracIF.java
+
+D:\Happy_Coding\jdk-21\bin>javac RMIIFImpl.java
+
+D:\Happy_Coding\jdk-21\bin>javac RMIServer.java
+
+D:\Happy_Coding\jdk-21\bin>javac RMIClient.java
+
+D:\Happy_Coding\jdk-21\bin>rmiregistry
+WARNING: A terminally deprecated method in java.lang.System has been called
+WARNING: System::setSecurityManager has been called by sun.rmi.registry.RegistryImpl
+WARNING: Please consider reporting this to the maintainers of sun.rmi.registry.RegistryImpl
+WARNING: System::setSecurityManager will be removed in a future release
+
+
+CMD-2 /*open new cmd */
+Microsoft Windows [Version 10.0.22631.3593]
+(c) Microsoft Corporation. All rights reserved.
+
+D:\Happy_Coding\jdk-21\bin>java RMIServer
+Server initiated....
+
+
+CMD-3  /*open new cmd */
+Microsoft Windows [Version 10.0.22631.3593]
+(c) Microsoft Corporation. All rights reserved.
+
+D:\Happy_Coding\jdk-21\bin>java RMIClient
+Hi,Vishal have a great time with the J2EE RMI World
+
+D:\Happy_Coding\jdk-21\bin>

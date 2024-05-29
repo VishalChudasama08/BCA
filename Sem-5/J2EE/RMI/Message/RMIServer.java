@@ -11,6 +11,6 @@ public class RMIServer extends RMIIFImpl
     {
         RMIIFImpl ri=new RMIIFImpl();
         Naming.rebind("StudName",ri);
-		System.out.println("Server initiated....");
+	System.out.println("Server initiated....");
     }
 }

@@ -1,4 +1,3 @@
-/* RMI_server_starting_and_run_simple_program */
 cmd-1 ==>
 
 

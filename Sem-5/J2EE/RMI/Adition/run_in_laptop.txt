@@ -1,0 +1,52 @@
+CMD-1
+Microsoft Windows [Version 10.0.22631.3593]
+(c) Microsoft Corporation. All rights reserved.
+
+D:\Happy_Coding\jdk-21\bin>javac AddServerIntf.java
+
+D:\Happy_Coding\jdk-21\bin>javac AddServerImpl.java
+
+D:\Happy_Coding\jdk-21\bin>javac AddServer.java
+
+D:\Happy_Coding\jdk-21\bin>javac AddClient.java
+
+D:\Happy_Coding\jdk-21\bin>rmiregistry
+WARNING: A terminally deprecated method in java.lang.System has been called
+WARNING: System::setSecurityManager has been called by sun.rmi.registry.RegistryImpl
+WARNING: Please consider reporting this to the maintainers of sun.rmi.registry.RegistryImpl
+WARNING: System::setSecurityManager will be removed in a future release
+
+CMD-2 /* open new CMD */
+Microsoft Windows [Version 10.0.22631.3593]
+(c) Microsoft Corporation. All rights reserved.
+
+D:\Happy_Coding\jdk-21\bin>java AddServer
+
+
+CMD-3
+Microsoft Windows [Version 10.0.22631.3593]
+(c) Microsoft Corporation. All rights reserved.
+
+D:\Happy_Coding\jdk-21\bin>java AddClient
+Exception: java.lang.ArrayIndexOutOfBoundsException: Index 0 out of bounds for length 0
+
+D:\Happy_Coding\jdk-21\bin>java AddClient 1 2
+Exception: java.rmi.ConnectIOException: Exception creating connection to: 1; nested exception is:
+        java.net.SocketException: Network is unreachable: connect
+
+D:\Happy_Coding\jdk-21\bin>java AddClient localhost 1 2
+The first number is: 1
+The second number is: 2
+The sum is: 3.0
+
+D:\Happy_Coding\jdk-21\bin>java AddClient localhost 1 8
+The first number is: 1
+The second number is: 8
+The sum is: 9.0
+
+D:\Happy_Coding\jdk-21\bin>java AddClient localhost 2 8
+The first number is: 2
+The second number is: 8
+The sum is: 10.0
+
+D:\Happy_Coding\jdk-21\bin>

@@ -1,0 +1,40 @@
+Microsoft Windows [Version 10.0.19042.789]
+(c) 2020 Microsoft Corporation. All rights reserved.
+
+C:\Users\Administrator>cd /
+
+C:\>cd C:\Java\jdk1.7\bin
+
+C:\Java\jdk1.7\bin>javac AddServerIntf.java
+
+C:\Java\jdk1.7\bin>javac AddServerImpl.java
+
+C:\Java\jdk1.7\bin>javac AddServer.java
+
+C:\Java\jdk1.7\bin>javac AddClient.java
+
+C:\Java\jdk1.7\bin>rmic AddServerImpl
+
+C:\Java\jdk1.7\bin>start RMIregistry
+
+C:\Java\jdk1.7\bin>java AddServer
+
+
+
+
+Microsoft Windows [Version 10.0.19042.789]
+(c) 2020 Microsoft Corporation. All rights reserved.
+
+C:\Users\Administrator>cd /
+
+C:\>cd C:\Java\jdk1.7\bin
+
+C:\Java\jdk1.7\bin>java AddClient
+Exception: java.lang.ArrayIndexOutOfBoundsException: 0
+
+C:\Java\jdk1.7\bin>java AddClient localhost 1 8
+The first number is: 1
+The second number is: 8
+The sum is: 9.0
+
+C:\Java\jdk1.7\bin>

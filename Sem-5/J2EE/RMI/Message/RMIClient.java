@@ -10,7 +10,7 @@ public class RMIClient
         try
         {
             RMIPracIF r = (RMIPracIF)Naming.lookup("//"+HOST_NAME+"/StudName");
-            String s1 = r.welcome("jitu sir");
+            String s1 = r.welcome("Vishal");
 			
             System.out.println(s1);
         }
