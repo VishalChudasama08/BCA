@@ -24,7 +24,7 @@ s2 = s2t + s2i
 s3 = s3t + s3i
 s4 = s4t + s4i
 
-total = s1 + s2 + s3 +s3
+total = s1 + s2 + s3 +s4
 per = total / 4
 
 if per>=90 :
@@ -42,10 +42,10 @@ elif per>=33 :
 else :
     grade = 'F'
 
-print("Subject 1 Mark total mark : %d" %s1)
-print("Subject 2 Mark total mark : %d" %s2)
-print("Subject 3 Mark total mark : %d" %s3)
-print("Subject 4 Mark total mark : %d" %s4)
+print("Subject 1 total mark : %d" %s1)
+print("Subject 2 total mark : %d" %s2)
+print("Subject 3 total mark : %d" %s3)
+print("Subject 4 total mark : %d" %s4)
 
 print("Percentage : %d" %per)
 

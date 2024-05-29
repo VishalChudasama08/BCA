@@ -1,4 +1,4 @@
-# Write a python program to accept two numbers from user and display addition, subtraction division, multiplication, floor division, modular. (ALL ARITHMETIC OPERATIONS)
+# Write a python program to accept two numbers from user and display addition, subtraction, division, multiplication, floor division, modular. (ALL ARITHMETIC OPERATIONS)
 x = float(input("Enter Value 1: "))
 y = float(input("Enter Value 2: "))
 a = x+y
