@@ -1,0 +1,21 @@
+Microsoft Windows [Version 10.0.19042.789]
+(c) 2020 Microsoft Corporation. All rights reserved.
+
+C:\Java\jdk1.7\bin>javac jdbcdemo.java
+
+C:\Java\jdk1.7\bin>java jdbcdemo
+Error in connection :[Microsoft][ODBC Microsoft Access Driver] The Microsoft Access database engine cannot find the input table or query 'emp'. Make sure it exists and that its name is spelled correctly.
+
+C:\Java\jdk1.7\bin>javac jdbcdemo.java
+
+C:\Java\jdk1.7\bin>java jdbcdemo
+Employee no. :1
+Employee Name :vishal
+Employee salary:8.0
+
+C:\Java\jdk1.7\bin>javac pstmtdemo.java
+
+C:\Java\jdk1.7\bin>java pstmtdemo
+Record inserted
+
+C:\Java\jdk1.7\bin>

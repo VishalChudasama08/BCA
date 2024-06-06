@@ -1,0 +1,43 @@
+cmd-1 ==>
+
+
+Microsoft Windows [Version 10.0.19042.789]
+(c) 2020 Microsoft Corporation. All rights reserved.
+
+C:\Users\Administrator>cd /
+
+C:\>cd C:\Java\jdk1.7\bin
+
+/* compile file in this sequence 1.RMIPracIF.java 2.RMIIFImpl.java 3.RMIServer.java 4.RMIClient.java */
+C:\Java\jdk1.7\bin>javac RMIPracIF.java
+
+C:\Java\jdk1.7\bin>javac RMIIFImpl.java
+
+C:\Java\jdk1.7\bin>javac RMIServer.java
+
+C:\Java\jdk1.7\bin>javac RMIClient.java
+
+C:\Java\jdk1.7\bin>RMIC RMIIFImpl
+
+C:\Java\jdk1.7\bin>start RMIregistry
+/* Minimize new opened file, not close */
+
+C:\Java\jdk1.7\bin>java RMIServer
+Server initiated....
+/* server is started */
+/* Minimize This CMD panel, not close*/
+
+/* open new CMD panel */
+cmd-2 ==> 
+
+Microsoft Windows [Version 10.0.19042.789]
+(c) 2020 Microsoft Corporation. All rights reserved.
+
+C:\Users\Administrator>cd /
+
+C:\>cd C:\Java\jdk1.7\bin
+
+C:\Java\jdk1.7\bin>java RMIClient
+Hi,jitu sir have a great time with the J2EE RMI World
+
+C:\Java\jdk1.7\bin>

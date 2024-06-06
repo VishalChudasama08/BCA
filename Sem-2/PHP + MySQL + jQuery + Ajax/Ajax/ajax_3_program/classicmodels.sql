@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 20, 2023 at 06:02 AM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 7.3.27
+-- Generation Time: Jun 02, 2024 at 05:20 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,13 +31,13 @@ CREATE TABLE `order` (
   `cust_code` int(11) NOT NULL,
   `cust_name` varchar(50) NOT NULL,
   `cust_city` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `order`
 --
 
-INSERT INTO `order` (`cust_code`, `cust_name`, `cust_city`) VALUES 
+INSERT INTO `order` (`cust_code`, `cust_name`, `cust_city`) VALUES
 (201, 'John Smith', 'New York'),
 (205, 'Emma Watson', 'London'),
 (208, 'Robert Johnson', 'Paris'),

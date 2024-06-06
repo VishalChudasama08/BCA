@@ -19,15 +19,15 @@
     <tbody>
       <?php
       while ($row = mysqli_fetch_assoc($records)) {
-        ?>
+      ?>
         <tr>
           <td><?= $row['cust_code'] ?></td>
           <td><?= $row['cust_name'] ?></td>
           <td><?= $row['cust_city'] ?></td>
         </tr>
       <?php
-    }
-    ?>
+      }
+      ?>
     </tbody>
   </table>
 </body>
@@ -63,4 +63,5 @@ INSERT INTO `classicmodels`.`order` (cust_code,cust_name, cust_city) VALUES (201
 (222, 'Isabella Lee', 'Beijing'),
 (223, 'Jason Chen', 'Moscow'),
 (224, 'Ava Kim', 'Rio de Janeiro'),
-(225, 'Andrew Lee', 'Bangkok'); -->
+(225, 'Andrew Lee', 'Bangkok'); 
+-->

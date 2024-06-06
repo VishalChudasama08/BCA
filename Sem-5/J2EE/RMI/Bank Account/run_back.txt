@@ -1,0 +1,88 @@
+				cmd-1
+
+Microsoft Windows [Version 10.0.19042.789]
+(c) 2020 Microsoft Corporation. All rights reserved.
+
+C:\Java\jdk1.7\bin>javac BankIntf.java
+
+C:\Java\jdk1.7\bin>javac BankImpl.java
+
+C:\Java\jdk1.7\bin>javac BankServer.java
+
+C:\Java\jdk1.7\bin>javac BankClient.java
+
+C:\Java\jdk1.7\bin>rmic BankImpl
+
+C:\Java\jdk1.7\bin>start rmiregistry
+
+C:\Java\jdk1.7\bin>java BankServer
+Serevr is ready
+
+				cmd-2
+Microsoft Windows [Version 10.0.19042.789]
+(c) 2020 Microsoft Corporation. All rights reserved.
+
+C:\Java\jdk1.7\bin>java BankClient localhost
+
+Enter the UserName:
+vishal
+
+Enter the Account Number:
+12453
+
+Enter the Initial Amount:
+35421
+
+        1.Withdraw
+        2.Deposit
+        3.Balance
+        4.Exit
+
+Enter your choice:
+1
+
+Enter amount of Withdraw:
+30000
+
+UserName:vishal
+Account Number:12453
+Balance:5421
+
+        1.Withdraw
+        2.Deposit
+        3.Balance
+        4.Exit
+
+Enter your choice:
+3
+
+UserName:vishal
+Account Number:12453
+Balance:5421
+
+        1.Withdraw
+        2.Deposit
+        3.Balance
+        4.Exit
+
+Enter your choice:
+2
+
+Enter amount of deposit:
+60000
+
+UserName:vishal
+Account Number:12453
+Balance:65421
+
+        1.Withdraw
+        2.Deposit
+        3.Balance
+        4.Exit
+
+Enter your choice:
+4
+
+C:\Java\jdk1.7\bin>
+
+

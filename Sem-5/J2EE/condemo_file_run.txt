@@ -1,0 +1,17 @@
+open "Control Panel" (search in in bottom search bar)
+
+than open "Windows Tools" if not find then find in url (control panel url --> "Control Panel\All Control Panel Items\Windows Tools")
+
+than find and oprn "ODBC Data Sources (64-bit)"
+
+in "ODBC Data Sources (64-bit)" click on "Add..." botton and 
+select "Microsoft Access Driver (*.mdb, *.accdb)"  then click on "Finish" 
+this opened new window "ODBC Microsoft Access Setup" 
+in this window "Data Source Name:" --> stud
+and "Description: " --> ...Any... 
+Enter and Click "Select..." botton and select your .mdb or .accdb database
+than click on "Ok"
+than click on "Ok"
+than click on "Ok"
+
+run you --> jdbc code connected with database using dsn

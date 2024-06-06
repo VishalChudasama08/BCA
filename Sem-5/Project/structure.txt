@@ -1,0 +1,12 @@
+Login’s
+	•	User
+		-	Normal user
+		-	Clint 
+	•	Admin
+	
+Normal User 
+=   View all project theatres and there’s movie 
+=   Movie 
+	-	Movie name 
+	-	Image
+	-	Strimming time
