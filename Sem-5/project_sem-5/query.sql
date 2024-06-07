@@ -1,3 +1,18 @@
+CREATE TABLE IF NOT EXISTS users (
+    id INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    mobile_number VARCHAR(15) NOT NULL,
+    date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    modify_date TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (id)
+);
+
+INSERT INTO `users` (`name`, `email`, `password`, `mobile_number`, `date`, `modify_date`) VALUES
+('vishal', 'okay@gmail.com', '74108520', '8320343610', '2024-05-29 18:30:00', NULL),
+('kaushik', 'test@gmail.com', '123456', '9313850547', '2024-06-01 10:44:57', NULL);
+
 CREATE TABLE IF NOT EXISTS movies (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
@@ -207,21 +222,82 @@ VALUES (
 );
 
 
-
-
-
-
-
-
-CREATE TABLE IF NOT EXISTS showtimes (
+CREATE TABLE IF NOT EXISTS theaters (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    movie_id INT NOT NULL,
-    show_date DATE NOT NULL,
-    show_time TIME NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    location VARCHAR(255) NOT NULL,
+    city VARCHAR(100) NOT NULL,
+    state VARCHAR(100) NOT NULL,
+    zip_code VARCHAR(10) NOT NULL,
+    facilities TEXT,
+    number_of_screens INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+);
+INSERT INTO theaters (name, location, city, state, zip_code, facilities, number_of_screens, created_at) VALUES 
+('Theater 1', '123 Main St', 'City1', 'State1', '12345', 'Parking, Snacks', 5, NOW()),
+('Theater 2', '456 Broadway', 'City2', 'State2', '67890', 'Parking, Snacks, 3D', 3, NOW());
+
+
+CREATE TABLE IF NOT EXISTS screens (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    theater_id INT NOT NULL,
+    screen_number INT NOT NULL,
+    num_seats INT NOT NULL,
+    seat_structure TEXT,
     available_seats INT NOT NULL,
+    booked_seats INT NOT NULL DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (theater_id) REFERENCES theaters(id) ON DELETE CASCADE
+);
+INSERT INTO screens (theater_id, screen_number, num_seats, seat_structure, available_seats, booked_seats, created_at) VALUES 
+(1, 1, 12, 'A1,A2,A3,A4,B1,B2,B3,B4,C1,C2,C3,C4', 12, 0, NOW()),
+(2, 1, 8, 'A1,A2,A3,A4,B1,B2,B3,B4', 8, 0, NOW());
+
+
+CREATE TABLE IF NOT EXISTS shows (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    screen_id INT NOT NULL,
+    movie_id INT NOT NULL,
+    show_time TIME NOT NULL,
+    show_date DATE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (screen_id) REFERENCES screens(id) ON DELETE CASCADE,
     FOREIGN KEY (movie_id) REFERENCES movies(id) ON DELETE CASCADE
 );
-INSERT INTO showtimes (movie_id, show_date, show_time, available_seats)
-VALUES (1, '2024-06-01', '18:00:00',100);
+INSERT INTO shows (movie_id, screen_id, show_date, show_time, created_at) VALUES 
+(1, 1, '2023-06-10', '18:00', NOW()),
+(2, 2, '2023-06-10', '20:00', NOW());
+
+
+CREATE TABLE IF NOT EXISTS bookings (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT(11) UNSIGNED NOT NULL,
+    show_id INT(11) NOT NULL,
+    num_tickets INT NOT NULL,
+    total_price DECIMAL(10, 2) NOT NULL,
+    booking_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (show_id) REFERENCES shows(id) ON DELETE CASCADE
+);
+INSERT INTO bookings (user_id, show_id, num_tickets, total_price, booking_date) VALUES 
+(1, 1, 2, 200.00, NOW()),
+(8, 2, 3, 150.00, NOW());
+
+
+CREATE TABLE IF NOT EXISTS seat_bookings (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    booking_id INT NOT NULL,
+    seat_number VARCHAR(10) NOT NULL,
+    FOREIGN KEY (booking_id) REFERENCES bookings(id) ON DELETE CASCADE
+);
+INSERT INTO seat_bookings (booking_id, seat_number) VALUES 
+(1, 'A1'),
+(1, 'A2'),
+(2, 'B1'),
+(2, 'B2'),
+(2, 'B3');

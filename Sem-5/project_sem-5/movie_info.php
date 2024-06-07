@@ -43,7 +43,7 @@ if (!isset($_SESSION['login'])) {
                         </div>
                         <p class="card-text mb-1"><strong>About the movie: </strong></p>
                         <p class="card-text mb-1"><?= $row['description'] ?></p>
-                        <a class="btn btn-primary" href="seatlayout.php?id=<?= $row['id'] ?>" role="button" style="width: 95%;">Booking</a>
+                        <a class="btn btn-primary" href="seat_layout.php?id=<?= $row['id'] ?>" role="button" style="width: 95%;">Booking</a>
                     </div>
                 </div>
             </div>
