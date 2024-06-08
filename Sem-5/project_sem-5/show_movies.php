@@ -2,18 +2,45 @@
 $query = "SELECT * FROM movies";
 $records  = mysqli_query($conn, $query);
 ?>
-<div class="row row-cols-1 row-cols-md-3 g-4">
+<div class="row">
     <?php
     while ($row = mysqli_fetch_assoc($records)) {
     ?>
-        <div class="col">
-            <div class="card h-100">
-                <img src="<?= $row['image_location'] ?>" class="card-img-top" style="height: 20rem; width:auto;" alt="<?= $row['title'] ?>">
-                <div class="card-body">
-                    <h5 class="card-title"><?= $row['title'] ?></h5>
-                    <p class="card-text"><?= $row['duration'] ?>&nbsp; • &nbsp;<?= $row['genre'] ?>&nbsp; • &nbsp;<?= $row['rating'] ?>&nbsp; • &nbsp;<?= $row['language'] ?></p>
+        <div class="col-6 col-md-4 col-lg-3">
+            <div class="card mb-4" style="border: none;">
+                <a href="movie_info.php?id=<?= $row['id'] ?>">
+                    <div class="ratio" style="--bs-aspect-ratio: calc(3 / 2 * 100%);">
+                        <img src="<?= $row['image_location'] ?>" class="img-fluid rounded" alt="<?= $row['title'] ?>">
+                    </div>
+                </a>
+                <div class="card-body m-0 px-0 py-2">
+                    <h5 class="card-title m-0"><?= $row['title'] ?></h5>
+                    <p class="card-text m-0">
+                        <?php
+                        $a = $row['genre'];
+                        $languagesArray = preg_split('/,\s*/', $a);
+                        if (count($languagesArray) <= 2) {
+                            echo $a;
+                        } else {
+                            $b = implode(", ", array_slice($languagesArray, 0, 2));
+                            echo $b . "...";
+                        }
+                        ?>
+                    </p>
+                    <p class="card-text m-0"><?= $row['rating']; ?></p>
+                    <p class="card-text m-0">
+                        <?php
+                        $a = $row['language'];
+                        $languagesArray = preg_split('/,\s*/', $a);
+                        if (count($languagesArray) <= 2) {
+                            echo $a;
+                        } else {
+                            $b = implode(", ", array_slice($languagesArray, 0, 2));
+                            echo $b . "...";
+                        }
+                        ?>
+                    </p>
                 </div>
-                <a class="btn btn-primary" href="movie_info.php?id=<?= $row['id'] ?>&" role="button">Booking</a>
             </div>
         </div>
     <?php

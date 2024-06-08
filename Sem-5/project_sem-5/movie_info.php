@@ -11,7 +11,7 @@ if (!isset($_SESSION['login'])) {
     <?php
     if (isset($_GET['id'])) {
         $id = $_GET['id'];
-        $query = "select * from movies where id=1";
+        $query = "select * from movies where id=" . $id . "";
         $records  = mysqli_query($conn, $query);
         $row = mysqli_fetch_assoc($records);
     }
@@ -43,7 +43,7 @@ if (!isset($_SESSION['login'])) {
                         </div>
                         <p class="card-text mb-1"><strong>About the movie: </strong></p>
                         <p class="card-text mb-1"><?= $row['description'] ?></p>
-                        <a class="btn btn-primary" href="seat_layout.php?id=<?= $row['id'] ?>" role="button" style="width: 95%;">Booking</a>
+                        <a class="btn btn-primary" href="streaming_time.php?id=<?= $row['id'] ?>" role="button" style="width: 95%;">Booking</a>
                     </div>
                 </div>
             </div>
