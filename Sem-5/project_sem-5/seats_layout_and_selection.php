@@ -1,7 +1,5 @@
 <?php
 
-use function PHPSTORM_META\type;
-
 require_once("connect.php");
 include_once("header.php");
 if (!isset($_SESSION['login'])) {
@@ -15,37 +13,8 @@ if (!isset($_SESSION['login'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-
-        .seat-layout {
-            display: flex;
-            flex-wrap: wrap;
-            width: 300px;
-            margin: auto;
-            padding-top: 50px;
-        }
-
-        .seat {
-            width: 30px;
-            height: 30px;
-            margin: 5px;
-            text-align: center;
-            line-height: 30px;
-            cursor: pointer;
-        }
-
-        .available {
-            background-color: #2ecc71;
-        }
-
-        .booked {
-            background-color: #e74c3c;
-        }
-
-        .selected {
-            background-color: #f1c40f;
+        .space {
+            padding-bottom: 50px;
         }
 
         /* Hide the default checkbox */
@@ -85,46 +54,53 @@ if (!isset($_SESSION['login'])) {
         }
     </style>
 </head>
+<?php
+$movie_id = $_GET['movie_id'];
+$movie_query = "SELECT * FROM `movies` WHERE id='" . $movie_id . "';";
+$movie_records  = mysqli_query($conn, $movie_query);
+$movie_row = mysqli_fetch_assoc($movie_records);
+
+$cinema_id = $_GET['cinema_id'];
+$cinema_query = "SELECT * FROM `cinema` WHERE id=" . $cinema_id . ";";
+$cinema_records  = mysqli_query($conn, $cinema_query);
+$cinema_row = mysqli_fetch_assoc($cinema_records);
+
+$times_id = $_GET['times_id'];
+$times_query = "SELECT * FROM `times` WHERE id=" . $times_id . ";";
+$times_records = mysqli_query($conn, $times_query);
+$times_row = mysqli_fetch_assoc($times_records);
+$formatted_time = date('h:i A', strtotime($times_row['show_time']));
+
+$seats_query = "SELECT * FROM `seats` WHERE id=1;";
+$seats_records = mysqli_query($conn, $seats_query);
+$seats_row = mysqli_fetch_assoc($seats_records);
+
+$seats_string = $seats_row['seat_structure'];
+$json_string = str_replace("'", '"', $seats_string);
+$seats_array = json_decode($json_string, true);
+?>
 
 <body>
-    <label class="custom-checkbox">
-        <input type="checkbox" id="checkbox" />
-        <span class="checkmark"></span>
-        A1
-    </label>
-    <label class="custom-checkbox">
-        <input type="checkbox" id="checkbox" />
-        <span class="checkmark"></span>
-        A2
-    </label>
-    <label class="custom-checkbox">
-        <input type="checkbox" id="checkbox" />
-        <span class="checkmark"></span>
-        A3
-    </label>
-    <label class="custom-checkbox">
-        <input type="checkbox" id="checkbox" />
-        <span class="checkmark"></span>
-        A4
-    </label>
-    <label class="custom-checkbox">
-        <input type="checkbox" id="checkbox" />
-        <span class="checkmark"></span>
-        A5
-    </label>
-    <label class="custom-checkbox">
-        <input type="checkbox" id="checkbox" />
-        <span class="checkmark"></span>
-        A6
-    </label>
-    <label class="custom-checkbox">
-        <input type="checkbox" id="checkbox" />
-        <span class="checkmark"></span>
-        A7
-    </label>
-    <label class="custom-checkbox">
-        <input type="checkbox" id="checkbox" />
-        <span class="checkmark"></span>
-        A8
-    </label>
+    <h2>Select Your Seats</h2>
+    <form action="ticket_layout.php?cinema_id=<?= $cinema_id; ?>&amp;times_id=<?= $times_id; ?>&amp;movie_id=<?= $movie_id; ?>" method="post">
+        <?php
+        foreach ($seats_array as $row) {
+            echo '<span class="space">' . substr($row[0], 0, 1) . '</span>';
+            foreach ($row as $seats_array) {
+        ?>
+
+                <label class="custom-checkbox">
+                    <input type="checkbox" id="checkbox" value='<?php echo $seats_array . " "; ?>' />
+                    <span class="checkmark"></span>
+
+                </label>
+        <?php
+            }
+            echo "<br><hr>";
+        }
+        ?>
+
+        <button type="submit">Book Seats</button>
+    </form>
+
     <?php include_once("footer.php"); ?>

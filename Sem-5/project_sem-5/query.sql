@@ -246,7 +246,7 @@ VALUES
 
 
 CREATE TABLE `seats` (
-  `id` INT(11) NOT NULL,
+  `id` INT(11) AUTO_INCREMENT PRIMARY KEY,
   `total_seats` INT(11) NOT NULL,
   `seat_structure` TEXT,
   `no_seat` TEXT,
