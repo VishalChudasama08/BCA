@@ -20,7 +20,7 @@ print("Morbi in Tuples:", "Morbi" in tuple3)
 
 print("\nAccessing elements of tuple:")
 for item in tuple2:
-    print(item)
+    print(item, end=" ")
 
 print("\nLength of tuple:", len(tuple2))
 print("Maximum:", max(tuple2))

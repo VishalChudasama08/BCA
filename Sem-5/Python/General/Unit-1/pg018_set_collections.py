@@ -1,38 +1,38 @@
 #write a python program to demonstrate set collections (using its all methods)
 
-my_set = {1,3,4,5,8}
-print(my_set)
+set = {1,3,4,5,8}
+print(set)
 
 #add
-my_set.add(2)
-print("Add Value 2:", my_set)
+set.add(2)
+print("Add Value 2:", set)
 
 #update 
-my_set.update([6,7,8,9])
-print("Update [6,7,8,9]:",my_set)
+set.update([6,7,8,9])
+print("Update [6,7,8,9]:",set)
 
 #discard
-my_set.discard(4)
-print("Discard 4:", my_set)
+set.discard(4)
+print("Discard 4:", set)
 
 #remove
-my_set.remove(6)
-print("Remove 6:", my_set)
-my_set.remove(2)
-print("Remove 2:", my_set)
+set.remove(6)
+print("Remove 6:", set)
+set.remove(2)
+print("Remove 2:", set)
 
 #discard
-my_set.discard(2)
-print("Discard 2:", my_set)
+set.discard(2)
+print("Discard 2:", set)
 
 #pop
-my_set.pop()
-print("Pop:", my_set)
-my_set.pop()
-print("Pop:", my_set)
+set.pop()
+print("Pop:", set)
+set.pop()
+print("Pop:", set)
 
 #copy
-set1=my_set.copy()
+set1=set.copy()
 print("Copy:", set1)
 
 #clear

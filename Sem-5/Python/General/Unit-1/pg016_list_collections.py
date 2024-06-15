@@ -1,4 +1,5 @@
-# W.A.P.P. to demonstrate list collections (using its all methods)
+# W.A.P.P. to demonstrate list collections (using its all methods)
+
 list = ["Rajkot", "Jamnagar", "Morbi"]
 list.append("Baroda")
 print("append():", list)
@@ -15,11 +16,11 @@ print("remove():", list)
 list.pop()
 print("pop():", list)
 
-index_of_orange = list.index("Jamnagar")
-print("Index of 'Jamnagar':", index_of_orange)
+index_of_jamnagar = list.index("Jamnagar")
+print("Index of 'Jamnagar':", index_of_jamnagar)
 
-count_of_apple = list.count("Rajkot")
-print("Count of 'Rajkot':", count_of_apple)
+count_of_rajkot = list.count("Rajkot")
+print("Count of 'Rajkot':", count_of_rajkot)
 
 list.reverse()
 print("reverse():", list)
