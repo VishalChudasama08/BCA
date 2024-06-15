@@ -1,0 +1,5 @@
+Write a program to input to input 4 subject marks from the user and prepare mark
+sheet with following rules
+1. Internal mark must be enter between 0 to 30 and min mark is 12 for pass
+2. Theory mark must be enter between 0 to 70 and min mark is 28 for pass
+Display marks, result and grade
