@@ -1,40 +1,28 @@
 <?php
 require_once("connect.php");
 include_once("header.php");
+extract($_POST);
+echo $select_seats;
 ?>
 
-<!-- <body>
-    <div class="input-group mb-3">
-        <label class="input-group-text" for="inputGroupSelect01">How Many Seats?</label>
-        <select class="form-select" id="inputGroupSelect01">
-            <option selected>Choose...</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-        </select>
-    </div>
-    <div class="container">
-        
-    </div>
-</body> -->
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['seats'])) {
-    $selectedSeats = $_POST['seats'];
-    foreach ($selectedSeats as $seat) {
-        $sql = "UPDATE seats SET booked=1 WHERE seat_number='$seat'";
-        $conn->query($sql);
-    }
-    echo "<p>Booking successful!</p>";
-}
+// if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['seats'])) {
+//     $selectedSeats = $_POST['seats'];
+//     foreach ($selectedSeats as $seat) {
+//         $sql = "UPDATE seats SET booked=1 WHERE seat_number='$seat'";
+//         $conn->query($sql);
+//     }
+//     echo "<p>Booking successful!</p>";
+// }
 
-// Fetch seat data
-$sql = "SELECT seat_number, booked FROM seats";
-$result = $conn->query($sql);
-$seats = [];
-while ($row = $result->fetch_assoc()) {
-    $seats[] = $row;
-}
-$conn->close();
+// // Fetch seat data
+// $sql = "SELECT seat_number, booked FROM seats";
+// $result = $conn->query($sql);
+// $seats = [];
+// while ($row = $result->fetch_assoc()) {
+//     $seats[] = $row;
+// }
+// $conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -85,24 +73,24 @@ $conn->close();
     <h1>Movie Booking</h1>
     <form method="post" action="">
         <?php
-        $rows = ['A', 'B', 'C', 'D', 'E'];
-        foreach ($rows as $row) {
-            echo '<div class="rows">';
-            echo "<p>" . $row . "</p>";
-            for ($i = 1; $i <= 10; $i++) {
-                $seatNumber = $row . $i;
-                $seat = array_filter($seats, function ($s) use ($seatNumber) {
-                    return $s['seat_number'] == $seatNumber;
-                });
-                $seat = reset($seat);
-                $booked = $seat['booked'] ? 'booked' : 'available';
-                echo '<div class="seat ' . $booked . '">';
-                echo '<input type="checkbox" name="seats[]" value="' . $seatNumber . '" ' . ($seat['booked'] ? 'disabled' : '') . '>';
-                echo $seatNumber;
-                echo '</div>';
-            }
-            echo '</div>';
-        }
+        // $rows = ['A', 'B', 'C', 'D', 'E'];
+        // foreach ($rows as $row) {
+        //     echo '<div class="rows">';
+        //     echo "<p>" . $row . "</p>";
+        //     for ($i = 1; $i <= 10; $i++) {
+        //         $seatNumber = $row . $i;
+        //         $seat = array_filter($seats, function ($s) use ($seatNumber) {
+        //             return $s['seat_number'] == $seatNumber;
+        //         });
+        //         $seat = reset($seat);
+        //         $booked = $seat['booked'] ? 'booked' : 'available';
+        //         echo '<div class="seat ' . $booked . '">';
+        //         echo '<input type="checkbox" name="seats[]" value="' . $seatNumber . '" ' . ($seat['booked'] ? 'disabled' : '') . '>';
+        //         echo $seatNumber;
+        //         echo '</div>';
+        //     }
+        //     echo '</div>';
+        // }
         ?>
         <br>
         <div class="screen_icon">

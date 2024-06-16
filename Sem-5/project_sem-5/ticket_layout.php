@@ -1,48 +1,58 @@
 <?php
 require_once("connect.php");
 include_once("header.php");
+extract($_POST);
+$booked_seats = count($select_seats);
+echo $booked_seats_name = str_replace(" , ", ", ", implode(", ", $select_seats));
 
-// if (!isset($_SESSION['booking_id'])) {
-//     header("Location: index.php");
-//     exit();
-// }
-// if (!isset($_SESSION['login'])) {
-//     header("location:login.php");
-//     exit();
-// }
+// Flag file path
+$flag_file = "seats_updated.txt";
+$seats_updated_flag = false;
 
-// $booking_id = $_SESSION['booking_id'];
+$seats_id = $_GET['seats_id'];
+$seats_query = "SELECT * FROM `seats` WHERE id='" . $seats_id . "';";
+$seats_records = mysqli_query($conn, $seats_query);
+$seats_row = mysqli_fetch_assoc($seats_records);
+if ($seats_row['booked_seats_name']) {
+    $seats_row['booked_seats_name']; // existing booked seats
 
-// // Fetch booking details
-// $query = "SELECT b.id, b.num_tickets, b.total_price, b.booking_date, u.name, u.email, s.show_date, s.show_time, m.title, t.name AS theater_name, t.location AS theater_location 
-//           FROM bookings b
-//           JOIN users u ON b.user_id = u.id
-//           JOIN shows s ON b.show_id = s.id
-//           JOIN movies m ON s.movie_id = m.id
-//           JOIN screens sc ON s.screen_id = sc.id
-//           JOIN theaters t ON sc.theater_id = t.id
-//           WHERE b.id = ?";
-// $stmt = $conn->prepare($query);
-// $stmt->bind_param("i", $booking_id);
-// $stmt->execute();
-// $result = $stmt->get_result();
-// $booking_details = $result->fetch_assoc();
+    // Combine booked seats into a single array (using explode and array_merge)
+    $booked_seats_name_array = explode(", ", $booked_seats_name);
+    $pre_booked_seats_name_array = explode(", ", $seats_row['booked_seats_name']);
+    $all_booked_seats_name_array = array_merge($booked_seats_name_array, $pre_booked_seats_name_array);
 
-// // Fetch seat details
-// $query = "SELECT seat_number FROM seat_bookings WHERE booking_id = ?";
-// $stmt = $conn->prepare($query);
-// $stmt->bind_param("i", $booking_id);
-// $stmt->execute();
-// $result = $stmt->get_result();
-// $seats = [];
-// while ($row = $result->fetch_assoc()) {
-//     $seats[] = $row['seat_number'];
-// }
+    // Remove duplicate entries (optional)
+    $all_booked_seats_name_array = array_unique($all_booked_seats_name_array);
 
-?>
+    // Join the array back into a string with commas
+    $all_booked_seats_name_string = implode(",", $all_booked_seats_name_array);
+    $all_booked_seats_name_string = str_replace(" ", "", $all_booked_seats_name_string);
+    $all_booked_seats_name_string = str_replace(",", ", ", $all_booked_seats_name_string);
 
+    echo "Combined booked seats: " . $all_booked_seats_name_string;
+}
+if (!file_exists($flag_file)) {
+    $available_seats = $seats_row['available_seats'] - $booked_seats;
+    $seats_query = "UPDATE `seats` SET `available_seats` = " . $available_seats . ", `booked_seats_name` = '" . $all_booked_seats_name_string . "' WHERE `seats`.`id` = " . $seats_id . ";";
+    $seats_updated = mysqli_query($conn, $seats_query);
+    if ($seats_updated) {
+        if (mysqli_affected_rows($conn) > 0) {
+            $seats_updated_flag = true;  // Set flag if update successful
+            echo "Seat updated successfully!";
 
-<?php
+            // Create the flag file (ideally with proper permissions)
+            file_put_contents($flag_file, "");  // Empty content acts as a flag
+        } else {
+            echo "No seat updated (might be non-existent ID).";
+        }
+    } else {
+        echo "Error updating seat: " . mysqli_error($conn);
+    }
+} else {
+    // Query has already run, so don't run it again
+    echo "Seat update skipped (already performed).";
+}
+
 $movie_id = $_GET['movie_id'];
 $movie_query = "SELECT * FROM `movies` WHERE id='" . $movie_id . "';";
 $movie_records  = mysqli_query($conn, $movie_query);
@@ -72,15 +82,15 @@ $formatted_time = date('h:i A', strtotime($times_row['show_time']));
 <body>
     <div class="ticket-layout">
         <h1>Booking Successful!</h1>
-        <p><strong>Booking ID:</strong> <?php echo htmlspecialchars($booking_details['id']); ?></p>
-        <p><strong>Movie Title:</strong> <?php echo htmlspecialchars($booking_details['title']); ?></p>
-        <p><strong>Theater:</strong> <?php echo htmlspecialchars($booking_details['theater_name']); ?></p>
-        <p><strong>Location:</strong> <?php echo htmlspecialchars($booking_details['theater_location']); ?></p>
-        <p><strong>Show Date:</strong> <?php echo htmlspecialchars($booking_details['show_date']); ?></p>
-        <p><strong>Show Time:</strong> <?php echo htmlspecialchars($booking_details['show_time']); ?></p>
-        <p><strong>Seats:</strong> <?php echo htmlspecialchars(implode(', ', $seats)); ?></p>
-        <p><strong>Total Price:</strong> $<?php echo htmlspecialchars(number_format($booking_details['total_price'], 2)); ?></p>
-        <p><strong>Booking Date:</strong> <?php echo htmlspecialchars($booking_details['booking_date']); ?></p>
+        <p><strong>Booking ID:</strong> </p>
+        <p><strong>Movie Title:</strong> </p>
+        <p><strong>Theater:</strong> </p>
+        <p><strong>Location:</strong> </p>
+        <p><strong>Show Date:</strong> </p>
+        <p><strong>Show Time:</strong> </p>
+        <p><strong>Seats:</strong> </p>
+        <p><strong>Total Price:</strong> &#8377;</p>
+        <p><strong>Booking Date:</strong> </p>
     </div>
 </body>
 

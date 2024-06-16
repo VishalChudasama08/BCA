@@ -373,10 +373,10 @@ VALUES
 
 
 CREATE TABLE IF NOT EXISTS bookings (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT(11) AUTO_INCREMENT PRIMARY KEY,
     user_id INT(11) UNSIGNED NOT NULL,
     show_id INT(11) NOT NULL,
-    num_tickets INT NOT NULL,
+    number_of_seats INT NOT NULL,
     total_price DECIMAL(10, 2) NOT NULL,
     booking_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -384,7 +384,7 @@ CREATE TABLE IF NOT EXISTS bookings (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (show_id) REFERENCES shows(id) ON DELETE CASCADE
 );
-INSERT INTO bookings (user_id, show_id, num_tickets, total_price, booking_date) VALUES 
+INSERT INTO bookings (user_id, show_id, number_of_seats, total_price, booking_date) VALUES 
 (1, 1, 2, 200.00, NOW()),
 (8, 2, 3, 150.00, NOW());
 

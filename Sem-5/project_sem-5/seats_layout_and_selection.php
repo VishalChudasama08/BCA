@@ -13,9 +13,20 @@ if (!isset($_SESSION['login'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        .space {
-            padding-bottom: 50px;
+        form {
+            text-align: center;
+            min-width: 800px;
         }
+
+        .screen_icon {
+            width: 30%;
+            min-width: 300px;
+            margin: 20px auto;
+        }
+
+        /* .space { */
+        /* margin: 15px; */
+        /* } */
 
         /* Hide the default checkbox */
         .custom-checkbox input[type="checkbox"] {
@@ -29,13 +40,13 @@ if (!isset($_SESSION['login'])) {
             user-select: none;
             padding-left: 25px;
             position: relative;
-            font-size: 18px;
+            /* font-size: 18px; */
         }
 
         /* Create the checkmark/indicator (hidden by default) */
         .custom-checkbox .checkmark {
             position: absolute;
-            top: 0;
+            top: -15px;
             left: 0;
             height: 20px;
             width: 20px;
@@ -71,36 +82,117 @@ $times_records = mysqli_query($conn, $times_query);
 $times_row = mysqli_fetch_assoc($times_records);
 $formatted_time = date('h:i A', strtotime($times_row['show_time']));
 
-$seats_query = "SELECT * FROM `seats` WHERE id=1;";
+$seats_id = '2';
+$seats_query = "SELECT * FROM `seats` WHERE id=" . $seats_id . ";";
 $seats_records = mysqli_query($conn, $seats_query);
 $seats_row = mysqli_fetch_assoc($seats_records);
 
 $seats_string = $seats_row['seat_structure'];
 $json_string = str_replace("'", '"', $seats_string);
 $seats_array = json_decode($json_string, true);
+
+$no_seats_string = $seats_row['no_seat'];
+$no_seats_string = str_replace('[', '', $no_seats_string);
+$no_seats_string = str_replace(']', '', $no_seats_string);
+echo $no_seats_string = str_replace('\'', '', $no_seats_string);
+$no_seats_array = explode(", ", $no_seats_string);
+// echo "<pre>";
+// print_r($no_seats_array);
+// echo "</pre>";
+echo "<br>";
+
+echo $booked_seats_name = $seats_row['booked_seats_name'];
+$booked_seats_name = explode(", ", $booked_seats_name);
+
+
+$level = ['Silver : 100', 'Gold : 150', 'Platimun : 300'];
+$price = [100, 150, 200];
+// $_SESSION["price"] = $price[substr($row[0], 0, 1)];
 ?>
 
 <body>
-    <h2>Select Your Seats</h2>
-    <form action="ticket_layout.php?cinema_id=<?= $cinema_id; ?>&amp;times_id=<?= $times_id; ?>&amp;movie_id=<?= $movie_id; ?>" method="post">
-        <?php
-        foreach ($seats_array as $row) {
-            echo '<span class="space">' . substr($row[0], 0, 1) . '</span>';
-            foreach ($row as $seats_array) {
-        ?>
-
-                <label class="custom-checkbox">
-                    <input type="checkbox" id="checkbox" value='<?php echo $seats_array . " "; ?>' />
-                    <span class="checkmark"></span>
-
+    <div class="container">
+        <h2>Select Your Seats</h2>
+        <div style="display: flex;text-align: center;justify-content: center;">
+            <div>
+                <label class="custom-checkbox" style="margin-top: .5rem;">
+                    <span class="checkmark" style="cursor: default;"></span>
                 </label>
-        <?php
+            </div>
+            <div>Available Seats</div>
+            <div style="margin-left: 2rem;">
+                <label class="custom-checkbox" style="margin-top: .5rem;">
+                    <span class="checkmark" style="background-color: #f1c40f;cursor: default;"></span>
+                </label>
+            </div>
+            <div>Booked Seats</div>
+        </div>
+        <div class="row">
+            <div class="col-12 overflow-auto">
+                <form id="form" action="ticket_layout.php?cinema_id=<?= $cinema_id; ?>&amp;times_id=<?= $times_id; ?>&amp;movie_id=<?= $movie_id; ?>&amp;seats_id=<?= $seats_id; ?>" method="post" onsubmit="return validateCheckboxes()">
+                    <div class="screen_icon">
+                        <img src="images/screen-icon-180.svg" class="img-fluid" style="transform: rotate(180deg)" alt="screen-icon">
+                    </div>
+                    <?php
+                    foreach ($seats_array as $row) {
+                        if (array_key_exists(substr($row[0], 0, 1), $level)) {
+                            // if (substr($row[0], 0, 1) == 0 || substr($row[0], 0, 1) == 1 || substr($row[0], 0, 1) == 2) {
+                            echo '<p style="margin: 1px auto;"> ' . $level[substr($row[0], 0, 1)] . ' </p>';
+                            continue;
+                        } else {
+                            echo '<span class="space">' . substr($row[0], 0, 1) . '</span>';
+                        }
+                        foreach ($row as $seats_array) {
+                            if (in_array($seats_array, $no_seats_array)) {
+                    ?>
+                                <span class="custom-checkbox" style="opacity: 0;"></span>
+                                <?php
+                            } else {
+                                if (in_array($seats_array, $booked_seats_name)) {
+                                ?>
+                                    <label class="custom-checkbox">
+                                        <input type="checkbox" id="checkbox" />
+                                        <span class="checkmark" style="background-color: #f1c40f;cursor: default;"></span>
+                                    </label>
+                                <?php
+                                } else {
+                                ?>
+                                    <label class="custom-checkbox">
+                                        <input type="checkbox" id="checkbox" name="select_seats[]" value='<?php echo $seats_array . " "; ?>' />
+                                        <span class="checkmark"></span>
+                                    </label>
+                    <?php
+                                }
+                            }
+                        }
+                        echo "<br>";
+                    }
+                    ?>
+
+                    <button class="btn btn-primary mt-5" type="submit" style="width: 50%;">Booking</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    function validateCheckboxes() {
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+        let isChecked = false;
+        for (const checkbox of checkboxes) {
+            if (checkbox.checked) {
+                isChecked = true;
+                break;
             }
-            echo "<br><hr>";
         }
-        ?>
 
-        <button type="submit">Book Seats</button>
-    </form>
+        if (!isChecked) {
+            alert("Please select at least one seat.");
+            return false; // Prevent form submission
+        }
 
-    <?php include_once("footer.php"); ?>
+        return true; // Allow form submission
+    }
+</script>
+<?php include_once("footer.php"); ?>

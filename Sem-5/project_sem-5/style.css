@@ -1,10 +1,10 @@
 body {
-    background-color: #F7FFE5;
+    background-color: #F7FFE5 !important;
 }
 
 nav,
 footer {
-    background-color: #A0C49D;
+    background-color: #A0C49D !important;
 }
 
 .v1 {
@@ -33,4 +33,8 @@ button {
     height: 40px;
     border: 1px solid yellow;
     border-radius: 50px;
+}
+
+li:hover {
+    color: yellow !important;
 }
