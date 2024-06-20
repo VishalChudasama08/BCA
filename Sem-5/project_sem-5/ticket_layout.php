@@ -2,55 +2,62 @@
 require_once("connect.php");
 include_once("header.php");
 extract($_POST);
-$booked_seats = count($select_seats);
-echo $booked_seats_name = str_replace(" , ", ", ", implode(", ", $select_seats));
 
-// Flag file path
-$flag_file = "seats_updated.txt";
-$seats_updated_flag = false;
+echo $booked_seats_name = str_replace(" , ", ", ", implode(", ", $select_seats));
+echo "<br>";
 
 $seats_id = $_GET['seats_id'];
 $seats_query = "SELECT * FROM `seats` WHERE id='" . $seats_id . "';";
 $seats_records = mysqli_query($conn, $seats_query);
 $seats_row = mysqli_fetch_assoc($seats_records);
+
+
 if ($seats_row['booked_seats_name']) {
     $seats_row['booked_seats_name']; // existing booked seats
 
     // Combine booked seats into a single array (using explode and array_merge)
     $booked_seats_name_array = explode(", ", $booked_seats_name);
+    $last_value = str_replace(" ", "", end($booked_seats_name_array));
+    // echo "last_value = '" . $last_value . "'<br>";
+    $booked_seats_name_array[key($booked_seats_name_array)] = $last_value;
+
     $pre_booked_seats_name_array = explode(", ", $seats_row['booked_seats_name']);
+
     $all_booked_seats_name_array = array_merge($booked_seats_name_array, $pre_booked_seats_name_array);
 
-    // Remove duplicate entries (optional)
+    // remove duplicate value in $all_booked_seats_name_array array
     $all_booked_seats_name_array = array_unique($all_booked_seats_name_array);
+
+    $all_booked_seats_name_array = array_values($all_booked_seats_name_array);
+
 
     // Join the array back into a string with commas
     $all_booked_seats_name_string = implode(",", $all_booked_seats_name_array);
     $all_booked_seats_name_string = str_replace(" ", "", $all_booked_seats_name_string);
     $all_booked_seats_name_string = str_replace(",", ", ", $all_booked_seats_name_string);
 
-    echo "Combined booked seats: " . $all_booked_seats_name_string;
+    $booked_seats_name = $all_booked_seats_name_string;
+    echo "Combined booked seats: " . $booked_seats_name;
 }
-if (!file_exists($flag_file)) {
-    $available_seats = $seats_row['available_seats'] - $booked_seats;
-    $seats_query = "UPDATE `seats` SET `available_seats` = " . $available_seats . ", `booked_seats_name` = '" . $all_booked_seats_name_string . "' WHERE `seats`.`id` = " . $seats_id . ";";
-    $seats_updated = mysqli_query($conn, $seats_query);
-    if ($seats_updated) {
-        if (mysqli_affected_rows($conn) > 0) {
-            $seats_updated_flag = true;  // Set flag if update successful
-            echo "Seat updated successfully!";
 
-            // Create the flag file (ideally with proper permissions)
-            file_put_contents($flag_file, "");  // Empty content acts as a flag
-        } else {
-            echo "No seat updated (might be non-existent ID).";
-        }
+$total_seats_number = $seats_row['total_seats'];
+$booke_seats_number = count(explode(", ", $booked_seats_name));
+$available_seats = $total_seats_number - $booke_seats_number;
+
+$seats_query = "UPDATE `seats` SET `available_seats` = " . $available_seats . ", `booked_seats_name` = '" . $booked_seats_name . "' WHERE `seats`.`id` = " . $seats_id . ";";
+
+echo "<br>" . $seats_query;
+
+$seats_updated = mysqli_query($conn, $seats_query);
+if ($seats_updated) {
+    if (mysqli_affected_rows($conn) > 0) {
+        echo "Seat updated successfully!";
     } else {
-        echo "Error updating seat: " . mysqli_error($conn);
+        echo "No seat updated (might be non-existent ID).";
+        echo mysqli_affected_rows($conn);
     }
 } else {
-    // Query has already run, so don't run it again
-    echo "Seat update skipped (already performed).";
+    echo "Error updating seat: " . mysqli_error($conn);
 }
 
 $movie_id = $_GET['movie_id'];
