@@ -8,10 +8,10 @@ if (!isset($_SESSION['login'])) {
 $movie_id = $_GET['id'];
 ?>
 <style>
-    #a {
+    /* #a {
         display: flex;
         flex-flow: row;
-    }
+    } */
 
     .modal {
         position: fixed;
@@ -19,7 +19,7 @@ $movie_id = $_GET['id'];
         right: 50%;
     }
 
-    .inema-info-modal {
+    .cinema-info-modal {
         max-width: 800px;
         width: 80%;
     }
@@ -43,13 +43,13 @@ $movie_id = $_GET['id'];
 <div class="container">
     <div style="display: flex; flex-flow: row;">
         <h3 class="m-2">Select Date : </h3>
-        <a href="#" onclick="loadDoc('cinema_and_times.php?id=<?= $movie_id; ?>&date=18')" type="button" class="btn btn-outline-info m-2">18 Dec</a>
+        <a href="#" id="autoclick" onclick="loadDoc('cinema_and_times.php?id=<?= $movie_id; ?>&date=18')" type="button" class="btn btn-outline-info m-2">18 Dec</a>
         <a href="#" onclick="loadDoc('cinema_and_times.php?id=<?= $movie_id; ?>&date=19')" type="button" class="btn btn-outline-info m-2">19 Dec</a>
         <a href="#" onclick="loadDoc('cinema_and_times.php?id=<?= $movie_id; ?>&date=20')" type="button" class="btn btn-outline-info m-2">20 Dec</a>
     </div>
     <div id="cinema_times_content"></div>
     <div id="cinema-info-modal" class="modal">
-        <div class="inema-info-modal">
+        <div class="cinema-info-modal">
             <div id="cinema-info"></div>
         </div>
     </div>
@@ -57,6 +57,10 @@ $movie_id = $_GET['id'];
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+    $(document).ready(function() {
+        $('#autoclick').click()
+    });
+
     function loadDoc(page) {
         const xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {

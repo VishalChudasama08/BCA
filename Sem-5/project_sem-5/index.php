@@ -1,10 +1,10 @@
 <?php
 require_once("connect.php");
 include_once("header.php");
-if (!isset($_SESSION['login'])) {
-    header("location:login.php");
-    exit();
-}
+// if (!isset($_SESSION['login'])) {
+//     header("location:login.php");
+//     exit();
+// }
 ?>
 
 <div class="container-lg">

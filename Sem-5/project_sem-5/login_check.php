@@ -15,6 +15,5 @@ if ($username == $row['email'] && $password == $row['password']) {
     header("location:index.php");
     exit();
 } else {
-    // header("location:login.php?invalid=invalid");
-
+    header("location:login.php?invalid=invalid");
 }

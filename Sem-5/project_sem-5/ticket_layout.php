@@ -2,8 +2,8 @@
 require_once("connect.php");
 include_once("header.php");
 extract($_POST);
-
 echo $booked_seats_name = str_replace(" , ", ", ", implode(", ", $select_seats));
+$booked_seats = $booked_seats_name;
 echo "<br>";
 
 $seats_id = $_GET['seats_id'];
@@ -87,17 +87,18 @@ $formatted_time = date('h:i A', strtotime($times_row['show_time']));
 </head>
 
 <body>
-    <div class="ticket-layout">
-        <h1>Booking Successful!</h1>
-        <p><strong>Booking ID:</strong> </p>
-        <p><strong>Movie Title:</strong> </p>
-        <p><strong>Theater:</strong> </p>
-        <p><strong>Location:</strong> </p>
-        <p><strong>Show Date:</strong> </p>
-        <p><strong>Show Time:</strong> </p>
-        <p><strong>Seats:</strong> </p>
-        <p><strong>Total Price:</strong> &#8377;</p>
-        <p><strong>Booking Date:</strong> </p>
+    <div class="container ticket-layout">
+        <h2>Booking Successful!</h2>
+        <p><strong>Booking ID:</strong> <?= "from booking table" ?></p>
+        <p><strong>Movie Title:</strong> <?= $movie_row['title']; ?></p>
+        <p><strong>Theater:</strong> <?= $cinema_row['name']; ?></p>
+        <p><strong>Location:</strong> <?= $cinema_row['location']; ?></p>
+        <p><strong>Show Date:</strong> <?= $times_row['show_date']; ?></p>
+        <p><strong>Show Time:</strong> <?= $formatted_time; ?></p>
+        <p><strong>Seats:</strong> <?= $booked_seats; ?></p>
+        <p><strong>Total Price:</strong> &#8377;<?= "Price" ?></p>
+        <p><strong>Booking Date:</strong> <?= "from booking table"; ?></p>
+        <button class="btn btn-danger" type="submit">Booking Cancellation</button>
     </div>
 </body>
 

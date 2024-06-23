@@ -15,6 +15,34 @@ session_start();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .modal {
+            position: fixed;
+            top: 50%;
+            right: 50%;
+        }
+
+        .cinema-info-modal {
+            max-width: 800px;
+            width: 80%;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 30px;
+            font-weight: bold;
+            margin-top: -12px;
+            padding: 0px;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
@@ -42,7 +70,7 @@ session_start();
                         if (!isset($_SESSION['login'])) {
                             echo '<a class="nav-link link" href="login.php" style="color: white !important;" onmouseover="this.style.color=`yellow`" onmouseout="this.style.color=`white`">Login</a>';
                         } else {
-                            echo '<a class="nav-link link" href="logout.php" style="color: white !important;" onmouseover="this.style.color=`yellow`" onmouseout="this.style.color=`white`">Logout</a>';
+                            echo '<a class="nav-link link" href="#" style="color: white !important;" onmouseover="this.style.color=`yellow`" onmouseout="this.style.color=`white`" onclick="logout()">Logout</a>';
                         }
                         ?>
                     </li>
@@ -51,14 +79,49 @@ session_start();
                     </li>
                 </ul>
             </div>
-            <div class="dropdown dropstart">
-                <button class="user" style="border: none;color: white !important;background-color: #A0C49D;font-size:large;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" onmouseover="this.style.color=`yellow`" onmouseout="this.style.color=`white`"><strong>User</strong></button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-            </div>
+            <?php
+            if (isset($_SESSION['login'])) {
+            ?>
+                <div class="dropdown dropstart me-3">
+                    <button class="user" style="border: none;color: white !important;background-color: #A0C49D;font-size:large;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" onmouseover="this.style.color=`yellow`" onmouseout="this.style.color=`white`"><strong>User</strong></button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="#" onclick="myProfile()">My Profile</a></li>
+                        <li><a class="dropdown-item" href="#">Booking History</a></li>
+                    </ul>
+                </div>
+            <?php
+            }
+            ?>
         </nav>
     </div>
+    <div id="cinema-info-modal" class="modal">
+        <div class="cinema-info-modal">
+            <div id="cinema-info"></div>
+        </div>
+    </div>
 </body>
+<script>
+    function logout() {
+        let res = confirm("Are you sure you want to log out ?");
+        if (res) {
+            window.location.href = "logout.php";
+        }
+    }
+
+    // ++++++++++++++++++++++++ modify first for myProfile than run/uncomment +++++++++++++++++++++++++++
+
+    // function myProfile(cinema_id) {
+    //     $.get('cinema_info.php?cinema_id=' + cinema_id, function(data) {
+    //         $('#cinema-info').html(data);
+    //         $('#cinema-info-modal').show();
+    //     });
+    // }
+
+    // $(document).ready(function() {
+    //     $(window).click(function(event) {
+    //         if (event.target.id === 'cinema-info-modal') {
+    //             $('#cinema-info-modal').hide();
+    //         }
+    //     });
+    // });
+</script>

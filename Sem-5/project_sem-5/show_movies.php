@@ -8,7 +8,7 @@ $records  = mysqli_query($conn, $query);
     ?>
         <div class="col-6 col-md-4 col-lg-3">
             <div class="card mb-4" style="border: none;">
-                <a href="movie_info.php?id=<?= $row['id'] ?>">
+                <a href="movie_info.php?id=<?= $row['id'] ?>" onclick="login()">
                     <div class="ratio" style="--bs-aspect-ratio: calc(3 / 2 * 100%);">
                         <img src="<?= $row['image_location'] ?>" class="img-fluid rounded" alt="<?= $row['title'] ?>">
                     </div>
@@ -47,3 +47,13 @@ $records  = mysqli_query($conn, $query);
     }
     ?>
 </div>
+<script>
+    function login() {
+        // window.location.href = "log-in.php";
+        // if (!isset($_SESSION['login'])) {
+
+        // <?php //header("location:login.php?text=yes"); 
+            ?>
+        // exit(); }
+    }
+</script>

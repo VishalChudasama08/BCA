@@ -19,6 +19,9 @@ include_once("header.php");
         if (isset($_GET['save']) && $_GET['save'] == 'yes') {
             echo "<p style='color: green;'>Registration Successfully...</p>";
         }
+        if (isset($_GET['text'])) {
+            echo "<h1>Welcome to the Booking System!</h1><p>To proceed with booking, please log in first.</p>";
+        }
         ?>
         <div class="card mx-auto" style="max-width: 300px;">
             <div class="card-header">Login</div>

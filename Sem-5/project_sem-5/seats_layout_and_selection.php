@@ -63,6 +63,24 @@ if (!isset($_SESSION['login'])) {
         .custom-checkbox .checkmark {
             transition: background-color 0.2s ease;
         }
+
+        .count {
+            padding-left: 12px;
+        }
+
+        .custom-checkbox1 {
+            display: inline-block;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .custom-checkbox1 .checkmark1 {
+            position: absolute;
+            top: -15px;
+            left: 0;
+            height: 20px;
+            width: 20px;
+        }
     </style>
 </head>
 <?php
@@ -82,7 +100,7 @@ $times_records = mysqli_query($conn, $times_query);
 $times_row = mysqli_fetch_assoc($times_records);
 $formatted_time = date('h:i A', strtotime($times_row['show_time']));
 
-$seats_id = '3';
+$seats_id = '1';
 $seats_query = "SELECT * FROM `seats` WHERE id=" . $seats_id . ";";
 $seats_records = mysqli_query($conn, $seats_query);
 $seats_row = mysqli_fetch_assoc($seats_records);
@@ -90,6 +108,7 @@ $seats_row = mysqli_fetch_assoc($seats_records);
 $seats_string = $seats_row['seat_structure'];
 $json_string = str_replace("'", '"', $seats_string);
 $seats_array = json_decode($json_string, true);
+$k = count($seats_array[1]);
 
 $no_seats_string = $seats_row['no_seat'];
 $no_seats_string = str_replace('[', '', $no_seats_string);
@@ -137,6 +156,7 @@ $price = [100, 150, 200];
                     foreach ($seats_array as $row) {
                         if (array_key_exists(substr($row[0], 0, 1), $level)) {
                             // if (substr($row[0], 0, 1) == 0 || substr($row[0], 0, 1) == 1 || substr($row[0], 0, 1) == 2) {
+                            // add in database seat_structure field 
                             echo '<p style="margin: 1px auto;"> ' . $level[substr($row[0], 0, 1)] . ' </p>';
                             continue;
                         } else {
@@ -168,7 +188,19 @@ $price = [100, 150, 200];
                         echo "<br>";
                     }
                     ?>
-
+                    <div class="count">
+                        <?php
+                        $i = 1;
+                        while ($k >= $i) {
+                        ?>
+                            <span class="custom-checkbox1">
+                                <span class="checkmark1" style="background-color: #F7FFE5;"><?= $i; ?></span>
+                            </span>
+                        <?php
+                            $i++;
+                        }
+                        ?>
+                    </div>
                     <button class="btn btn-primary mt-5" type="submit" style="width: 50%;">Booking</button>
                 </form>
             </div>
