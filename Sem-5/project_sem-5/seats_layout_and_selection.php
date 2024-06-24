@@ -6,6 +6,9 @@ if (!isset($_SESSION['login'])) {
     header("location:login.php");
     exit();
 }
+if (isset($_SESSION['booked_seats'])) {
+    echo $_SESSION['booked_seats'];
+}
 ?>
 
 <head>
@@ -24,9 +27,11 @@ if (!isset($_SESSION['login'])) {
             margin: 20px auto;
         }
 
-        /* .space { */
-        /* margin: 15px; */
-        /* } */
+        .space,
+        .number {
+            display: inline;
+            font-size: 18px;
+        }
 
         /* Hide the default checkbox */
         .custom-checkbox input[type="checkbox"] {
@@ -38,7 +43,7 @@ if (!isset($_SESSION['login'])) {
             display: inline-block;
             cursor: pointer;
             user-select: none;
-            padding-left: 25px;
+            padding-left: 23px;
             position: relative;
             /* font-size: 18px; */
         }
@@ -70,7 +75,7 @@ if (!isset($_SESSION['login'])) {
 
         .custom-checkbox1 {
             display: inline-block;
-            padding-left: 25px;
+            padding-left: 23px;
             position: relative;
         }
 
@@ -79,7 +84,7 @@ if (!isset($_SESSION['login'])) {
             top: -15px;
             left: 0;
             height: 20px;
-            width: 20px;
+            width: 23px;
         }
     </style>
 </head>
@@ -100,7 +105,7 @@ $times_records = mysqli_query($conn, $times_query);
 $times_row = mysqli_fetch_assoc($times_records);
 $formatted_time = date('h:i A', strtotime($times_row['show_time']));
 
-$seats_id = '1';
+$seats_id = '2';
 $seats_query = "SELECT * FROM `seats` WHERE id=" . $seats_id . ";";
 $seats_records = mysqli_query($conn, $seats_query);
 $seats_row = mysqli_fetch_assoc($seats_records);
@@ -127,6 +132,7 @@ $booked_seats_name = explode(", ", $booked_seats_name);
 $level = ['Silver : 100', 'Gold : 150', 'Platimun : 300'];
 $price = [100, 150, 200];
 // $_SESSION["price"] = $price[substr($row[0], 0, 1)];
+
 ?>
 
 <body>
@@ -154,13 +160,13 @@ $price = [100, 150, 200];
                     </div>
                     <?php
                     foreach ($seats_array as $row) {
-                        if (array_key_exists(substr($row[0], 0, 1), $level)) {
-                            // if (substr($row[0], 0, 1) == 0 || substr($row[0], 0, 1) == 1 || substr($row[0], 0, 1) == 2) {
-                            // add in database seat_structure field 
-                            echo '<p style="margin: 1px auto;"> ' . $level[substr($row[0], 0, 1)] . ' </p>';
+                        $alphabet = substr($row[0], 0, 1);
+                        if (array_key_exists($alphabet, $level)) {
+                            echo '<p style="margin: 1px auto;"> ' . $level[$alphabet] . ' </p>';
+                            // this line add levels
                             continue;
                         } else {
-                            echo '<span class="space">' . substr($row[0], 0, 1) . '</span>';
+                            echo '<span><pre class="space">' . $alphabet . '</pre></span>';
                         }
                         foreach ($row as $seats_array) {
                             if (in_array($seats_array, $no_seats_array)) {
@@ -194,7 +200,9 @@ $price = [100, 150, 200];
                         while ($k >= $i) {
                         ?>
                             <span class="custom-checkbox1">
-                                <span class="checkmark1" style="background-color: #F7FFE5;"><?= $i; ?></span>
+                                <span class="checkmark1" style="background-color: #F7FFE5;">
+                                    <pre class="number"><?= $i; ?></pre>
+                                </span>
                             </span>
                         <?php
                             $i++;

@@ -49,11 +49,7 @@ $records  = mysqli_query($conn, $query);
 </div>
 <script>
     function login() {
-        // window.location.href = "log-in.php";
-        // if (!isset($_SESSION['login'])) {
 
-        // <?php //header("location:login.php?text=yes"); 
-            ?>
-        // exit(); }
+        sessionStorage.setItem("selected_movie_id", "<?= $row['id'] ?>");
     }
 </script>

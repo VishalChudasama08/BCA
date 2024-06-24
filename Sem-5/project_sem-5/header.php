@@ -1,6 +1,15 @@
 <?php
 require_once("connect.php");
 session_start();
+if (!isset($_SESSION['login'])) {
+    if (!isset($_GET['login'])) {
+        header("location:login.php?login=yes");
+        exit();
+    } else {
+        // header("location:login.php");
+        // exit();
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,7 +17,6 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title></title>
@@ -83,9 +91,10 @@ session_start();
             if (isset($_SESSION['login'])) {
             ?>
                 <div class="dropdown dropstart me-3">
-                    <button class="user" style="border: none;color: white !important;background-color: #A0C49D;font-size:large;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" onmouseover="this.style.color=`yellow`" onmouseout="this.style.color=`white`"><strong>User</strong></button>
+                    <button class="user" style="border: none;color: white !important;background-color: grey !important;font-size:large;padding: 5px 6.2px !important;border-radius: 18px !important;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" onmouseover="this.style.color=`yellow`" onmouseout="this.style.color=`white`" size><strong>CV</strong></button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="#" onclick="myProfile()">My Profile</a></li>
+                        <li><a class="dropdown-item" href="#">My Profile</a></li>
+                        <!-- onclick="myProfile()" -->
                         <li><a class="dropdown-item" href="#">Booking History</a></li>
                     </ul>
                 </div>
@@ -102,7 +111,7 @@ session_start();
 </body>
 <script>
     function logout() {
-        let res = confirm("Are you sure you want to log out ?");
+        let res = confirm("Are you sure! You want to log out ?");
         if (res) {
             window.location.href = "logout.php";
         }

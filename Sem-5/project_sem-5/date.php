@@ -6,6 +6,13 @@ if (!isset($_SESSION['login'])) {
     exit();
 }
 $movie_id = $_GET['id'];
+
+$today = time();
+
+$day1 = strtotime("+1 day", $today);
+$day2 = strtotime("+2 days", $today);
+$day3 = strtotime("+3 days", $today);
+
 ?>
 <style>
     /* #a {
@@ -43,9 +50,11 @@ $movie_id = $_GET['id'];
 <div class="container">
     <div style="display: flex; flex-flow: row;">
         <h3 class="m-2">Select Date : </h3>
-        <a href="#" id="autoclick" onclick="loadDoc('cinema_and_times.php?id=<?= $movie_id; ?>&date=18')" type="button" class="btn btn-outline-info m-2">18 Dec</a>
-        <a href="#" onclick="loadDoc('cinema_and_times.php?id=<?= $movie_id; ?>&date=19')" type="button" class="btn btn-outline-info m-2">19 Dec</a>
-        <a href="#" onclick="loadDoc('cinema_and_times.php?id=<?= $movie_id; ?>&date=20')" type="button" class="btn btn-outline-info m-2">20 Dec</a>
+        <button id="autoclick" onclick="loadDoc('cinema_and_times.php?id=<?= $movie_id; ?>&date=18')" type="button" class="btn btn-outline-info m-2 buttons"><?= date("d M", $day1); ?></button>
+
+        <button onclick="loadDoc('cinema_and_times.php?id=<?= $movie_id; ?>&date=19')" type="button" class="btn btn-outline-info m-2 buttons"><?= date("d M", $day2); ?></button>
+
+        <button onclick="loadDoc('cinema_and_times.php?id=<?= $movie_id; ?>&date=20')" type="button" class="btn btn-outline-info m-2 buttons"><?= date("d M", $day3); ?></button>
     </div>
     <div id="cinema_times_content"></div>
     <div id="cinema-info-modal" class="modal">
@@ -58,7 +67,14 @@ $movie_id = $_GET['id'];
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
-        $('#autoclick').click()
+        //autoclick and add css
+        $('#autoclick').click().css('background-color', '#0dcaf0').css('color', 'black');
+        $('.buttons').click(function() {
+            // Remove background color from all buttons
+            $('button').css('background-color', '').css('color', '');
+            // Add background color to the clicked button
+            $(this).css('background-color', '#0dcaf0').css('color', 'black');
+        });
     });
 
     function loadDoc(page) {

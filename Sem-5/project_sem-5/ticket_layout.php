@@ -1,20 +1,27 @@
 <?php
 require_once("connect.php");
 include_once("header.php");
+if (!isset($_SESSION['login'])) {
+    header("location:login.php");
+    exit();
+}
 extract($_POST);
 echo $booked_seats_name = str_replace(" , ", ", ", implode(", ", $select_seats));
+
 $booked_seats = $booked_seats_name;
+$_SESSION["booked_seats"] = $booked_seats;
+
 echo "<br>";
 
 $seats_id = $_GET['seats_id'];
+$_SESSION["seats_id"] = $seats_id;
+
 $seats_query = "SELECT * FROM `seats` WHERE id='" . $seats_id . "';";
 $seats_records = mysqli_query($conn, $seats_query);
 $seats_row = mysqli_fetch_assoc($seats_records);
 
 
-if ($seats_row['booked_seats_name']) {
-    $seats_row['booked_seats_name']; // existing booked seats
-
+if ($seats_row['booked_seats_name']) { // existing booked seats
     // Combine booked seats into a single array (using explode and array_merge)
     $booked_seats_name_array = explode(", ", $booked_seats_name);
     $last_value = str_replace(" ", "", end($booked_seats_name_array));
@@ -27,7 +34,7 @@ if ($seats_row['booked_seats_name']) {
 
     // remove duplicate value in $all_booked_seats_name_array array
     $all_booked_seats_name_array = array_unique($all_booked_seats_name_array);
-
+    // reindex array 
     $all_booked_seats_name_array = array_values($all_booked_seats_name_array);
 
 
@@ -98,9 +105,17 @@ $formatted_time = date('h:i A', strtotime($times_row['show_time']));
         <p><strong>Seats:</strong> <?= $booked_seats; ?></p>
         <p><strong>Total Price:</strong> &#8377;<?= "Price" ?></p>
         <p><strong>Booking Date:</strong> <?= "from booking table"; ?></p>
-        <button class="btn btn-danger" type="submit">Booking Cancellation</button>
+        <button class="btn btn-danger" onclick="cancel()">Booking Cancellation</button>
     </div>
 </body>
+<script>
+    function cancel() {
+        let $ok = confirm("Are your sure! You want to cancel booking ?");
+        if ($ok) {
+            window.location.href = "booking_cancel.php";
+        }
+    }
+</script>
 
 </html>
 <?php include_once("footer.php"); ?>
