@@ -1,13 +1,13 @@
 <?php
-
 require_once("connect.php");
 include_once("header.php");
+
 if (!isset($_SESSION['login'])) {
     header("location:login.php");
     exit();
 }
 if (isset($_SESSION['booked_seats'])) {
-    echo $_SESSION['booked_seats'];
+    // echo $_SESSION['booked_seats'];
 }
 ?>
 
@@ -89,17 +89,18 @@ if (isset($_SESSION['booked_seats'])) {
     </style>
 </head>
 <?php
-$movie_id = $_GET['movie_id'];
+print_r($_POST);
+$movie_id = $_POST['movie_id'];
 $movie_query = "SELECT * FROM `movies` WHERE id='" . $movie_id . "';";
 $movie_records  = mysqli_query($conn, $movie_query);
 $movie_row = mysqli_fetch_assoc($movie_records);
 
-$cinema_id = $_GET['cinema_id'];
+$cinema_id = $_POST['cinema_id'];
 $cinema_query = "SELECT * FROM `cinema` WHERE id=" . $cinema_id . ";";
 $cinema_records  = mysqli_query($conn, $cinema_query);
 $cinema_row = mysqli_fetch_assoc($cinema_records);
 
-$times_id = $_GET['times_id'];
+$times_id = $_POST['times_id'];
 $times_query = "SELECT * FROM `times` WHERE id=" . $times_id . ";";
 $times_records = mysqli_query($conn, $times_query);
 $times_row = mysqli_fetch_assoc($times_records);
@@ -109,6 +110,7 @@ $seats_id = '2';
 $seats_query = "SELECT * FROM `seats` WHERE id=" . $seats_id . ";";
 $seats_records = mysqli_query($conn, $seats_query);
 $seats_row = mysqli_fetch_assoc($seats_records);
+// $_SESSION['seats_id'] = $seats_id; // ser this because on button onclick="postIds()... not set seats_id in post method, i not undustend this why not set, on postIds() function ids variable not present seats_id:2, why not present i not found this bug
 
 $seats_string = $seats_row['seat_structure'];
 $json_string = str_replace("'", '"', $seats_string);
@@ -154,7 +156,7 @@ $price = [100, 150, 200];
         </div>
         <div class="row">
             <div class="col-12 overflow-auto">
-                <form id="form" action="ticket_layout.php?cinema_id=<?= $cinema_id; ?>&amp;times_id=<?= $times_id; ?>&amp;movie_id=<?= $movie_id; ?>&amp;seats_id=<?= $seats_id; ?>" method="post" onsubmit="return validateCheckboxes()">
+                <form id="existingForm" action="ticket_layout.php" method="post" onsubmit="return validateCheckboxes('ticket_layout.php', ['movie_id:<?= $movie_id; ?>', 'cinema_id:<?= $cinema_row['id']; ?>', 'times_id:<?= $times_row['id']; ?>', 'seats_id:<?= $seats_id; ?>'], true)">
                     <div class="screen_icon">
                         <img src="images/screen-icon-180.svg" class="img-fluid" style="transform: rotate(180deg)" alt="screen-icon">
                     </div>
@@ -209,14 +211,14 @@ $price = [100, 150, 200];
                         }
                         ?>
                     </div>
-                    <button class="btn btn-primary mt-5" type="submit" style="width: 50%;">Booking</button>
+                    <button class="btn btn-primary mt-5" type="submit" type="button" style="width: 50%;">Booking</button>
                 </form>
             </div>
         </div>
     </div>
 </body>
 <script>
-    function validateCheckboxes() {
+    function validateCheckboxes(file, ids, formexist) {
         const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
         let isChecked = false;
@@ -230,6 +232,8 @@ $price = [100, 150, 200];
         if (!isChecked) {
             alert("Please select at least one seat.");
             return false; // Prevent form submission
+        } else {
+            postIds(file, ids, formexist);
         }
 
         return true; // Allow form submission

@@ -5,7 +5,7 @@ if (!isset($_SESSION['login'])) {
     header("location:login.php");
     exit();
 }
-$movie_id = $_GET['id'];
+$movie_id = $_POST['movie_id'];
 
 $today = time();
 
@@ -50,11 +50,11 @@ $day3 = strtotime("+3 days", $today);
 <div class="container">
     <div style="display: flex; flex-flow: row;">
         <h3 class="m-2">Select Date : </h3>
-        <button id="autoclick" onclick="loadDoc('cinema_and_times.php?id=<?= $movie_id; ?>&date=18')" type="button" class="btn btn-outline-info m-2 buttons"><?= date("d M", $day1); ?></button>
+        <button id="autoclick" onclick="loadCinemas('cinema_and_times.php?id=<?= $movie_id; ?>&date=18')" type="button" class="btn btn-outline-info m-2 buttons"><?= date("d M", $day1); ?></button>
 
-        <button onclick="loadDoc('cinema_and_times.php?id=<?= $movie_id; ?>&date=19')" type="button" class="btn btn-outline-info m-2 buttons"><?= date("d M", $day2); ?></button>
+        <button onclick="loadCinemas('cinema_and_times.php?id=<?= $movie_id; ?>&date=19')" type="button" class="btn btn-outline-info m-2 buttons"><?= date("d M", $day2); ?></button>
 
-        <button onclick="loadDoc('cinema_and_times.php?id=<?= $movie_id; ?>&date=20')" type="button" class="btn btn-outline-info m-2 buttons"><?= date("d M", $day3); ?></button>
+        <button onclick="loadCinemas('cinema_and_times.php?id=<?= $movie_id; ?>&date=20')" type="button" class="btn btn-outline-info m-2 buttons"><?= date("d M", $day3); ?></button>
     </div>
     <div id="cinema_times_content"></div>
     <div id="cinema-info-modal" class="modal">
@@ -77,7 +77,7 @@ $day3 = strtotime("+3 days", $today);
         });
     });
 
-    function loadDoc(page) {
+    function loadCinemas(page) {
         const xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {

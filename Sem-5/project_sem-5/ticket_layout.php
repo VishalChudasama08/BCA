@@ -13,7 +13,7 @@ $_SESSION["booked_seats"] = $booked_seats;
 
 echo "<br>";
 
-$seats_id = $_GET['seats_id'];
+$seats_id = $_POST['seats_id'];
 $_SESSION["seats_id"] = $seats_id;
 
 $seats_query = "SELECT * FROM `seats` WHERE id='" . $seats_id . "';";
@@ -67,17 +67,17 @@ if ($seats_updated) {
     echo "Error updating seat: " . mysqli_error($conn);
 }
 
-$movie_id = $_GET['movie_id'];
+$movie_id = $_POST['movie_id'];
 $movie_query = "SELECT * FROM `movies` WHERE id='" . $movie_id . "';";
 $movie_records  = mysqli_query($conn, $movie_query);
 $movie_row = mysqli_fetch_assoc($movie_records);
 
-$cinema_id = $_GET['cinema_id'];
+$cinema_id = $_POST['cinema_id'];
 $cinema_query = "SELECT * FROM `cinema` WHERE id=" . $cinema_id . ";";
 $cinema_records  = mysqli_query($conn, $cinema_query);
 $cinema_row = mysqli_fetch_assoc($cinema_records);
 
-$times_id = $_GET['times_id'];
+$times_id = $_POST['times_id'];
 $times_query = "SELECT * FROM `times` WHERE id=" . $times_id . ";";
 $times_records  = mysqli_query($conn, $times_query);
 $times_row = mysqli_fetch_assoc($times_records);

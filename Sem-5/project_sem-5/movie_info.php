@@ -9,12 +9,14 @@ if (!isset($_SESSION['login'])) {
 
 <body style="background-color: #F7FFE5;">
     <?php
-    if (isset($_GET['id'])) {
-        $id = $_GET['id'];
-        $query = "select * from movies where id=" . $id . "";
-        $records  = mysqli_query($conn, $query);
-        $row = mysqli_fetch_assoc($records);
-    }
+    // echo $_POST['movie_id'];
+    // if (isset($_GET['id'])) {
+    // $id = $_GET['id'];
+    $id = $_POST['movie_id'];
+    $query = "select * from movies where id=" . $id . "";
+    $records  = mysqli_query($conn, $query);
+    $row = mysqli_fetch_assoc($records);
+    // }
     ?>
     <div class="container">
         <div class="card">
@@ -43,7 +45,7 @@ if (!isset($_SESSION['login'])) {
                         </div>
                         <p class="card-text mb-1"><strong>About the movie: </strong></p>
                         <p class="card-text mb-1"><?= $row['description'] ?></p>
-                        <a class="btn btn-primary" href="date.php?id=<?= $row['id'] ?>" role="button" style="width: 95%;">Booking</a>
+                        <button class="btn btn-primary" onclick="postIds('date.php', ['movie_id:<?= $row['id'] ?>'], false)" style="width: 95%;">Booking</button>
                     </div>
                 </div>
             </div>

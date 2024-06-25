@@ -113,6 +113,7 @@ if (!isset($_SESSION['login'])) {
     function logout() {
         let res = confirm("Are you sure! You want to log out ?");
         if (res) {
+            sessionStorage.clear();
             window.location.href = "logout.php";
         }
     }
@@ -132,5 +133,38 @@ if (!isset($_SESSION['login'])) {
     //             $('#cinema-info-modal').hide();
     //         }
     //     });
-    // });
+    // })
+
+    // set ids in post method
+    function postIds(file, ids, form_exist) {
+        let form;
+
+        if (form_exist == true) {
+            form = document.getElementById('existingForm');
+        } else {
+            form = document.createElement('form');
+            form.method = 'POST';
+            form.action = file;
+        }
+
+        ids.forEach(element => {
+            let parts = element.split(':');
+            let id_name = parts[0];
+            let id = parts[1];
+
+            // it is Create input element
+            let input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = id_name;
+            input.value = id;
+
+            // set input tag as from append childs 
+            form.appendChild(input);
+        });
+
+        // set form tag as body append child
+        document.body.appendChild(form);
+
+        form.submit();
+    }
 </script>

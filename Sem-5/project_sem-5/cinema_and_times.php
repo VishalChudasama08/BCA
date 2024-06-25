@@ -50,9 +50,9 @@ $cinema_records  = mysqli_query($conn, $cinema_query);
                         while ($times_row = mysqli_fetch_assoc($times_records)) {
                             $formatted_time = date('h:i A', strtotime($times_row['show_time']));
                         ?>
-                            <a href="seats_layout_and_selection.php?cinema_id=<?= $cinema_row['id']; ?>&amp;times_id=<?= $times_row['id']; ?>&amp;movie_id=<?= $movie_id; ?>" class="btn btn-outline-warning">
+                            <button onclick="postIds('seats_layout_and_selection.php', ['movie_id:<?= $movie_id; ?>', 'cinema_id:<?= $cinema_row['id']; ?>', 'times_id:<?= $times_row['id']; ?>'], false)" class="btn btn-outline-warning">
                                 <?= $formatted_time; ?>
-                            </a>
+                            </button>
                         <?php
                         }
                         ?>

@@ -23,7 +23,7 @@ include_once("header.php");
             echo "<h1>Welcome to the Booking System!</h1><p>To proceed with booking, please log in first.</p>";
         }
         ?>
-        <div class="card mx-auto" style="max-width: 300px;">
+        <div class="card mx-auto" style="min-width: 300px;max-width: 600px;">
             <div class="card-header">Login</div>
             <div class="card-body">
                 <form action="login_check.php" method="post">
