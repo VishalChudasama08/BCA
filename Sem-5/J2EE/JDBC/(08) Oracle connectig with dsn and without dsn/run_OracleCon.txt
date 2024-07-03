@@ -1,0 +1,25 @@
+run OracleCon.java file 
+
+cmd =>
+Microsoft Windows [Version 10.0.19042.1466]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Java\jdk1.7\bin>javac OracleCon.java
+
+C:\Java\jdk1.7\bin>java OracleCon
+7369  SMITH  CLERK
+7499  ALLEN  SALESMAN
+7521  WARD  SALESMAN
+7566  JONES  MANAGER
+7654  MARTIN  SALESMAN
+7698  BLAKE  MANAGER
+7782  CLARK  MANAGER
+7788  SCOTT  ANALYST
+7839  KING  PRESIDENT
+7844  TURNER  SALESMAN
+7876  ADAMS  CLERK
+7900  JAMES  CLERK
+7902  FORD  ANALYST
+7934  MILLER  CLERK
+
+C:\Java\jdk1.7\bin>

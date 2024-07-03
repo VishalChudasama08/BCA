@@ -1,0 +1,31 @@
+run mysqldsncon.java file 
+
+start xampp mysql server
+in phpmyadmin create database name -> emp
+create table name-> emp with any field
+
+then,
+
+Control Panel -> ODBC Data Source Administrator (64-bit) 
+					User DSN
+					click "Add..."
+					choose -> MySQL ODBC 8.0 ANSI Driver
+					click "Finish" (open MySQL Connector/ODBC Data Source Configuration) in this window
+								Data Source Name: <dsn name> (in my case 'dsn_name', this see in mysqldsncon.java file this line DriverManager.getConnection("jdbc:odbc:dsn_name","root","");)
+								Description: <any>
+								TCP/IP Server: <host name> (in my case 'localhost')
+								User: <user name> (in my case 'root')
+								
+								Database: <database name> (in my case 'emp')
+								then, click "Test" you are see "Connction Successful" window click "ok" then "ok" then "ok"
+								
+then open cmd =>
+Microsoft Windows [Version 10.0.19042.789]
+(c) 2020 Microsoft Corporation. All rights reserved.
+
+C:\Java\jdk1.7\bin>javac mysqldsncon.java
+
+C:\Java\jdk1.7\bin>java mysqldsncon
+Connected Successfully To mysql database
+
+C:\Java\jdk1.7\bin>

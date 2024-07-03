@@ -1,0 +1,38 @@
+run oradsncon.java file =>
+
+chenge in oradsncon.java file this line ->
+         Connection con =  DriverManager.getConnection("jdbc:odbc:emp","scott","tiger");
+on username (scott) and password (tiger)
+
+open Control Panel => ODBC Data Source Administrator (64-bit) 
+					User DSN
+					click "Add..."
+					choose -> Oracle in XE
+					click "Finish" -> this open (Oracle ODBC Driver Configuration)
+								Data Source Name: <dsn_name> (in my case 'emp')
+								Description: any
+					then click "ok" then "ok"
+
+
+open Run SQL Command Line =>
+
+SQL*Plus: Release 11.2.0.2.0 Production on Wed Jun 26 11:28:20 2024
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> connect
+Enter user-name: scott
+Enter password: 				(tiger)
+Connected.
+SQL> (create table emp, using emp.sql file)
+
+open cmd =>
+Microsoft Windows [Version 10.0.19042.789]
+(c) 2020 Microsoft Corporation. All rights reserved.
+
+C:\Java\jdk1.7\bin>javac oradsncon.java
+
+C:\Java\jdk1.7\bin>java oradsncon
+Connected Successfully To Oracle
+
+C:\Java\jdk1.7\bin>

@@ -1,0 +1,38 @@
+run ordsnlessdemo.java file =>
+
+chenge in ordsnlessdemo.java file this line ->
+         Connection con =  DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","scott","tiger");
+on username (scott) and password (tiger)
+
+open -> Run SQL Command Line
+
+SQL*Plus: Release 11.2.0.2.0 Production on Wed Jun 26 11:28:20 2024
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> connect
+Enter user-name: scott
+Enter password: 				(tiger)
+Connected.
+SQL> CREATE TABLE employee(emp_number number(11), name varchar(50));
+
+Table created.
+
+SQL> desc employee;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMP_NUMBER                                         NUMBER(11)
+ NAME                                               VARCHAR2(50)
+
+SQL>
+
+open -> cmd =>
+Microsoft Windows [Version 10.0.19042.789]
+(c) 2020 Microsoft Corporation. All rights reserved.
+
+C:\Java\jdk1.7\bin>javac ordsnlessdemo.java
+
+C:\Java\jdk1.7\bin>java ordsnlessdemo
+Connected Successfully To Oracle
+
+C:\Java\jdk1.7\bin>

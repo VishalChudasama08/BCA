@@ -1,0 +1,7 @@
+syntax for mysql database connection
+
+Class.forName("com.mysql.jdbc.Driver");
+Connection conn = null;
+conn = DriverManager.getConnection("jdbc:mysql://hostname:port/dbname","username", "password");
+conn.close();
+

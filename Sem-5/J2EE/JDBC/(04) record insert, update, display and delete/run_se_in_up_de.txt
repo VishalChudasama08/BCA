@@ -1,0 +1,129 @@
+Microsoft Windows [Version 10.0.19042.789]
+(c) 2020 Microsoft Corporation. All rights reserved.
+
+C:\Java\jdk1.7\bin>javac se_in_up_de.java
+
+C:\Java\jdk1.7\bin>java se_in_up_de
+
+1.Display The Record
+2.Insert The Record
+3.Update The Record
+4.Delete The Record
+5.Exit
+
+Enter your Choice : 1
+
+
+Employee no.    : 1
+Employee Name   : vishal
+Employee Salary : 987654.0
+
+Employee no.    : 2
+Employee Name   : nitin
+Employee Salary : 876543.0
+
+Employee no.    : 3
+Employee Name   : ajay
+Employee Salary : 456789.0
+
+
+1.Display The Record
+2.Insert The Record
+3.Update The Record
+4.Delete The Record
+5.Exit
+
+Enter your Choice : 2
+
+
+Enter Employee no.      : 4
+Enter Employee Name     : paresh
+Enter Employee Salary : 784532
+Record Inserted
+
+1.Display The Record
+2.Insert The Record
+3.Update The Record
+4.Delete The Record
+5.Exit
+
+Enter your Choice : 3
+
+
+Enter employee No which you want to update := 2
+
+Enter employee Name for update :=> vishanu
+Record Updated
+
+1.Display The Record
+2.Insert The Record
+3.Update The Record
+4.Delete The Record
+5.Exit
+
+Enter your Choice : 1
+
+
+Employee no.    : 1
+Employee Name   : vishal
+Employee Salary : 987654.0
+
+Employee no.    : 2
+Employee Name   : vishanu
+Employee Salary : 876543.0
+
+Employee no.    : 3
+Employee Name   : ajay
+Employee Salary : 456789.0
+
+Employee no.    : 4
+Employee Name   : paresh
+Employee Salary : 784532.0
+
+
+1.Display The Record
+2.Insert The Record
+3.Update The Record
+4.Delete The Record
+5.Exit
+
+Enter your Choice : 4
+
+
+Enter employee No which you want to Delete := 2
+Record Deleted
+
+1.Display The Record
+2.Insert The Record
+3.Update The Record
+4.Delete The Record
+5.Exit
+
+Enter your Choice : 1
+
+
+Employee no.    : 1
+Employee Name   : vishal
+Employee Salary : 987654.0
+
+Employee no.    : 3
+Employee Name   : ajay
+Employee Salary : 456789.0
+
+Employee no.    : 4
+Employee Name   : paresh
+Employee Salary : 784532.0
+
+
+1.Display The Record
+2.Insert The Record
+3.Update The Record
+4.Delete The Record
+5.Exit
+
+Enter your Choice : 5
+
+
+Exit
+
+C:\Java\jdk1.7\bin>

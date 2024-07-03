@@ -1,0 +1,18 @@
+run mysqldsnless.java file
+
+start xampp mysql server
+
+run mysqldsnless.java file in cmd
+
+cmd =>
+Microsoft Windows [Version 10.0.19042.789]
+(c) 2020 Microsoft Corporation. All rights reserved.
+
+C:\Java\jdk1.7\bin>javac mysqldsnless.java
+
+C:\Java\jdk1.7\bin>java mysqldsnless
+-------- MySQL JDBC Connection Testing ------------
+MySQL JDBC Driver Registered!
+You made it, take control your database now!
+
+C:\Java\jdk1.7\bin>

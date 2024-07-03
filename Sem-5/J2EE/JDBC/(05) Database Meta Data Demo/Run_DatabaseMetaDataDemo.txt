@@ -1,0 +1,18 @@
+make database table name is : "stud"
+
+cmd => 
+
+Microsoft Windows [Version 10.0.19042.789]
+(c) 2020 Microsoft Corporation. All rights reserved.
+
+C:\Java\jdk1.7\bin>javac DatabaseMetaDataDemo.java
+
+C:\Java\jdk1.7\bin>java DatabaseMetaDataDemo
+DatabaseMetaData Information
+===========================================
+Product Name:ACCESS
+ProductVersion :12.00.0000
+Driver Name: JDBC-ODBC Bridge (ACEODBC.DLL)
+Driver Version :2.0001 (Microsoft Access database engine)
+
+C:\Java\jdk1.7\bin>

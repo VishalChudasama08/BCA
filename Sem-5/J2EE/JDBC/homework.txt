@@ -1,0 +1,2 @@
+write a jdbc code to display records from student table in mysql without using dsn
+table filed --> rollNumber, name, mobileNumber
