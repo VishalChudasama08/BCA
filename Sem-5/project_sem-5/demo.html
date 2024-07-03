@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button onclick="postMovieId('demo.php', ['movie_id:1', 'cinema_id:2'])" style="cursor: pointer;">
+        <img src="images/12th_Fail.jpg" alt="">
+    </button>
+</body>
+<script>
+    function postMovieId(file, ids) {
+        let form = document.createElement('form');
+        form.method = 'POST';
+        form.action = file;
+
+        ids.forEach(element => {
+            let parts = element.split(':');
+            let id_name = parts[0];
+            let id = parts[1];
+
+            // it is Create input element
+            let input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = id_name;
+            input.value = id;
+
+            // set input tag as from append childs 
+            form.appendChild(input);
+        });
+
+        // set form tag as body append child
+        document.body.appendChild(form);
+
+        form.submit();
+    }
+</script>
+
+</html>

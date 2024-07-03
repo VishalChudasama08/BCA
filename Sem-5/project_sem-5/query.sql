@@ -375,32 +375,20 @@ VALUES
 CREATE TABLE IF NOT EXISTS bookings (
     id INT(11) AUTO_INCREMENT PRIMARY KEY,
     user_id INT(11) UNSIGNED NOT NULL,
-    show_id INT(11) NOT NULL,
-    number_of_seats INT NOT NULL,
+    movies_id INT(11) NOT NULL,
+    cinema_id INT(11) NOT NULL,
+    number_of_seats INT(5) NOT NULL,
     total_price DECIMAL(10, 2) NOT NULL,
     booking_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    FOREIGN KEY (show_id) REFERENCES shows(id) ON DELETE CASCADE
+    FOREIGN KEY (movies_id) REFERENCES movies(id) ON DELETE CASCADE,
+    FOREIGN KEY (cinema_id) REFERENCES cinema(id) ON DELETE CASCADE
 );
-INSERT INTO bookings (user_id, show_id, number_of_seats, total_price, booking_date) VALUES 
-(1, 1, 2, 200.00, NOW()),
-(8, 2, 3, 150.00, NOW());
 
-
-CREATE TABLE IF NOT EXISTS seat_bookings (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    booking_id INT NOT NULL,
-    seat_number VARCHAR(10) NOT NULL,
-    FOREIGN KEY (booking_id) REFERENCES bookings(id) ON DELETE CASCADE
-);
-INSERT INTO seat_bookings (booking_id, seat_number) VALUES 
-(1, 'A1'),
-(1, 'A2'),
-(2, 'B1'),
-(2, 'B2'),
-(2, 'B3');
+INSERT INTO bookings (user_id, movies_id, cinema_id, number_of_seats, total_price) VALUES 
+(1, 1, 1, 2, 200.00),
+(8, 2, 2, 3, 150.00);
 
 
 
@@ -415,4 +403,7 @@ INSERT INTO seat_bookings (booking_id, seat_number) VALUES
 -- ('The Cinestar Miniplex: Bhat Circle, SP Ring Road', '201, Xperia, 2nd Floor, Opposite Agora Mall, Bhat Circle, Gandhinagar, Ahmedabad, Gujarat 382424, India', 'Ticket Cancellation, F&B, MTicket, Recliner Seats, Parking Facility, Food Court', 80, "['A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'A7', 'A8', 'A9', 'A10', 'A11', 'A12', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B9', 'B10', 'B11', 'B12', 'C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7', 'C8', 'C9', 'C10', 'C11', 'C12', 'D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7', 'D8', 'D9', 'D10', 'D11', 'D12', 'E1', 'E2', 'E3', 'E4', 'E5', 'E6', 'E7', 'E8', 'E9', 'E10', 'E11', 'E12', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12', 'G1', 'G2', 'G3', 'G4', 'G5', 'G6', 'G7', 'G8', 'G9', 'G10', 'G11', 'G12', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9', 'H10', 'H11', 'H12']", "['A6', 'A7', 'B6', 'B7', 'C6', 'C7', 'D6', 'D7', 'E6', 'E7', 'F6', 'F7', 'G6', 'G7', 'H6', 'H7']"), 
 -- ('ROONGTA CINEMAS, Shyam Mandir Vesu: Surat', '5th Floor, Roongta Cinemas, Roongta Signature, Vesu, Opposite Shyam Baba Mandir, Surat, Gujarat 395007, India', 'Ticket Cancellation, F&B, MTicket, Food Court', 124, "['A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'A7', 'A8', 'A9', 'A10', 'A11', 'A12', 'A13', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B9', 'B10', 'B11', 'B12', 'B13', 'C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7', 'C8', 'C9', 'C10', 'C11', 'C12', 'C13', 'D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7', 'D8', 'D9', 'D10', 'D11', 'D12', 'D13', 'E1', 'E2', 'E3', 'E4', 'E5', 'E6', 'E7', 'E8', 'E9', 'E10', 'E11', 'E12', 'E13', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12', 'F13', 'G1', 'G2', 'G3', 'G4', 'G5', 'G6', 'G7', 'G8', 'G9', 'G10', 'G11', 'G12', 'G13', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9', 'H10', 'H11', 'H12', 'H13', 'I1', 'I2', 'I3', 'I4', 'I5', 'I6', 'I7', 'I8', 'I9', 'I10', 'I11', 'I12', 'I13', 'J1', 'J2', 'J3', 'J4', 'J5', 'J6', 'J7', 'J8', 'J9', 'J10', 'J11', 'J12', 'J13']", "['A1', 'A2', 'A12', 'A13','J12', 'J13]"), 
 -- ('Wide Angle: Mehsana', 'Nagalpur Village, Near Khari River Bridge, Mehsana, Gujarat 384002, India', 'Parking Facility, Food Court', 176, "['A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'A7', 'A8', 'A9', 'A10', 'A11', 'A12', 'A13', 'A14', 'A15', 'A16', 'A17', 'A18', 'A19', 'A20', 'A21', 'A22', 'A23', 'A24', 'A25', 'B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8', 'B9', 'B10', 'B11', 'B12', 'B13', 'B14', 'B15', 'B16', 'B17', 'B18', 'B19', 'B20', 'B21', 'B22', 'B23', 'B24', 'B25', 'C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7', 'C8', 'C9', 'C10', 'C11', 'C12', 'C13', 'C14', 'C15', 'C16', 'C17', 'C18', 'C19', 'C20', 'C21', 'C22', 'C23', 'C24', 'C25', 'D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7', 'D8', 'D9', 'D10', 'D11', 'D12', 'D13', 'D14', 'D15', 'D16', 'D17', 'D18', 'D19', 'D20', 'D21', 'D22', 'D23', 'D24', 'D25', 'E1', 'E2', 'E3', 'E4', 'E5', 'E6', 'E7', 'E8', 'E9', 'E10', 'E11', 'E12', 'E13', 'E14', 'E15', 'E16', 'E17', 'E18', 'E19', 'E20', 'E21', 'E22', 'E23', 'E24', 'E25', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8', 'F9', 'F10', 'F11', 'F12', 'F13', 'F14', 'F15', 'F16', 'F17', 'F18', 'F19', 'F20', 'F21', 'F22', 'F23', 'F24', 'F25', 'G1', 'G2', 'G3', 'G4', 'G5', 'G6', 'G7', 'G8', 'G9', 'G10', 'G11', 'G12', 'G13', 'G14', 'G15', 'G16', 'G17', 'G18', 'G19', 'G20', 'G21', 'G22', 'G23', 'G24', 'G25', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8', 'H9', 'H10', 'H11', 'H12', 'H13', 'H14', 'H15', 'H16', 'H17', 'H18', 'H19', 'H20', 'H21', 'H22', 'H23', 'H24', 'H25', 'I1', 'I2', 'I3', 'I4', 'I5', 'I6', 'I7', 'I8', 'I9', 'I10', 'I11', 'I12', 'I13', 'I14', 'I15', 'I16', 'I17', 'I18', 'I19', 'I20', 'I21', 'I22', 'I23', 'I24', 'I25', 'J1', 'J2', 'J3', 'J4', 'J5', 'J6', 'J7', 'J8', 'J9', 'J10', 'J11', 'J12', 'J13', 'J14', 'J15', 'J16', 'J17', 'J18', 'J19', 'J20', 'J21', 'J22', 'J23', 'J24', 'J25']", "['A1', 'A2', 'A3', 'A13', 'A23', 'A24', 'A25', 'B1', 'B2', 'B3', 'B13', 'B23', 'B24', 'B25', 'C1', 'C2', 'C13', 'C24', 'C25', 'D1', 'D2', 'D13', 'D24', 'D25', 'E1', 'E2', 'E13', 'E24', 'E25', 'F5', 'F6', 'F7', 'F12', 'F13', 'F14', 'F19', 'F20', 'F21', 'G5', 'G6', 'G7', 'G12', 'G13', 'G14', 'G19', 'G20', 'G21', 'H5', 'H6', 'H7', 'H12', 'H13', 'H14', 'H19', 'H20', 'H21', 'I5', 'I6', 'I7', 'I12', 'I13', 'I14', 'I19', 'I20', 'I21', 'J5', 'J6', 'J7', 'J12', 'J13', 'J14', 'J19', 'J20', 'J21']"); 
+
+
+
 

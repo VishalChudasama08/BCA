@@ -6,14 +6,15 @@ if (!isset($_SESSION['login'])) {
     exit();
 }
 extract($_POST);
-echo $booked_seats_name = str_replace(" , ", ", ", implode(", ", $select_seats));
+// echo $booked_seats_name = str_replace(" , ", ", ", implode(", ", $select_seats)); // this action doing in payment page 
+echo $booked_seats_name = $select_seats;
 
 $booked_seats = $booked_seats_name;
 $_SESSION["booked_seats"] = $booked_seats;
 
 echo "<br>";
 
-$seats_id = $_POST['seats_id'];
+// $seats_id = $_POST['seats_id'];
 $_SESSION["seats_id"] = $seats_id;
 
 $seats_query = "SELECT * FROM `seats` WHERE id='" . $seats_id . "';";
@@ -48,8 +49,8 @@ if ($seats_row['booked_seats_name']) { // existing booked seats
 }
 
 $total_seats_number = $seats_row['total_seats'];
-$booke_seats_number = count(explode(", ", $booked_seats_name));
-$available_seats = $total_seats_number - $booke_seats_number;
+$booked_seats_number = count(explode(", ", $booked_seats_name));
+$available_seats = $total_seats_number - $booked_seats_number;
 
 $seats_query = "UPDATE `seats` SET `available_seats` = " . $available_seats . ", `booked_seats_name` = '" . $booked_seats_name . "' WHERE `seats`.`id` = " . $seats_id . ";";
 
@@ -67,17 +68,17 @@ if ($seats_updated) {
     echo "Error updating seat: " . mysqli_error($conn);
 }
 
-$movie_id = $_POST['movie_id'];
+// $movie_id = $_POST['movie_id'];
 $movie_query = "SELECT * FROM `movies` WHERE id='" . $movie_id . "';";
 $movie_records  = mysqli_query($conn, $movie_query);
 $movie_row = mysqli_fetch_assoc($movie_records);
 
-$cinema_id = $_POST['cinema_id'];
+// $cinema_id = $_POST['cinema_id'];
 $cinema_query = "SELECT * FROM `cinema` WHERE id=" . $cinema_id . ";";
 $cinema_records  = mysqli_query($conn, $cinema_query);
 $cinema_row = mysqli_fetch_assoc($cinema_records);
 
-$times_id = $_POST['times_id'];
+// $times_id = $_POST['times_id'];
 $times_query = "SELECT * FROM `times` WHERE id=" . $times_id . ";";
 $times_records  = mysqli_query($conn, $times_query);
 $times_row = mysqli_fetch_assoc($times_records);
@@ -103,7 +104,7 @@ $formatted_time = date('h:i A', strtotime($times_row['show_time']));
         <p><strong>Show Date:</strong> <?= $times_row['show_date']; ?></p>
         <p><strong>Show Time:</strong> <?= $formatted_time; ?></p>
         <p><strong>Seats:</strong> <?= $booked_seats; ?></p>
-        <p><strong>Total Price:</strong> &#8377;<?= "Price" ?></p>
+        <p><strong>Total Price:</strong> &#8377;<?= $total_price; ?></p>
         <p><strong>Booking Date:</strong> <?= "from booking table"; ?></p>
         <button class="btn btn-danger" onclick="cancel()">Booking Cancellation</button>
     </div>

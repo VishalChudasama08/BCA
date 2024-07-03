@@ -124,17 +124,29 @@ echo $no_seats_string = str_replace('\'', '', $no_seats_string);
 $no_seats_array = explode(", ", $no_seats_string);
 // echo "<pre>";
 // print_r($no_seats_array);
-// echo "</pre>";
+// echo "</pre>";                                                                   
 echo "<br>";
 
 echo $booked_seats_name = $seats_row['booked_seats_name'];
 $booked_seats_name = explode(", ", $booked_seats_name);
 
 
-$level = ['Silver : 100', 'Gold : 150', 'Platimun : 300'];
-$price = [100, 150, 200];
+// $level = ['Silver : 100', 'Gold : 150', 'Platinum : 300'];
+// $price = [100, 150, 200];
 // $_SESSION["price"] = $price[substr($row[0], 0, 1)];
 
+$level = ['Silver :', 'Gold :', 'Platinum :'];
+
+$movie_price = $movie_row['movie_price'];
+
+$price_level = explode(",", $cinema_row['price_level']);
+$total_price;
+$n = 0;
+foreach ($price_level as $p) {
+    $total_price[$n] = $movie_price + (int)$p;
+    $n++;
+}
+print_r($total_price);
 ?>
 
 <body>
@@ -156,19 +168,26 @@ $price = [100, 150, 200];
         </div>
         <div class="row">
             <div class="col-12 overflow-auto">
-                <form id="existingForm" action="ticket_layout.php" method="post" onsubmit="return validateCheckboxes('ticket_layout.php', ['movie_id:<?= $movie_id; ?>', 'cinema_id:<?= $cinema_row['id']; ?>', 'times_id:<?= $times_row['id']; ?>', 'seats_id:<?= $seats_id; ?>'], true)">
+                <form id="existingForm" action="payment.php" method="post" onsubmit="return validateCheckboxes('payment.php', ['movie_id:<?= $movie_id; ?>', 'cinema_id:<?= $cinema_row['id']; ?>', 'times_id:<?= $times_row['id']; ?>', 'seats_id:<?= $seats_id; ?>'], true)">
                     <div class="screen_icon">
                         <img src="images/screen-icon-180.svg" class="img-fluid" style="transform: rotate(180deg)" alt="screen-icon">
                     </div>
                     <?php
+                    $i = 0;
+                    $all_alphabet_array = [];
+                    $all_alphabet_string = '';
                     foreach ($seats_array as $row) {
                         $alphabet = substr($row[0], 0, 1);
+                        $all_alphabet_string .= $alphabet;
                         if (array_key_exists($alphabet, $level)) {
-                            echo '<p style="margin: 1px auto;"> ' . $level[$alphabet] . ' </p>';
                             // this line add levels
+                            echo '<p style="margin: 1px auto;"> ' . $level[$alphabet] . ' ' . $total_price[$i] . ' </p>';
+                            $all_alphabet_string = '';
+                            $i++;
                             continue;
                         } else {
                             echo '<span><pre class="space">' . $alphabet . '</pre></span>';
+                            $all_alphabet_array[$i - 1] = $all_alphabet_string;
                         }
                         foreach ($row as $seats_array) {
                             if (in_array($seats_array, $no_seats_array)) {
@@ -209,6 +228,8 @@ $price = [100, 150, 200];
                         <?php
                             $i++;
                         }
+                        $_SESSION['total_price'] = $total_price;
+                        $_SESSION['all_alphabet_array'] = $all_alphabet_array;
                         ?>
                     </div>
                     <button class="btn btn-primary mt-5" type="submit" type="button" style="width: 50%;">Booking</button>

@@ -149,6 +149,7 @@ if (!isset($_SESSION['login'])) {
 
         ids.forEach(element => {
             let parts = element.split(':');
+            console.log(parts);
             let id_name = parts[0];
             let id = parts[1];
 
