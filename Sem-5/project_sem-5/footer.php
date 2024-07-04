@@ -1,5 +1,5 @@
 <body style="width: 100%;">
-    <div class="container-flued mt-3">
+    <div class="container-flued mt-2">
         <footer>
             <div class="mt-auto py-1 text-center">
                 <div class="d-flex justify-content-center">

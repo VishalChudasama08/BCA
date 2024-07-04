@@ -1,14 +1,26 @@
 <?php
 require_once("connect.php");
+session_start();
+
+$today = time();
+$day1 = strtotime("+1 days", $today);
+$day2 = strtotime("+2 days", $today);
+$day3 = strtotime("+3 days", $today);
 
 $date = '';
-if ($_GET['date'] == '18') {
+$day = '';
+if ($_GET['date'] == date("d", $day1)) {
     $date = '2024-12-18';
-} elseif ($_GET['date'] == '19') {
+    $day = date("d/m/Y", $day1);
+} elseif ($_GET['date'] == date("d", $day2)) {
     $date = '2024-12-19';
-} elseif ($_GET['date'] == '20') {
+    $day = date("d/m/Y", $day2);
+} elseif ($_GET['date'] == date("d", $day3)) {
     $date = '2024-12-20';
+    $day = date("d/m/Y", $day3);
 }
+$_SESSION['booking_day'] = $day;
+
 $movie_id = $_GET['id'];
 $movie_query = "SELECT * FROM `movies` WHERE id='" . $movie_id . "';";
 $movie_records  = mysqli_query($conn, $movie_query);
@@ -18,8 +30,8 @@ $cinema_query = "SELECT * FROM `cinema`;";
 $cinema_records  = mysqli_query($conn, $cinema_query);
 ?>
 
-<div class="container">
-    <table class="table">
+<div class="border border-2 border-info rounded mt-2 pt-1 pb-1">
+    <table class="table m-0">
         <tbody>
             <tr>
                 <th>Cinema Name</th>
@@ -58,7 +70,7 @@ $cinema_records  = mysqli_query($conn, $cinema_query);
                         ?>
                     </td>
                     <td>
-                        <a href="#" onclick="loadCinemaInfo(<?= $cinema_row['id']; ?>)">info</a>
+                        <a href="#" onclick="loadCinemaInfo(<?= $cinema_row['id']; ?>)"><i class="fa-solid fa-circle-info"></i></a>
                     </td>
                 </tr>
             <?php

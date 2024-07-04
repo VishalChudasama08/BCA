@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 03, 2024 at 12:46 PM
+-- Generation Time: Jul 04, 2024 at 09:17 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -44,7 +44,7 @@ CREATE TABLE `bookings` (
 
 INSERT INTO `bookings` (`id`, `user_id`, `movies_id`, `cinema_id`, `number_of_seats`, `total_price`, `booking_date`, `updated_at`) VALUES
 (1, 1, 1, 1, 2, 200.00, '2024-06-30 10:41:54', NULL),
-(2, 8, 2, 2, 3, 150.00, '2024-06-30 10:41:54', NULL);
+(2, 8, 2, 2, 1, 150.00, '2024-06-30 10:41:54', '2024-07-04 05:09:03');
 
 -- --------------------------------------------------------
 

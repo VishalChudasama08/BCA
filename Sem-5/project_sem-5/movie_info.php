@@ -18,7 +18,7 @@ if (!isset($_SESSION['login'])) {
     $row = mysqli_fetch_assoc($records);
     // }
     ?>
-    <div class="container">
+    <div class="container border border-2 border-info rounded p-0">
         <div class="card">
             <div class="row">
                 <div class="col-4">

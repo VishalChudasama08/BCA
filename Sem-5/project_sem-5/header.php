@@ -1,28 +1,15 @@
-<?php
-require_once("connect.php");
-session_start();
-if (!isset($_SESSION['login'])) {
-    if (!isset($_GET['login'])) {
-        header("location:login.php?login=yes");
-        exit();
-    } else {
-        // header("location:login.php");
-        // exit();
-    }
-}
-?>
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
         .modal {
             position: fixed;
@@ -54,7 +41,7 @@ if (!isset($_SESSION['login'])) {
 </head>
 
 <body>
-    <div class="container-flued mb-3">
+    <div class="container-flued mb-2">
         <nav class="navbar navbar-expand-md navbar-dark py-1">
             <a class="navbar-brand" href="index.php">
                 <img src="images/theme_3_logo.jpg" class="v8logo navbar-toggler-icon" alt="Logo">&nbsp&nbsp

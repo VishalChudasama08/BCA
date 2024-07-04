@@ -27,6 +27,11 @@ if (isset($_SESSION['booked_seats'])) {
             margin: 20px auto;
         }
 
+        .role {
+            position: relative;
+            float: left;
+        }
+
         .space,
         .number {
             display: inline;
@@ -89,7 +94,7 @@ if (isset($_SESSION['booked_seats'])) {
     </style>
 </head>
 <?php
-print_r($_POST);
+// print_r($_POST);
 $movie_id = $_POST['movie_id'];
 $movie_query = "SELECT * FROM `movies` WHERE id='" . $movie_id . "';";
 $movie_records  = mysqli_query($conn, $movie_query);
@@ -120,14 +125,16 @@ $k = count($seats_array[1]);
 $no_seats_string = $seats_row['no_seat'];
 $no_seats_string = str_replace('[', '', $no_seats_string);
 $no_seats_string = str_replace(']', '', $no_seats_string);
-echo $no_seats_string = str_replace('\'', '', $no_seats_string);
+$no_seats_string = str_replace('\'', '', $no_seats_string);
+// echo $no_seats_string;
 $no_seats_array = explode(", ", $no_seats_string);
 // echo "<pre>";
 // print_r($no_seats_array);
 // echo "</pre>";                                                                   
-echo "<br>";
+// echo "<br>";
 
-echo $booked_seats_name = $seats_row['booked_seats_name'];
+$booked_seats_name = $seats_row['booked_seats_name'];
+// echo $booked_seats_name;
 $booked_seats_name = explode(", ", $booked_seats_name);
 
 
@@ -146,28 +153,29 @@ foreach ($price_level as $p) {
     $total_price[$n] = $movie_price + (int)$p;
     $n++;
 }
-print_r($total_price);
+// print_r($total_price);
 ?>
 
 <body>
-    <div class="container">
-        <h2>Select Your Seats</h2>
-        <div style="display: flex;text-align: center;justify-content: center;">
-            <div>
-                <label class="custom-checkbox" style="margin-top: .5rem;">
-                    <span class="checkmark" style="cursor: default;"></span>
-                </label>
-            </div>
-            <div>Available Seats</div>
-            <div style="margin-left: 2rem;">
-                <label class="custom-checkbox" style="margin-top: .5rem;">
-                    <span class="checkmark" style="background-color: #f1c40f;cursor: default;"></span>
-                </label>
-            </div>
-            <div>Booked Seats</div>
+    <div class="container p-0">
+        <div class="border border-2 border-info rounded ps-3 pt-2">
+            <h5 style="display: inline-block;"><?= $movie_row['title']; ?></h5>
+            <span class="ms-2 ps-1 pe-1 pt-0 text-muted border border-1 border-secondary rounded-circle"><?= $movie_row['rating']; ?></span>
+            <p class="m-0 pb-1"><?= $cinema_row['name']; ?> &nbsp;|&nbsp; <?= $_SESSION['booking_day']; ?> &nbsp;|&nbsp; <?= $formatted_time; ?></p>
         </div>
-        <div class="row">
-            <div class="col-12 overflow-auto">
+        <div class="border border-2 border-info rounded mt-2 pt-2 pb-2">
+            <h4 class="ps-3" style="display: inline-block;">Select Your Seats:-</h4>
+            <div class="pe-3" style="float:right;">
+                <div class="custom-checkbox" style="margin-top: 1.1rem;margin-right: .3rem;">
+                    <span class="checkmark" style="cursor: default;"></span>
+                </div>
+                <span>Available Seats</span>
+                <div class="custom-checkbox mr-2" style="margin-left: 1.1rem;margin-right: .3rem;margin-top: 1.1rem;">
+                    <span class="checkmark" style="background-color: #f1c40f;cursor: default;"></span>
+                </div>
+                <span>Booked Seats</span>
+            </div>
+            <div class="col-12 overflow-auto p-0">
                 <form id="existingForm" action="payment.php" method="post" onsubmit="return validateCheckboxes('payment.php', ['movie_id:<?= $movie_id; ?>', 'cinema_id:<?= $cinema_row['id']; ?>', 'times_id:<?= $times_row['id']; ?>', 'seats_id:<?= $seats_id; ?>'], true)">
                     <div class="screen_icon">
                         <img src="images/screen-icon-180.svg" class="img-fluid" style="transform: rotate(180deg)" alt="screen-icon">
@@ -232,7 +240,7 @@ print_r($total_price);
                         $_SESSION['all_alphabet_array'] = $all_alphabet_array;
                         ?>
                     </div>
-                    <button class="btn btn-primary mt-5" type="submit" type="button" style="width: 50%;">Booking</button>
+                    <button class="btn btn-primary mt-2" type="submit" type="button" style="width: 50%;">Booking</button>
                 </form>
             </div>
         </div>
