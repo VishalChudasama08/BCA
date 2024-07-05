@@ -1,10 +1,10 @@
 <?php
 require_once("connect.php");
-include_once("header.php");
 if (!isset($_SESSION['login'])) {
     header("location:login.php");
     exit();
 }
+include_once("header.php");
 $movie_id = $_POST['movie_id'];
 
 $today = time();

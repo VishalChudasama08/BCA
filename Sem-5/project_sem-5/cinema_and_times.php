@@ -1,6 +1,5 @@
 <?php
 require_once("connect.php");
-session_start();
 
 $today = time();
 $day1 = strtotime("+1 days", $today);

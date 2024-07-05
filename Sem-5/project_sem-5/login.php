@@ -19,8 +19,8 @@ include_once("header.php");
         if (isset($_GET['save']) && $_GET['save'] == 'yes') {
             echo "<p style='color: green;'>Registration Successfully...</p>";
         }
-        if (isset($_GET['text'])) {
-            echo "<h1>Welcome to the Booking System!</h1><p>To proceed with booking, please log in first.</p>";
+        if (isset($_GET['pass']) && $_GET['pass'] == 'update') {
+            echo "<p style='color: green;'>Reset Password Successfully...</p>";
         }
         ?>
         <div class="card mx-auto" style="min-width: 300px;max-width: 600px;">
@@ -36,6 +36,7 @@ include_once("header.php");
                         <input type="password" class="form-control" id="password" name="password" required>
                     </div>
                     <button type="submit" class="btn btn-primary" name="submit">Login</button>
+
                     <a href="index.php" class="btn btn-primary" name="cancel">Cancel</a>
                     <div class="d-flex mb-3 justify-content-between">
                         <a href="forgot_password.php">Forgot your Password?</a>

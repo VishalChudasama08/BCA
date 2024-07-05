@@ -20,7 +20,8 @@ $records  = mysqli_query($conn, $query);
                     <p class="card-text m-0">
                         <?php
                         $a = $row['genre'];
-                        $languagesArray = preg_split('/,\s*/', $a);
+                        $languagesArray = preg_split('/,\s*/', $a); // return array, split string as array
+                        // print_r($languagesArray);
                         if (count($languagesArray) <= 2) {
                             echo $a;
                         } else {

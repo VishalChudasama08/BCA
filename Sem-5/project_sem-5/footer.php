@@ -1,15 +1,26 @@
-<body style="width: 100%;">
-    <div class="container-flued mt-2">
-        <footer>
-            <div class="mt-auto py-1 text-center">
-                <div class="d-flex justify-content-center">
-                    <a href="privacy.php" class="me-3">Privacy Policy</a>
-                    <a href="terms.php" class="ms-3">Terms of Service</a>
-                </div>
-                <p class="m-0">&copy;<?= date("Y"); ?> V2 Online Movies Booking System. All rights reserved.</p>
+<?php
+$uri = $_SERVER['REQUEST_URI']; // return running url (not full url)
+$file_url = explode('/', $uri);
+$count = count($file_url);
+
+$position = "";
+$absolute_file_name = ["login.php", "login.php?save=yes", "login.php?invalid=invalid", "forgot_password.php"];
+if (in_array($file_url[$count - 1], $absolute_file_name)) {
+    $position = "absolute";
+} else {
+    $position = "relative";
+}
+?>
+<div class="container-flued mt-2" style="width: 100%;position:<?= $position; ?>;bottom: 0px;">
+    <footer>
+        <div class="mt-auto py-1 text-center">
+            <div class="d-flex justify-content-center">
+                <a href="privacy.php" class="me-3">Privacy Policy</a>
+                <a href="terms.php" class="ms-3">Terms of Service</a>
             </div>
-        </footer>
-    </div>
-</body>
+            <p class="m-0">&copy;<?= date("Y"); ?> V2 Online Movies Booking System. All rights reserved.</p>
+        </div>
+    </footer>
+</div>
 
 </html>

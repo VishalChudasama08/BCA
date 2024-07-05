@@ -8,10 +8,22 @@ CREATE TABLE IF NOT EXISTS users (
     modify_date TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (id)
 );
+CREATE TABLE `users` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `mobile_number` varchar(15) NOT NULL,
+  `security_question` varchar(255) NOT NULL,
+  `answer` varchar(255) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `modify_date` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
+);
+INSERT INTO `users` (`name`, `email`, `password`, `mobile_number`, `security_question`, `answer`) VALUES ('admin', 'okay@gmail.com', 'okay', '8320343610', 'What is your nickname ?', 'admin')
+('Vishal', 'vishal@gmail.com', '74108520', '7490943610', 'What\'s your favorite number in 0 to 9 ?', '8')
+('kaushik', 'kaushik@gmail.com', '123456', '9313850547', 'What's your favorite color ?', 'blue');
 
-INSERT INTO `users` (`name`, `email`, `password`, `mobile_number`, `date`, `modify_date`) VALUES
-('vishal', 'okay@gmail.com', '74108520', '8320343610', '2024-05-29 18:30:00', NULL),
-('kaushik', 'test@gmail.com', '123456', '9313850547', '2024-06-01 10:44:57', NULL);
+
 
 CREATE TABLE IF NOT EXISTS movies (
     id INT AUTO_INCREMENT PRIMARY KEY,

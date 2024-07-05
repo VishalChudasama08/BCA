@@ -1,10 +1,10 @@
 <?php
 require_once("connect.php");
-include_once("header.php");
 if (!isset($_SESSION['login'])) {
     header("location:login.php");
     exit();
 }
+include_once("header.php");
 extract($_POST);
 // echo $booked_seats_name = str_replace(" , ", ", ", implode(", ", $select_seats)); // this action doing in payment page 
 echo $booked_seats_name = $select_seats;

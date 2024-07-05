@@ -1,6 +1,5 @@
 <?php
 require_once("connect.php");
-session_start();
 extract($_POST);
 $query = "SELECT * FROM users WHERE email='$username'";
 $records = mysqli_query($conn, $query);
