@@ -3,13 +3,6 @@ require_once("connect.php");
 include_once("header.php");
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <title>Login Page</title>
-</head>
-
 <body>
     <div class="container">
         <?php
@@ -24,7 +17,7 @@ include_once("header.php");
         }
         ?>
         <div class="card mx-auto" style="min-width: 300px;max-width: 600px;">
-            <div class="card-header">Login</div>
+            <div class="card-header text-center h5">Login</div>
             <div class="card-body">
                 <form action="login_check.php" method="post">
                     <div class="mb-3">
@@ -35,12 +28,12 @@ include_once("header.php");
                         <label for="password" class="form-label">Password</label>
                         <input type="password" class="form-control" id="password" name="password" required>
                     </div>
-                    <button type="submit" class="btn btn-primary" name="submit">Login</button>
-
-                    <a href="index.php" class="btn btn-primary" name="cancel">Cancel</a>
+                    <div class="d-flex mb-3 justify-content-evenly">
+                    </div>
                     <div class="d-flex mb-3 justify-content-between">
-                        <a href="forgot_password.php">Forgot your Password?</a>
-                        <a href="register.php">Register Now</a>
+                        <button type="submit" class="btn btn-primary" name="submit">Login</button>
+                        <a href="forgot_password.php" class="btn btn-outline-secondary">Forgot your Password?</a>
+                        <a href="register.php" class="btn btn-outline-success">Register Anew</a>
                     </div>
                 </form>
             </div>

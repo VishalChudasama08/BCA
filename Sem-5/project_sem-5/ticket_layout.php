@@ -6,13 +6,14 @@ if (!isset($_SESSION['login'])) {
 }
 include_once("header.php");
 extract($_POST);
-// echo $booked_seats_name = str_replace(" , ", ", ", implode(", ", $select_seats)); // this action doing in payment page 
-echo $booked_seats_name = $select_seats;
+// print_r($_POST);
+// $booked_seats_name = str_replace(" , ", ", ", implode(", ", $select_seats)); // this action doing in payment page 
+$booked_seats_name = $select_seats;
 
 $booked_seats = $booked_seats_name;
 $_SESSION["booked_seats"] = $booked_seats;
 
-echo "<br>";
+// echo "<br>";
 
 // $seats_id = $_POST['seats_id'];
 $_SESSION["seats_id"] = $seats_id;
@@ -45,7 +46,7 @@ if ($seats_row['booked_seats_name']) { // existing booked seats
     $all_booked_seats_name_string = str_replace(",", ", ", $all_booked_seats_name_string);
 
     $booked_seats_name = $all_booked_seats_name_string;
-    echo "Combined booked seats: " . $booked_seats_name;
+    // echo "Combined booked seats: " . $booked_seats_name;
 }
 
 $total_seats_number = $seats_row['total_seats'];
@@ -54,19 +55,9 @@ $available_seats = $total_seats_number - $booked_seats_number;
 
 $seats_query = "UPDATE `seats` SET `available_seats` = " . $available_seats . ", `booked_seats_name` = '" . $booked_seats_name . "' WHERE `seats`.`id` = " . $seats_id . ";";
 
-echo "<br>" . $seats_query;
+// echo "<br>" . $seats_query;
 
 $seats_updated = mysqli_query($conn, $seats_query);
-if ($seats_updated) {
-    if (mysqli_affected_rows($conn) > 0) {
-        echo "Seat updated successfully!";
-    } else {
-        echo "No seat updated (might be non-existent ID).";
-        echo mysqli_affected_rows($conn);
-    }
-} else {
-    echo "Error updating seat: " . mysqli_error($conn);
-}
 
 // $movie_id = $_POST['movie_id'];
 $movie_query = "SELECT * FROM `movies` WHERE id='" . $movie_id . "';";
@@ -85,23 +76,29 @@ $times_row = mysqli_fetch_assoc($times_records);
 $formatted_time = date('h:i A', strtotime($times_row['show_time']));
 ?>
 
-
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>Ticket Layout</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
-</head>
-
 <body>
     <div class="container ticket-layout">
-        <h2>Booking Successful!</h2>
+        <?php
+        if (mysqli_affected_rows($conn) > 0) {
+            echo "<h2>Booking Successful!</h2>";
+        }
+        // if ($seats_updated) {
+        //     if (mysqli_affected_rows($conn) > 0) {
+        //         echo "<h2>Booking Successful!</h2>";
+        //     } else {
+        //         echo "No seat updated (might be non-existent ID).";
+        //         echo mysqli_affected_rows($conn);
+        //     }
+        // } else {
+        //     echo "Error updating seat: " . mysqli_error($conn);
+        // }
+        ?>
+
         <p><strong>Booking ID:</strong> <?= "from booking table" ?></p>
         <p><strong>Movie Title:</strong> <?= $movie_row['title']; ?></p>
         <p><strong>Theater:</strong> <?= $cinema_row['name']; ?></p>
         <p><strong>Location:</strong> <?= $cinema_row['location']; ?></p>
-        <p><strong>Show Date:</strong> <?= $times_row['show_date']; ?></p>
+        <p><strong>Show Date:</strong> <?= $_SESSION['booking_day']; ?></p>
         <p><strong>Show Time:</strong> <?= $formatted_time; ?></p>
         <p><strong>Seats:</strong> <?= $booked_seats; ?></p>
         <p><strong>Total Price:</strong> &#8377;<?= $total_price; ?></p>

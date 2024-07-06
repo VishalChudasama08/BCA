@@ -5,11 +5,32 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title></title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
+        #header {
+            position: sticky;
+            top: 0px;
+            z-index: 1;
+        }
+
+        #my_profile {
+            width: 85vw;
+            height: 83vh;
+            position: fixed;
+            /* border: 1px solid black; */
+            right: 6.6vw;
+            top: 9.5vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
         .modal {
             position: fixed;
             top: 50%;
@@ -40,7 +61,7 @@
 </head>
 
 <body>
-    <div class="container-flued mb-2">
+    <div class="container-flued mb-2" id="header">
         <nav class="navbar navbar-expand-md navbar-dark py-1">
             <a class="navbar-brand" href="index.php">
                 <img src="images/theme_3_logo.jpg" class="v8logo navbar-toggler-icon" alt="Logo">&nbsp&nbsp
@@ -75,14 +96,16 @@
             </div>
             <?php
             if (isset($_SESSION['login'])) {
+                // $user_id = $_SESSION['user_id'];
+                // $row = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM `users` WHERE id=" . $user_id . ";"));
+                // $name = $row['name'][0];
             ?>
                 <div class="dropdown dropstart me-3">
-                    <button class="user" style="border: none;color: white !important;background-color: grey !important;font-size:large;padding: 5px 6.2px !important;border-radius: 18px !important;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" onmouseover="this.style.color=`yellow`" onmouseout="this.style.color=`white`" size><strong>CV</strong></button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="#">My Profile</a></li>
-                        <!-- onclick="myProfile()" -->
-                        <li><a class="dropdown-item" href="#">Booking History</a></li>
-                    </ul>
+                    <button class="user" style="border: none;color: white !important;background-color: grey !important;font-size:large;padding: 0px 6.2px !important;border-radius: 100% !important;width:40px;height: 40px;" type="button" id="show_profile" onmouseover="this.style.color=`yellow`" onmouseout="this.style.color=`white`">
+                        <strong>
+                            <i class="fa-regular fa-user"></i>
+                        </strong>
+                    </button>
                 </div>
             <?php
             }
@@ -96,6 +119,29 @@
     </div>
 </body>
 <script>
+    $(document).ready(function() {
+        $('#my_profile').hide();
+        $('#show_profile').click(function() {
+
+            if ($('#show_movies').is(':hidden')) {
+                $('#footer').css({
+                    'position': 'relative',
+                    'bottom': '0px'
+                });
+            } else {
+                $('#footer').css({
+                    'position': 'absolute',
+                    'bottom': '0px'
+                });
+            }
+
+            $('#show_movies').toggle();
+            $('#my_profile').toggle();
+            // $('#my_profile').toggle();
+        });
+
+    });
+
     function logout() {
         let res = confirm("Are you sure! You want to log out ?");
         if (res) {

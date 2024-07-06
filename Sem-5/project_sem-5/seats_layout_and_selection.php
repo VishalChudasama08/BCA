@@ -111,7 +111,7 @@ $times_records = mysqli_query($conn, $times_query);
 $times_row = mysqli_fetch_assoc($times_records);
 $formatted_time = date('h:i A', strtotime($times_row['show_time']));
 
-$seats_id = '2';
+$seats_id = '3';
 $seats_query = "SELECT * FROM `seats` WHERE id=" . $seats_id . ";";
 $seats_records = mysqli_query($conn, $seats_query);
 $seats_row = mysqli_fetch_assoc($seats_records);
@@ -238,6 +238,7 @@ foreach ($price_level as $p) {
                         }
                         $_SESSION['total_price'] = $total_price;
                         $_SESSION['all_alphabet_array'] = $all_alphabet_array;
+                        $_SESSION['booking_query'] = "true";
                         ?>
                     </div>
                     <button class="btn btn-primary mt-2" type="submit" type="button" style="width: 50%;">Booking</button>

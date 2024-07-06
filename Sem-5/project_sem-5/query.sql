@@ -400,7 +400,7 @@ CREATE TABLE IF NOT EXISTS bookings (
 
 INSERT INTO bookings (user_id, movies_id, cinema_id, number_of_seats, total_price) VALUES 
 (1, 1, 1, 2, 200.00),
-(8, 2, 2, 3, 150.00);
+(3, 2, 2, 3, 150.00);
 
 
 
