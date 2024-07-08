@@ -4,7 +4,7 @@ $file_url = explode('/', $uri);
 $count = count($file_url);
 
 $position = "";
-$absolute_file_name = ["login.php", "login.php?save=yes", "login.php?invalid=invalid", "forgot_password.php", "index.php?profile=update"];
+$absolute_file_name = ["login.php", "login.php?save=yes", "login.php?invalid=invalid", "forgot_password.php", "index.php?profile=update", "admin_login.php", "payment.php"];
 if (in_array($file_url[$count - 1], $absolute_file_name)) {
     $position = "absolute";
 } else {

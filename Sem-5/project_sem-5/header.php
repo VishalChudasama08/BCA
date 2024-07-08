@@ -10,6 +10,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
+    <!-- <link href="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script> -->
+
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
@@ -57,6 +60,112 @@
             text-decoration: none;
             cursor: pointer;
         }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .payment-container {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .payment-info {
+            flex: 1;
+            margin-right: 20px;
+        }
+
+        .payment-info h2,
+        .order-details h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .payment-methods {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .payment-methods button {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background: #fff;
+            cursor: pointer;
+        }
+
+        .payment-methods button.active {
+            background: #d9fdd3;
+            border-color: #8dc34a;
+        }
+
+        .payment-form {
+            border: 1px solid #ccc;
+            padding: 20px;
+            background: #f9f9f9;
+        }
+
+        .payment-form .card-info,
+        .expiry-cvv,
+        .total-amount {
+            margin-bottom: 20px;
+        }
+
+        .payment-form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .payment-form input,
+        .payment-form select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .payment-form .expiry-cvv {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .payment-form .expiry-cvv div {
+            flex: 1;
+        }
+
+        .payment-form .expiry-cvv div:first-child {
+            margin-right: 10px;
+        }
+
+        .payment-form button[type="submit"] {
+            background: #8dc34a;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .payment-form button.cancel {
+            background: #ccc;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .order-details {
+            width: 200px;
+        }
+
+        .order-details p {
+            margin: 5px 0;
+        }
     </style>
 </head>
 
@@ -81,16 +190,33 @@
                         <a class="nav-link link" href="contact.php" style="color: white !important;" onmouseover="this.style.color=`yellow`" onmouseout="this.style.color=`white`">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <?php
-                        if (!isset($_SESSION['login'])) {
-                            echo '<a class="nav-link link" href="login.php" style="color: white !important;" onmouseover="this.style.color=`yellow`" onmouseout="this.style.color=`white`">Login</a>';
-                        } else {
-                            echo '<a class="nav-link link" href="#" style="color: white !important;" onmouseover="this.style.color=`yellow`" onmouseout="this.style.color=`white`" onclick="logout()">Logout</a>';
-                        }
-                        ?>
+                        <a class="nav-link link" href="register.php" style="color: white !important;" onmouseover="this.style.color=`yellow`" onmouseout="this.style.color=`white`">Register</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link link" href="register.php" style="color: white !important;" onmouseover="this.style.color=`yellow`" onmouseout="this.style.color=`white`">Register</a>
+                        <?php
+                        if (isset($_SESSION['login']) || isset($_SESSION['admin'])) {
+                            echo '<a class="nav-link link" href="#" style="color: white !important;" onmouseover="this.style.color=`yellow`" onmouseout="this.style.color=`white`" onclick="logout()">Logout</a>';
+                        } else {
+                        ?>
+                            <div class="btn-group" style="padding-top: .40rem;">
+                                <button class="dropdown-toggle" type="button" style="color: white !important;border:none;background-color: #A0C49D;" onmouseover="this.style.color=`yellow`" onmouseout="this.style.color=`white`" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Logins
+                                </button>
+                                <ul class="dropdown-menu p-0 border-3" style="background-color: #A0C49D;">
+                                    <li>
+                                        <a class="nav-link link" href="login.php" style="color: white !important;" onmouseover="this.style.color=`yellow`" onmouseout="this.style.color=`white`">User login</a>
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider border-3 m-0">
+                                    </li>
+                                    <li>
+                                        <a class="nav-link link" href="admin_login.php" style="color: white !important;" onmouseover="this.style.color=`yellow`" onmouseout="this.style.color=`white`">Admin login</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        <?php
+                        }
+                        ?>
                     </li>
                 </ul>
             </div>

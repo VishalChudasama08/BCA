@@ -157,7 +157,7 @@ foreach ($price_level as $p) {
 ?>
 
 <body>
-    <div class="container p-0">
+    <div class="container p-0" id="show_movies">
         <div class="border border-2 border-info rounded ps-3 pt-2">
             <h5 style="display: inline-block;"><?= $movie_row['title']; ?></h5>
             <span class="ms-2 ps-1 pe-1 pt-0 text-muted border border-1 border-secondary rounded-circle"><?= $movie_row['rating']; ?></span>
@@ -245,6 +245,24 @@ foreach ($price_level as $p) {
                 </form>
             </div>
         </div>
+    </div>
+    <?php
+    if (isset($_GET['profile']) && $_GET['profile'] == 'update') {
+    ?>
+        <script>
+            $(document).ready(function() {
+                $('#show_movies').hide();
+                $('#my_profile').show();
+                console.log('okay');
+            });
+        </script>
+    <?php
+    }
+    ?>
+    <div class="overflow-auto" id="my_profile">
+        <?php
+        include_once("my_profile.php")
+        ?>
     </div>
 </body>
 <script>

@@ -42,7 +42,7 @@ $today = time();
         cursor: pointer;
     }
 </style>
-<div class="container">
+<div class="container" id="show_movies">
     <div class="border border-2 border-info rounded ps-3 pt-2 pb-2" style="display: flex; flex-flow: row;">
         <h3 class="m-2">Select Date : </h3>
         <?php
@@ -69,6 +69,24 @@ $today = time();
             <div id="cinema-info"></div>
         </div>
     </div>
+</div>
+<?php
+if (isset($_GET['profile']) && $_GET['profile'] == 'update') {
+?>
+    <script>
+        $(document).ready(function() {
+            $('#show_movies').hide();
+            $('#my_profile').show();
+            console.log('okay');
+        });
+    </script>
+<?php
+}
+?>
+<div class="overflow-auto" id="my_profile">
+    <?php
+    include_once("my_profile.php")
+    ?>
 </div>
 
 <script>

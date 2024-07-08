@@ -1,5 +1,6 @@
 <?php
 require_once("connect.php");
+// echo $encrypt = md5("I Am Admin");
 if (!isset($_SESSION['login'])) {
     header("location:login.php");
     exit();

@@ -18,7 +18,7 @@ include_once("header.php");
     $row = mysqli_fetch_assoc($records);
     // }
     ?>
-    <div class="container border border-2 border-info rounded p-0">
+    <div class="container border border-2 border-info rounded p-0" id="show_movies">
         <div class="card">
             <div class="row">
                 <div class="col-4">
@@ -50,6 +50,24 @@ include_once("header.php");
                 </div>
             </div>
         </div>
+    </div>
+    <?php
+    if (isset($_GET['profile']) && $_GET['profile'] == 'update') {
+    ?>
+        <script>
+            $(document).ready(function() {
+                $('#show_movies').hide();
+                $('#my_profile').show();
+                console.log('okay');
+            });
+        </script>
+    <?php
+    }
+    ?>
+    <div class="overflow-auto" id="my_profile">
+        <?php
+        include_once("my_profile.php")
+        ?>
     </div>
 </body>
 <?php

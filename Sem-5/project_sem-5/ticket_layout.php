@@ -77,7 +77,7 @@ $formatted_time = date('h:i A', strtotime($times_row['show_time']));
 ?>
 
 <body>
-    <div class="container ticket-layout">
+    <div class="container ticket-layout" id="show_movies">
         <?php
         if (mysqli_affected_rows($conn) > 0) {
             echo "<h2>Booking Successful!</h2>";
@@ -104,6 +104,24 @@ $formatted_time = date('h:i A', strtotime($times_row['show_time']));
         <p><strong>Total Price:</strong> &#8377;<?= $total_price; ?></p>
         <p><strong>Booking Date:</strong> <?= "from booking table"; ?></p>
         <button class="btn btn-danger" onclick="cancel()">Booking Cancellation</button>
+    </div>
+    <?php
+    if (isset($_GET['profile']) && $_GET['profile'] == 'update') {
+    ?>
+        <script>
+            $(document).ready(function() {
+                $('#show_movies').hide();
+                $('#my_profile').show();
+                console.log('okay');
+            });
+        </script>
+    <?php
+    }
+    ?>
+    <div class="overflow-auto" id="my_profile">
+        <?php
+        include_once("my_profile.php")
+        ?>
     </div>
 </body>
 <script>

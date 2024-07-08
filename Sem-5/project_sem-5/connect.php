@@ -1,5 +1,6 @@
 <?php
 session_start();
+// echo $directory = str_replace("\\", "/", __DIR__);
 $host = 'localhost';
 $username = 'root';
 $password = '';
