@@ -21,7 +21,7 @@ include_once("header.php");
             $(document).ready(function() {
                 $('#show_movies').hide();
                 $('#my_profile').show();
-                console.log('okay');
+                // console.log('okay');
             });
         </script>
     <?php

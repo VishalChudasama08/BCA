@@ -5,37 +5,83 @@ if (!isset($_SESSION['admin'])) {
     exit();
 }
 include_once("header.php");
-?>
-<!-- Modal toggle -->
-<!-- <button data-modal-target="default-modal" data-modal-toggle="default-modal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-    Toggle modal
-</button> -->
 
-<!-- Main modal -->
-<!-- <div id="default-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="relative p-4 w-full max-w-2xl max-h-full"> -->
-<!-- Modal content -->
-<!-- <div class="relative bg-white rounded-lg shadow dark:bg-gray-700"> -->
-<?php
 $movies_records  = mysqli_query($conn, "SELECT * FROM movies");
-while ($movies_row = mysqli_fetch_assoc($movies_records)) {
 ?>
-    <!-- <div class="grid grid-flow-col gap-2">
-        <div class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-            <img class="object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg" src="<?= $movies_row['image_location'] ?>" alt="<?= $movies_row['title'] ?>">
-            <div class="flex flex-col justify-between p-4 leading-normal">
-                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology acquisitions 2021</h5>
-                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.</p>
-            </div>
+<style>
+    .custom-checkbox .checkmark {
+        position: absolute;
+        top: 0px;
+        height: 20px;
+        width: 20px;
+        border-radius: 5px;
+    }
+</style>
+<div class="container border border-2 border-info rounded p-1">
+    <div id="movie_info"></div>
+    <?php
+    if (isset($_GET['delete']) && $_GET['delete'] == 'yes') {
+        echo "<h5 style='color: green;'>Movie Delete Successfully...</h5>";
+    }
+    if (isset($_GET['delete']) && $_GET['delete'] == 'no') {
+        echo "<h5 style='color: red;display:inline;'>Movie Not Delete </h5><span>choose atleast one movie</span>";
+    }
+    ?>
+    <form action="delete_movie.php" method="post">
+        <div class="px-1 py-2" id="all_movies" style="display: flex;overflow-x: scroll;overflow-y: hidden;white-space: nowrap;-webkit-overflow-scrolling: touch;">
+            <?php while ($movies_row = mysqli_fetch_assoc($movies_records)) {
+                $id = $movies_row['id']; ?>
+                <div class="card me-2" style="flex: 0 0 auto;max-width:200px;min-width:80px;">
+                    <div class="movie_checkbox" style="position:absolute;">
+                        <label class="custom-checkbox">
+                            <input type="checkbox" class="checkmark" name="selected_movie[]" value="<?= $id ?>" size="50px">
+                        </label>
+                    </div>
+                    <img id="this_movie" onclick="loadMovie('movie_info_form.php?id=<?= $id ?>')" class="card-img-top img-fluid" style="height: 250px;" src="<?= $movies_row['image_location'] ?>" alt="<?= $movies_row['title'] ?>">
+                    <div class="p-1" style="white-space: normal;word-wrap: break-word;overflow-wrap: break-word;">
+                        <p class="card-text"><?= $movies_row['title'] ?></p>
+                    </div>
+                </div>
+            <?php } ?>
         </div>
-    </div> -->
-<?php
-}
-?>
-<!-- 
+        <input type="button" id="delete_btn" value="Delete Movies">
+        <input type="submit" id="delete_sub" value="Delete">
+        <span id="delete_text">Select movies that you want to delete</span>
+    </form>
+    <form action="update_movie.php" method="post" enctype="multipart/form-data">
+        <input type="button" id="add_btn" value="Add New Movies">
+        <div id="add_form">
+            <label for="image">Select Movie Image:
+                <input type="file" name="image" id="image">
+            </label>
+            <input type="text" name="title">
         </div>
-    </div> -->
-</div>
+    </form>
 
+</div>
+<script>
+    $(document).ready(function() {
+        $('.movie_checkbox').hide()
+        $('#delete_sub').hide()
+        $('#delete_text').hide()
+        $('#delete_btn').click(function() {
+            $('.movie_checkbox').show()
+            $('#delete_sub').show()
+            $('#delete_text').show()
+            $('#delete_btn').hide()
+        })
+    })
+
+    function loadMovie(page) {
+        const xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("movie_info").innerHTML = this.responseText;
+            }
+        };
+        xhttp.open("GET", page);
+        xhttp.send();
+    }
+</script>
 
 <?php include_once("footer.php"); ?>

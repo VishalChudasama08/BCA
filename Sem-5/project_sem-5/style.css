@@ -1,10 +1,12 @@
 body {
-    background-color: #F7FFE5 !important;
+    background-color: #ff1b5e20 !important;
+    /* #ff1b5e20 */
 }
 
 nav,
 footer {
-    background-color: #ff1b5e20 !important;
+    background-color: #30c6f0 !important;
+    /* #67c85e*/
     /* A0C49D */
 }
 
