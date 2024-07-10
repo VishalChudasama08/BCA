@@ -392,10 +392,7 @@ CREATE TABLE IF NOT EXISTS bookings (
     number_of_seats INT(5) NOT NULL,
     total_price DECIMAL(10, 2) NOT NULL,
     booking_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    FOREIGN KEY (movies_id) REFERENCES movies(id) ON DELETE CASCADE,
-    FOREIGN KEY (cinema_id) REFERENCES cinema(id) ON DELETE CASCADE
+    updated_at TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
 );
 
 INSERT INTO bookings (user_id, movies_id, cinema_id, number_of_seats, total_price) VALUES 

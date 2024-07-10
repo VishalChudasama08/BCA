@@ -12,8 +12,6 @@ extract($_POST);
 // print_r($_SESSION);
 
 // echo "<br>";
-$user_id = $_SESSION['user_id'];
-// echo "<br>";
 $number_of_seats = count($select_seats);
 // echo "<br>";
 
@@ -32,10 +30,24 @@ foreach ($keys as $k) {
 }
 // echo $total_price;
 
+$user_id = $_SESSION['user_id'];
+$users_query = "SELECT * FROM `users` WHERE id=" . $user_id . ";";
+$user_row = mysqli_fetch_assoc(mysqli_query($conn, $users_query));
+$user_name = $user_row['name'];
 
+$movie_query = "SELECT * FROM `movies` WHERE id='" . $movie_id . "';";
+$movie_records  = mysqli_query($conn, $movie_query);
+$movie_row = mysqli_fetch_assoc($movie_records);
+$movie_title = $movie_row['title'];
+
+// $cinema_id = $_POST['cinema_id'];
+$cinema_query = "SELECT * FROM `cinema` WHERE id=" . $cinema_id . ";";
+$cinema_records  = mysqli_query($conn, $cinema_query);
+$cinema_row = mysqli_fetch_assoc($cinema_records);
+$cinema_name = $cinema_row['name'];
 
 // save booking records 
-$booking_query = "INSERT INTO bookings (user_id, movies_id, cinema_id, number_of_seats, total_price) VALUES (" . $user_id . ", " . $movie_id . ", " . $cinema_id . ", " . $number_of_seats . ", " . $total_price . ");";
+echo $booking_query = "INSERT INTO bookings (user_name, movies_title, cinema_name, number_of_seats, total_price) VALUES ('" . $user_name . "', '" . $movie_title . "', '" . $cinema_name . "', " . $number_of_seats . ", " . $total_price . ");";
 if ($_SESSION['booking_query'] == "true") {
     if (mysqli_query($conn, $booking_query)) {
         $_SESSION['booking_query'] = "false";

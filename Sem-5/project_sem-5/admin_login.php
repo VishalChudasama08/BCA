@@ -19,7 +19,7 @@ include_once("header.php");
         <div class="card mx-auto" style="min-width: 300px;max-width: 600px;">
             <div class="card-header text-center h5">Login</div>
             <div class="card-body">
-                <form action="login_check.php" method="post">
+                <form action="admin_login_check.php" method="post">
                     <div class="mb-3">
                         <label for="username" class="form-label">Username</label>
                         <input type="text" class="form-control" id="username" name="username" required>

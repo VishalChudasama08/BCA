@@ -9,15 +9,11 @@ $_SESSION['user_id'] = $row['id'];
 
 $encrypt = md5($password); //74108520
 // if ($username == "okay@gmail.com" && $encrypt == "a49dbc19f3fa835f2786ad4de7966252") {
-if ($username == 'okay@gmail.com' && $encrypt == "f97db60c120efd65f737b8c2122f13ec") { //I Am Admin
-    $_SESSION["admin"] = "Yes";
-    header("location:dashboard.php");
+
+if ($username == $row['email'] && $encrypt == $row['password']) {
+    $_SESSION["login"] = "Yes";
+    header("location:index.php");
+    exit();
 } else {
-    if ($username == $row['email'] && $encrypt == $row['password']) {
-        $_SESSION["login"] = "Yes";
-        header("location:index.php");
-        exit();
-    } else {
-        header("location:login.php?invalid=invalid");
-    }
+    header("location:login.php?invalid=invalid");
 }
