@@ -47,7 +47,7 @@ $cinema_row = mysqli_fetch_assoc($cinema_records);
 $cinema_name = $cinema_row['name'];
 
 // save booking records 
-echo $booking_query = "INSERT INTO bookings (user_name, movies_title, cinema_name, number_of_seats, total_price) VALUES ('" . $user_name . "', '" . $movie_title . "', '" . $cinema_name . "', " . $number_of_seats . ", " . $total_price . ");";
+$booking_query = "INSERT INTO bookings (user_name, movies_title, cinema_name, number_of_seats, total_price) VALUES ('" . $user_name . "', '" . $movie_title . "', '" . $cinema_name . "', " . $number_of_seats . ", " . $total_price . ");";
 if ($_SESSION['booking_query'] == "true") {
     if (mysqli_query($conn, $booking_query)) {
         $_SESSION['booking_query'] = "false";
@@ -115,17 +115,17 @@ if ($_SESSION['booking_query'] == "true") {
                             <label for="cvv">CVV:</label>
                         </div>
                         <div style="margin-top: 10px;">
-                            <input type="number" class="form-control" id="cvv" placeholder="XXX">
+                            <input type="number" class="form-control" id="cvv" placeholder="XXX" required>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-primary mt-3" onclick="return postIds('ticket_layout.php', ['total_price:<?= $total_price; ?>', 'select_seats:<?= $select_seats; ?>', 'movie_id:<?= $movie_id; ?>', 'cinema_id:<?= $cinema_id; ?>', 'times_id:<?= $times_id; ?>', 'seats_id:<?= $seats_id; ?>'], false)">Pay &#8377;<?= $total_price; ?></button>
+                    <button type="button" class="btn btn-primary mt-3" onclick="return postIds('ticket_layout.php', ['total_price:<?= $total_price; ?>', 'select_seats:<?= $select_seats; ?>', 'movie_id:<?= $movie_id; ?>', 'cinema_id:<?= $cinema_id; ?>', 'times_id:<?= $times_id; ?>'], false)">Pay &#8377;<?= $total_price; ?></button>
                 </div>
                 <div id="show_upi">
                     <div id="show_qr">
                         <img src="images/qr_code.png" alt="qr-code" style="width: 250px;margin:1rem;" />
                     </div>
                     <p class="ms-3">Scan to pay with any UPI app</p>
-                    <button type="button" class="btn btn-primary ms-3" onclick="return postIds('ticket_layout.php', ['total_price:<?= $total_price; ?>', 'select_seats:<?= $select_seats; ?>', 'movie_id:<?= $movie_id; ?>', 'cinema_id:<?= $cinema_id; ?>', 'times_id:<?= $times_id; ?>', 'seats_id:<?= $seats_id; ?>'], false)">Pay &#8377;<?= $total_price; ?></button>
+                    <button type="button" class="btn btn-primary ms-3" onclick="return postIds('ticket_layout.php', ['total_price:<?= $total_price; ?>', 'select_seats:<?= $select_seats; ?>', 'movie_id:<?= $movie_id; ?>', 'cinema_id:<?= $cinema_id; ?>', 'times_id:<?= $times_id; ?>', false)">Pay &#8377;<?= $total_price; ?></button>
                 </div>
             </div>
         </div>

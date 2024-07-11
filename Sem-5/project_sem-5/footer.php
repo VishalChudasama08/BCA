@@ -2,10 +2,13 @@
 $uri = $_SERVER['REQUEST_URI']; // return running url (not full url)
 $file_url = explode('/', $uri);
 $count = count($file_url);
+$file_name_with_extension = $file_url[$count - 1];
+$file_name = explode(".", $file_name_with_extension)[0];
+
 
 $position = "";
 $absolute_file_name = ["login.php", "login.php?save=yes", "login.php?invalid=invalid", "forgot_password.php", "index.php?profile=update", "admin_login.php", "payment.php"];
-if (in_array($file_url[$count - 1], $absolute_file_name)) {
+if (in_array($file_name_with_extension, $absolute_file_name)) {
     $position = "absolute";
 } else {
     $position = "relative";
@@ -15,7 +18,10 @@ if (in_array($file_url[$count - 1], $absolute_file_name)) {
     <footer>
         <div class="mt-auto py-1 text-center">
             <div class="d-flex justify-content-center">
-                <!-- $file_url[$count - 1]; -->
+                <?php
+                // echo $file_name_with_extension;
+                // echo $file_name;
+                ?>
                 <a href="privacy.php" class="me-3">Privacy Policy</a>
                 <a href="terms.php" class="ms-3">Terms of Service</a>
             </div>

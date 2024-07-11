@@ -15,13 +15,14 @@ $_SESSION["booked_seats"] = $booked_seats;
 
 // echo "<br>";
 
-// $seats_id = $_POST['seats_id'];
-$_SESSION["seats_id"] = $seats_id;
 
-$seats_query = "SELECT * FROM `seats` WHERE id='" . $seats_id . "';";
+
+$seats_query = "SELECT * FROM `seats` WHERE cinema_id='" . $cinema_id . "';";
 $seats_records = mysqli_query($conn, $seats_query);
 $seats_row = mysqli_fetch_assoc($seats_records);
+$seats_id = $seats_row['id'];
 
+$_SESSION["seats_id"] = $seats_id;
 
 if ($seats_row['booked_seats_name']) { // existing booked seats
     // Combine booked seats into a single array (using explode and array_merge)

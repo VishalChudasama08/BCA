@@ -1,5 +1,19 @@
 <?php
 require_once("connect.php");
+if (isset($_SESSION['admin'])) {
+    echo "
+    <script type='text/javascript'>
+        let res = confirm('You are already login! You want to log out ?');
+        if (res) {
+            sessionStorage.clear();
+            window.location.href = 'admin_logout.php'
+            // (window.location.href = 'logout.php').then((value)=>{ window.location.href = 'admin_login.php';})
+        } else {
+            window.location.href = 'dashboard.php';
+        }
+    </script>
+    ";
+}
 include_once("header.php");
 ?>
 
@@ -7,7 +21,7 @@ include_once("header.php");
     <div class="container">
         <?php
         if (isset($_GET['invalid'])) {
-            echo "<h3 style='color: red'>Invalid email or password</h3>";
+            echo "<h5 style='color: red'>Invalid email or password</h5>";
         }
         if (isset($_GET['save']) && $_GET['save'] == 'yes') {
             echo "<p style='color: green;'>Registration Successfully...</p>";

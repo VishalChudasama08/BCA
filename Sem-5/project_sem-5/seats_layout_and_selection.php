@@ -108,8 +108,8 @@ $times_records = mysqli_query($conn, $times_query);
 $times_row = mysqli_fetch_assoc($times_records);
 $formatted_time = date('h:i A', strtotime($times_row['show_time']));
 
-$seats_id = '3';
-$seats_query = "SELECT * FROM `seats` WHERE id=" . $seats_id . ";";
+$seats_layout = $cinema_row['id'];
+$seats_query = "SELECT * FROM `seats` WHERE cinema_id=" . $seats_layout . ";";
 $seats_records = mysqli_query($conn, $seats_query);
 $seats_row = mysqli_fetch_assoc($seats_records);
 // $_SESSION['seats_id'] = $seats_id; // ser this because on button onclick="postIds()... not set seats_id in post method, i not undustend this why not set, on postIds() function ids variable not present seats_id:2, why not present i not found this bug
@@ -173,7 +173,7 @@ foreach ($price_level as $p) {
                 <span>Booked Seats</span>
             </div>
             <div class="col-12 overflow-auto p-0">
-                <form id="existingForm" action="payment.php" method="post" onsubmit="return validateCheckboxes('payment.php', ['movie_id:<?= $movie_id; ?>', 'cinema_id:<?= $cinema_row['id']; ?>', 'times_id:<?= $times_row['id']; ?>', 'seats_id:<?= $seats_id; ?>'], true)">
+                <form id="existingForm" action="payment.php" method="post" onsubmit="return validateCheckboxes('payment.php', ['movie_id:<?= $movie_id; ?>', 'cinema_id:<?= $cinema_row['id']; ?>', 'times_id:<?= $times_row['id']; ?>'], true)">
                     <div class="screen_icon">
                         <img src="images/screen-icon-180.svg" class="img-fluid" style="transform: rotate(180deg)" alt="screen-icon">
                     </div>
@@ -238,7 +238,7 @@ foreach ($price_level as $p) {
                         $_SESSION['booking_query'] = "true";
                         ?>
                     </div>
-                    <button class="btn btn-primary mt-2" type="submit" type="button" style="width: 50%;">Booking</button>
+                    <input class="btn btn-primary mt-2" type="submit" type="button" style="width: 50%;" value="Booking" />
                 </form>
             </div>
         </div>

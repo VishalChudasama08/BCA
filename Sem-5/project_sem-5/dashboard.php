@@ -1,7 +1,7 @@
 <?php
 require_once("connect.php");
 if (!isset($_SESSION['admin'])) {
-    header("location:dashboard.php");
+    header("location:admin_login.php");
     exit();
 }
 include_once("header.php");

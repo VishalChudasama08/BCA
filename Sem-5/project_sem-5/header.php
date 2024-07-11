@@ -93,6 +93,12 @@
                     <li class="nav-item">
                         <?php
                         if (isset($_SESSION['login']) || isset($_SESSION['admin'])) {
+                            $uri = $_SERVER['REQUEST_URI']; // return running url (not full url)
+                            $file_url = explode('/', $uri);
+                            $count = count($file_url);
+                            $file_name_with_extension = $file_url[$count - 1];
+                            $file_name = explode(".", $file_name_with_extension)[0];
+                            $_SESSION['file_name'] = $file_name;
                             echo '<a class="nav-link link" href="#" style="color: white !important;" onmouseover="this.style.color=`yellow`" onmouseout="this.style.color=`white`" onclick="logout()">Logout</a>';
                         } else {
                         ?>
@@ -194,7 +200,7 @@
     // set ids in post method
     function postIds(file, ids, form_exist) {
         let form;
-
+        sessionStorage.setItem("ids", ids);
         if (form_exist == true) {
             form = document.getElementById('existingForm');
         } else {
@@ -224,4 +230,5 @@
 
         form.submit();
     }
+    console.log(sessionStorage.getItem("ids"))
 </script>

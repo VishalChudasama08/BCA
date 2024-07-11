@@ -1,6 +1,19 @@
 <?php
 require_once("connect.php");
 include_once("header.php");
+if (isset($_SESSION['login'])) {
+    echo "
+    <script>
+        let res = confirm('You are already login! You want to log out ?');
+        if (res) {
+            sessionStorage.clear();
+            window.location.href = 'logout.php';
+        } else {
+            window.location.href = 'index.php';
+        }
+    </script>
+    ";
+}
 ?>
 
 <body>
