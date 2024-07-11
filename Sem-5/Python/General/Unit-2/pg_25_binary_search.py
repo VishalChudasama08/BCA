@@ -4,7 +4,7 @@ def binary_search(item_list,item):
     first = 0
     last = len(item_list)-1
     found = False
-    while( first<=last and not found):
+    while(first<=last and not found):
         mid = (first + last)//2
         if item_list[mid] == item :
             found = True
@@ -17,9 +17,7 @@ def binary_search(item_list,item):
 
 # number of list element
 arr = [64, 34, 25, 12, 22, 11, 90]
+value =  12
 
-# input search value from user
-s = int(input("Enter search value:"))
-
-if binary_search(arr,s) :
-    print(s, "present in list")
+if binary_search(arr,value) :
+    print(value, "present in list")
