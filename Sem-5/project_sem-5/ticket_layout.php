@@ -75,6 +75,7 @@ $times_query = "SELECT * FROM `times` WHERE id=" . $times_id . ";";
 $times_records  = mysqli_query($conn, $times_query);
 $times_row = mysqli_fetch_assoc($times_records);
 $formatted_time = date('h:i A', strtotime($times_row['show_time']));
+
 ?>
 
 <body>
@@ -83,19 +84,8 @@ $formatted_time = date('h:i A', strtotime($times_row['show_time']));
         if (mysqli_affected_rows($conn) > 0) {
             echo "<h2>Booking Successful!</h2>";
         }
-        // if ($seats_updated) {
-        //     if (mysqli_affected_rows($conn) > 0) {
-        //         echo "<h2>Booking Successful!</h2>";
-        //     } else {
-        //         echo "No seat updated (might be non-existent ID).";
-        //         echo mysqli_affected_rows($conn);
-        //     }
-        // } else {
-        //     echo "Error updating seat: " . mysqli_error($conn);
-        // }
         ?>
 
-        <p><strong>Booking ID:</strong> <?= "from booking table" ?></p>
         <p><strong>Movie Title:</strong> <?= $movie_row['title']; ?></p>
         <p><strong>Theater:</strong> <?= $cinema_row['name']; ?></p>
         <p><strong>Location:</strong> <?= $cinema_row['location']; ?></p>
@@ -103,7 +93,6 @@ $formatted_time = date('h:i A', strtotime($times_row['show_time']));
         <p><strong>Show Time:</strong> <?= $formatted_time; ?></p>
         <p><strong>Seats:</strong> <?= $booked_seats; ?></p>
         <p><strong>Total Price:</strong> &#8377;<?= $total_price; ?></p>
-        <p><strong>Booking Date:</strong> <?= "from booking table"; ?></p>
         <button class="btn btn-danger" onclick="cancel()">Booking Cancellation</button>
     </div>
     <?php

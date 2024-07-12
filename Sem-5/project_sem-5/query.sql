@@ -13,7 +13,19 @@ INSERT INTO `users` (`name`, `email`, `password`, `mobile_number`, `security_que
 ('Vishal', 'vishal@gmail.com', '74108520', '7490943610', 'What\'s your favorite number in 0 to 9 ?', '8')
 ('kaushik', 'kaushik@gmail.com', '123456', '9313850547', 'What's your favorite color ?', 'blue');
 
-
+CREATE TABLE `admin` (
+  `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL UNIQUE,
+  `password` varchar(255) NOT NULL,
+  `mobile_number` varchar(15) NOT NULL,
+  `security_question` varchar(255) NOT NULL,
+  `answer` varchar(255) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `modify_date` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
+);
+INSERT INTO `admin` (`name`, `email`, `password`, `mobile_number`, `security_question`, `answer`) VALUES 
+('admin', 'okay@gmail.com', 'f97db60c120efd65f737b8c2122f13ec', '8320343610', 'What is your nickname ?', 'admin');
 
 CREATE TABLE IF NOT EXISTS movies (
     id INT AUTO_INCREMENT PRIMARY KEY,

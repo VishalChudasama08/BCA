@@ -13,7 +13,7 @@
     <!-- <link href="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script> -->
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
         #header {
@@ -66,12 +66,20 @@
         }
     </style>
 </head>
+<?php
+$uri = $_SERVER['REQUEST_URI']; // return running url (not full url)
+$file_url = explode('/', $uri);
+$count = count($file_url);
+$file_name_with_extension = $file_url[$count - 2];
+// $file_name = explode(".", $file_name_with_extension)[0];
+// $_SESSION['file_name'] = $file_name;
+?>
 
 <body>
     <div class="container-flued mb-2" id="header">
-        <nav class="navbar navbar-expand-md navbar-dark py-1">
+        <nav class="navbar navbar-expand-md navbar-dark py-1" style="background-color: #A0C49D;">
             <a class="navbar-brand" href="index.php">
-                <img src="images/theme_3_logo.jpg" class="v8logo navbar-toggler-icon" alt="Logo">&nbsp&nbsp
+                <img src="../images/theme_3_logo.jpg" class="v8logo navbar-toggler-icon" alt="Logo">&nbsp&nbsp
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -79,7 +87,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav" style="display: flex;">
                     <li class="nav-item">
-                        <a class="nav-link link" href="index.php" onmouseover="this.style.color=`yellow`" onmouseout="this.style.color=`white`" style="color: white !important;">Home</a>
+                        <a class="nav-link link" href="../index.php" onmouseover="this.style.color=`yellow`" onmouseout="this.style.color=`white`" style="color: white !important;">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link link" href="about.php" style="color: white !important;" onmouseover="this.style.color=`yellow`" onmouseout="this.style.color=`white`">About</a>
@@ -88,17 +96,8 @@
                         <a class="nav-link link" href="contact.php" style="color: white !important;" onmouseover="this.style.color=`yellow`" onmouseout="this.style.color=`white`">Contact</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link link" href="register.php" style="color: white !important;" onmouseover="this.style.color=`yellow`" onmouseout="this.style.color=`white`">Register</a>
-                    </li>
-                    <li class="nav-item">
                         <?php
                         if (isset($_SESSION['login']) || isset($_SESSION['admin'])) {
-                            $uri = $_SERVER['REQUEST_URI']; // return running url (not full url)
-                            $file_url = explode('/', $uri);
-                            $count = count($file_url);
-                            $file_name_with_extension = $file_url[$count - 1];
-                            $file_name = explode(".", $file_name_with_extension)[0];
-                            $_SESSION['file_name'] = $file_name;
                             echo '<a class="nav-link link" href="#" style="color: white !important;" onmouseover="this.style.color=`yellow`" onmouseout="this.style.color=`white`" onclick="logout()">Logout</a>';
                         } else {
                         ?>
@@ -108,13 +107,13 @@
                                 </button>
                                 <ul class="dropdown-menu p-0 border-3" style="background-color: #A0C49D;">
                                     <li>
-                                        <a class="nav-link link" href="login.php" style="color: white !important;" onmouseover="this.style.color=`yellow`" onmouseout="this.style.color=`white`">User login</a>
+                                        <a class="nav-link link" href="../login.php" style="color: white !important;" onmouseover="this.style.color=`yellow`" onmouseout="this.style.color=`white`">User login</a>
                                     </li>
                                     <li>
                                         <hr class="dropdown-divider border-3 m-0">
                                     </li>
                                     <li>
-                                        <a class="nav-link link" href="admin/admin_login.php" style="color: white !important;" onmouseover="this.style.color=`yellow`" onmouseout="this.style.color=`white`">Admin login</a>
+                                        <a class="nav-link link" href="admin_login.php" style="color: white !important;" onmouseover="this.style.color=`yellow`" onmouseout="this.style.color=`white`">Admin login</a>
                                     </li>
                                 </ul>
                             </div>
@@ -125,7 +124,7 @@
                 </ul>
             </div>
             <?php
-            if (isset($_SESSION['login'])) {
+            if (isset($_SESSION['admin'])) {
                 // $user_id = $_SESSION['user_id'];
                 // $row = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM `users` WHERE id=" . $user_id . ";"));
                 // $name = $row['name'][0];
@@ -153,7 +152,7 @@
         $('#my_profile').hide();
         $('#show_profile').click(function() {
 
-            if ($('#show_movies').is(':hidden')) {
+            if ($('#admin_all').is(':hidden')) {
                 $('#footer').css({
                     'position': 'relative',
                     'bottom': '0px'
@@ -165,7 +164,7 @@
                 });
             }
 
-            $('#show_movies').toggle();
+            $('#admin_all').toggle();
             $('#my_profile').toggle();
             // $('#my_profile').toggle();
         });
@@ -176,42 +175,7 @@
         let res = confirm("Are you sure! You want to log out ?");
         if (res) {
             sessionStorage.clear();
-            window.location.href = "logout.php";
+            window.location.href = "admin_logout.php";
         }
     }
-
-    // set ids in post method
-    function postIds(file, ids, form_exist) {
-        let form;
-        sessionStorage.setItem("ids", ids);
-        if (form_exist == true) {
-            form = document.getElementById('existingForm');
-        } else {
-            form = document.createElement('form');
-            form.method = 'POST';
-            form.action = file;
-        }
-
-        ids.forEach(element => {
-            let parts = element.split(':');
-            console.log(parts);
-            let id_name = parts[0];
-            let id = parts[1];
-
-            // it is Create input element
-            let input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = id_name;
-            input.value = id;
-
-            // set input tag as from append childs 
-            form.appendChild(input);
-        });
-
-        // set form tag as body append child
-        document.body.appendChild(form);
-
-        form.submit();
-    }
-    console.log(sessionStorage.getItem("ids"))
 </script>

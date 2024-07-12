@@ -7,7 +7,7 @@ if (!isset($_SESSION['login'])) {
 include_once("header.php");
 
 extract($_POST);
-// print_r($_POST);
+print_r($_POST);
 // echo "<br>";
 // print_r($_SESSION);
 
