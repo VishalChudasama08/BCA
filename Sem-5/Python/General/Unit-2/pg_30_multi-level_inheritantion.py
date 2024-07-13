@@ -19,7 +19,8 @@ class Student(Stream):
         self.student_name=student_name
         self.student_id=student_id
     def getStudentInfo(self):
-        return self.getStreamInfo(),"\nStudent Name:",self.stream_name,"\tStudent ID:",self.student_id
+        string = self.getStreamInfo(),"\n Student Name:",self.student_name,"\t Student ID:",self.student_id
+        return string
     
 s=Student("JJKCC","BCA","Chudasama Vishal","v8143")
 print(s.getStudentInfo())
