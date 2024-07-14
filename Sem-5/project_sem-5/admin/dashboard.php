@@ -47,11 +47,22 @@ $movies_records  = mysqli_query($conn, "SELECT * FROM movies");
         <div class="col-10 border border-2 border-info rounded py-2">
             <div id="all_movies_and_info">
                 <?php
-                if (isset($_GET['delete']) && $_GET['delete'] == 'yes') {
+                if (isset($_SESSION['delete']) && $_SESSION['delete'] == 'yes') {
                     echo "<h5 style='color: green;'>Movie Delete Successfully...</h5>";
+                    unset($_SESSION['delete']);
                 }
-                if (isset($_GET['delete']) && $_GET['delete'] == 'no') {
+                if (isset($_SESSION['delete']) && $_SESSION['delete'] == 'no') {
                     echo "<script>delete_alert()</script>";
+                    unset($_SESSION['delete']);
+                }
+
+                if (isset($_SESSION['error'])) {
+                    echo "<script>alert('" . $_SESSION['error'] . "'. Please fill the form properly);</script>";
+                    unset($_SESSION['error']);
+                }
+                if (isset($_SESSION['message'])) {
+                    echo "<h5 style='color: green;'>" . $_SESSION['message'] . "..</h5>";
+                    unset($_SESSION['message']);
                 }
                 ?>
                 <form action="delete_movie.php" method="post">
@@ -108,16 +119,15 @@ $movies_records  = mysqli_query($conn, "SELECT * FROM movies");
 </div>
 <script>
     $(document).ready(function() {
+        // $('#all_movies_and_info').hide()
         $('#add_movie').hide()
 
         $('#show_users').hide()
 
         $('#booking_history').hide()
-
-        $('#delete_movie_alert').click()
         $('.movie_checkbox').hide()
         $('#delete_submit').hide()
-
+        $('#footer').css('position', 'absolute');
         $('#all_movie_btn').click(function() {
             $('#add_movie').hide()
             $('#all_movies_and_info').show()
@@ -126,6 +136,7 @@ $movies_records  = mysqli_query($conn, "SELECT * FROM movies");
 
             $('.movie_checkbox').hide()
             $('#delete_submit').hide()
+            $('#footer').css('position', 'absolute');
         });
 
         $('#add_movie_btn').click(function() {
@@ -136,6 +147,7 @@ $movies_records  = mysqli_query($conn, "SELECT * FROM movies");
 
             $('.movie_checkbox').hide()
             $('#delete_submit').hide()
+            $('#footer').css('position', 'relative');
         });
 
         $('#delete_btn').click(function() {
@@ -146,6 +158,7 @@ $movies_records  = mysqli_query($conn, "SELECT * FROM movies");
 
             $('.movie_checkbox').show()
             $('#delete_submit').show()
+            $('#footer').css('position', 'absolute');
         });
 
         $('#user_btn').click(function() {
@@ -157,6 +170,7 @@ $movies_records  = mysqli_query($conn, "SELECT * FROM movies");
             $('.movie_checkbox').show()
             $('#delete_submit').hide()
             $('#delete_text').hide()
+            $('#footer').css('position', 'relative');
         });
 
         $('#booking_history_btn').click(function() {
@@ -164,6 +178,7 @@ $movies_records  = mysqli_query($conn, "SELECT * FROM movies");
             $('#all_movies_and_info').hide()
             $('#add_movie').hide()
             $('#show_users').hide()
+            $('#footer').css('position', 'relative');
         })
     })
 

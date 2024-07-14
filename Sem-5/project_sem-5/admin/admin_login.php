@@ -1,5 +1,6 @@
 <?php
 require_once("../connect.php");
+unset($_SESSION['user_id']);
 if (isset($_SESSION['admin'])) {
     echo "
     <script type='text/javascript'>

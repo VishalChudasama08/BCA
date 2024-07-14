@@ -1,5 +1,6 @@
 <?php
 require_once("connect.php");
+unset($_SESSION['admin_id']);
 include_once("header.php");
 if (isset($_SESSION['login'])) {
     echo "

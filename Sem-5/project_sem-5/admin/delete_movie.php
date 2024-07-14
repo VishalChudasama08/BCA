@@ -7,9 +7,11 @@ foreach ($selected_movie as $key) {
     $result = mysqli_query($conn, "DELETE FROM `movies` WHERE `id` = " . $key . ";");
 }
 if ($result) {
-    header("location:dashboard.php?delete=yes");
+    $_SESSION['delete'] = "yes";
+    header("location:dashboard.php");
     exit();
 } else {
-    header("location:dashboard.php?delete=no");
+    $_SESSION['delete'] = "no";
+    header("location:dashboard.php");
     exit();
 }

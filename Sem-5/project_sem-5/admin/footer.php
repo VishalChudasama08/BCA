@@ -7,14 +7,16 @@ $file_name = explode(".", $file_name_with_extension)[0];
 
 
 $position = "";
-$absolute_file_name = ["admin_login.php", "dashboard.php?delete=no", "dashboard.php?delete=yes", "dashboard.php?profile=update"];
+$absolute_file_name = ["admin_login.php"];
 if (in_array($file_name_with_extension, $absolute_file_name)) {
     $position = "absolute";
 } else {
     $position = "relative";
 }
 ?>
-<div class="container-flued mt-2" style="width: 100%;position:<?= $position; ?>;bottom: 0px;background-color: #A0C49D;" id="footer">
+<div class="container-flued mt-2" style="width: 100%;<?php if ($file_name == 'admin_login') {
+                                                            echo "position:" . $position;
+                                                        } ?>;bottom: 0px;background-color: #A0C49D;" id="footer">
     <footer>
         <div class="mt-auto py-1 text-center">
             <div class="d-flex justify-content-center">
