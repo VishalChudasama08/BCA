@@ -11,7 +11,10 @@ extract($_POST);
 $booked_seats_name = $select_seats;
 
 $booked_seats = $booked_seats_name;
-$_SESSION["booked_seats"] = $booked_seats;
+
+mysqli_query($conn, "DELETE FROM temp");
+mysqli_query($conn, "INSERT INTO `temp`(name, value) VALUES ('booked_seats', '" . $booked_seats . "')");
+// $_SESSION["booked_seats" . $user_id] = $booked_seats;
 
 // echo "<br>";
 
@@ -22,7 +25,8 @@ $seats_records = mysqli_query($conn, $seats_query);
 $seats_row = mysqli_fetch_assoc($seats_records);
 $seats_id = $seats_row['id'];
 
-$_SESSION["seats_id"] = $seats_id;
+mysqli_query($conn, "INSERT INTO `temp`(name, value) VALUES ('seats_id', '" . $seats_id . "')");
+// $_SESSION["seats_id"] = $seats_id;
 
 if ($seats_row['booked_seats_name']) { // existing booked seats
     // Combine booked seats into a single array (using explode and array_merge)

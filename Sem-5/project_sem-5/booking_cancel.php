@@ -1,9 +1,11 @@
 <?php
 require_once("connect.php");
-if (isset($_SESSION["booked_seats"]) && isset($_SESSION["seats_id"])) {
-    $booked_seats = $_SESSION["booked_seats"];
+
+$temp_row1 = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM `temp` WHERE name='booked_seats';"));
+echo $booked_seats = $temp_row1['value'];
+if (isset($booked_seats)) {
     $booked_seats_array = explode(", ", $booked_seats);
-    $booked_seats_number = count($booked_seats_array);
+    echo $booked_seats_number = count($booked_seats_array);
 
     $last_value = str_replace(" ", "", end($booked_seats_array));
     $booked_seats_array[key($booked_seats_array)] = $last_value;
@@ -12,7 +14,8 @@ if (isset($_SESSION["booked_seats"]) && isset($_SESSION["seats_id"])) {
     // }
     // echo "<br>";
 
-    $seats_id = $_SESSION["seats_id"];
+    $temp_row2 = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM `temp` WHERE name='seats_id';"));
+    $seats_id = $temp_row2['value'];
     $seats_query = "SELECT * FROM `seats` WHERE id='" . $seats_id . "';";
     $seats_records = mysqli_query($conn, $seats_query);
     $seats_row = mysqli_fetch_assoc($seats_records);
@@ -39,7 +42,7 @@ if (isset($_SESSION["booked_seats"]) && isset($_SESSION["seats_id"])) {
     $total_seats_number = $seats_row['available_seats'];
     $available_seats = $total_seats_number + $booked_seats_number;
 
-    $seats_query = "UPDATE `seats` SET `available_seats` = " . $available_seats . ", `booked_seats_name` = '" . $booked_seats_name . "' WHERE `seats`.`id` = " . $seats_id . ";";
+    echo $seats_query = "UPDATE `seats` SET `available_seats` = " . $available_seats . ", `booked_seats_name` = '" . $booked_seats_name . "' WHERE `seats`.`id` = " . $seats_id . ";";
     mysqli_query($conn, $seats_query);
     header("location:index.php");
 }

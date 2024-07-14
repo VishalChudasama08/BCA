@@ -44,8 +44,10 @@ if (isset($_SESSION['login'])) {
                     </div>
                     <div class="d-flex mt-3 justify-content-between">
                         <button type="submit" class="btn btn-primary" name="submit">Login</button>
-                        <a href="forgot_password.php" class="btn btn-outline-secondary">Forgot your Password?</a>
                         <a href="register.php" class="btn btn-outline-success">Register Anew</a>
+                    </div>
+                    <div class="mt-2 ms-0">
+                        <a href="forgot_password.php">Forgot your Password?</a>
                     </div>
                 </form>
             </div>

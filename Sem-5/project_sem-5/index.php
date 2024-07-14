@@ -1,10 +1,10 @@
 <?php
 require_once("connect.php");
 // echo $encrypt = md5("I Am Admin");
-if (!isset($_SESSION['login'])) {
-    header("location:login.php");
-    exit();
-}
+// if (!isset($_SESSION['login'])) {
+//     header("location:login.php");
+//     exit();
+// }
 include_once("header.php");
 
 ?>
@@ -29,7 +29,9 @@ include_once("header.php");
     ?>
     <div class="overflow-auto" id="my_profile">
         <?php
-        include_once("my_profile.php")
+        if (isset($_SESSION["login"])) {
+            include_once("my_profile.php");
+        }
         ?>
     </div>
 </div>

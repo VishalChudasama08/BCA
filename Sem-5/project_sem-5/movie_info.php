@@ -1,9 +1,9 @@
 <?php
 require_once("connect.php");
-if (!isset($_SESSION['login'])) {
-    header("location:login.php");
-    exit();
-}
+// if (!isset($_SESSION['login'])) {
+//     header("location:login.php");
+//     exit();
+// }
 include_once("header.php");
 ?>
 
@@ -45,7 +45,7 @@ include_once("header.php");
                         </div>
                         <p class="card-text mb-1"><strong>About the movie: </strong></p>
                         <p class="card-text mb-1"><?= $row['description'] ?></p>
-                        <button class="btn btn-primary" onclick="postIds('date.php', ['movie_id:<?= $row['id'] ?>'], false)" style="width: 95%;">Booking</button>
+                        <button class="btn btn-primary" onclick="request()" style="width: 95%;">Booking</button>
                     </div>
                 </div>
             </div>
@@ -66,10 +66,24 @@ include_once("header.php");
     ?>
     <div class="overflow-auto" id="my_profile">
         <?php
-        include_once("my_profile.php")
+        if (isset($_SESSION["login"])) {
+            include_once("my_profile.php");
+        }
         ?>
     </div>
 </body>
+<script>
+    function request() {
+        <?php
+        if (!isset($_SESSION['login'])) {
+            echo 'let res = confirm("Hey there, you need to be logged in to perform this action.");';
+            echo "if (res) { postIds('date.php', ['movie_id:" . $row['id'] . "'], false); }";
+        } else {
+            echo "postIds('date.php', ['movie_id:" . $row['id'] . "'], false);";
+        }
+        ?>
+    }
+</script>
 <?php
 include_once("footer.php");
 ?>

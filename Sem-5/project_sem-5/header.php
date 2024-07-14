@@ -125,7 +125,7 @@
                 </ul>
             </div>
             <?php
-            if (isset($_SESSION['login'])) {
+            if (isset($_SESSION['login'])) { // use form on provide, add user name first characater
                 // $user_id = $_SESSION['user_id'];
                 // $row = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM `users` WHERE id=" . $user_id . ";"));
                 // $name = $row['name'][0];
