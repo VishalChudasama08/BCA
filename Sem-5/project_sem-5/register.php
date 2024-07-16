@@ -1,6 +1,20 @@
 <?php
 require_once("connect.php");
 include_once("header.php");
+if (isset($_SESSION['login'])) {
+    $_SESSION['logoutfornew'] = "yes";
+    echo "
+    <script>
+        let res = confirm('You are already login! Can you logout first and then register again?');
+        if (res) {
+            sessionStorage.clear();
+            window.location.href = 'logout.php';
+        } else {
+            window.location.href = 'index.php';
+        }
+    </script>
+    ";
+}
 ?>
 
 <body>
@@ -46,6 +60,10 @@ include_once("header.php");
                     </div>
                     <div class="col-12 d-flex justify-content-center mt-2">
                         <button type="submit" class="btn btn-primary">Register</button>
+                    </div>
+                    <div class="col-12 d-flex justify-content-center mt-2">
+                        If you are already registered then click here &nbsp;
+                        <a href="login.php">log-in</a>
                     </div>
                 </form>
             </div>

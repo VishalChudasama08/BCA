@@ -64,7 +64,7 @@ include_once("header.php");
     <?php
     }
     ?>
-    <div class="overflow-auto" id="my_profile">
+    <div class="overflow-auto;display: block;" id="my_profile">
         <?php
         if (isset($_SESSION["login"])) {
             include_once("my_profile.php");

@@ -111,7 +111,7 @@ $movies_records  = mysqli_query($conn, "SELECT * FROM movies");
     <?php
     }
     ?>
-    <div class="overflow-auto" id="my_profile">
+    <div class="overflow-auto;display: block;" id="my_profile">
         <?php
         include_once("my_profile.php")
         ?>

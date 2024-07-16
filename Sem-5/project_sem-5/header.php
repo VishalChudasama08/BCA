@@ -5,7 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title></title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+    <script src="javascript/jquery/jquery-3.6.0.min.js"></script>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
@@ -13,8 +14,9 @@
     <!-- <link href="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script> -->
 
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"> -->
+    <!-- <link rel="stylesheet" href="css/ajax_libs_font-awesome_6.5.2/ajax_6.5.2_all.min.css"> -->
     <style>
         #header {
             position: sticky;
@@ -32,6 +34,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow-y: scroll;
         }
 
         .modal {
@@ -102,8 +105,8 @@
                             echo '<a class="nav-link link" href="#" style="color: white !important;" onmouseover="this.style.color=`yellow`" onmouseout="this.style.color=`white`" onclick="logout()">Logout</a>';
                         } else {
                         ?>
-                            <div class="btn-group" style="padding-top: .40rem;">
-                                <button class="dropdown-toggle" type="button" style="color: white !important;border:none;background-color: #A0C49D;" onmouseover="this.style.color=`yellow`" onmouseout="this.style.color=`white`" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="btn-group" style="padding-top: .20rem;">
+                                <button class="dropdown-toggle p-1 px-2" type="button" style="color: white !important;border:none;border-radius:8px;" onmouseover="this.style.color=`yellow`" onmouseout="this.style.color=`white`" data-bs-toggle="dropdown" aria-expanded="false">
                                     Logins
                                 </button>
                                 <ul class="dropdown-menu p-0 border-3" style="background-color: #A0C49D;">
@@ -131,10 +134,8 @@
                 // $name = $row['name'][0];
             ?>
                 <div class="dropdown dropstart me-3">
-                    <button class="user" style="border: none;color: white !important;background-color: grey !important;font-size:large;padding: 0px 6.2px !important;border-radius: 100% !important;width:40px;height: 40px;" type="button" id="show_profile" onmouseover="this.style.color=`yellow`" onmouseout="this.style.color=`white`">
-                        <strong>
-                            <i class="fa-regular fa-user"></i>
-                        </strong>
+                    <button class="user" style="border: none;color: white !important;background-color: white !important;font-size:large;border-radius: 100% !important;width:40px;height: 40px;" type="button" id="show_profile" onmouseover="this.style.color=`yellow`" onmouseout="this.style.color=`white`">
+                        <img src="images/user-solid.svg" alt="user icon" style="margin:2px;">
                     </button>
                 </div>
             <?php

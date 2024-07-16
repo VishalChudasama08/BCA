@@ -69,7 +69,9 @@ $cinema_records  = mysqli_query($conn, $cinema_query);
                         ?>
                     </td>
                     <td>
-                        <a href="#" onclick="loadCinemaInfo(<?= $cinema_row['id']; ?>)"><i class="fa-solid fa-circle-info"></i></a>
+                        <a href="#" onclick="loadCinemaInfo(<?= $cinema_row['id']; ?>)">
+                            <img src="images/circle-info-solid.svg" alt="information logo" style="margin: 8px;">
+                        </a>
                     </td>
                 </tr>
             <?php

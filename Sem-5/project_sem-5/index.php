@@ -9,6 +9,11 @@ include_once("header.php");
 
 ?>
 <div class="container-lg" id="main">
+    <?php
+    if (isset($_GET['booking_cancel'])) {
+        echo '<h5 style="color:green;">Booking canceled successful.</h5>';
+    }
+    ?>
     <div style="border-radius: 10px;" id="show_movies">
         <?php
         include_once("show_movies.php");

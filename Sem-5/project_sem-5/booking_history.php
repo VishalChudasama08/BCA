@@ -25,6 +25,7 @@ if (array_key_exists('user_id', $_SESSION)) {
             <th>Booked Seats</th>
             <th>Price</th>
             <th>Date</th>
+            <th>Status</th>
         </tr>
     </thead>
     <tbody>
@@ -36,6 +37,8 @@ if (array_key_exists('user_id', $_SESSION)) {
             $cinema_name = $booking_history_row['cinema_name'];
             $booked_seats = $booking_history_row['number_of_seats'];
             $price = $booking_history_row['total_price'];
+            $bookings_id = $booking_history_row['id'];
+            $bookings_status = $booking_history_row['status'];
             // Date formatting
             $booking_date = implode("/", array_reverse(explode("-", explode(" ", $booking_history_row['booking_date'])[0])));
 
@@ -48,6 +51,26 @@ if (array_key_exists('user_id', $_SESSION)) {
                 <td><?= $booked_seats ?></td>
                 <td><?= $price ?></td>
                 <td><?= $booking_date ?></td>
+                <td>
+                    <?php
+                    $today = time();
+                    $now_date_string = date("d/m", $today);
+                    $now_day_string = explode(":", explode(" ", $booking_history_row['booking_date'])[1])[0];
+                    // echo "<br>";
+                    $booking_date_string = explode("/", $booking_date)[0] . "/" . explode("/", $booking_date)[1];
+                    $booking_day_string = explode(":", explode(" ", $booking_history_row['booking_date'])[1])[0];
+
+                    if ($booking_date_string == $now_date_string && $booking_day_string == $now_day_string && $bookings_status == 'Booking successful.') {
+                        echo '<a href="booking_cancel.php?cancel_this=' . $bookings_id . '" class="btn btn-outline-danger m-0 py-0 px-1">Booking Cancel</a>';
+                    } else {
+                        if ($bookings_status == 'Booking successful.') {
+                            echo '<p style="color:green;">' . $bookings_status . '</p>';
+                        } else {
+                            echo '<p>' . $bookings_status . '</p>';
+                        }
+                    }
+                    ?>
+                </td>
             </tr>
         <?php
             $rows_counter++;
