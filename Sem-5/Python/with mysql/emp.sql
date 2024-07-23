@@ -1,6 +1,6 @@
 CREATE TABLE emp(empno INT(4), ename VARCHAR(10), job VARCHAR(9), mgr INT(4), hiredate DATE, sal INT(7), comm INT(7), deptno INT(2));
 
-INSERT INTO emp(empno, ename, job, mgr, hiredate, sal, deptno) VALUES (7369, 'SMITH', 'CLERK', 7902, '1980-12-17', 800, 20), ;
+INSERT INTO emp(empno, ename, job, mgr, hiredate, sal, deptno) VALUES (7369, 'SMITH', 'CLERK', 7902, '1980-12-17', 800, 20);
 INSERT INTO emp (empno, ename, job, mgr, hiredate, sal, comm, deptno) VALUES (7499, 'allen', 'salesman', 7698, '1981-02-20', 1600, 300, 30);
 INSERT INTO emp (empno, ename, job, mgr, hiredate, sal, comm, deptno) VALUES (7521, 'ward', 'salesman', 7698, '1981-02-22', 1250, 500, 30);
 INSERT INTO emp (empno, ename, job, mgr, hiredate, sal, deptno) VALUES (7566, 'jones', 'manager', 7839, '1981-04-02', 2975, 20);

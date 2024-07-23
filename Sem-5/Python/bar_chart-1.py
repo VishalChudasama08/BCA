@@ -1,4 +1,6 @@
 import pylab
+# pip install matplotlib
+
 x = [1,2,3,4]
 y = [10, 11, 34, 25]
 
