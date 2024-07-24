@@ -1,6 +1,14 @@
 import mysql.connector
 from tkinter import *
+import subprocess  # Import subprocess to open other scripts
 
+def open_display_record():
+    """Open the display record script."""
+    subprocess.Popen(['python', 'Sem-5\\Python\\General\\gui_display_record.py'])
+
+def open_delete_record():
+    """Open the delete record script."""
+    subprocess.Popen(['python', 'Sem-5\\Python\\General\\gui_delete_record.py'])
 
 
 root = Tk()
@@ -113,11 +121,20 @@ insert_btn.grid(row=6, column=0, padx=10, pady=10)
 exit_btn = Button(f, font=font_settings, text='Exit', width=8, bg='Yellow', fg='blue', activebackground='green', activeforeground='red')
 exit_btn.grid(row=6, column=1, padx=10, pady=10)
 
-# Use grid to place buttons side by side
 
 # Bind the left mouse button with the method to be called
 insert_btn.bind("<Button-1>", insertData)
 exit_btn.bind("<Button-1>", exitApp)
+
+# Create buttons to open other scripts
+btn_frame = Frame(root)
+btn_frame.pack(pady=10)
+
+insert_display_btn = Button(btn_frame, text="Open Display Record", command=open_display_record)
+insert_display_btn.pack(side=LEFT, padx=10)
+
+insert_delete_btn = Button(btn_frame, text="Open Delete Record", command=open_delete_record)
+insert_delete_btn.pack(side=LEFT, padx=10)
 
 root.mainloop()  # The root window handles the mouse click event
 
