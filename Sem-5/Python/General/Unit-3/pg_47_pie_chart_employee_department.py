@@ -6,7 +6,7 @@ departments = ['HR', 'Finance', 'Engineering', 'Sales', 'Marketing']
 num_employees = [10, 15, 40, 25, 20]
 
 # Create the pie chart
-pylab.pie(num_employees, labels=departments, autopct='%1.1f%%', startangle=140)
+pylab.pie(num_employees, labels=departments, autopct='%1.1f%%')
 
 # Add a title
 pylab.title('Percentage of Employees in Each Department')

@@ -51,7 +51,7 @@ def insertData(event):
     
 
     # Create the insert query string
-    insert_query = f"INSERT INTO `student` (first_name, last_name, age, city, state, mobile_number) VALUES ('{first_name}', '{last_name}', {age}, '{city}', '{state}', {mobile_number});"
+    insert_query = f"INSERT INTO `students` (first_name, last_name, age, city, state, mobile_number) VALUES ('{first_name}', '{last_name}', {age}, '{city}', '{state}', {mobile_number});"
 
     try:
         # Prepare a cursor using cursor() method

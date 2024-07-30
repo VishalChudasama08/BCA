@@ -10,10 +10,10 @@ salaries = [50000, 60000, 55000, 45000, 70000]
 pylab.bar(employee_ids, salaries)
 
 # Bar graph with label
-pylab.bar(employee_ids, salaries, label="Salaries")
+# pylab.bar(employee_ids, salaries, label="Salaries")
 
 # Bar graph with label and color
-pylab.bar(employee_ids, salaries, label="Salaries", color="blue")
+# pylab.bar(employee_ids, salaries, label="Salaries", color="blue")
 
 # Adding labels and title
 pylab.xlabel("Employee ID")

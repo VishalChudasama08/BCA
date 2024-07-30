@@ -17,7 +17,7 @@ def delete_row():
     if row_id:
         try:
             # Delete row from the database
-            cursor.execute("DELETE FROM `student` WHERE `ID` = %s", (row_id,))
+            cursor.execute("DELETE FROM `students` WHERE `ID` = %s", (row_id,))
             conn.commit()
 
             # Remove row from the Treeview
@@ -46,7 +46,7 @@ conn = mysql.connector.connect(host='localhost', database='python', user='root',
 cursor = conn.cursor()
 
 # Execute a SQL statement
-cursor.execute("SELECT * FROM `student`;")
+cursor.execute("SELECT * FROM `students`;")
 
 # Get all rows from the executed query
 rows = cursor.fetchall()

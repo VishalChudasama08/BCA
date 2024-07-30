@@ -27,7 +27,7 @@ conn = mysql.connector.connect(host='localhost', database='python', user='root',
 cursor = conn.cursor()
 
 # Execute a SQL statement
-cursor.execute("SELECT * FROM `student`;")
+cursor.execute("SELECT * FROM `students`;")
 
 # Get all rows from the executed query
 rows = cursor.fetchall()
