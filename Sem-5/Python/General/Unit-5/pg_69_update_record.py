@@ -9,13 +9,12 @@ cursor = conn.cursor()
 
 # Execute a SQL statement to update record
 try:
-    cursor.execute("UPDATE `emp` SET job='clerk' WHERE empno=7934;")
+    cursor.execute("UPDATE `emp` SET job='president' WHERE empno=7839;")
     conn.commit()  # Commit the transaction
     print("1 row Updated.")
 except mysql.connector.Error as err:
     print("Error: ", err)
     conn.rollback()  # Rollback in case of error
-
 
 #close connection
 cursor.close()

@@ -1,4 +1,5 @@
-# 71 Write a python script for student registration form like name, address, gender, contact number, city save all data in student table
+# 72 Write a python code for display all  records form student table in tabular format  
+
 import mysql.connector
 
 # Connect to the MySQL database
@@ -9,10 +10,15 @@ cursor = conn.cursor()
 
 try:
     # Execute the SQL query
-    cursor.execute("INSERT INTO student (name, address, gender, contact_number, city) VALUES ('Akhil', '370020, Dhaneti, Bhuj, Khachchh', 'Male', '9104318634', 'Khachchh');")
+    cursor.execute("SELECT * FROM `student`;")
 
-    conn.commit()  # Commit the transaction
-    print("Student registered successfully.")
+    # Get all rows from the executed query
+    rows = cursor.fetchall()
+
+    for row in rows:
+        for value in row:
+            print(value, end="\t")
+        print()
 
 except mysql.connector.Error as err:
     print(f"Error: {err}")
