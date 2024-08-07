@@ -1,16 +1,16 @@
 import mysql.connector
 from tkinter import *
-import subprocess  # Import subprocess to open other scripts
+# import subprocess  # Import subprocess to open other scripts
 
+"""
 def open_display_record():
-    """Open the display record script."""
+    #Open the display record script.
     subprocess.Popen(['python', 'Sem-5\\Python\\General\\gui_display_record.py'])
 
 def open_delete_record():
-    """Open the delete record script."""
+    #Open the delete record script.
     subprocess.Popen(['python', 'Sem-5\\Python\\General\\gui_delete_record.py'])
-
-
+"""
 root = Tk()
 root.title("Insert Record")
 
@@ -40,18 +40,18 @@ result_label.grid(row=7, column=0, columnspan=2, padx=20, pady=20)
 def insertData(event):
     first_name = first_name_entry.get()
     last_name = last_name_entry.get()
-    age = int(age_entry.get())
+    age = age_entry.get()
     city = city_entry.get()
     state = state_entry.get()
-    mobile_number = int(mobile_number_entry.get())
+    mobile_number = mobile_number_entry.get()
     # Check if any field is empty
     if not (first_name and last_name and age and city and state and mobile_number):
-        result_label.config(text="All fields are required!", fg="red")
+        result_label.config(text="All fields are required! Please fill all fields", fg="red")
         return
     
 
     # Create the insert query string
-    insert_query = f"INSERT INTO `students` (first_name, last_name, age, city, state, mobile_number) VALUES ('{first_name}', '{last_name}', {age}, '{city}', '{state}', {mobile_number});"
+    insert_query = f"INSERT INTO `students` (first_name, last_name, age, city, state, mobile_number) VALUES ('{first_name}', '{last_name}', {int(age)}, '{city}', '{state}', {int(mobile_number)});"
 
     try:
         # Prepare a cursor using cursor() method
@@ -126,6 +126,7 @@ exit_btn.grid(row=6, column=1, padx=10, pady=10)
 insert_btn.bind("<Button-1>", insertData)
 exit_btn.bind("<Button-1>", exitApp)
 
+"""
 # Create buttons to open other scripts
 btn_frame = Frame(root)
 btn_frame.pack(pady=10)
@@ -135,6 +136,7 @@ insert_display_btn.pack(side=LEFT, padx=10)
 
 insert_delete_btn = Button(btn_frame, text="Open Delete Record", command=open_delete_record)
 insert_delete_btn.pack(side=LEFT, padx=10)
+"""
 
 root.mainloop()  # The root window handles the mouse click event
 
