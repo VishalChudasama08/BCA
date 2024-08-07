@@ -14,12 +14,10 @@ class StudentRegistration:
         Label(root, text="Student Registration Form", font=("Arial", 14)).grid(row=0, column=0, columnspan=2, pady=10)
         
         Label(root, text="Name").grid(row=1, column=0, padx=10, pady=5)
-        self.name_entry = Entry(root, width=40)
-        self.name_entry.grid(row=1, column=1, padx=0, pady=10)
+        self.name_entry = Entry(root, width=40).grid(row=1, column=1, padx=0, pady=10)
         
         Label(root, text="Address").grid(row=2, column=0, padx=10, pady=5)
-        self.address_entry = Entry(root, width=40)
-        self.address_entry.grid(row=2, column=1, padx=0, pady=10)
+        self.address_entry = Entry(root, width=40).grid(row=2, column=1, padx=0, pady=10)
         
         Label(root, text="Gender").grid(row=3, column=0, padx=10, pady=5)
         self.gender_var = StringVar(value="Male")
@@ -27,19 +25,16 @@ class StudentRegistration:
         Radiobutton(root, text="Female", variable=self.gender_var, value="Female").grid(row=3,column=1, padx=(10, 0), pady=5)
         
         Label(root, text="Contact Number").grid(row=4, column=0, padx=10, pady=5)
-        self.contact_entry = Entry(root, width=40)
-        self.contact_entry.grid(row=4, column=1, padx=0, pady=10)
+        self.contact_entry = Entry(root, width=40).grid(row=4, column=1, padx=0, pady=10)
         
         Label(root, text="City").grid(row=5, column=0, padx=10, pady=5)
-        self.city_entry = Entry(root, width=40)
-        self.city_entry.grid(row=5, column=1, padx=0, pady=10)
+        self.city_entry = Entry(root, width=40).grid(row=5, column=1, padx=0, pady=10)
         
         # Submit button
         Button(root, text="Submit", command=self.submit).grid(row=6, column=1, pady=10)
         
         # Result label
-        self.result_label = Label(root, text="", wraplength=400)  # Use wraplength to ensure text wraps within width
-        self.result_label.grid(row=7, column=0, columnspan=3, pady=10) 
+        self.result_label = Label(root, text="", wraplength=400).grid(row=7, column=0, columnspan=3, pady=10)   # Use wraplength to ensure text wraps within width
     
     def submit(self):
         name = self.name_entry.get()

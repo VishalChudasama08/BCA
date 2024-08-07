@@ -1,6 +1,5 @@
 import mysql.connector
 from tkinter import *
-from tkinter import ttk
 # import subprocess  # Import subprocess to open other scripts
 
 """

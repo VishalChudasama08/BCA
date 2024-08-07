@@ -38,7 +38,7 @@ def display_records():
 # Create the main window
 root = Tk()
 root.title("Student Records")
-root.geometry("600x400")
+root.geometry("800x400")
 
 # Call the function to display records
 display_records()
