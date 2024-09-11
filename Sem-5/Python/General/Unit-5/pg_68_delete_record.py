@@ -10,7 +10,7 @@ cursor = conn.cursor()
 
 # Execute a SQL statement to delete record
 try:
-    cursor.execute("DELETE FROM `emp` WHERE empno=7934;")
+    cursor.execute("DELETE FROM `emp` WHERE empno=7934;") # 7934
     conn.commit()  # Commit the transaction
     print("1 row Deleted.")
 except mysql.connector.Error as err:

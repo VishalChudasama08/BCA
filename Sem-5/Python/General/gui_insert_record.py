@@ -73,46 +73,28 @@ def exitApp(event):
 
 
 # first name
-first_name_label = Label(f, font=font_settings, text="First Name:")
-first_name_label.grid(row=0, column=0, padx=10, pady=10)
-
-first_name_entry = Entry(f, font=font_settings, width=20)
-first_name_entry.grid(row=0, column=1, padx=0, pady=10)
+first_name_label = Label(f, font=font_settings, text="First Name:").grid(row=0, column=0, padx=10, pady=10)
+first_name_entry = Entry(f, font=font_settings, width=20).grid(row=0, column=1, padx=0, pady=10)
 
 #last name
-last_name_label = Label(f, font=font_settings, text="Last Name:")
-last_name_label.grid(row=1, column=0, padx=10, pady=10)
-
-last_name_entry = Entry(f, font=font_settings, width=20)
-last_name_entry.grid(row=1, column=1, padx=0, pady=10)
+last_name_label = Label(f, font=font_settings, text="Last Name:").grid(row=1, column=0, padx=10, pady=10)
+last_name_entry = Entry(f, font=font_settings, width=20).grid(row=1, column=1, padx=0, pady=10)
 
 #age
-age_label = Label(f, font=font_settings, text="Age:")
-age_label.grid(row=2, column=0, padx=10, pady=10)
-
-age_entry = Entry(f, font=font_settings, width=20, validate='key', validatecommand=(validate_numeric, '%d', '%P'))
-age_entry.grid(row=2, column=1, padx=10, pady=10)
+age_label = Label(f, font=font_settings, text="Age:").grid(row=2, column=0, padx=10, pady=10)
+age_entry = Entry(f, font=font_settings, width=20, validate='key', validatecommand=(validate_numeric, '%d', '%P')).grid(row=2, column=1, padx=10, pady=10)
 
 #City
-city_label = Label(f, font=font_settings, text="City:")
-city_label.grid(row=3, column=0, padx=10, pady=10)
-
-city_entry = Entry(f, font=font_settings, width=20)
-city_entry.grid(row=3, column=1, padx=0, pady=10)
+city_label = Label(f, font=font_settings, text="City:").grid(row=3, column=0, padx=10, pady=10)
+city_entry = Entry(f, font=font_settings, width=20).grid(row=3, column=1, padx=0, pady=10)
 
 #State
-state_label = Label(f, font=font_settings, text="State:")
-state_label.grid(row=4, column=0, padx=10, pady=10)
-
-state_entry = Entry(f, font=font_settings, width=20)
-state_entry.grid(row=4, column=1, padx=0, pady=10)
+state_label = Label(f, font=font_settings, text="State:").grid(row=4, column=0, padx=10, pady=10)
+state_entry = Entry(f, font=font_settings, width=20).grid(row=4, column=1, padx=0, pady=10)
 
 #Mobile Number
-mobile_number_label = Label(f, font=font_settings, text="Mobile Number:")
-mobile_number_label.grid(row=5, column=0, padx=10, pady=10)
-
-mobile_number_entry = Entry(f, font=font_settings, width=20, validate='key', validatecommand=(validate_numeric, '%d', '%P'))
-mobile_number_entry.grid(row=5, column=1, padx=10, pady=10)
+mobile_number_label = Label(f, font=font_settings, text="Mobile Number:").grid(row=5, column=0, padx=10, pady=10)
+mobile_number_entry = Entry(f, font=font_settings, width=20, validate='key', validatecommand=(validate_numeric, '%d', '%P')).grid(row=5, column=1, padx=10, pady=10)
 
 # Create a push button as child to the frame
 insert_btn = Button(f, font=font_settings, text='Insert', width=8, bg='Yellow', fg='blue', activebackground='green', activeforeground='red')

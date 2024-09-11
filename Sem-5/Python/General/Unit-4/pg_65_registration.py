@@ -21,8 +21,8 @@ class StudentRegistration:
         
         Label(root, text="Gender").grid(row=3, column=0, padx=10, pady=5, sticky=E)
         self.gender_var = StringVar(value="Male")
-        Radiobutton(root, text="Male", variable=self.gender_var, value="Male").grid(row=3, column=1, sticky=W)
-        Radiobutton(root, text="Female", variable=self.gender_var, value="Female").grid(row=3, column=1)
+        Radiobutton(root, text="Male", variable=self.gender_var, value="Male").grid(row=3, column=1, sticky='w')
+        Radiobutton(root, text="Female", variable=self.gender_var, value="Female").grid(row=3, column=1, padx=60)
         
         Label(root, text="Contact Number").grid(row=4, column=0, padx=10, pady=5, sticky=E)
         self.contact_entry = Entry(root)

@@ -48,13 +48,13 @@ class MyCheck:
         
         # catch user choice
         if x == 1:
-            str += 'Java'
+            str += ' Java '
         if y == 1:
-            str += 'Python'
+            str += ' Python '
         if z == 1:
-            str += '.NET'
+            str += ' .NET '
         if v == 1:
-            str += 'JavaScript'
+            str += ' JavaScript '
         
         # display the user selection as label
         lbl = Label(text=str, fg='blue').place(x=50, y=150, width=200, height=20)
