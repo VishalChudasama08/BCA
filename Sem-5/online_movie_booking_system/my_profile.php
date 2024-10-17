@@ -61,10 +61,12 @@ $user_row = mysqli_fetch_assoc(mysqli_query($conn, $users_query));
 </div>
 <script>
     $(document).ready(function() {
+        $('#disabled_info').show()
+        $('#user_head').show();
+        $('#history_table').hide();
         $('#edit_info').hide();
         $('#booking_head').hide();
         $('#update').hide();
-        $('#cancel').hide();
         $('#edit').click(function() {
             $('#disabled_info').hide();
             $('#history_table').hide();
@@ -85,13 +87,14 @@ $user_row = mysqli_fetch_assoc(mysqli_query($conn, $users_query));
             $('#edit').show();
             $('#cancel').hide();
         });
-        $('#booking_history').click(function() {
-            $('#disabled_info').hide();
-            $('#edit_info').hide();
-            $('#user_head').hide();
-            $('#booking_head').show();
-            $('#history_table').show();
-            $('#cancel').show();
-        });
+        // $('#booking_history').click(function() {
+        // $('#disabled_info').hide();
+        // $('#edit_info').hide();
+        // $('#user_head').hide();
+        // $('#edit').hide();
+        // $('#booking_head').show();
+        // $('#history_table').show();
+        // $('#cancel').show();
+        // });
     });
 </script>

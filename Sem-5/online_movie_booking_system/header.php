@@ -123,7 +123,7 @@
             ?>
                 <div class="dropdown dropstart me-3">
                     <button class="btn btn-primary mx-2 show_profile" id="booking_history">Booking History</button>
-                    <button class="user show_profile" style="border: none;color: white !important;background-color: white !important;font-size:large;border-radius: 100% !important;width:40px;height: 40px;" type="button" id="show_profile" onmouseover="this.style.color=`yellow`" onmouseout="this.style.color=`white`">
+                    <button class="user show_profile" style="border: none;color: white !important;background-color: white !important;font-size:large;border-radius: 100% !important;width:40px;height: 40px;" type="button" id="show_profile_icon" onmouseover="this.style.color=`yellow`" onmouseout="this.style.color=`white`">
                         <img src="images/user-solid.svg" alt="user icon" style="margin:2px;">
                     </button>
                 </div>
@@ -141,7 +141,7 @@
 <script>
     $(document).ready(function() {
         $('#my_profile').hide();
-        $('.show_profile').click(function() {
+        $('#show_profile_icon').click(function() {
 
             if ($('#show_movies').is(':hidden')) {
                 $('#footer').css({
@@ -158,6 +158,40 @@
             $('#show_movies').toggle();
             $('#my_profile').toggle();
             // $('#my_profile').toggle();
+
+            $('#disabled_info').show()
+            $('#user_head').show();
+            $('#edit').show();
+            $('#history_table').hide();
+            $('#edit_info').hide();
+            $('#booking_head').hide();
+            $('#update').hide();
+        });
+        $('#booking_history').click(function() {
+
+            if ($('#show_movies').is(':hidden')) {
+                $('#footer').css({
+                    'position': 'relative',
+                    'bottom': '0px'
+                });
+            } else {
+                $('#footer').css({
+                    'position': 'absolute',
+                    'bottom': '0px'
+                });
+            }
+
+            $('#show_movies').toggle();
+            $('#my_profile').toggle();
+            // $('#my_profile').toggle();
+
+            $('#disabled_info').hide();
+            $('#edit_info').hide();
+            $('#user_head').hide();
+            $('#edit').hide();
+            $('#booking_head').show();
+            $('#history_table').show();
+            $('#cancel').show();
         });
     });
 
