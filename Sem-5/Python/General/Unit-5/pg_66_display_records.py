@@ -16,7 +16,7 @@ try:
 
     for row in rows:
         for value in row:
-            print(value, end="\t")
+            print(value, end="\t     ")
         print()
 
 except mysql.connector.Error as err:

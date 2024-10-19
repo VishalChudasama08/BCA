@@ -10,7 +10,8 @@ cursor = conn.cursor()
 # Execute a SQL statement to insert a record
 try:
     # cursor.execute("DROP DATABASE new_py_db")
-    cursor.execute("CREATE DATABASE new_py_db")
+    # cursor.execute("CREATE DATABASE new_py_db")
+    cursor.execute("CREATE DATABASE python")
     print("Database created successfully.")
 except mysql.connector.Error as err:
     print("Error: ", err)

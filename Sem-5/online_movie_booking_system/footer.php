@@ -26,7 +26,7 @@ if (in_array($file_name_with_extension, $absolute_file_name)) {
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <a class="nav-link link" href="contact.php" target="_blank" onmouseover="this.style.color=`yellow`" onmouseout="this.style.color=`black`">Contact</a> -->
             </div>
-            <p class="m-0">&copy;<?= date("Y"); ?> V2 Online Movies Booking System. All rights reserved.</p>
+            <p class="m-0">&copy;<?= date("Y"); ?> V8 Online Movies Booking System. All rights reserved.</p>
         </div>
     </footer>
 </div>
