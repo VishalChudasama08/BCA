@@ -1,0 +1,711 @@
+in spring project (with hibernate, jsp, mysql) (not spring boot) how to manage : my project name 'Keep_Notes' structure is ->
+
+src/main/java/in.v8.main.KeepNotes.java =>
+package in.v8.main;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import in.v8.main.services.NotesService;
+
+public class KeepNotes {
+    public static void main(String[] args) {
+    	// Load the application context from the annotated configuration class
+    	ApplicationContext context = new AnnotationConfigApplicationContext(KeepNotes.class);
+    	
+    	// Retrieve a bean and call its methods
+        NotesService noteService = context.getBean(NotesService.class);
+		
+    }
+}
+
+src/main/java/in.v8.main.controllers.MainController.java
+package in.v8.main.controllers;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import jakarta.servlet.http.HttpSession;
+
+@Controller
+public class MainController {
+
+    @GetMapping("/")
+    public String openHomePage() {
+        return "index"; // Matches index.jsp in /WEB-INF/view/
+    }
+    
+    @GetMapping("/register")
+    public String openRegisterPage() {
+    	return "register";
+    }
+    
+    @GetMapping("/login")
+    public String openLoginPage() {
+    	return "login";
+    }
+    
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate(); // Invalidate the session
+        System.out.print("remove session all data");
+        return "redirect:/login"; // Redirect to login page
+    }
+
+    @GetMapping("/NotesHome")
+    public String openNotesHomePage() {
+    	return "NotesHome";
+    }
+    
+    @GetMapping("/Profile")
+    public String openProfilePage() {
+    	return "Profile";
+    }
+}
+
+
+src/main/java/in.v8.main.controllers.NotesController.java =>
+package in.v8.main.controllers;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import in.v8.main.entities.Notes;
+import in.v8.main.services.NotesService;
+
+@RestController
+@RequestMapping("/api/note")
+public class NotesController {
+	
+	@Autowired
+	private NotesService notesService;
+	
+	@PostMapping("/addNote") // for add note
+	@ResponseBody
+	public Map<String, String> addNote(@RequestBody Notes note) {
+		Map<String, String> response = new HashMap<>();
+//		System.out.println(note.get);
+		int status = notesService.addNote(note);
+		if (status == 0) {
+	        response.put("status", "error");
+	        response.put("message", "Note not created due to same error");
+	    } else {
+	        response.put("status", "success");
+	        response.put("message", "Note add successfully.");
+	    }
+		return response;
+	}
+	
+	@GetMapping("/{userId}") // for fetch All Notes, id is note table useId
+	@ResponseBody
+	public ResponseEntity<?> getAllNote(@PathVariable Long userId) { 
+		List<Notes> listNotes = notesService.getAllNotesByUserId(userId);
+		if (listNotes != null && !listNotes.isEmpty()) {
+			return ResponseEntity.ok(listNotes);
+		} else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No notes found for this user.");
+		}
+	}
+	
+	@PostMapping("/{id}") // for fetch this Notes
+	@ResponseBody
+	public ResponseEntity<?> getThisNote(@PathVariable Long id) { 
+		Optional<Notes> listNotes = notesService.getThisNote(id);
+		if (listNotes != null && !listNotes.isEmpty()) {
+			return ResponseEntity.ok(listNotes);
+		} else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Note not found.");
+		}
+	}
+	
+	@PutMapping("/{id}") // for update note
+	@ResponseBody
+	public Map<String, String> editNote(@PathVariable Long id, @RequestBody Notes editedNote) {
+		Map<String, String> response = new HashMap<>();
+		int status = notesService.updateNote(editedNote, id);
+		if(status == 0) {
+			response.put("status", "error");
+			response.put("message", "Note not edited due to same error");
+		} else {
+			response.put("status", "success");
+			response.put("message", "Note edited successfully.");
+		}
+		return response;
+	}
+
+	@PutMapping("bgColor/{id}/color") // update color
+	@ResponseBody
+	public Map<String, String> updateNoteBGColor(@PathVariable Long id, @RequestParam String color){
+		Map<String, String> response = new HashMap<>();
+		int status = notesService.updateBGColor(id, color);
+		if(status > 0) {
+			response.put("status", "success");
+			response.put("message", status+" note set color successful");
+		} else {
+			response.put("status", "error");
+	        response.put("message", "set color failed");
+		}
+		return response;
+	}
+	
+	@PutMapping("pin/{id}/pinned") // for update pinned status
+	@ResponseBody
+	public Map<String, String> updatePinStatus(@PathVariable Long id, @RequestParam Boolean pinned) {
+		Map<String, String> response = new HashMap<>();
+		int status = notesService.updatePinStatus(id, pinned);
+		if(status > 0) {
+			response.put("status", "success");
+			response.put("message", "Note pinned status update successfully.");
+		} else {
+			response.put("status", "error");
+			response.put("message", "Note pinned status not update due to same error");
+		}
+		return response;
+	}
+	
+	@DeleteMapping("/{id}") // for delete note
+	@ResponseBody
+	public Map<String, String> deleteNote(@PathVariable Long id, Model model) {
+		Map<String, String> response = new HashMap<>();
+		String message = notesService.deleteNote(id);
+		if (message.equals("Note deleted successfully")) {
+			model.addAttribute("Success", message);
+			response.put("status", "success");
+			response.put("message", message);
+		} else {
+			model.addAttribute("ErrorMsg", message);
+			response.put("status", "error");
+			response.put("message", message);
+		}
+		return response;
+	}
+}
+
+
+src/main/java/in.v8.main.controllers.UserController.java =>
+package in.v8.main.controllers;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import in.v8.main.entities.Users;
+import in.v8.main.services.UserService;
+import jakarta.servlet.http.HttpSession;
+
+@RestController
+@RequestMapping("/api/user")
+public class UserController {
+	
+	@Autowired
+	private UserService userService;
+	
+	@PostMapping("/createUser")
+	@ResponseBody
+	public Map<String, String> addUser(@RequestBody Users user) { // use @RequestBody annotation to get client provide data 
+		Map<String, String> response = new HashMap<>();
+		int status = userService.createUser(user);
+		if (status == 0) {
+	        response.put("status", "error");
+	        response.put("message", "The provided email is already registered.");
+	    } else {
+	        response.put("status", "success");
+	        response.put("message", "User registered successfully.");
+	    }
+		return response;
+	}
+	
+	@PutMapping("/updateUser/{id}")
+	@ResponseBody
+	public Map<String, String> updateUser(@PathVariable Long id, @RequestBody Users user) {
+		Map<String, String> response = new HashMap<>();
+		Users newUser = userService.updateUser(id, user);
+		if (newUser != null) {
+			response.put("status", "success");
+	        response.put("message", "User Details Update successfully.");
+	    } else {
+	    	response.put("status", "error");
+	        response.put("message", "User Details not updated due to some error");
+	    }
+		return response;
+	}
+
+	
+	@PostMapping("/login")
+	@ResponseBody
+	public Map<String, String> getOneUser(@RequestBody Users user, HttpSession session) {
+		Map<String, String> response = new HashMap<>();
+		Users validUser = userService.login(user.getEmail(), user.getPassword());
+		if (validUser != null) {
+			response.put("status", "success");
+			response.put("message", "User loging successfully.");
+			response.put("UserName", validUser.getFirstName());
+			response.put("UserId", String.valueOf(validUser.getId()));
+			session.setAttribute("loggedInUser", validUser);
+		} else {
+			response.put("status", "error");
+			response.put("message", "Email or Password didn't matched.");
+		}
+		return response;
+	}
+	
+	@DeleteMapping("deleteUser/{id}")
+	@ResponseBody
+	public Map<String, String> deleteUser(@PathVariable Long id, Model model) {
+		Map<String, String> response = new HashMap<>();
+		String message = userService.deleteUser(id);
+		if (message.equals("User deleted successfully")) {
+			model.addAttribute("Success", message);
+			response.put("status", "success");
+			response.put("message", message);
+		} else {
+			model.addAttribute("ErrorMsg", message);
+			response.put("status", "error");
+			response.put("message", message);
+		}
+		return response;
+	}
+}
+
+
+package in.v8.main.entities;
+
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table
+public class Notes {
+	@Id
+	@Column
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
+	@Column(name = "user_id", nullable = false)
+	private Long userId;
+	@Column
+	private String title;
+	@Column
+	private String description;
+	
+	@Column(name = "pinned", columnDefinition = "BIT(1) DEFAULT b'0'") // Default is false (0)
+	private boolean pinned;
+	@Column(name = "bg_color", columnDefinition = "VARCHAR(255) DEFAULT ''") // Default is empty
+	private String bg_color;
+	
+	@Column
+	@CreationTimestamp
+	private LocalDateTime created_date;
+	@Column
+	@UpdateTimestamp
+	private LocalDateTime updated_date;
+	
+	public Long getId() {
+		return id;
+	}
+	public boolean isPinned() {
+		return pinned;
+	}
+	public void setPinned(boolean pinned) {
+		this.pinned = pinned;
+	}
+	public String getBg_color() {
+		return bg_color;
+	}
+	public void setBg_color(String bg_color) {
+		this.bg_color = bg_color;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public Long getUserId() {
+		return userId;
+	}
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public LocalDateTime getCreated_date() {
+		return created_date;
+	}
+	public void setCreated_date(LocalDateTime created_date) {
+		this.created_date = created_date;
+	}
+	public LocalDateTime getUpdated_date() {
+		return updated_date;
+	}
+	public void setUpdated_date(LocalDateTime updated_date) {
+		this.updated_date = updated_date;
+	}
+}
+
+package in.v8.main.entities;
+
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table
+public class Users {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column
+	private Long id;
+	
+	@Column(name = "first_name", nullable = false, length = 100)
+	private String firstName;
+
+	@Column(name = "last_name", nullable = false, length = 100)
+	private String lastName;
+	
+	@Column(name = "email", unique = true)
+	private String email;
+	
+	@Column(name = "password", nullable = false)
+	private String password;
+	
+	@Column(name = "phone_number", nullable = false, length = 15)
+	private String phoneNumber;
+	
+	@Column(name = "create_date", nullable = false, updatable = false)
+	@CreationTimestamp
+	private LocalDateTime createDate;
+	@Column(name = "updated_date", nullable = false, updatable = true)
+	@UpdateTimestamp
+	private LocalDateTime updatedDate;
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public Long getId() {
+		return id;
+	}
+	public LocalDateTime getUpdatedDate() {
+		return updatedDate;
+	}
+	public void setUpdatedDate(LocalDateTime updatedDate) {
+		this.updatedDate = updatedDate;
+	}
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	public LocalDateTime getCreateDate() {
+		return createDate;
+	}
+	public void setCreateDate(LocalDateTime createDate) {
+		this.createDate = createDate;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}	
+}
+
+package in.v8.main.services;
+
+import java.util.List;
+import java.util.Optional;
+
+import javax.swing.text.StyledEditorKit.BoldAction;
+
+import in.v8.main.entities.Notes;
+
+public interface NotesService {
+	public int addNote(Notes note);
+	public List<Notes> getAllNotesByUserId(Long userId);
+	public Optional<Notes> getThisNote(Long id);
+	public int updateNote(Notes editedNote, Long id);
+	public String deleteNote(Long id);
+	public int updateBGColor(Long id, String color);
+	public int updatePinStatus(Long id, Boolean pinned);
+}
+
+package in.v8.main.services;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import in.v8.main.entities.Notes;
+import in.v8.main.repositories.NotesRepository;
+
+@Service
+public class NotesServiceImpl implements NotesService {
+	
+	@Autowired
+	private NotesRepository notesRepository;
+
+	@Override
+	public int addNote(Notes note) {
+		notesRepository.save(note);
+		return 1;
+	}
+
+	@Override
+	public List<Notes> getAllNotesByUserId(Long userId) {
+		return notesRepository.findByUserId(userId);
+	}
+
+	@Override
+	public Optional<Notes> getThisNote(Long id) {
+		return notesRepository.findById(id);
+	}
+
+	@Override
+	public int updateNote(Notes editedNote, Long id) {
+	    Notes oldNote = notesRepository.findById(id).orElse(null);
+	    if (oldNote != null) { // here note exist it means that id note exist and id present in that object (means oldNote.id is not null)
+	        // Set the existing id and userId to the editedNote
+	        editedNote.setId(oldNote.getId());
+	        editedNote.setUserId(oldNote.getUserId());
+	        editedNote.setCreated_date(oldNote.getCreated_date()); // Preserve created_date, not do this than update time create date value null insert in database
+	        editedNote.setBg_color(oldNote.getBg_color());
+	        editedNote.setPinned(oldNote.isPinned());
+
+	        // Save the updated note
+	        notesRepository.save(editedNote); // if in provided entity object id is exist than JPA do update else JPA perform a new save
+	        return 1;
+	    } else {
+	        return 0;
+	    }
+	}
+
+	@Override
+	public String deleteNote(Long id) {
+		if (notesRepository.existsById(id)) {
+			notesRepository.deleteById(id);
+			return "Note deleted successfully";
+		} else {			
+			return "Note not deleted or note not Found.";
+		}
+	}
+
+	@Override
+	public int updateBGColor(Long id, String color) {
+		return notesRepository.updateNoteBgColor(id, color);
+	}
+
+	@Override
+	public int updatePinStatus(Long id, Boolean pinned) {
+		return notesRepository.updatePinnedStatus(id, pinned);
+	}
+}
+
+
+package in.v8.main.services;
+
+import java.util.List;
+import java.util.Optional;
+
+import in.v8.main.entities.Users;
+
+public interface UserService {
+	public int createUser(Users user);
+	public List<Users> getAllUsers();
+	public Users login(String email, String password);
+	public Optional<Users> getUser(Long id);
+	public Users updateUser(Long id, Users newUser);
+	public String deleteUser(Long id);
+}
+
+package in.v8.main.services;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import in.v8.main.entities.Users;
+import in.v8.main.repositories.UserRepository;
+
+@Service
+public class UserServiceImpl implements UserService {
+	
+	@Autowired
+	private UserRepository userRepository;
+
+	@Override
+	public int createUser(Users user) {
+		if(userRepository.existsByEmail(user.getEmail())) { // check email is exists or not
+			return 0;
+		} else {
+			userRepository.save(user);
+			return 1;
+		}
+	}
+
+	@Override
+	public List<Users> getAllUsers() {
+		return userRepository.findAll();
+	}
+
+	@Override
+	public Optional<Users> getUser(Long id) {
+		return userRepository.findById(id);
+	}
+
+	@Override
+	public Users updateUser(Long id, Users newUser) {
+		Users user = userRepository.findById(id).orElse(null);
+		if(user != null) { // here user exist it means that id user exist and id present in that object (means user.id is not null) 
+			newUser.setId(user.getId());
+			newUser.setPassword(user.getPassword());
+			newUser.setCreateDate(user.getCreateDate());
+			return userRepository.save(newUser); // if id exist in provided entity object than JSP do update
+		} else {
+			throw new RuntimeException("User not found with id:"+ id);
+		}
+	}
+
+	@Override
+	public String deleteUser(Long id) {
+		if (userRepository.existsById(id)) {
+			userRepository.deleteById(id);
+			return "User deleted successfully";
+		} else {			
+			return "User not deleted or User not Found."; // Check provided id's user exist!
+		}
+	}
+
+	@Override
+	public Users login(String email, String password) {
+		Users validUser = userRepository.findByEmail(email);
+		
+		if (validUser != null && validUser.getPassword().equals(password)) {
+			validUser.setPassword(""); // remove password
+			validUser.setCreateDate(null); // remove date
+			return validUser;
+		} else {
+			return null;
+		}
+	}
+}
+
+package in.v8.main;
+
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+public class HibernateConfig {
+	public static SessionFactory getSessionFactory() {
+		Configuration cfg = new Configuration();
+        cfg.configure("in/v8/main/resources/hibernate.cfg.xml");
+        
+		return cfg.buildSessionFactory();
+	}
+}
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC 
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+    	<!-- Database connection settings -->
+        <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property> 
+        <property name="connection.url">jdbc:mysql://localhost:3306/keep_notes_db</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password"></property>
+
+		<!-- Hibernate properties -->
+        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="show_sql">true</property>
+        <property name="format_sql">true</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <property name="connection.pool_size">20</property>
+
+		<!-- Specify annotated entity classes -->
+        <mapping resource="in.v8.main.entities.Users" /> 
+        <mapping resource="in.v8.main.entities.Notes" />
+    </session-factory>
+</hibernate-configuration>
+
+and in src/main/webapp/WEB-INF/lib ->
+commons-logging-1.2.jar, hibernate-commons-annotations-6.0.6.Final.jar, hibernate-core-5.6.15.Final.jar, jakarta.persistence-api-3.1.0.jar, jakarta.servlet-api-6.0.0.jar, mysql-connector-j-9.1.0.jar, spring-beans-6.2.0.jar, spring-context-6.2.0.jar, spring-core-6.2.0.jar, spring-web-6.2.0.jar 
+if and more jar file need than asking me 
+make this project running...
