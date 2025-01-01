@@ -1,13 +1,9 @@
 package in.v8.main;
 
-import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import com.mysql.cj.jdbc.MysqlDataSource;
@@ -15,7 +11,6 @@ import java.util.Properties;
 
 @Configuration
 @ComponentScan(basePackages = "in.v8.main") // Important: Scan your components
-@EnableTransactionManagement
 public class AppConfig {
 
     @Bean
@@ -39,12 +34,5 @@ public class AppConfig {
         hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "update");
         sessionFactory.setHibernateProperties(hibernateProperties);
         return sessionFactory;
-    }
-
-    @Bean
-    public PlatformTransactionManager transactionManager(SessionFactory sessionFactory) {
-        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
-        transactionManager.setSessionFactory(sessionFactory);
-        return transactionManager;
     }
 }

@@ -3,8 +3,6 @@ package in.v8.main.services;
 import java.util.List;
 import java.util.Optional;
 
-import javax.swing.text.StyledEditorKit.BoldAction;
-
 import in.v8.main.entities.Notes;
 
 public interface NotesService {
