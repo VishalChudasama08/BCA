@@ -3,6 +3,8 @@ package in.v8.main.controllers;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import in.v8.main.entities.Users;
 import in.v8.main.services.UserService;
-import jakarta.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/api/user")
