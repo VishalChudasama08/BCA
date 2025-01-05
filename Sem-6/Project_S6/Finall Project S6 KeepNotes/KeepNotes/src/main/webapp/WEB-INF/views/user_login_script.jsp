@@ -39,7 +39,7 @@
 
                   setTimeout(() => {
                      window.location.href = "/KeepNotes/NotesHome"; // go on NotesHome page
-                  }, 300);
+                  }, 100);
                } else {
                   softAlert("danger", response.message, 30000);
                }

@@ -488,7 +488,7 @@
       $('.restrict-input').on('input', function () {
          let value = $(this).val();
          if (value.includes("'")) {
-            alert("Single quotes (') are not allowed!");
+            // alert("Single quotes (') are not allowed!");
             $(this).val(value.replace(/'/g, '')); // Remove single quotes
          }
       });
