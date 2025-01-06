@@ -3,7 +3,7 @@
    <div class="modal-dialog d-flex justify-content-center align-items-center vh-100 my-0">
       <div class="modal-content">
          <div class="modal-header">
-            <h5 class="modal-title" id="profileModalLabel">Hello ${loggedInUser.firstName}</h5>
+            <h5 class="modal-title" id="profileModalLabel">User Details</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
          </div>
          <div class="modal-body">

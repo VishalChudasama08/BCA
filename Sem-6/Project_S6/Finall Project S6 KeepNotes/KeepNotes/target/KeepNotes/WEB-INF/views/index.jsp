@@ -3,7 +3,7 @@
 <br>
 <h3>Welcome to Keep Notes</h3>
 <br>
-<p><strong>Keep Notes</strong> is a simple, secure, and user-friendly web application designed to help you organize your notes effectively. Whether you’re capturing ideas, managing tasks, or jotting down important information, Keep Notes provides the perfect platform to manage your thoughts securely.</p>
+<p><strong>Keep Notes</strong> is a simple, secure, and user-friendly web application designed to help you organize your notes effectively. Whether you are capturing ideas, managing tasks, or jotting down important information, Keep Notes provides the perfect platform to manage your thoughts securely.</p>
 <br>
 <h5><strong>Our Features</strong></h5>
 <ul>
