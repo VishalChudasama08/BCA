@@ -194,7 +194,7 @@
             "</div>" +
             "</div>" +
             "</div>" +
-            "</div";
+            "</div>";
          formatEditDateAndTimeElement = "";
          formatCreateDateAndTime = "";
          $(document).ready(await function () {
