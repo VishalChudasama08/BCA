@@ -4,5 +4,6 @@ maven-3.2.5
 -Dhttps.protocols=TLSv1.2
 
 spring -> spring-webmvc 3.0.5.RELEASE
-JSP 1.2
-Servlet API 2.3
+
+javax.servlet Servlet API 2.3
+jslt 1.0 now not use 
