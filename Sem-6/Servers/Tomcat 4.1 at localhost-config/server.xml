@@ -246,7 +246,7 @@
         <!-- Tomcat Examples Context -->
         
 
-      <Context docBase="KeepNotes" path="/KeepNotes" reloadable="true" source="org.eclipse.jst.j2ee.server:KeepNotes"/></Host>
+      <Context docBase="KeepNotes" path="/KeepNotes" reloadable="true" source="org.eclipse.jst.j2ee.server:KeepNotes"/><Context docBase="Example" path="/Example" reloadable="true" source="org.eclipse.jst.j2ee.server:Example"/></Host>
 
     </Engine>
 
