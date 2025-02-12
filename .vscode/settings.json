@@ -43,6 +43,7 @@
         "streambuf": "cpp",
         "typeinfo": "cpp",
         "CIRCU_Q.C": "cpp",
-        "CIR_Q_LL.C": "cpp"
+        "CIR_Q_LL.C": "cpp",
+        "BUBBLE_S.C": "cpp"
     }
 }
