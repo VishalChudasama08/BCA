@@ -1,6 +1,10 @@
 {
 	"files.associations": {
 		"MARK2-S.C": "cpp",
-		"CPG-017.C": "cpp"
+		"CPG-017.C": "cpp",
+		"SELECT_S.C": "cpp",
+		"BUBBLE_S.C": "cpp",
+		"INDEX_SEARCH.C": "cpp",
+		"BIN_SEARCH.C": "cpp"
 	}
 }
